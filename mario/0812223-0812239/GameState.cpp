@@ -26,4 +26,9 @@ void GameState::StateHandler(int message, CDC *pDC, int keys)
 	{
 		MessagePaint(message, pDC);
 	}
+
+	if (message == cDef::MESSAGE_EXIT)
+	{
+		MessageExit(message, pDC);
+	}
 }

@@ -37,7 +37,7 @@ void GameStateLogo::MessagePaint(int message, CDC *pDC)
 	imgBG->DrawTransparent(&(mg->m_MemDC), 0, 0, RGB(255,255,255));
 	sprMenuIcon->Render(m_iX, 230, &(mg->m_MemDC));
 
-	pDC->StretchBlt(0, 0, 300, 400, &(mg->m_MemDC), 0, 0 , 240, 320, SRCCOPY);
+	pDC->StretchBlt(0, 0, cDef::MAINGAME_WIDTH, cDef::MAINGAME_HEIGHT, &(mg->m_MemDC), 0, 0 , 240, 320, SRCCOPY);
 }
 
 void GameStateLogo::MessageEnter(int message)

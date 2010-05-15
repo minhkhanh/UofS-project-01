@@ -84,3 +84,8 @@ void GameStateTypeA::PaintMap(int iX, int iY, Sprite *sprImage, CDC *pDC)
 			}
 		}
 }
+
+void GameStateTypeA::MessageExit(int message, CDC *pDC)
+{
+
+}
