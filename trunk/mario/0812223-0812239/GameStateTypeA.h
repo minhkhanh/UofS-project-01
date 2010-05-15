@@ -8,13 +8,12 @@
 #include "Sprite.h"
 #include "GameKeys.h"
 #include "MainGame.h"
-#include <vector>
 
 #define BASE_HEIGHT 24
 #define BASE_WIDTH 24
 #define iLogicScreenWidth 16
 #define iLogicScreenHeight 20
-using namespace std;
+
 class GameStateTypeA :public GameState
 {
 public:
@@ -30,4 +29,5 @@ public:
 	void MessageEnter(int message);
 	void MessageUpdate(int message, int keys);
 	void MessagePaint(int message, CDC *pDC);
+	void MessageExit(int message, CDC *pDC);
 };

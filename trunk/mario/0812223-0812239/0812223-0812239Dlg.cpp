@@ -159,6 +159,7 @@ HCURSOR CMy08122230812239Dlg::OnQueryDragIcon()
 CClientDC *pDC;
 void CMy08122230812239Dlg::run()
 {
+	//pDC = this->GetDC();
 	pDC = new CClientDC(this);
 
 	mg->SetPDC(pDC);
