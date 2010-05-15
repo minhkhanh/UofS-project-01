@@ -10,4 +10,7 @@ public:
 	static int MESSAGE_UPDATE;
 	static int MESSAGE_PAINT;
 	static int MESSAGE_EXIT;
+
+	static int MAINGAME_WIDTH;
+	static int MAINGAME_HEIGHT;
 };

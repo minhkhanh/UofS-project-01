@@ -9,3 +9,6 @@ int cDef::MESSAGE_ENTER = 0x02;
 int cDef::MESSAGE_UPDATE = 0x04;
 int cDef::MESSAGE_PAINT = 0x08;
 int cDef::MESSAGE_EXIT = 0x10;
+
+int cDef::MAINGAME_WIDTH = 380;
+int cDef::MAINGAME_HEIGHT = 480;

@@ -210,6 +210,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GameStateMenu.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\GameStateTypeA.cpp"
 				>
 			</File>
@@ -277,6 +281,10 @@
 			</File>
 			<File
 				RelativePath=".\GameStateLogo.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GameStateMenu.h"
 				>
 			</File>
 			<File
