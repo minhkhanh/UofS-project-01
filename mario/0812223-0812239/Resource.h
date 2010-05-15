@@ -2,12 +2,15 @@
 // Microsoft Visual C++ generated include file.
 // Used by 0812223-0812239.rc
 //
+
+#define IDIMG_MENUBACKGROUND			7
 #define IDIMG_TILES_TYPE_A_LEVEL_1		6
 #define IDIMG_BGR_TYPE_A_LEVEL_1		5
 #define IDIMG_AXE						4
 #define IDIMG_DEMOMENU					3
 #define IDIMG_COMMANDER					2
 #define IDIMG_QEENCITY					1
+
 #define INPUT_MAX_LEN					500
 
 #define IDR_MAINFRAME					128
