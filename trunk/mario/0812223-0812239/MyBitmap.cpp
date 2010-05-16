@@ -100,7 +100,8 @@ void MyBitmap::DrawTransparent(CDC * pDC, int x, int y,int x1, int y1,int width,
 
 		// Build mask based on transparent colour
 		dcImage.SetBkColor(crColour);
-		dcTrans.BitBlt(0, 0, nWidth, nHeight, &dcImage, x1, y1, SRCCOPY);
+		//dcTrans.BitBlt(0, 0, nWidth, nHeight, &dcImage, x1, y1, SRCCOPY);
+		dcTrans.BitBlt(0, 0, nWidth, nHeight, &dcImage, 0, 0, SRCCOPY);  
 
 
 		// Do the work - True Mask method - cool if not actual display

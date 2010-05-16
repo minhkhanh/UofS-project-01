@@ -33,6 +33,10 @@ GameStateTypeA::~GameStateTypeA(void)
 {
 }
 
+void GameStateTypeA::MessageExit(int message, CDC *pDC)
+{
+}
+
 void GameStateTypeA::MessageUpdate(int message, int keys)
 {
 	if ((keys & GameKeys::Left) == GameKeys::Left)
@@ -83,9 +87,4 @@ void GameStateTypeA::PaintMap(int iX, int iY, Sprite *sprImage, CDC *pDC)
 				sprImage->Render(ii*BASE_WIDTH, jj*BASE_HEIGHT, pDC);
 			}
 		}
-}
-
-void GameStateTypeA::MessageExit(int message, CDC *pDC)
-{
-
 }
