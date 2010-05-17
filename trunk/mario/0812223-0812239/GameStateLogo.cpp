@@ -20,12 +20,14 @@ void GameStateLogo::MessageUpdate(int message, int keys)
 		sprMenuIcon->NextFrame();
 		--m_iX;
 	}
-	else if ((keys & GameKeys::Right) == GameKeys::Right)
+	
+	if ((keys & GameKeys::Right) == GameKeys::Right)
 	{
 		sprMenuIcon->NextFrame();
 		++m_iX;
 	}
-	else if ((keys & GameKeys::Enter) == GameKeys::Enter)
+	
+	if ((keys & GameKeys::Enter) == GameKeys::Enter)
 	{
 		mg->mBiz_SwitchState(cDef::STATE_MENU);
 	}

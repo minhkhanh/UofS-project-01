@@ -77,7 +77,8 @@ IDR_MAINFRAME           ICON                    "res\\0812223-0812239.ico"
 // Bitmap
 //
 
-IDIMG_MENUBACKGROUND		BITMAP					"Resource\\MenuBackground.bmp"
+IDIMG_OCEGRINE_SPRITE	BITMAP					"Resource\\ocegrine3.bmp"
+IDIMG_MENUBACKGROUND	BITMAP					"Resource\\MenuBackground.bmp"
 IDIMG_AXE               BITMAP                  "Resource\\Axe.bmp"
 IDIMG_QEENCITY          BITMAP                  "Resource\\QeenCity.bmp"
 IDIMG_COMMANDER         BITMAP                  "Resource\\Commander.bmp"

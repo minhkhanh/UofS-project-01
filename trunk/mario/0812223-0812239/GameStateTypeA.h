@@ -21,6 +21,9 @@ public:
 	Sprite *sprTiles;
 	vector<vector<int>> vMap;
 	int iMapLogicHeight, iMapLogicWidth, iMainX, iMainY;
+	Sprite *sprOcegrine;
+
+
 	GameStateTypeA(MainGame *_mg, TCHAR * pszPath);
 	virtual ~GameStateTypeA(void);
 
