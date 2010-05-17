@@ -3,6 +3,7 @@
 // Used by 0812223-0812239.rc
 //
 
+#define IDIMG_MONSTER07					9
 #define IDIMG_OCEGRINE_SPRITE			8
 #define IDIMG_MENUBACKGROUND			7
 #define IDIMG_TILES_TYPE_A_LEVEL_1		6
