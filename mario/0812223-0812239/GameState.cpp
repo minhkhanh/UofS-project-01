@@ -16,18 +16,15 @@ void GameState::StateHandler(int message, CDC *pDC, int keys)
 	{
 		MessageEnter(message);
 	}
-
-	if (message == cDef::MESSAGE_UPDATE)
+	else if (message == cDef::MESSAGE_UPDATE)
 	{
 		MessageUpdate(message, keys);
 	}
-
-	if (message == cDef::MESSAGE_PAINT)
+	else if (message == cDef::MESSAGE_PAINT)
 	{
 		MessagePaint(message, pDC);
 	}
-
-	if (message == cDef::MESSAGE_EXIT)
+	else if (message == cDef::MESSAGE_EXIT)
 	{
 		MessageExit(message, pDC);
 	}
