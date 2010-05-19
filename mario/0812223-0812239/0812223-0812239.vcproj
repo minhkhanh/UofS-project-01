@@ -254,6 +254,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\TypeAMapInfo.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\TypeAMonster.cpp"
 				>
 			</File>
@@ -321,6 +325,10 @@
 			</File>
 			<File
 				RelativePath=".\Thread.h"
+				>
+			</File>
+			<File
+				RelativePath=".\TypeAMapInfo.h"
 				>
 			</File>
 			<File
