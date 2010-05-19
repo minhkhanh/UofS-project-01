@@ -354,6 +354,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Resource\BearVillage1.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\Resource\CoinIcon.bmp"
+				>
+			</File>
+			<File
 				RelativePath=".\Resource\Commander.bmp"
 				>
 			</File>
@@ -362,11 +370,43 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Resource\GraMount.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\Resource\IceField.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\Resource\MenuBackground.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\Resource\Monster07.bmp"
+				>
+			</File>
+			<File
 				RelativePath=".\res\My08122230812239.rc2"
 				>
 			</File>
 			<File
+				RelativePath=".\Resource\ocegrine3.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\Resource\OcegrineIcon.bmp"
+				>
+			</File>
+			<File
 				RelativePath=".\Resource\QeenCity.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\Resource\StoneAge1.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\Resource\tilesstandard.bmp"
 				>
 			</File>
 		</Filter>
