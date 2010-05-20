@@ -198,6 +198,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Functions.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\GameKeys.cpp"
 				>
 			</File>
@@ -254,11 +258,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\TypeAMapInfo.cpp"
+				RelativePath=".\TypeAMap.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\TypeAMonster.cpp"
+				RelativePath=".\TypeAObject.cpp"
 				>
 			</File>
 		</Filter>
@@ -277,6 +281,10 @@
 			</File>
 			<File
 				RelativePath=".\cDef.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Functions.h"
 				>
 			</File>
 			<File
@@ -328,11 +336,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\TypeAMapInfo.h"
+				RelativePath=".\TypeAMap.h"
 				>
 			</File>
 			<File
-				RelativePath=".\TypeAMonster.h"
+				RelativePath=".\TypeAObject.h"
 				>
 			</File>
 		</Filter>
