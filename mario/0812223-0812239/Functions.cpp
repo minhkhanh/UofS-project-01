@@ -28,3 +28,8 @@ CPoint Functions::Cell2Pixel(int cellX, int cellY)
 {
 	return CPoint(cellX * BASE_WIDTH, cellY * BASE_HEIGHT);
 }
+
+void Functions::Move(int &iVal, int iStep, int iPixel)
+{
+	iVal += iStep*MOVE_PIXELS + iPixel;
+}

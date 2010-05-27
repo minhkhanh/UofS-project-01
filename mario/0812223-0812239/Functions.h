@@ -19,6 +19,8 @@
 #define COIN_TILE						0x40
 #define RIGHT_SIDE_TILE					0x80
 
+#define MOVE_PIXELS		10
+
 class Functions
 {
 public:
@@ -30,4 +32,6 @@ public:
 
 	static CPoint Cell2Pixel(CPoint cell);
 	static CPoint Cell2Pixel(int cellX, int cellY);
+
+	static void Move(int &iVal, int iStep, int iPixel = 0);
 };

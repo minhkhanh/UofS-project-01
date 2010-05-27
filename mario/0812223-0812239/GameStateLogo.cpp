@@ -46,6 +46,8 @@ void GameStateLogo::MessageEnter(int message)
 {
 	imgBG = new MyBitmap((LPCTSTR)IDIMG_DEMOMENU);
 	sprMenuIcon = new Sprite(0,0,42,40,1,3,0,new MyBitmap((LPCTSTR)IDIMG_COMMANDER));
+
+	mg->iSleepTime = 100;
 }
 
 void GameStateLogo::MessageExit(int message, CDC *pDC)
