@@ -210,6 +210,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GameStateIntro.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\GameStateLogo.cpp"
 				>
 			</File>
@@ -227,6 +231,10 @@
 			</File>
 			<File
 				RelativePath=".\MyBitmap.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\MyScriptMap.cpp"
 				>
 			</File>
 			<File
@@ -262,7 +270,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\TypeAObject.cpp"
+				RelativePath=".\TypeAOcegrine.cpp"
 				>
 			</File>
 		</Filter>
@@ -296,6 +304,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GameStateIntro.h"
+				>
+			</File>
+			<File
 				RelativePath=".\GameStateLogo.h"
 				>
 			</File>
@@ -313,6 +325,10 @@
 			</File>
 			<File
 				RelativePath=".\MyBitmap.h"
+				>
+			</File>
+			<File
+				RelativePath=".\MyScriptMap.h"
 				>
 			</File>
 			<File
@@ -340,7 +356,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\TypeAObject.h"
+				RelativePath=".\TypeAOcegrine.h"
 				>
 			</File>
 		</Filter>
@@ -418,6 +434,10 @@
 				>
 			</File>
 		</Filter>
+		<File
+			RelativePath=".\ClassDiagram1.cd"
+			>
+		</File>
 		<File
 			RelativePath=".\ReadMe.txt"
 			>

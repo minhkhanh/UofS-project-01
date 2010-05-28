@@ -33,3 +33,8 @@ void Functions::Move(int &iVal, int iStep, int iPixel)
 {
 	iVal += iStep*MOVE_PIXELS + iPixel;
 }
+
+int Functions::GetScreenCenterX()
+{
+	return SCREEN_WIDTH / 2;
+}
