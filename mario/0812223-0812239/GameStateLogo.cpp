@@ -52,5 +52,5 @@ void GameStateLogo::MessageEnter(int message)
 
 void GameStateLogo::MessageExit(int message, CDC *pDC)
 {
-	mg->mBiz_iCurrentState = cDef::STATE_MENU;
+	mg->mBiz_iCurrentState = cDef::STATE_INTRO;
 }
