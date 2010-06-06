@@ -13,5 +13,6 @@ public:
 	void NextScript();
 	void PreviousScript();
 	void ShowText(int X, int Y, CDC *pDC);
+	void ShowText(int X, int Y, Graphics *pGraphics);
 	virtual ~MyScriptMap(void);
 };
