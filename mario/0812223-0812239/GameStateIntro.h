@@ -22,3 +22,9 @@ public:
 	void MessagePaint(int message, CDC *pDC);
 	void MessageExit(int message, CDC *pDC);
 };
+
+#ifndef MYCREATEFONT
+#define MYCREATEFONT
+
+
+#endif
