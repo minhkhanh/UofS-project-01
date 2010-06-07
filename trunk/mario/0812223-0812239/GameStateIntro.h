@@ -1,14 +1,11 @@
 #pragma once
 
-#include "stdafx.h"
-#include "MyScriptMap.h"
+#include "Functions.h"
+
 #include "GameState.h"
-#include "MyBitmap.h"
-#include "cDef.h"
-#include "0812223-0812239.h"
-#include "Sprite.h"
-#include "GameKeys.h"
-#include "MainGame.h"
+
+class MainGame;
+class MyScriptMap;
 
 class GameStateIntro: public GameState
 {

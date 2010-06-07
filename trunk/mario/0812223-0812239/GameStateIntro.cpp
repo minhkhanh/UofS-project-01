@@ -1,6 +1,9 @@
 #include "StdAfx.h"
 #include "GameStateIntro.h"
 
+#include "MyScriptMap.h"
+#include "MainGame.h"
+
 GameStateIntro::GameStateIntro(MainGame *_mg, TCHAR szText[])
 {
 	mg = _mg;

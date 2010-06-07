@@ -1,8 +1,5 @@
 #pragma once
-#include "stdafx.h"
-#include "cDef.h"
-#include "GameState.h"
-#include "Resource.h"
+
 #include "Functions.h"
 
 class MyScriptMap
