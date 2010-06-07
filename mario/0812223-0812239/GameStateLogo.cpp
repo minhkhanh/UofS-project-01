@@ -1,6 +1,8 @@
 #include "StdAfx.h"
 #include "GameStateLogo.h"
 
+#include "MainGame.h"
+
 GameStateLogo::GameStateLogo(MainGame *_mg)
 {
 	mg = _mg;

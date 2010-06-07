@@ -270,6 +270,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\TypeAMonster.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\TypeAObject.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\TypeAOcegrine.cpp"
 				>
 			</File>
@@ -353,6 +361,14 @@
 			</File>
 			<File
 				RelativePath=".\TypeAMap.h"
+				>
+			</File>
+			<File
+				RelativePath=".\TypeAMonster.h"
+				>
+			</File>
+			<File
+				RelativePath=".\TypeAObject.h"
 				>
 			</File>
 			<File

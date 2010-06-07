@@ -1,24 +1,19 @@
 #pragma once
 
-#include "stdafx.h"
-#include "GameState.h"
-#include "MyBitmap.h"
-#include "cDef.h"
 #include "0812223-0812239.h"
-#include "Sprite.h"
+#include "cDef.h"
+#include "Functions.h"
 #include "GameKeys.h"
-#include "MainGame.h"
+#include "stdafx.h"
 
-class TypeAMonster
+#include "TypeAObject.h"
+
+class TypeAObject;
+class TypeAMonster;
+
+class TypeAMonster :	public TypeAObject
 {
 public:
 	TypeAMonster(void);
-	TypeAMonster(Sprite *sprImage, int iPos);
-	~TypeAMonster(void);
-
-	Sprite *m_pSprite;
-	int m_iPos;
-	//int m_iY;
-	bool m_bIsDead;
-	//bool m_bIsAppeared;
+	virtual ~TypeAMonster(void);
 };
