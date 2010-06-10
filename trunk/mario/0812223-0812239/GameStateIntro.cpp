@@ -34,14 +34,14 @@ void GameStateIntro::MessageUpdate( int message, int keys )
 	{
 		m_pScriptText->PreviousScript();
 		bNeedRedraw = true;
-		keys &= ~(GameKeys::Left);
+		mg->KeyRelease(GameKeys::Left);
 	}
 
 	if ((keys & GameKeys::Right) == GameKeys::Right)
 	{
 		m_pScriptText->NextScript();
 		bNeedRedraw = true;
-		keys &= ~(GameKeys::Right);
+		mg->KeyRelease(GameKeys::Right);
 	}
 
 	if ((keys & GameKeys::Enter) == GameKeys::Enter)

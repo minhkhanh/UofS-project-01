@@ -13,4 +13,8 @@ public:
 	static int Right;
 	static int Left;
 	static int Enter;
+	static int UpKeyDowning;
+	static int DownKeyDowning;
+	static int LeftKeyDowning;
+	static int RightKeyDowning;
 };

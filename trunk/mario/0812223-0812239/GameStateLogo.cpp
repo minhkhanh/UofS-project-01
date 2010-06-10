@@ -21,17 +21,20 @@ void GameStateLogo::MessageUpdate(int message, int keys)
 	{
 		sprMenuIcon->NextFrame();
 		--m_iX;
+		mg->KeyRelease(GameKeys::Left);
 	}
 	
 	if ((keys & GameKeys::Right) == GameKeys::Right)
 	{
 		sprMenuIcon->NextFrame();
 		++m_iX;
+		mg->KeyRelease(GameKeys::Right);
 	}
 	
 	if ((keys & GameKeys::Enter) == GameKeys::Enter)
 	{
 		mg->mBiz_SwitchState(cDef::STATE_MENU);
+		mg->KeyRelease(GameKeys::Enter);
 	}
 
 }
