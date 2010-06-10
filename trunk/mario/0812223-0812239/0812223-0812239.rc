@@ -91,7 +91,8 @@ IDIMG_QEENCITY          BITMAP                  "Resource\\QeenCity.bmp"
 IDIMG_COMMANDER         BITMAP                  "Resource\\Commander.bmp"
 IDIMG_DEMOMENU          BITMAP                  "Resource\\DemoMenu_Stage1.bmp"
 IDIMG_TILES             BITMAP                  "Resource\\tilesstandard.bmp"
-IDIMG_COIN_ICON             BITMAP                  "Resource\\CoinIcon.bmp"
+IDIMG_COIN_ICON         BITMAP                  "Resource\\CoinIcon.bmp"
+IDIMG_BGR_INTRO			BITMAP					"Resource\\background_intro.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //

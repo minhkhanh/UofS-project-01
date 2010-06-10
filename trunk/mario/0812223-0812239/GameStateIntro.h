@@ -11,7 +11,9 @@ class GameStateIntro: public GameState
 {
 public:
 	MyScriptMap * m_pScriptText;
-	GameStateIntro(MainGame *_mg, TCHAR szText[]);
+	MyBitmap * m_pBGR;
+	bool bNeedRedraw;
+	GameStateIntro(MainGame *_mg, TCHAR szText[], LPCTSTR szBGR);
 	virtual ~GameStateIntro(void);
 
 	void MessageEnter(int message);
