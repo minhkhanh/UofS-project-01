@@ -426,6 +426,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Resource\Monster08.bmp"
+				>
+			</File>
+			<File
 				RelativePath=".\res\My08122230812239.rc2"
 				>
 			</File>

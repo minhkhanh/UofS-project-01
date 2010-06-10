@@ -16,6 +16,7 @@
 #define IDIMG_BGR_TYPE_A_LEVEL_4        12
 #define IDIMG_BGR_TYPE_A_LEVEL_5        13
 #define IDIMG_OCEGRINE_ICON             14
+#define IDIMG_MONSTER08					15
 #define IDM_ABOUTBOX                    0x0010
 #define IDD_ABOUTBOX                    100
 #define IDS_ABOUTBOX                    101
