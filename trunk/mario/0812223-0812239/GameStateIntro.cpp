@@ -53,6 +53,7 @@ void GameStateIntro::MessageUpdate( int message, int keys )
 
 void GameStateIntro::MessagePaint( int message, CDC *pDC )
 {
+	mg->m_pMemGraphics->Clear(Color(255,25,55,255));
 	if (bNeedRedraw) 
 	{
 		HDC old = mg->m_pGraphics->GetHDC();

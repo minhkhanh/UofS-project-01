@@ -73,3 +73,29 @@ wchar_t * Functions::UTF8_to_WChar(const char *string){
 	}
 	return res;
 }
+
+int Functions::GetBits( int a, int x, int y )
+{
+	return ((a >> x) & ~((-1) << (y-x+1)));
+}
+
+void Functions::SetBits( int &a, int x, int y, int v )
+{
+	int tmp = (v << x) & ~((-1) << (y+1));					// 0000 yyyy 0000 , ex.
+	int tmp2 = (~((-1) << (x+1))) | ((-1) << (y+1));		// 1111 0000 1111 , ex.
+	a &= tmp2;												// xxxx 0000 xxxx , ex.
+	a |= tmp;												// xxxx yyyy xxxx
+}
+
+int Functions::GetBit( int a, int x )
+{
+	return ((a >> x) & 1);
+}
+
+void Functions::SetBit( int &a, int x, int v )
+{
+	if (v == 0)
+		a &= ~(1 << x);
+	else if (v == 1)
+		a |= 1 << x;
+}

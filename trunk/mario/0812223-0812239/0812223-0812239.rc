@@ -92,6 +92,7 @@ IDIMG_COMMANDER         BITMAP                  "Resource\\Commander.bmp"
 IDIMG_DEMOMENU          BITMAP                  "Resource\\DemoMenu_Stage1.bmp"
 IDIMG_TILES             BITMAP                  "Resource\\tilesstandard.bmp"
 IDIMG_COIN_ICON         BITMAP                  "Resource\\CoinIcon.bmp"
+IDIMG_MONSTER08         BITMAP                  "Resource\\Monster08.bmp"
 IDIMG_BGR_INTRO			BITMAP					"Resource\\background_intro.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
@@ -110,7 +111,7 @@ BEGIN
     DEFPUSHBUTTON   "OK",IDOK,113,41,50,14,WS_GROUP
 END
 
-IDD_MY08122230812239_DIALOG DIALOGEX 0, 0, 253, 295
+IDD_MY08122230812239_DIALOG DIALOGEX 0, 0, 253, 294
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_APPWINDOW
 CAPTION "0812223-0812239"
