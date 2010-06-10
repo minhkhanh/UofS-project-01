@@ -200,7 +200,7 @@ void CMy08122230812239Dlg::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 
 void CMy08122230812239Dlg::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
-	// TODO: Add your message handler code here and/or call default
+	//TODO: Add your message handler code here and/or call default
 
 	char aChar = (char)nChar;
 
@@ -227,7 +227,7 @@ void CMy08122230812239Dlg::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 
 	case 'n':
 	case 'N':
-		mg->KeyRelease(GameKeys::Enter);
+		//mg->KeyRelease(GameKeys::Enter);
 		break;
 	}
 
