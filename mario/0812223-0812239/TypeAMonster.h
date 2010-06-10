@@ -37,5 +37,9 @@ public:
 	void Activate();
 	int GetStatus();
 
-	void InnerCollisionHandle();
+	int InnerCollisionHandle();
+	int GetOcegrineCollision();
+	void Collapse();
+
+	void RenderSprite(CDC* pDC);
 };

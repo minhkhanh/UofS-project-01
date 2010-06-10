@@ -1,6 +1,9 @@
 #include "StdAfx.h"
 #include "TypeAMonster.h"
 
+#include "GameStateTypeA.h"
+#include "TypeAOcegrine.h"
+
 TypeAMonster::TypeAMonster(void)
 {
 }
@@ -46,7 +49,6 @@ void TypeAMonster::Move()
 			m_iIsFall = 1;
 
 		OnFall();
-		InnerCollisionHandle();
 	}
 }
 
@@ -145,15 +147,75 @@ void TypeAMonster::Activate()
 	m_iStatus = 1;
 }
 
-void TypeAMonster::InnerCollisionHandle()
+int TypeAMonster::InnerCollisionHandle()
 {
+	if (m_iStatus != 1)
+		return 0;
+
 	int iTiles = GetInnerCollision();
 
 	if (iTiles & HELL_TILE)
-		m_iStatus = -1;
+	{
+		Collapse();
+		return 0;
+	}
+	else
+	{
+		int iOceCollision = GetOcegrineCollision();
+		if (iOceCollision == -1)
+		{
+			Collapse();
+			return 0;
+		}
+		else if (iOceCollision == 1)
+			return 1;
+		else
+			return 0;
+	}
 }
 
 int TypeAMonster::GetStatus()
 {
 	return m_iStatus;
+}
+
+int TypeAMonster::GetOcegrineCollision()
+{
+	GameStateTypeA *pGameState = m_pMapTypeA->GetGameStateTypeA();
+	TypeAOcegrine *pOcegrine = pGameState->GetOcegrine();
+
+	int iRight = GetRight();
+	int iOceBottom = pOcegrine->GetBottom();
+	int iOceLeft = pOcegrine->GetLeft();
+	int iOceRight = pOcegrine->GetRight();
+
+	if ((iOceRight >= m_iLeft && iOceLeft < m_iLeft)
+		|| (iOceLeft < iRight && iOceRight >= iRight)
+		|| (iOceLeft >= m_iLeft && iOceRight < iRight))
+	{
+		if (iOceBottom - m_iTop >= 1 && iOceBottom - m_iTop <= MOVE_PIXELS)
+			return -1;
+		else
+		{
+			if (iOceBottom - m_iTop > MOVE_PIXELS && pOcegrine->GetTop() < GetBottom())
+				return 1;
+		}
+	}
+	
+	return 0;
+}
+
+void TypeAMonster::Collapse()
+{
+	m_iStatus = -1;
+
+	m_pSprite->SetPositionFrame(0);
+}
+
+void TypeAMonster::RenderSprite( CDC* pDC )
+{
+	if (m_iStatus != 1)
+		return;
+
+	TypeAObject::RenderSprite(pDC);
 }

@@ -87,12 +87,12 @@ void Functions::SetBits( int &a, int x, int y, int v )
 	a |= tmp;												// xxxx yyyy xxxx
 }
 
-int Functions::GetBit( int a, int x )
+bool Functions::GetBit( int a, int x )
 {
 	return ((a >> x) & 1);
 }
 
-void Functions::SetBit( int &a, int x, int v )
+void Functions::SetBit( int &a, int x, bool v )
 {
 	if (v == 0)
 		a &= ~(1 << x);

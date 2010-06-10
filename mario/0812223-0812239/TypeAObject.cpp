@@ -150,3 +150,8 @@ int TypeAObject::GetWidth()
 {
 	return m_pSprite->GetWidth();
 }
+
+int TypeAObject::GetFall()
+{
+	return m_iIsFall;
+}
