@@ -162,7 +162,6 @@ void CMy08122230812239Dlg::run()
 	pDC = GetDC();
 
 	mg->SetPDC(pDC);
-	mg->PrepareGameSound();
 	mg->GameLoop();
 }
 void CMy08122230812239Dlg::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
