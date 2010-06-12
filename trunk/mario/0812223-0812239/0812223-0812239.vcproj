@@ -216,6 +216,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GameStateHowToPlay.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\GameStateIntro.cpp"
 				>
 			</File>
@@ -322,6 +326,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GameStateHowToPlay.h"
+				>
+			</File>
+			<File
 				RelativePath=".\GameStateIntro.h"
 				>
 			</File>
@@ -412,6 +420,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Resource\bitmap1.bmp"
+				>
+			</File>
+			<File
 				RelativePath=".\Resource\CoinIcon.bmp"
 				>
 			</File>
@@ -428,7 +440,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Resource\HowToPlay.bmp"
+				>
+			</File>
+			<File
 				RelativePath=".\Resource\IceField.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\Resource\MarioRevolution.bmp"
 				>
 			</File>
 			<File

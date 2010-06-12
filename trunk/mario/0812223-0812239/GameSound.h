@@ -19,4 +19,5 @@ public:
 	static void MenuTheme(int iFlag);
 	static void IntroTheme(int iFlag);
 	static void EnterMainGame(int iFlag);
+	static void Explosion(int iFlag);
 };

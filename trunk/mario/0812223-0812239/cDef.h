@@ -7,6 +7,7 @@ public:
 	static int STATE_MENU;
 	static int STATE_INTRO;
 	static int STATE_TYPE_A;
+	static int STATE_HOWTOPLAY;
 
 	static int MESSAGE_ENTER;
 	static int MESSAGE_UPDATE;

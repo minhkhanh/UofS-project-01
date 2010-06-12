@@ -17,7 +17,7 @@ void GameSound::Coin(int iFlag)
 	if (iFlag == 1)
 	{
 		mciSendString(L"open Resource\\Music\\coin.wav type mpegvideo alias coin", NULL, 0, 0);
-		mciSendString(L"play coin", NULL, 0, 0);
+		mciSendString(L"play coin wait", NULL, 0, 0);
 	}
 
 //	PlaySound(L"Resource\\Music\\coin.wav", NULL, SND_FILENAME);
@@ -80,5 +80,17 @@ void GameSound::EnterMainGame( int iFlag )
 	{
 		mciSendString(L"open Resource\\Music\\beginlevel.wav type mpegvideo alias beginlevel", NULL, 0, 0);
 		mciSendString(L"play beginlevel from 0 wait", NULL, 0, 0);
+	}
+}
+
+void GameSound::Explosion( int iFlag )
+{
+	mciSendString(L"stop explosion", NULL, 0, 0);
+	mciSendString(L"close explosion", NULL, 0, 0);
+
+	if (iFlag == 1)
+	{
+		mciSendString(L"open Resource\\Music\\explosion.wav type mpegvideo alias explosion", NULL, 0, 0);
+		mciSendString(L"play explosion from 0 wait", NULL, 0, 0);
 	}
 }

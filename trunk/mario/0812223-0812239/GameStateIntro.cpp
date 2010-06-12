@@ -22,7 +22,7 @@ void GameStateIntro::MessageEnter( int message )
 	m_iStep = 0;
 	GameSound::IntroTheme(1);
 
-	mciSendString(L"play pushing from 0 repeat", NULL, 0, 0);
+	//mciSendString(L"play pushing from 0 repeat", NULL, 0, 0);
 
 	bNeedRedraw = true;
 	m_pScriptText->Reset();
@@ -31,8 +31,8 @@ void GameStateIntro::MessageEnter( int message )
 	CDC *pMemDC = m_pMainGame->GetMemDC();
 	CDC *pDC = m_pMainGame->GetMainDC();
 
-	m_pBGR->DrawTransparent(pMemDC, 0, 0, RGB(255,255,255));
-	pDC->StretchBlt(0, 0, cDef::SCREEN_WIDTH, cDef::SCREEN_HEIGHT, pMemDC, 0, 0 , 240, 320, SRCCOPY);
+	m_pBGR->DrawTransparent(pDC, 0, 0, RGB(113,113,113));
+	//pDC->StretchBlt(0, 0, cDef::SCREEN_WIDTH, cDef::SCREEN_HEIGHT, pMemDC, 0, 0 , cDef::SCREEN_WIDTH, cDef::SCREEN_HEIGHT, SRCCOPY);
 	m_pMainGame->m_pGraphics->ReleaseHDC(old);
 }
 
@@ -69,8 +69,8 @@ void GameStateIntro::MessagePaint( int message, CDC *pDC )
 	if (bNeedRedraw) 
 	{
 		HDC old = m_pMainGame->m_pGraphics->GetHDC();
-		m_pBGR->DrawTransparent(&(m_pMainGame->m_MemDC), 0, 0, RGB(255,255,255));
-		pDC->StretchBlt(0, 0, cDef::SCREEN_WIDTH, cDef::SCREEN_HEIGHT, &(m_pMainGame->m_MemDC), 0, 0 , 240, 320, SRCCOPY);
+		m_pBGR->DrawTransparent(&(m_pMainGame->m_MemDC), 0, 0, RGB(113,113,113));
+		pDC->StretchBlt(0, 0, cDef::SCREEN_WIDTH, cDef::SCREEN_HEIGHT, &(m_pMainGame->m_MemDC), 0, 0 , cDef::SCREEN_WIDTH, cDef::SCREEN_HEIGHT, SRCCOPY);
 		m_pMainGame->m_pGraphics->ReleaseHDC(old);
 	}
 	m_pMainGame->m_pMemGraphics->Clear(Color(0,0,0,0));
@@ -88,6 +88,6 @@ void GameStateIntro::MessageExit( int message, CDC *pDC )
 {
 	GameSound::IntroTheme(0);
 
-	m_pMainGame->mBiz_iCurrentState = cDef::STATE_MENU;
+	m_pMainGame->mBiz_iCurrentState = cDef::STATE_HOWTOPLAY;
 }
 
