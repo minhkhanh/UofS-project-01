@@ -102,80 +102,80 @@ void Functions::SetBit( int &a, int x, bool v )
 		a |= 1 << x;
 }
 
-bool Functions::IsWaveFile( LPWSTR lpszFileName )
-{
-	HMMIO hmmio;
-
-	// Mo file 
-	if (!(hmmio = mmioOpen(lpszFileName, 0, MMIO_READ | MMIO_ALLOCBUF)))
-		return false;
-
-	MMCKINFO mmckinfoParent;   // Group Header (special chunk)
-
-	// Dinh vi nhom wave (group header) 
-	mmckinfoParent.fccType = mmioFOURCC('W', 'A', 'V', 'E'); 
-
-	// Neu khong co nhom wave thi day la khong phai thuoc dinh dang wave
-	if (mmioDescend(hmmio, (LPMMCKINFO) &mmckinfoParent, 0, MMIO_FINDRIFF))
-		return false;
-
-	// Nguoc lai dung -> dung
-	return true;
-}
-
-bool Functions::IsMIDIFile( LPWSTR lpszFileName )
-{
-	HMMIO hmmio;
-
-	// Mo file 
-	if (!(hmmio = mmioOpen(lpszFileName, 0, MMIO_READ | MMIO_ALLOCBUF)))
-		return false;
-
-	MMCKINFO mmckinfoSubchunk;   
-
-	memset(&mmckinfoSubchunk, 0, sizeof(mmckinfoSubchunk));
-
-	// Tim nhom MThd 
-	mmckinfoSubchunk.ckid = mmioFOURCC('M', 'T', 'h', 'd'); 
-
-	// Neu khong tinm thay nhom MThd -> khong phai file Midi
-	if (mmioDescend(hmmio, &mmckinfoSubchunk, 0, MMIO_FINDCHUNK))
-		return false;
-
-	// Nguoc lai -> dung
-	return true;
-}
-
-void Functions::PlayCommandWaveMidi( LPWSTR lpszFilePath )
-{
-	MCI_OPEN_PARMS mciOpenParms;
-
-	if (Functions::IsWaveFile(lpszFilePath))
-		mciOpenParms.lpstrDeviceType = L"waveaudio";
-	else if (Functions::IsMIDIFile(lpszFilePath))
-		mciOpenParms.lpstrDeviceType = L"sequencer";
-
-	mciOpenParms.lpstrElementName = lpszFilePath;
-
-	if (mciSendCommand(NULL, MCI_OPEN, MCI_OPEN_TYPE | MCI_OPEN_ELEMENT, (DWORD)(LPVOID)&mciOpenParms))
-		return;
-
-	g_mciDevID = mciOpenParms.wDeviceID;
-
-	MCI_PLAY_PARMS mciPlayParms;
-
-	if (mciSendCommand(g_mciDevID, MCI_PLAY, MCI_NOTIFY, (DWORD)(LPVOID)&mciPlayParms))
-	{
-		mciSendCommand(g_mciDevID, MCI_CLOSE, 0, 0L);
-		return;
-	}
-}
-
-void Functions::PlayStringWaveMidi( LPWSTR lpszAlias)
-{
-	TCHAR szCommand[120];
-	wsprintf(szCommand, L"play %s type %s alias EEE", lpszAlias);
-
-	mciSendString(szCommand, NULL, 0, 0);
-	mciSendString(L"play EEE", NULL, 0, 0);
-}
+//bool Functions::IsWaveFile( LPWSTR lpszFileName )
+//{
+//	HMMIO hmmio;
+//
+//	// Mo file 
+//	if (!(hmmio = mmioOpen(lpszFileName, 0, MMIO_READ | MMIO_ALLOCBUF)))
+//		return false;
+//
+//	MMCKINFO mmckinfoParent;   // Group Header (special chunk)
+//
+//	// Dinh vi nhom wave (group header) 
+//	mmckinfoParent.fccType = mmioFOURCC('W', 'A', 'V', 'E'); 
+//
+//	// Neu khong co nhom wave thi day la khong phai thuoc dinh dang wave
+//	if (mmioDescend(hmmio, (LPMMCKINFO) &mmckinfoParent, 0, MMIO_FINDRIFF))
+//		return false;
+//
+//	// Nguoc lai dung -> dung
+//	return true;
+//}
+//
+//bool Functions::IsMIDIFile( LPWSTR lpszFileName )
+//{
+//	HMMIO hmmio;
+//
+//	// Mo file 
+//	if (!(hmmio = mmioOpen(lpszFileName, 0, MMIO_READ | MMIO_ALLOCBUF)))
+//		return false;
+//
+//	MMCKINFO mmckinfoSubchunk;   
+//
+//	memset(&mmckinfoSubchunk, 0, sizeof(mmckinfoSubchunk));
+//
+//	// Tim nhom MThd 
+//	mmckinfoSubchunk.ckid = mmioFOURCC('M', 'T', 'h', 'd'); 
+//
+//	// Neu khong tinm thay nhom MThd -> khong phai file Midi
+//	if (mmioDescend(hmmio, &mmckinfoSubchunk, 0, MMIO_FINDCHUNK))
+//		return false;
+//
+//	// Nguoc lai -> dung
+//	return true;
+//}
+//
+//void Functions::PlayCommandWaveMidi( LPWSTR lpszFilePath )
+//{
+//	MCI_OPEN_PARMS mciOpenParms;
+//
+//	if (Functions::IsWaveFile(lpszFilePath))
+//		mciOpenParms.lpstrDeviceType = L"waveaudio";
+//	else if (Functions::IsMIDIFile(lpszFilePath))
+//		mciOpenParms.lpstrDeviceType = L"sequencer";
+//
+//	mciOpenParms.lpstrElementName = lpszFilePath;
+//
+//	if (mciSendCommand(NULL, MCI_OPEN, MCI_OPEN_TYPE | MCI_OPEN_ELEMENT, (DWORD)(LPVOID)&mciOpenParms))
+//		return;
+//
+//	g_mciDevID = mciOpenParms.wDeviceID;
+//
+//	MCI_PLAY_PARMS mciPlayParms;
+//
+//	if (mciSendCommand(g_mciDevID, MCI_PLAY, MCI_NOTIFY, (DWORD)(LPVOID)&mciPlayParms))
+//	{
+//		mciSendCommand(g_mciDevID, MCI_CLOSE, 0, 0L);
+//		return;
+//	}
+//}
+//
+//void Functions::PlayStringWaveMidi( LPWSTR lpszAlias)
+//{
+//	TCHAR szCommand[120];
+//	wsprintf(szCommand, L"play %s type %s alias EEE", lpszAlias);
+//
+//	mciSendString(szCommand, NULL, 0, 0);
+//	mciSendString(L"play EEE", NULL, 0, 0);
+//}
