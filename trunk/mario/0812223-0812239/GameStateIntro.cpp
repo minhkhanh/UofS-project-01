@@ -19,6 +19,7 @@ GameStateIntro::~GameStateIntro(void)
 
 void GameStateIntro::MessageEnter( int message )
 {
+	m_iStep = 0;
 	bNeedRedraw = true;
 	m_pScriptText->Reset();
 	HDC old = mg->m_pGraphics->GetHDC();
@@ -34,6 +35,7 @@ void GameStateIntro::MessageUpdate( int message, int keys )
 	{
 		m_pScriptText->PreviousScript();
 		bNeedRedraw = true;
+		m_iStep = 0;
 		mg->KeyRelease(GameKeys::Left);
 	}
 
@@ -41,6 +43,7 @@ void GameStateIntro::MessageUpdate( int message, int keys )
 	{
 		m_pScriptText->NextScript();
 		bNeedRedraw = true;
+		m_iStep = 0;
 		mg->KeyRelease(GameKeys::Right);
 	}
 
@@ -53,6 +56,8 @@ void GameStateIntro::MessageUpdate( int message, int keys )
 
 void GameStateIntro::MessagePaint( int message, CDC *pDC )
 {
+	++m_iStep;
+	if ((m_iStep % 3) != 0) return;
 	mg->m_pMemGraphics->Clear(Color(255,25,55,255));
 	if (bNeedRedraw) 
 	{
@@ -63,9 +68,9 @@ void GameStateIntro::MessagePaint( int message, CDC *pDC )
 	}
 	mg->m_pMemGraphics->Clear(Color(0,0,0,0));
 	m_pScriptText->ShowText(10, 10, mg->m_pMemGraphics);
-	if (!m_pScriptText->NextCharacter())
+	if (m_pScriptText->IsEndLine())
 	{
-		m_pScriptText->NextScript() ;
+		//m_pScriptText->NextScript() ;
 		bNeedRedraw = true;
 	}
 	else bNeedRedraw = false;

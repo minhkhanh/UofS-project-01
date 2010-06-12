@@ -13,6 +13,7 @@ public:
 	MyScriptMap * m_pScriptText;
 	MyBitmap * m_pBGR;
 	bool bNeedRedraw;
+	int m_iStep;
 	GameStateIntro(MainGame *_mg, TCHAR szText[], LPCTSTR szBGR);
 	virtual ~GameStateIntro(void);
 

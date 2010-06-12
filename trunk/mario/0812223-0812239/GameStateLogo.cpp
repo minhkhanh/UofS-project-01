@@ -8,6 +8,7 @@ GameStateLogo::GameStateLogo(MainGame *_mg)
 	mg = _mg;
 	GAME_STATE_DEF = cDef::STATE_LOGO;
 
+	m_pTenGame = new MyBitmap((LPCTSTR)IDIMG_BGR_LOGO_TEN_GAME);
 	m_iX = 0;
 }
 
@@ -41,9 +42,12 @@ void GameStateLogo::MessageUpdate(int message, int keys)
 
 void GameStateLogo::MessagePaint(int message, CDC *pDC)
 {
-	imgBG->DrawTransparent(&(mg->m_MemDC), 0, 0, RGB(255,255,255));
+	imgBG->DrawTransparent(&(mg->m_MemDC), 0, 0, RGB(255, 255, 255));
+	m_pTenGame->DrawTransparent(&(mg->m_MemDC), 5, 20, RGB(255,255,255));
 	sprMenuIcon->Render(m_iX, 230, &(mg->m_MemDC));
-
+	m_iX += 3;
+	sprMenuIcon->NextFrame();
+	if (m_iX > 240) mg->KeyPressed(GameKeys::Enter);
 	pDC->StretchBlt(0, 0, cDef::MAINGAME_WIDTH, cDef::MAINGAME_HEIGHT, &(mg->m_MemDC), 0, 0 , 240, 320, SRCCOPY);
 }
 
