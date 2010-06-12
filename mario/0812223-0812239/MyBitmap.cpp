@@ -60,6 +60,10 @@ void MyBitmap::DrawTransparent(CDC * pDC, int x, int y, COLORREF crColour)
 	dcTrans.SelectObject(pOldBitmapTrans);
 	pDC->SetBkColor(crOldBack);
 	pDC->SetTextColor(crOldText);
+
+	dcTrans.DeleteDC();
+	dcImage.DeleteDC();
+	bitmapTrans.DeleteObject();
 }
 
 void MyBitmap::DrawTransparent(CDC * pDC, int x, int y,int x1, int y1,int width,int height, COLORREF crColour)
@@ -102,4 +106,8 @@ void MyBitmap::DrawTransparent(CDC * pDC, int x, int y,int x1, int y1,int width,
 	dcTrans.SelectObject(pOldBitmapTrans);
 	pDC->SetBkColor(crOldBack);
 	pDC->SetTextColor(crOldText);
+
+	dcImage.DeleteDC();
+	dcTrans.DeleteDC();
+	bitmapTrans.DeleteObject();
 }

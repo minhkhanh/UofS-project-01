@@ -3,7 +3,7 @@
 
 TypeAObject::TypeAObject(void)
 {
-	m_iIsFall = 1;
+	m_iIsFall = 0;
 }
 
 TypeAObject::~TypeAObject(void)
@@ -25,6 +25,7 @@ int TypeAObject::GetLeftCollision(int iScope)
 	int iTiles = 0x0;
 	int iBottom = GetBottom();
 	int j = m_iLeft-iScope;
+
 
 	for (int i = m_iTop; i < iBottom; i += 1)
 		iTiles |= m_pMapTypeA->GetTile(j, i);
@@ -99,15 +100,27 @@ int TypeAObject::OnFall()
 {
 	if (m_iIsFall != 0)
 	{
-		int i = MOVE_PIXELS;
-		for ( ; i > 0; --i)
-			if (!(GetBottomCollision(i) & HARD_TILE))
+		//int i = cDef::OCEGRINE_MOVE_PIXELS;
+		//for ( ; i > 0; --i)
+		//	if (!(GetBottomCollision(i) & cDef::HARD_TILE))
+		//	{
+		//		Functions::Move(m_iTop, 0, i);
+		//		break;
+		//	}
+
+		int i = 1;
+		for ( ; i <= cDef::OCEGRINE_MOVE_PIXELS*2; ++i)
+		{
+			if (GetBottomCollision(i) & cDef::HARD_TILE)
 			{
-				Functions::Move(m_iTop, 0, i);
 				break;
 			}
+		}
 
-			if (i != MOVE_PIXELS)
+		--i;
+		m_iTop += i;
+
+			if (i != cDef::OCEGRINE_MOVE_PIXELS*2)
 				m_iIsFall = 0;
 
 			return 1;
@@ -133,7 +146,8 @@ void TypeAObject::SetLeft(int iVal)
 
 int TypeAObject::IsInSight()
 {
-	return (GetRight() >= m_pMapTypeA->GetCurrScreenX() && m_iLeft <= m_pMapTypeA->GetCurrScreenX()+SCREEN_WIDTH);
+	return (GetRight() >= m_pMapTypeA->GetCurrScreenX() && m_iLeft <= m_pMapTypeA->GetCurrScreenX()+cDef::SCREEN_WIDTH
+		&& GetTop() >= 0 && GetBottom() <= m_pMapTypeA->GetMapHeight());
 }
 
 int TypeAObject::GetCurrScreenX()
@@ -154,4 +168,14 @@ int TypeAObject::GetWidth()
 int TypeAObject::GetFall()
 {
 	return m_iIsFall;
+}
+
+Sprite *TypeAObject::GetSprite()
+{
+	return m_pSprite;
+}
+
+void TypeAObject::SetTop( int iVal )
+{
+	m_iTop = iVal;
 }

@@ -156,13 +156,13 @@ HCURSOR CMy08122230812239Dlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
-CClientDC *pDC;
 void CMy08122230812239Dlg::run()
 {
-	//pDC = this->GetDC();
-	pDC = new CClientDC(this);
+	CDC* pDC;
+	pDC = GetDC();
 
 	mg->SetPDC(pDC);
+	mg->PrepareGameSound();
 	mg->GameLoop();
 }
 void CMy08122230812239Dlg::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)

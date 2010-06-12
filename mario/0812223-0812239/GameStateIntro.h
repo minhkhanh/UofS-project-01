@@ -9,11 +9,13 @@ class MyScriptMap;
 
 class GameStateIntro: public GameState
 {
-public:
+private:
 	MyScriptMap * m_pScriptText;
 	MyBitmap * m_pBGR;
 	bool bNeedRedraw;
 	int m_iStep;
+
+public:
 	GameStateIntro(MainGame *_mg, TCHAR szText[], LPCTSTR szBGR);
 	virtual ~GameStateIntro(void);
 
@@ -22,9 +24,3 @@ public:
 	void MessagePaint(int message, CDC *pDC);
 	void MessageExit(int message, CDC *pDC);
 };
-
-#ifndef MYCREATEFONT
-#define MYCREATEFONT
-
-
-#endif
