@@ -94,6 +94,7 @@ IDIMG_TILES             BITMAP                  "Resource\\tilesstandard.bmp"
 IDIMG_COIN_ICON         BITMAP                  "Resource\\CoinIcon.bmp"
 IDIMG_MONSTER08         BITMAP                  "Resource\\Monster08.bmp"
 IDIMG_BGR_INTRO			BITMAP					"Resource\\background_intro.bmp"
+IDIMG_BGR_LOGO_TEN_GAME BITMAP					"Resource\\MarioRevolution.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //

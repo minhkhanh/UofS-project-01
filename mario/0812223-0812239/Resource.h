@@ -25,6 +25,7 @@
 #define IDIMG_COIN_ICON                     131
 #define INPUT_MAX_LEN                   500
 #define IDIMG_BGR_INTRO					2000
+#define IDIMG_BGR_LOGO_TEN_GAME		2001
 
 // Next default values for new objects
 // 
