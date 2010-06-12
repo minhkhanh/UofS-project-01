@@ -93,7 +93,7 @@ IDIMG_DEMOMENU          BITMAP                  "Resource\\DemoMenu_Stage1.bmp"
 IDIMG_TILES             BITMAP                  "Resource\\tilesstandard.bmp"
 IDIMG_COIN_ICON         BITMAP                  "Resource\\CoinIcon.bmp"
 IDIMG_MONSTER08         BITMAP                  "Resource\\Monster08.bmp"
-IDIMG_BGR_INTRO			BITMAP					"Resource\\background_intro.bmp"
+IDIMG_BGR_INTRO         BITMAP                  "Resource\\background_intro.bmp"
 IDIMG_BGR_LOGO_TEN_GAME BITMAP					"Resource\\MarioRevolution.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
@@ -143,13 +143,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "TODO: <Company name>"
-            VALUE "FileDescription", "TODO: <File description>"
+            VALUE "CompanyName", "Mario Revolution"
+            VALUE "FileDescription", "Mario Revolution"
             VALUE "FileVersion", "1.0.0.1"
             VALUE "InternalName", "0812223-0812239.exe"
-            VALUE "LegalCopyright", "TODO: (c) <Company name>.  All rights reserved."
+            VALUE "LegalCopyright", "Mario Revolution.  All rights reserved."
             VALUE "OriginalFilename", "0812223-0812239.exe"
-            VALUE "ProductName", "TODO: <Product name>"
+            VALUE "ProductName", "Maio Revolution"
             VALUE "ProductVersion", "1.0.0.1"
         END
     END

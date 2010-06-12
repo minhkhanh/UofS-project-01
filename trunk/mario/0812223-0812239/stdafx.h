@@ -22,7 +22,7 @@
 
 #include <afxwin.h>         // MFC core and standard components
 #include <afxext.h>         // MFC extensions
-
+//#pragma  warning(disable 4101)
 
 #include <afxdisp.h>        // MFC Automation classes
 
