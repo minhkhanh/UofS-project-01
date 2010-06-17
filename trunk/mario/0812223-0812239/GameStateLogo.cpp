@@ -42,6 +42,8 @@ void GameStateLogo::MessageUpdate(int message, int keys)
 
 void GameStateLogo::MessagePaint(int message, CDC *pDC)
 {
+	GameSound::Play(JUMP_SOUND);
+
 	m_pBackground->DrawTransparent(&(m_pMainGame->m_MemDC), 0, 0, RGB(255, 255, 255));
 	m_pTenGame->DrawTransparent(&(m_pMainGame->m_MemDC), 5, 20, RGB(255,255,255));
 	m_pMenuIcon->Render(m_iX, 230, &(m_pMainGame->m_MemDC));

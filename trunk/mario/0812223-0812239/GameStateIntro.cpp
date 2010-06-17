@@ -20,9 +20,7 @@ GameStateIntro::~GameStateIntro(void)
 void GameStateIntro::MessageEnter( int message )
 {
 	m_iStep = 0;
-	GameSound::IntroTheme(1);
-
-	//mciSendString(L"play pushing from 0 repeat", NULL, 0, 0);
+	GameSound::Play(INTRO_THEME_SOUND);
 
 	bNeedRedraw = true;
 	m_pScriptText->Reset();
@@ -38,7 +36,7 @@ void GameStateIntro::MessageEnter( int message )
 
 void GameStateIntro::MessageUpdate( int message, int keys )
 {
-	if ((keys & GameKeys::Left) == GameKeys::Left)
+	if (keys & GameKeys::Left)
 	{
 		m_pScriptText->PreviousScript();
 		bNeedRedraw = true;
@@ -46,7 +44,7 @@ void GameStateIntro::MessageUpdate( int message, int keys )
 		m_pMainGame->KeyRelease(GameKeys::Left);
 	}
 
-	if ((keys & GameKeys::Right) == GameKeys::Right)
+	if (keys & GameKeys::Right)
 	{
 		m_pScriptText->NextScript();
 		bNeedRedraw = true;
@@ -54,10 +52,10 @@ void GameStateIntro::MessageUpdate( int message, int keys )
 		m_pMainGame->KeyRelease(GameKeys::Right);
 	}
 
-	if ((keys & GameKeys::Enter) == GameKeys::Enter)
+	if (keys & GameKeys::Enter)
 	{
 		m_pMainGame->mBiz_SwitchState(cDef::STATE_MENU);
-		m_pMainGame->KeyRelease(GameKeys::Enter);
+		//m_pMainGame->KeyRelease(GameKeys::Enter);
 	}
 }
 
@@ -86,8 +84,8 @@ void GameStateIntro::MessagePaint( int message, CDC *pDC )
 
 void GameStateIntro::MessageExit( int message, CDC *pDC )
 {
-	GameSound::IntroTheme(0);
+	GameSound::Play(INTRO_THEME_SOUND, 0);
 
-	m_pMainGame->mBiz_iCurrentState = cDef::STATE_HOWTOPLAY;
+	m_pMainGame->mBiz_iCurrentState = cDef::STATE_MENU;
 }
 
