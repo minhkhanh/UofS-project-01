@@ -10,6 +10,7 @@ public:
 	static int STATE_HOWTOPLAY;
 	static int STATE_SETTINGS;
 	static int STATE_GAMEOVER;
+	static int STATE_FINISH;
 
 	static int MESSAGE_ENTER;
 	static int MESSAGE_UPDATE;

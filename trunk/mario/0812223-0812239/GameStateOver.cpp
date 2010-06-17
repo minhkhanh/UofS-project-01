@@ -19,8 +19,11 @@ GameStateOver::~GameStateOver(void)
 
 void GameStateOver::MessageEnter(int message)
 {
-	GameSound::Play(GAME_OVER_THEME);
+	GameSound::Play(GAME_OVER_THEME_SOUND);
+	m_pMainGame->SetSleepTime(25);
 	m_iStep = 0;
+	bNeedRedraw = true;
+	m_pScriptText->Reset();
 	m_pBackGroundBMP->DrawTransparent(m_pMainGame->m_pDC, 0, 0, RGB(113,113,113));
 }
 
@@ -35,7 +38,7 @@ void GameStateOver::MessageUpdate(int message, int keys)
 	{
 		m_pScriptText->PreviousScript();
 		bNeedRedraw = true;
-
+		m_iStep = 0;
 		m_pMainGame->KeyRelease(GameKeys::Left);
 	}
 
@@ -43,7 +46,7 @@ void GameStateOver::MessageUpdate(int message, int keys)
 	{
 		m_pScriptText->NextScript();
 		bNeedRedraw = true;
-
+		m_iStep = 0;
 		m_pMainGame->KeyRelease(GameKeys::Right);
 	}
 }
@@ -51,7 +54,7 @@ void GameStateOver::MessageUpdate(int message, int keys)
 void GameStateOver::MessagePaint(int message, CDC *pDC)
 {
 	++m_iStep;
-	if ((m_iStep % 3) != 0) return;
+	if ((m_iStep % 10) != 0) return;
 	m_pMainGame->m_pMemGraphics->Clear(Color(255,25,55,255));
 	if (bNeedRedraw) 
 	{
@@ -73,6 +76,6 @@ void GameStateOver::MessagePaint(int message, CDC *pDC)
 
 void GameStateOver::MessageExit(int message, CDC *pDC)
 {
-	GameSound::Play(GAME_OVER_THEME, 0);
+	GameSound::Play(GAME_OVER_THEME_SOUND, 0);
 	m_pMainGame->mBiz_iCurrentState = cDef::STATE_LOGO;
 }

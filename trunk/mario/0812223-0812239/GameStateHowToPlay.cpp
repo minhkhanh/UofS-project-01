@@ -28,10 +28,7 @@ void GameStateHowToPlay::MessageUpdate(int message, int keys)
 		m_pBackGroundBMP->DrawTransparent(&(m_pMainGame->m_MemDC), 0, 0, RGB(113,113,113));
 		m_pMainGame->m_pDC->StretchBlt(0,0,cDef::SCREEN_WIDTH, cDef::SCREEN_HEIGHT, &(m_pMainGame->m_MemDC), 0,0,cDef::SCREEN_WIDTH, cDef::SCREEN_HEIGHT, SRCCOPY);
 
-		GameSound::Play(EXPLOSION_SOUND);
-
 		m_pMainGame->mBiz_SwitchState(cDef::STATE_MENU);
-		//m_pMainGame->KeyRelease(GameKeys::Enter);
 	}
 }
 

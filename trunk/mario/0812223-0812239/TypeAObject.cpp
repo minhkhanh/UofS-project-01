@@ -147,7 +147,7 @@ void TypeAObject::SetLeft(int iVal)
 int TypeAObject::IsInSight()
 {
 	return (GetRight() >= m_pMapTypeA->GetCurrScreenX() && m_iLeft <= m_pMapTypeA->GetCurrScreenX()+cDef::SCREEN_WIDTH
-		&& GetTop() >= 0 && GetBottom() <= m_pMapTypeA->GetMapHeight());
+		&& GetBottom() >= 0 && GetTop() <= m_pMapTypeA->GetMapHeight());
 }
 
 int TypeAObject::GetCurrScreenX()
