@@ -94,10 +94,9 @@ IDIMG_COIN_ICON         BITMAP                  "Resource\\CoinIcon.bmp"
 IDIMG_MONSTER08         BITMAP                  "Resource\\Monster08.bmp"
 IDIMG_BGR_INTRO         BITMAP                  "Resource\\background_intro.bmp"
 IDIMG_BGR_LOGO_TEN_GAME BITMAP                  "Resource\\MarioRevolution.bmp"
-IDIMG_HOWTOPLAY             BITMAP            "Resource\\HowToPlay_Mario.bmp"
-IDIMG_HOWTOPLAY_MASK1             BITMAP            "Resource\\HowToPlay_Mario_mask1.bmp"
-IDIMG_HOWTOPLAY_MASK2             BITMAP            "Resource\\HowToPlay_Mario_mask2.bmp"
-IDIMG_HOWTOPLAY_MASK3             BITMAP            "Resource\\HowToPlay_Mario_mask3.bmp"
+IDIMG_HOWTOPLAY         BITMAP                  "Resource\\HowToPlay_Mario.bmp"
+IDIMG_GAME_SETTINGS     BITMAP                  "Resource\\GameSettings.bmp"
+IDIMG_GAME_OVER             BITMAP                  "Resource\\GameOver.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //

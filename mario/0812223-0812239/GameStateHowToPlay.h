@@ -8,7 +8,8 @@ class GameStateHowToPlay :
 	public GameState
 {
 private:
-	vector<MyBitmap*> m_vBackGround;
+	MyBitmap *m_pBackGroundBMP;
+	int m_iCurrPos;
 
 public:
 	GameStateHowToPlay(MainGame*);

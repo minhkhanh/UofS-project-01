@@ -22,10 +22,9 @@
 #define IDD_MY08122230812239_DIALOG     102
 #define IDR_MAINFRAME                   128
 #define IDIMG_COIN_ICON                 131
-#define IDIMG_HOWTOPLAY                     138
-#define IDIMG_HOWTOPLAY_MASK1                     139
-#define IDIMG_HOWTOPLAY_MASK2                     140
-#define IDIMG_HOWTOPLAY_MASK3                     141
+#define IDIMG_HOWTOPLAY                 138
+#define IDIMG_GAME_SETTINGS             139
+#define IDIMG_GAME_OVER                     140
 #define INPUT_MAX_LEN                   500
 #define IDIMG_BGR_INTRO                 2000
 #define IDIMG_BGR_LOGO_TEN_GAME         2001
@@ -34,7 +33,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        139
+#define _APS_NEXT_RESOURCE_VALUE        141
 #define _APS_NEXT_COMMAND_VALUE         32771
 #define _APS_NEXT_CONTROL_VALUE         1000
 #define _APS_NEXT_SYMED_VALUE           101

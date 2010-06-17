@@ -1,11 +1,13 @@
 #include "StdAfx.h"
 #include "cDef.h"
 
-int cDef::STATE_LOGO	=	0x00;
-int cDef::STATE_MENU	=	0x01;
-int cDef::STATE_TYPE_A	=	0x02;
-int cDef::STATE_INTRO	=	0x04;
-int cDef::STATE_HOWTOPLAY = 0x08;
+int cDef::STATE_LOGO	=	0;
+int cDef::STATE_MENU	=	1;
+int cDef::STATE_TYPE_A	=	2;
+int cDef::STATE_INTRO	=	3;
+int cDef::STATE_HOWTOPLAY = 4;
+int cDef::STATE_SETTINGS = 5;
+int cDef::STATE_GAMEOVER = 6;
 
 int cDef::MESSAGE_ENTER		=	0x02;
 int cDef::MESSAGE_UPDATE	=	0x04;

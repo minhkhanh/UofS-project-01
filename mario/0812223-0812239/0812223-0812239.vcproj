@@ -232,6 +232,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GameStateOver.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\GameStateSettings.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\GameStateTypeA.cpp"
 				>
 			</File>
@@ -342,6 +350,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GameStateOver.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GameStateSettings.h"
+				>
+			</File>
+			<File
 				RelativePath=".\GameStateTypeA.h"
 				>
 			</File>
@@ -408,10 +424,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Resource\Axe.bmp"
-				>
-			</File>
-			<File
 				RelativePath=".\Resource\background_intro.bmp"
 				>
 			</File>
@@ -436,11 +448,23 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Resource\GameOver.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\Resource\GameSettings.bmp"
+				>
+			</File>
+			<File
 				RelativePath=".\Resource\GraMount.bmp"
 				>
 			</File>
 			<File
 				RelativePath=".\Resource\HowToPlay.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\Resource\HowToPlay_Mario.bmp"
 				>
 			</File>
 			<File
