@@ -8,6 +8,7 @@ int cDef::STATE_INTRO	=	3;
 int cDef::STATE_HOWTOPLAY = 4;
 int cDef::STATE_SETTINGS = 5;
 int cDef::STATE_GAMEOVER = 6;
+int cDef::STATE_FINISH = 7;
 
 int cDef::MESSAGE_ENTER		=	0x02;
 int cDef::MESSAGE_UPDATE	=	0x04;

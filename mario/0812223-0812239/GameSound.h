@@ -11,8 +11,10 @@
 #define INTRO_THEME_SOUND		4
 #define ENTER_MAIN_GAME_SOUND	5
 #define MENU_THEME_SOUND		6
-#define GAME_OVER_THEME			7
-#define BONUS_LIVE				8
+#define GAME_OVER_THEME_SOUND	7
+#define BONUS_LIVE_SOUND		8
+#define GAME_FINISH_THEME_SOUND	9
+#define OCEGRINE_DIES_SOUND		10
 
 class GameSound
 {
@@ -40,4 +42,6 @@ public:
 	static void EnterMainGame(int iFlag = 1);
 	static void GameOverTheme(int iFlag = 1);
 	static void BonusLive(int iFlag = 1);
+	static void GameFinishTheme(int iFlag = 1);
+	static void OcegrineDies(int iFlag = 1);
 };

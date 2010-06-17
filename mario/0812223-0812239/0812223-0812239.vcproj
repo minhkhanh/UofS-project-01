@@ -216,6 +216,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GameStateFinish.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\GameStateHowToPlay.cpp"
 				>
 			</File>
@@ -334,6 +338,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GameStateFinish.h"
+				>
+			</File>
+			<File
 				RelativePath=".\GameStateHowToPlay.h"
 				>
 			</File>
@@ -429,10 +437,6 @@
 			</File>
 			<File
 				RelativePath=".\Resource\BearVillage1.bmp"
-				>
-			</File>
-			<File
-				RelativePath=".\Resource\bitmap1.bmp"
 				>
 			</File>
 			<File

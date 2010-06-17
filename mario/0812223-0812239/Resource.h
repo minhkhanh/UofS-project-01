@@ -25,6 +25,7 @@
 #define IDIMG_HOWTOPLAY                 138
 #define IDIMG_GAME_SETTINGS             139
 #define IDIMG_GAME_OVER                     140
+#define IDIMG_GAME_FINISH				141
 #define INPUT_MAX_LEN                   500
 #define IDIMG_BGR_INTRO                 2000
 #define IDIMG_BGR_LOGO_TEN_GAME         2001
