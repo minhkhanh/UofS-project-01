@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConfClient", "ConfClient\ConfClient.vcproj", "{D25B7FCC-93B6-4D11-8C72-47DF21B01F80}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConfServer", "ConfServer\ConfServer.vcproj", "{573799C5-1D4D-419B-828C-209B40A0E21F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -15,10 +13,6 @@ Global
 		{D25B7FCC-93B6-4D11-8C72-47DF21B01F80}.Debug|Win32.Build.0 = Debug|Win32
 		{D25B7FCC-93B6-4D11-8C72-47DF21B01F80}.Release|Win32.ActiveCfg = Release|Win32
 		{D25B7FCC-93B6-4D11-8C72-47DF21B01F80}.Release|Win32.Build.0 = Release|Win32
-		{573799C5-1D4D-419B-828C-209B40A0E21F}.Debug|Win32.ActiveCfg = Debug|Win32
-		{573799C5-1D4D-419B-828C-209B40A0E21F}.Debug|Win32.Build.0 = Debug|Win32
-		{573799C5-1D4D-419B-828C-209B40A0E21F}.Release|Win32.ActiveCfg = Release|Win32
-		{573799C5-1D4D-419B-828C-209B40A0E21F}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,7 +5,7 @@
 
 // CPrivateChatDlg dialog
 
-class CConfClientDlg;
+class CClientConfDlg;
 
 class CPrivateChatDlg : public CDialog
 {
@@ -18,7 +18,7 @@ public:
 // Dialog Data
 	enum { IDD = IDD_DLG_PRIVATE };
 
-	friend class CConfClientDlg;
+	friend class CClientConfDlg;
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
@@ -34,11 +34,15 @@ public:
 	void WriteToPrivContent(TCHAR *strMess);
 	afx_msg void OnClicked_BtnSend();
 
+	void ProcessPrivFileOffer(CString *cstrFileName);
+
 private:
 	//int m_iDx;
 	CEdit m_ebMessage;
 	CEdit m_ebPrivateContent;
-	CConfClientDlg * m_pConfClient;
+	CClientConfDlg * m_pClientConf;
+
+	CString m_cstrCurrFileUp;
 public:
 	afx_msg void OnBnClickedButton2();
 };

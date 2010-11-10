@@ -186,6 +186,18 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\ClientComm.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ClientConf.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ClientConfDlg.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\ClientSendClientThread.cpp"
 				>
 			</File>
@@ -202,19 +214,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Communicator.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ConfClient.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ConfClientDlg.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\MessageProcessor.cpp"
+				RelativePath=".\MessProcessor.cpp"
 				>
 			</File>
 			<File
@@ -248,6 +248,18 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath=".\ClientComm.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ClientConf.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ClientConfDlg.h"
+				>
+			</File>
+			<File
 				RelativePath=".\ClientSendClientThread.h"
 				>
 			</File>
@@ -264,19 +276,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Communicator.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ConfClient.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ConfClientDlg.h"
-				>
-			</File>
-			<File
-				RelativePath=".\MessageProcessor.h"
+				RelativePath=".\MessProcessor.h"
 				>
 			</File>
 			<File

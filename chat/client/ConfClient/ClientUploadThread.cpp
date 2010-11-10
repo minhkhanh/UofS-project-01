@@ -2,7 +2,7 @@
 //
 
 #include "stdafx.h"
-#include "ConfClient.h"
+#include "ClientConf.h"
 #include "ClientUploadThread.h"
 
 int CClientUploadThread::m_iCountInstance;

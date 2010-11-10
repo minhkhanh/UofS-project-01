@@ -2,9 +2,9 @@
 //
 
 #include "stdafx.h"
-#include "ConfClient.h"
+#include "ClientConf.h"
 #include "PrivateChatDlg.h"
-#include "ConfClientDlg.h"
+#include "ClientConfDlg.h"
 
 
 // CPrivateChatDlg dialog
@@ -59,17 +59,11 @@ void CPrivateChatDlg::OnClicked_BtnSend()
 	CString cstrPrivMess = CString(L"\r\n") + m_cstrLocalUser + L": " + cstrMess.GetBuffer();
 	WriteToPrivContent(cstrPrivMess.GetBuffer());
 
-	m_pConfClient->m_comm.SendPrivMess_C(&m_cstrRemoteUser, &cstrMess);
+	m_pClientConf->m_comm.SendPrivMess(&m_cstrRemoteUser, &cstrMess);
 
 	m_ebMessage.SetWindowText(L"");
 	m_ebMessage.SetFocus();
 }
-
-//
-//void CPrivateChatDlg::WritePrivMess( CString *cstrUsername, CString *cstrMess )
-//{
-//	CString cstrMess = cstrUsername->GetBuffer();
-//}
 
 void CPrivateChatDlg::PostNcDestroy()
 {
@@ -83,4 +77,31 @@ void CPrivateChatDlg::OnBnClickedButton2()
 
 	// filepath + ip + port
 	// goi message
+
+	if (m_cstrCurrFileUp != "")
+	{
+		AfxMessageBox(L"Service busy");
+		return;
+	}
+
+	CFileDialog dlgOpen(true, L"*.*", L"*.*",
+		OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,
+		L"All files|*.*||");
+
+	if (dlgOpen.DoModal() == IDCANCEL)
+		return;
+
+	m_cstrCurrFileUp = dlgOpen.GetPathName();
+
+	m_pClientConf->m_comm.SendPrivFileOffer(&m_cstrRemoteUser, &dlgOpen.GetFileName());
+}
+
+void CPrivateChatDlg::ProcessPrivFileOffer( CString *cstrFileName )
+{
+	CString cstrOffer = m_cstrRemoteUser + L"has 1 file to share: " + cstrFileName->GetBuffer();
+
+	if (AfxMessageBox(cstrOffer, NULL, MB_OKCANCEL|MB_ICONQUESTION) != IDOK)
+		return;
+
+	m_pClientConf->m_comm.SendPrivFileAccept(&m_cstrRemoteUser);
 }

@@ -7,7 +7,7 @@
 #include "afxwin.h"
 #include "afxcmn.h"
 
-#include "Communicator.h"
+#include "ClientComm.h"
 #include "ClientShareService.h"
 
 #define WM_SOCKET WM_USER + 1
@@ -17,11 +17,11 @@
 class CPrivateChatDlg;
 
 // CConfClientDlg dialog
-class CConfClientDlg : public CDialog
+class CClientConfDlg : public CDialog
 {
 // Construction
 public:
-	CConfClientDlg(CWnd* pParent = NULL);	// standard constructor
+	CClientConfDlg(CWnd* pParent = NULL);	// standard constructor
 
 // Dialog Data
 	enum { IDD = IDD_CONFCLIENT_DIALOG };
@@ -51,7 +51,7 @@ private:
 	CClientShareService *m_serviceClient;
 
 	// bien comm giao tiep giua client va server
-	Communicator m_comm;
+	ClientComm m_comm;
 
 	// trang thai connect cua client
 	bool m_bConnected;
@@ -81,15 +81,17 @@ private:
 	// ham xu ly message nhan duoc
 	void ProcessMessage(CString *cstrMess);
 
-	void ProcessPubChatMess(CString *cstrPubChatMess, int iSenderIdx = -1);
-	void ProcessUserLoggedInMess(CString *cstrMessContent, int iSenderIdx = -1);
-	void ProcessUserExistedErr(CString *cstrErrMess, int iSenderIdx = -1);
-	void ProcessUserListData(CString *cstrUserList, int iSenderIdx = -1);
-	void ProcessUserLoggedOutMess(CString *cstrMessContent, int iSenderIdx = -1);
-	void ProcessPrivChatMess(CString *cstrPubChatMess, int iSenderIdx = -1);
-	void ProcessPrivChatErr(CString *cstrErrMess, int iSenderIdx = -1);
-	void ProcessUploadReadyMess(CString *cstrMessContent, int iSenderIdx = -1);
-	void ProcessSharedFileInfo(CString *cstrMessContent, int iSenderIdx = -1);
+	void ProcessPubChatMess(CString *cstrPubChatMess);
+	void ProcessUserLoggedInMess(CString *cstrMessContent);
+	void ProcessUserExistedErr(CString *cstrErrMess);
+	void ProcessUserListData(CString *cstrUserList);
+	void ProcessUserLoggedOutMess(CString *cstrMessContent);
+	void ProcessPrivChatMess(CString *cstrPubChatMess);
+	void ProcessPrivChatErr(CString *cstrErrMess);
+	void ProcessUploadReadyMess(CString *cstrMessContent);
+	void ProcessPubDownloadOffer(CString *cstrMessContent);
+	void ProcessPrivFileOffer(CString *cstrMessContent);
+	void ProcessPrivFileAccept(CString *cstrMessContent);
 
 	// chen chuoi vao cuoi khung noi dung chat public
 	void WriteToPubContent(TCHAR *strMess);

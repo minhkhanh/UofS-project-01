@@ -15,10 +15,10 @@
 // See ConfClient.cpp for the implementation of this class
 //
 
-class CConfClientApp : public CWinAppEx
+class CClientConfApp : public CWinAppEx
 {
 public:
-	CConfClientApp();
+	CClientConfApp();
 
 // Overrides
 	public:
@@ -29,4 +29,4 @@ public:
 	DECLARE_MESSAGE_MAP()
 };
 
-extern CConfClientApp theApp;
+extern CClientConfApp theApp;
