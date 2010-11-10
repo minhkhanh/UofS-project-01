@@ -3,8 +3,8 @@
 //
 
 #include "stdafx.h"
-#include "ConfServer.h"
-#include "ConfServerDlg.h"
+#include "ServerConf.h"
+#include "ServerConfDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -46,13 +46,13 @@ END_MESSAGE_MAP()
 
 
 
-CConfServerDlg::CConfServerDlg(CWnd* pParent /*=NULL*/)
-	: CDialog(CConfServerDlg::IDD, pParent)
+CServerConfDlg::CServerConfDlg(CWnd* pParent /*=NULL*/)
+	: CDialog(CServerConfDlg::IDD, pParent)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
 
-void CConfServerDlg::DoDataExchange(CDataExchange* pDX)
+void CServerConfDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_LIST2, m_lvUsers);
@@ -60,19 +60,19 @@ void CConfServerDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_LIST_FILES, m_lvFiles);
 }
 
-BEGIN_MESSAGE_MAP(CConfServerDlg, CDialog)
+BEGIN_MESSAGE_MAP(CServerConfDlg, CDialog)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	//}}AFX_MSG_MAP
 	ON_MESSAGE(WM_SOCKET, SockMsg)
-	ON_BN_CLICKED(IDC_BUTTON_RUN, &CConfServerDlg::OnClicked_BtnRun)
+	ON_BN_CLICKED(IDC_BUTTON_RUN, &CServerConfDlg::OnClicked_BtnRun)
 END_MESSAGE_MAP()
 
 
 // CConfServerDlg message handlers
 
-BOOL CConfServerDlg::OnInitDialog()
+BOOL CServerConfDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
@@ -111,7 +111,7 @@ BOOL CConfServerDlg::OnInitDialog()
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
 
-void CConfServerDlg::OnSysCommand(UINT nID, LPARAM lParam)
+void CServerConfDlg::OnSysCommand(UINT nID, LPARAM lParam)
 {
 	if ((nID & 0xFFF0) == IDM_ABOUTBOX)
 	{
@@ -128,7 +128,7 @@ void CConfServerDlg::OnSysCommand(UINT nID, LPARAM lParam)
 //  to draw the icon.  For MFC applications using the document/view model,
 //  this is automatically done for you by the framework.
 
-void CConfServerDlg::OnPaint()
+void CServerConfDlg::OnPaint()
 {
 	if (IsIconic())
 	{
@@ -155,12 +155,12 @@ void CConfServerDlg::OnPaint()
 
 // The system calls this function to obtain the cursor to display while the user drags
 //  the minimized window.
-HCURSOR CConfServerDlg::OnQueryDragIcon()
+HCURSOR CServerConfDlg::OnQueryDragIcon()
 {
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
-LRESULT CConfServerDlg::SockMsg( WPARAM wParam, LPARAM lParam )
+LRESULT CServerConfDlg::SockMsg( WPARAM wParam, LPARAM lParam )
 {
 	if (WSAGETSELECTERROR(lParam))
 	{
@@ -212,7 +212,7 @@ LRESULT CConfServerDlg::SockMsg( WPARAM wParam, LPARAM lParam )
 			int iSize = (sizeof(sockaddrClient));
 			SOCKET sockClient = accept(m_sockServer, (sockaddr*)&sockaddrClient, &iSize);
 
-			m_vComm.push_back(Communicator(sockClient));
+			m_vComm.push_back(ServerComm(sockClient));
 		}
 
 		break;
@@ -221,7 +221,7 @@ LRESULT CConfServerDlg::SockMsg( WPARAM wParam, LPARAM lParam )
 	return 0;
 }
 
-void CConfServerDlg::OnClicked_BtnRun()
+void CServerConfDlg::OnClicked_BtnRun()
 {
 	// TODO: Add your control notification handler code here
 
@@ -266,7 +266,7 @@ void CConfServerDlg::OnClicked_BtnRun()
 	ControlSwitch(true);
 }
 
-void CConfServerDlg::ProcessMessage( SOCKET socketTarget, CString *cstrMess )
+void CServerConfDlg::ProcessMessage( SOCKET socketTarget, CString *cstrMess )
 {
 	CString cstrMessCode = MessProcessor::PeelMess(cstrMess);
 
@@ -275,27 +275,29 @@ void CConfServerDlg::ProcessMessage( SOCKET socketTarget, CString *cstrMess )
 	if (cstrMessCode == L"")
 		return;
 
-	if (cstrMessCode == MessProcessor::MC_PUBLIC_CHAT)
+	if (cstrMessCode == MessProcessor::MC_PUBLIC_CHAT)					// public chat
 		ProcessPubChatMess(cstrMess);
-	else if (cstrMessCode == MessProcessor::MC_USERNAME_REQUEST)
+	else if (cstrMessCode == MessProcessor::MC_USERNAME_REQUEST)		// co client dang nhap
 		ProcessUsernameReq(cstrMess, iSenderIdx);
-	else if (cstrMessCode == MessProcessor::MC_PRIVATE_CHAT)
+	else if (cstrMessCode == MessProcessor::MC_PRIVATE_CHAT)			// private chat
 		ProcessPrivChatMess(cstrMess, iSenderIdx);
-	else if (cstrMessCode == MessProcessor::MC_DOWNLOAD_OFFER)
-		ProcessDownloadReq(cstrMess, iSenderIdx);
-	else if (cstrMessCode == MessProcessor::MC_UPLOAD_REQUEST)
+	else if (cstrMessCode == MessProcessor::MC_UPLOAD_REQUEST)			// client xin phep share file public
 		ProcessUploadReq(cstrMess, iSenderIdx);
+	else if (cstrMessCode == MessProcessor::MC_PRIVATE_FILE_OFFER)		// client de nghi share file private
+		ProcessPrivFileOffer(cstrMess, iSenderIdx);
+	else if (cstrMessCode == MessProcessor::MC_PRIVATE_FILE_ACCEPT)		// client chap nhan loi de nghi share file private
+		ProcessPrivFileAccept(cstrMess, iSenderIdx);
 }
 
-void CConfServerDlg::AnnouncePubChatMess( CString *cstrMessContent )
+void CServerConfDlg::AnnouncePubChatMess( CString *cstrMessContent )
 {
 	for (unsigned u = 0; u < m_vComm.size(); ++u)
 	{
-		m_vComm[u].SendPublicMess_S(cstrMessContent);
+		m_vComm[u].SendPublicMess(cstrMessContent);
 	}
 }
 
-bool CConfServerDlg::CheckUsername( CString *cstrUsername )
+bool CServerConfDlg::CheckUsername( CString *cstrUsername )
 {
 	for (int i = 0; i < m_lvUsers.GetItemCount(); ++i)
 	{
@@ -306,7 +308,7 @@ bool CConfServerDlg::CheckUsername( CString *cstrUsername )
 	return true;
 }
 
-int CConfServerDlg::FindComm( SOCKET sock )
+int CServerConfDlg::FindComm( SOCKET sock )
 {
 	for (int i = 0; i < m_vComm.size(); ++i)
 	{
@@ -317,7 +319,7 @@ int CConfServerDlg::FindComm( SOCKET sock )
 	return -1;
 }
 
-int CConfServerDlg::FindComm( CString *cstrUsername )
+int CServerConfDlg::FindComm( CString *cstrUsername )
 {
 	for (int i = 0; i < m_vComm.size(); ++i)
 	{
@@ -327,7 +329,7 @@ int CConfServerDlg::FindComm( CString *cstrUsername )
 
 	return -1;
 }
-void CConfServerDlg::InitStuff()
+void CServerConfDlg::InitStuff()
 {
 	m_lvUsers.InsertColumn(0, L"Usernames", LVCFMT_LEFT, 70);
 	m_lvUsers.SetExtendedStyle(LVS_EX_FULLROWSELECT);
@@ -340,7 +342,7 @@ void CConfServerDlg::InitStuff()
 	m_serviceShare = CServerShareService::CreateCServerShareService(this);
 }
 
-void CConfServerDlg::InitSocket()
+void CServerConfDlg::InitSocket()
 {
 	WORD wVersionRequested;
 	WSADATA wsaData;
@@ -352,25 +354,25 @@ void CConfServerDlg::InitSocket()
 		AfxMessageBox(L"WSAStartup() error");
 }
 
-void CConfServerDlg::EndComm( int idx )
+void CServerConfDlg::EndComm( int idx )
 {
 	m_vComm[idx].End();
 	m_vComm.erase(m_vComm.begin() + idx);
 }
 
-void CConfServerDlg::AnnounceUserLoggedIn(CString *cstrUsername, CString *cstrMessBody)
+void CServerConfDlg::AnnounceUserLoggedIn(CString *cstrUsername, CString *cstrMessBody)
 {
 	for (unsigned u = 0; u < m_vComm.size(); ++u)
 		m_vComm[u].SendLoggedInMess(cstrUsername, cstrMessBody);
 }
 
-void CConfServerDlg::AnnounceUserLoggedOut( CString *cstrUsername, CString *cstrMessBody )
+void CServerConfDlg::AnnounceUserLoggedOut( CString *cstrUsername, CString *cstrMessBody )
 {
 	for (unsigned u = 0; u < m_vComm.size(); ++u)
 		m_vComm[u].SendLoggedOutMess(cstrUsername, cstrMessBody);
 }
 
-void CConfServerDlg::RemoveUsername( CString *cstrUsername )
+void CServerConfDlg::RemoveUsername( CString *cstrUsername )
 {
 	for (int i = 0; i < m_lvUsers.GetItemCount(); ++i)
 		if (m_lvUsers.GetItemText(i, 0) == *cstrUsername)
@@ -380,13 +382,13 @@ void CConfServerDlg::RemoveUsername( CString *cstrUsername )
 		}
 }
 
-void CConfServerDlg::WriteToPubContent(TCHAR *strMess)
+void CServerConfDlg::WriteToPubContent(TCHAR *strMess)
 {
 	m_ebPublicContent.SetSel(0xffff,0xffff);
 	m_ebPublicContent.ReplaceSel(strMess);
 }
 
-void CConfServerDlg::StopServer()
+void CServerConfDlg::StopServer()
 {
 	for (int i = 0; i < m_vComm.size(); ++i)
 		m_vComm[i].End();
@@ -397,7 +399,7 @@ void CConfServerDlg::StopServer()
 	closesocket(m_sockServer);
 }
 
-void CConfServerDlg::ControlSwitch( bool bval )
+void CServerConfDlg::ControlSwitch( bool bval )
 {
 	m_bRunning = bval;
 
@@ -415,7 +417,7 @@ void CConfServerDlg::ControlSwitch( bool bval )
 	}
 }
 
-bool CConfServerDlg::CheckFile( CString *cstrFileName )
+bool CServerConfDlg::CheckFile( CString *cstrFileName )
 {
 	for (int i = 0; i < m_lvFiles.GetItemCount(); ++i)
 	{
@@ -426,7 +428,7 @@ bool CConfServerDlg::CheckFile( CString *cstrFileName )
 	return true;
 }
 
-void CConfServerDlg::ProcessPubChatMess( CString *cstrPubChatMess, int iSenderIdx )
+void CServerConfDlg::ProcessPubChatMess( CString *cstrPubChatMess, int iSenderIdx )
 {
 	AnnouncePubChatMess(cstrPubChatMess);	// broadcast to clients
 
@@ -436,7 +438,7 @@ void CConfServerDlg::ProcessPubChatMess( CString *cstrPubChatMess, int iSenderId
 	WriteToPubContent(tmpMess.GetBuffer());
 }
 
-void CConfServerDlg::ProcessUsernameReq( CString *cstrUsername, int iSenderIdx )
+void CServerConfDlg::ProcessUsernameReq( CString *cstrUsername, int iSenderIdx )
 {
 	//!!!cstrMess hien tai chi con chua chuoi username
 
@@ -462,31 +464,22 @@ void CConfServerDlg::ProcessUsernameReq( CString *cstrUsername, int iSenderIdx )
 	WriteToPubContent(tmpMess.GetBuffer());
 }
 
-void CConfServerDlg::ProcessPrivChatMess( CString *cstrMessContent, int iSenderIdx )
+void CServerConfDlg::ProcessPrivChatMess( CString *cstrMessContent, int iSenderIdx )
 {
 	CString cstrSender = MessProcessor::PeelMess(cstrMessContent);
 	CString cstrReceiver = MessProcessor::PeelMess(cstrMessContent);
 
 	if (CheckUsername(&cstrReceiver))		// username nay thoat roi
 	{
-		m_vComm[iSenderIdx].SendPrivMessErr(&cstrReceiver, &CString(L"\r\n[This user logged out, your message was undelivered]"));
+		m_vComm[iSenderIdx].SendPrivMessErr(&cstrReceiver, &CString(L"\r\n[This user logged out, your action was ignored]"));
 		return;
 	}
 
 	int i = FindComm(&cstrReceiver);
-	m_vComm[i].SendPrivMess_S(&cstrSender, cstrMessContent);
+	m_vComm[i].SendPrivMess(&cstrSender, cstrMessContent);
 }
 
-void CConfServerDlg::ProcessDownloadReq( CString *cstrFileName, int iSenderIdx )
-{
-	if (CheckFile(cstrFileName))
-	{
-		m_vComm[iSenderIdx].SendFileNotFoundErr(&CString(L"File not found"));
-		return;
-	}
-}
-
-void CConfServerDlg::ProcessUploadReq( CString *cstrFileName, int iSenderIdx )
+void CServerConfDlg::ProcessUploadReq( CString *cstrFileName, int iSenderIdx )
 {
 	int iPort = m_serviceShare->OnClientNeedShareFile(*cstrFileName);
 
@@ -496,10 +489,40 @@ void CConfServerDlg::ProcessUploadReq( CString *cstrFileName, int iSenderIdx )
 	m_vComm[iSenderIdx].SendUploadReadyMess(&cstrPort);
 }
 
-void CConfServerDlg::AnnounceFileForShare( CString *cstrFileSize, CString *cstrPort, CString *cstrFileName)
+void CServerConfDlg::AnnounceFileForShare( CString *cstrFileSize, CString *cstrPort, CString *cstrFileName)
 {
 	for (int i = 0; i < m_vComm.size(); ++i)
 	{
-		m_vComm[i].SendFileSharedInfo(cstrFileSize, cstrPort, cstrFileName);
+		m_vComm[i].SendDownloadOffer(cstrFileSize, cstrPort, cstrFileName);
 	}
+}
+
+void CServerConfDlg::ProcessPrivFileOffer( CString *cstrMessContent, int iSenderIdx )
+{
+	CString cstrSender = MessProcessor::PeelMess(cstrMessContent);
+	CString cstrReceiver = MessProcessor::PeelMess(cstrMessContent);
+
+	if (CheckUsername(&cstrReceiver))		// username nay thoat roi
+	{
+		m_vComm[iSenderIdx].SendPrivMessErr(&cstrReceiver, &CString(L"\r\n[This user logged out, your action was ignored]"));
+		return;
+	}
+
+	int i = FindComm(&cstrReceiver);
+	m_vComm[i].SendPrivateFileOffer(&cstrSender, cstrMessContent);
+}
+
+void CServerConfDlg::ProcessPrivFileAccept( CString *cstrMessContent, int iSenderIdx /*= -1*/ )
+{
+	CString cstrSender = MessProcessor::PeelMess(cstrMessContent);
+	//CString cstrReceiver = MessProcessor::PeelMess(cstrMessContent);
+
+	if (CheckUsername(cstrMessContent))		// username nay thoat roi
+	{
+		m_vComm[iSenderIdx].SendPrivMessErr(cstrMessContent, &CString(L"\r\n[This user logged out, your action was ignored]"));
+		return;
+	}
+
+	int i = FindComm(cstrMessContent);
+	m_vComm[i].SendPrivFileAccept(&cstrSender);
 }

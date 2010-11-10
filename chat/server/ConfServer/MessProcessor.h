@@ -7,7 +7,7 @@ using namespace std;
 
 //////////////////////////////////////////////////////////////////////////
 /// Lop MessProcessor chua cac thong tin ve message code, error code,
-/// ham xu ly thong diep
+/// ham xu ly chuoi thong diep
 //////////////////////////////////////////////////////////////////////////
 class MessProcessor
 {
@@ -22,12 +22,11 @@ public:
 	static TCHAR *MC_USERNAME_LIST;			// server gui danh sach client
 	static TCHAR *MC_USER_LOGGEDOUT;		// thong bao user thoat ra
 	static TCHAR *MC_PRIVATE_CHAT;			// private chat message
-	static TCHAR *MC_DOWNLOAD_OFFER;		// yeu cau download file
 	static TCHAR *MC_UPLOAD_REQUEST;		// yeu cau upload file
 	static TCHAR *MC_UPLOAD_READY;			// client dc phep upload
-	static TCHAR *MC_RECEIVE_ACCEPT;		// client dong y download private
-	static TCHAR *MC_RECEIVE_REQUEST;		// client yeu cau nhan file gui private	
-	static TCHAR *MC_SHARED_FILEINFO;		// thong tin cua file dc share
+	static TCHAR *MC_DOWNLOAD_OFFER;		// thong tin cua file dc share
+	static TCHAR *MC_PRIVATE_FILE_OFFER;	// client de nghi client ben kia nhan file private
+	static TCHAR *MC_PRIVATE_FILE_ACCEPT;	// client chap nhan de nghi share file private tu client khac
 
 	// error code:
 	static TCHAR *EC_USERNAME_EXISTED;		// bao loi username bi trung

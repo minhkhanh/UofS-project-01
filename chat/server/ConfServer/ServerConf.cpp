@@ -3,8 +3,8 @@
 //
 
 #include "stdafx.h"
-#include "ConfServer.h"
-#include "ConfServerDlg.h"
+#include "ServerConf.h"
+#include "ServerConfDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -13,14 +13,14 @@
 
 // CConfServerApp
 
-BEGIN_MESSAGE_MAP(CConfServerApp, CWinAppEx)
+BEGIN_MESSAGE_MAP(CServerConfApp, CWinAppEx)
 	ON_COMMAND(ID_HELP, &CWinApp::OnHelp)
 END_MESSAGE_MAP()
 
 
 // CConfServerApp construction
 
-CConfServerApp::CConfServerApp()
+CServerConfApp::CServerConfApp()
 {
 	// TODO: add construction code here,
 	// Place all significant initialization in InitInstance
@@ -29,12 +29,12 @@ CConfServerApp::CConfServerApp()
 
 // The one and only CConfServerApp object
 
-CConfServerApp theApp;
+CServerConfApp theApp;
 
 
 // CConfServerApp initialization
 
-BOOL CConfServerApp::InitInstance()
+BOOL CServerConfApp::InitInstance()
 {
 	// InitCommonControlsEx() is required on Windows XP if an application
 	// manifest specifies use of ComCtl32.dll version 6 or later to enable
@@ -65,7 +65,7 @@ BOOL CConfServerApp::InitInstance()
 	// such as the name of your company or organization
 	SetRegistryKey(_T("Local AppWizard-Generated Applications"));
 
-	CConfServerDlg dlg;
+	CServerConfDlg dlg;
 	m_pMainWnd = &dlg;
 	INT_PTR nResponse = dlg.DoModal();
 	if (nResponse == IDOK)

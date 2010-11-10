@@ -186,27 +186,27 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\ConfClient\Communicator.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ConfServer.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ConfServerDlg.h"
-				>
-			</File>
-			<File
 				RelativePath=".\GarbageCollectorThread.h"
 				>
 			</File>
 			<File
-				RelativePath="..\ConfClient\MessageProcessor.h"
+				RelativePath=".\MessProcessor.h"
 				>
 			</File>
 			<File
 				RelativePath=".\Resource.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ServerComm.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ServerConf.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ServerConfDlg.h"
 				>
 			</File>
 			<File
@@ -258,23 +258,23 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\ConfClient\Communicator.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ConfServer.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ConfServerDlg.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\GarbageCollectorThread.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\ConfClient\MessageProcessor.cpp"
+				RelativePath=".\MessProcessor.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ServerComm.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ServerConf.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ServerConfDlg.cpp"
 				>
 			</File>
 			<File

@@ -2,7 +2,7 @@
 //
 
 #include "stdafx.h"
-#include "ConfServer.h"
+#include "ServerConf.h"
 #include "ServerShareThread.h"
 
 int CServerShareThread::m_iCountInstance;

@@ -7,7 +7,7 @@
 #include "afxcmn.h"
 #include "afxwin.h"
 
-#include "..\ConfClient\Communicator.h"
+#include "ServerComm.h"
 #include "ServerShareService.h"
 #include "resource.h"
 
@@ -16,11 +16,11 @@
 
 
 // CConfServerDlg dialog
-class CConfServerDlg : public CDialog
+class CServerConfDlg : public CDialog
 {
 // Construction
 public:
-	CConfServerDlg(CWnd* pParent = NULL);	// standard constructor
+	CServerConfDlg(CWnd* pParent = NULL);	// standard constructor
 
 // Dialog Data
 	enum { IDD = IDD_CONFSERVER_DIALOG };
@@ -47,7 +47,7 @@ private:
 	CServerShareService *m_serviceShare;
 
 	// mang cac socket client
-	vector<Communicator> m_vComm;
+	vector<ServerComm> m_vComm;
 
 	// trang thai cho biet server dang chay hay khong
 	bool m_bRunning;
@@ -71,8 +71,9 @@ private:
 	void ProcessPubChatMess(CString *cstrPubChatMess, int iSenderIdx = -1);
 	void ProcessUsernameReq(CString *cstrUsername, int iSenderIdx = -1);
 	void ProcessPrivChatMess(CString *cstrMessContent, int iSenderIdx = -1);
-	void ProcessDownloadReq(CString *cstrFileName, int iSenderIdx = -1);
 	void ProcessUploadReq(CString *cstrFileName, int iSenderIdx = -1);
+	void ProcessPrivFileOffer(CString *cstrMessContent, int iSenderIdx = -1);
+	void ProcessPrivFileAccept(CString *cstrMessContent, int iSenderIdx = -1);
 
 	// ham gui thong diep chat public cho tat ca client
 	void AnnouncePubChatMess(CString *cstrMessContent);
