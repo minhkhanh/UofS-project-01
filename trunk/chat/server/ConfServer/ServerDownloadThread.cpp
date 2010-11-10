@@ -2,7 +2,7 @@
 //
 
 #include "stdafx.h"
-#include "ConfServer.h"
+#include "ServerConf.h"
 #include "ServerDownloadThread.h"
 #define BUFFER_LEN 1024
 

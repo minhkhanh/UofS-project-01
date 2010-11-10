@@ -1,5 +1,5 @@
 
-// ConfClient.h : main header file for the PROJECT_NAME application
+// ConfServer.h : main header file for the PROJECT_NAME application
 //
 
 #pragma once
@@ -11,14 +11,14 @@
 #include "resource.h"		// main symbols
 
 
-// CConfClientApp:
-// See ConfClient.cpp for the implementation of this class
+// CConfServerApp:
+// See ConfServer.cpp for the implementation of this class
 //
 
-class CConfClientApp : public CWinAppEx
+class CServerConfApp : public CWinAppEx
 {
 public:
-	CConfClientApp();
+	CServerConfApp();
 
 // Overrides
 	public:
@@ -29,4 +29,4 @@ public:
 	DECLARE_MESSAGE_MAP()
 };
 
-extern CConfClientApp theApp;
+extern CServerConfApp theApp;
