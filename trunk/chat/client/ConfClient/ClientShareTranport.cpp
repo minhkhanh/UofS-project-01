@@ -2,7 +2,7 @@
 //
 
 #include "stdafx.h"
-#include "ConfClient.h"
+#include "ClientConf.h"
 #include "ClientShareTranport.h"
 
 int CClientShareTranport::m_iCountInstance;

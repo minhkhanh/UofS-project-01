@@ -107,7 +107,7 @@ BEGIN
     LTEXT           "Server IP:",IDC_STATIC,15,33,34,8
     CONTROL         "",IDC_IPADDRESS1,"SysIPAddress32",WS_TABSTOP,57,30,100,14
     PUSHBUTTON      "Log in",IDC_BUTTON_CONNECT,159,17,50,24
-    GROUPBOX        "Logging: OFF",IDC_STATIC,7,7,305,40
+    GROUPBOX        "Logging state",IDC_STATIC,7,7,305,40
     GROUPBOX        "Conferencing",IDC_STATIC,7,48,305,153
     GROUPBOX        "Sharing:",IDC_STATIC,7,202,305,63
     PUSHBUTTON      "Button1",IDC_BUTTON1,244,21,50,14

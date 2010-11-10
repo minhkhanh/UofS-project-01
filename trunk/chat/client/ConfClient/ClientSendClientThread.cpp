@@ -2,7 +2,7 @@
 //
 
 #include "stdafx.h"
-#include "ConfClient.h"
+#include "ClientConf.h"
 #include "ClientSendClientThread.h"
 
 int CClientSendClientThread::m_iCountInstance;

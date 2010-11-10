@@ -1,40 +1,40 @@
 
-// ConfServer.cpp : Defines the class behaviors for the application.
+// ConfClient.cpp : Defines the class behaviors for the application.
 //
 
 #include "stdafx.h"
-#include "ConfServer.h"
-#include "ConfServerDlg.h"
+#include "ClientConf.h"
+#include "ClientConfDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
 
-// CConfServerApp
+// CConfClientApp
 
-BEGIN_MESSAGE_MAP(CConfServerApp, CWinAppEx)
+BEGIN_MESSAGE_MAP(CClientConfApp, CWinAppEx)
 	ON_COMMAND(ID_HELP, &CWinApp::OnHelp)
 END_MESSAGE_MAP()
 
 
-// CConfServerApp construction
+// CConfClientApp construction
 
-CConfServerApp::CConfServerApp()
+CClientConfApp::CClientConfApp()
 {
 	// TODO: add construction code here,
 	// Place all significant initialization in InitInstance
 }
 
 
-// The one and only CConfServerApp object
+// The one and only CConfClientApp object
 
-CConfServerApp theApp;
+CClientConfApp theApp;
 
 
-// CConfServerApp initialization
+// CConfClientApp initialization
 
-BOOL CConfServerApp::InitInstance()
+BOOL CClientConfApp::InitInstance()
 {
 	// InitCommonControlsEx() is required on Windows XP if an application
 	// manifest specifies use of ComCtl32.dll version 6 or later to enable
@@ -65,7 +65,7 @@ BOOL CConfServerApp::InitInstance()
 	// such as the name of your company or organization
 	SetRegistryKey(_T("Local AppWizard-Generated Applications"));
 
-	CConfServerDlg dlg;
+	CClientConfDlg dlg;
 	m_pMainWnd = &dlg;
 	INT_PTR nResponse = dlg.DoModal();
 	if (nResponse == IDOK)
