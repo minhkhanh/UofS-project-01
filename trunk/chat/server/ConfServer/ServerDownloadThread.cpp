@@ -43,7 +43,7 @@ void CServerDownloadThread::HardDelete( CServerDownloadThread ** t )
 	*t = NULL;
 }
 
-CServerDownloadThread * CServerDownloadThread::CreateCServerDownloadThread( CString stFilePath, int iPort )
+CServerDownloadThread * CServerDownloadThread::CreateCServerDownloadThread( CString stFilePath, int iPort , bool bIsPublicShare)
 {
 	if (CServerDownloadThread::m_iCountInstance >= MAX_FILE_UP_TO_SERVER)
 	{
@@ -52,6 +52,7 @@ CServerDownloadThread * CServerDownloadThread::CreateCServerDownloadThread( CStr
 	CServerDownloadThread * t = (CServerDownloadThread*)AfxBeginThread(RUNTIME_CLASS(CServerDownloadThread), THREAD_PRIORITY_NORMAL, 0, CREATE_SUSPENDED);
 	t->m_stFilePath = stFilePath;
 	t->m_iPort = iPort;
+	t->m_bIsPublicShare = bIsPublicShare;
 	TRACE2("cho upload file %s tai port: %d \n", stFilePath, iPort);
 	return t;
 }
@@ -118,6 +119,11 @@ int CServerDownloadThread::GetExitCode()
 CString CServerDownloadThread::GetFilePath()
 {
 	return m_stFilePath;
+}
+
+bool CServerDownloadThread::IsPublicShare()
+{
+	return m_bIsPublicShare;
 }
 
 

@@ -481,7 +481,7 @@ void CServerConfDlg::ProcessPrivChatMess( CString *cstrMessContent, int iSenderI
 
 void CServerConfDlg::ProcessUploadReq( CString *cstrFileName, int iSenderIdx )
 {
-	int iPort = m_serviceShare->OnClientNeedShareFile(*cstrFileName);
+	int iPort = m_serviceShare->OnClientNeedShareFilePublic(*cstrFileName);
 
 	CString cstrPort;
 	cstrPort.Format(L"%d", iPort);

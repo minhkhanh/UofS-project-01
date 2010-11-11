@@ -16,13 +16,15 @@ public:
 	virtual BOOL InitInstance();
 	virtual int ExitInstance();
 	static int m_iCountInstance;
-	static CServerDownloadThread * CreateCServerDownloadThread(CString stFilePath, int iPort);
+	static CServerDownloadThread * CreateCServerDownloadThread(CString stFilePath, int iPort, bool bIsPublicShare);
 	virtual int Run();
 	static void HardDelete(CServerDownloadThread ** t);
 	int GetExitCode();
 	CString GetFilePath();
+	bool IsPublicShare();
 
 private:
+	bool m_bIsPublicShare;
 	CString m_stFilePath;
 	int m_iPort;
 	SOCKET m_Socket;
