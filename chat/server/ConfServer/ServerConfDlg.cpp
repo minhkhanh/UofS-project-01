@@ -283,9 +283,9 @@ void CServerConfDlg::ProcessMessage( SOCKET socketTarget, CString *cstrMess )
 		ProcessPrivChatMess(cstrMess, iSenderIdx);
 	else if (cstrMessCode == MessProcessor::MC_UPLOAD_REQUEST)			// client xin phep share file public
 		ProcessUploadReq(cstrMess, iSenderIdx);
-	else if (cstrMessCode == MessProcessor::MC_PRIVATE_FILE_OFFER)		// client de nghi share file private
+	else if (cstrMessCode == MessProcessor::MC_PRIVATE_FILE_OFFER)		// co client de nghi share file private
 		ProcessPrivFileOffer(cstrMess, iSenderIdx);
-	else if (cstrMessCode == MessProcessor::MC_PRIVATE_FILE_ACCEPT)		// client chap nhan loi de nghi share file private
+	else if (cstrMessCode == MessProcessor::MC_PRIVATE_FILE_ACCEPT)		// client dong y nhan file private
 		ProcessPrivFileAccept(cstrMess, iSenderIdx);
 }
 
@@ -297,7 +297,7 @@ void CServerConfDlg::AnnouncePubChatMess( CString *cstrMessContent )
 	}
 }
 
-bool CServerConfDlg::CheckUsername( CString *cstrUsername )
+bool CServerConfDlg::CheckUserList( CString *cstrUsername )
 {
 	for (int i = 0; i < m_lvUsers.GetItemCount(); ++i)
 	{
@@ -442,7 +442,7 @@ void CServerConfDlg::ProcessUsernameReq( CString *cstrUsername, int iSenderIdx )
 {
 	//!!!cstrMess hien tai chi con chua chuoi username
 
-	if (CheckUsername(cstrUsername) == false)	//!!!username bi trung roi
+	if (CheckUserList(cstrUsername) == false)	//!!!username bi trung roi
 	{
 		m_vComm[iSenderIdx].SendLogInErr(&CString(L"Username existed"));
 		EndComm(iSenderIdx);		// xoa communicator voi socket nay
@@ -469,7 +469,7 @@ void CServerConfDlg::ProcessPrivChatMess( CString *cstrMessContent, int iSenderI
 	CString cstrSender = MessProcessor::PeelMess(cstrMessContent);
 	CString cstrReceiver = MessProcessor::PeelMess(cstrMessContent);
 
-	if (CheckUsername(&cstrReceiver))		// username nay thoat roi
+	if (CheckUserList(&cstrReceiver))		// username nay thoat roi
 	{
 		m_vComm[iSenderIdx].SendPrivMessErr(&cstrReceiver, &CString(L"\r\n[This user logged out, your action was ignored]"));
 		return;
@@ -489,7 +489,7 @@ void CServerConfDlg::ProcessUploadReq( CString *cstrFileName, int iSenderIdx )
 	m_vComm[iSenderIdx].SendUploadReadyMess(&cstrPort);
 }
 
-void CServerConfDlg::AnnounceFileForShare( CString *cstrFileSize, CString *cstrPort, CString *cstrFileName)
+void CServerConfDlg::AnnouncePubFile( CString *cstrFileSize, CString *cstrPort, CString *cstrFileName)
 {
 	for (int i = 0; i < m_vComm.size(); ++i)
 	{
@@ -502,7 +502,7 @@ void CServerConfDlg::ProcessPrivFileOffer( CString *cstrMessContent, int iSender
 	CString cstrSender = MessProcessor::PeelMess(cstrMessContent);
 	CString cstrReceiver = MessProcessor::PeelMess(cstrMessContent);
 
-	if (CheckUsername(&cstrReceiver))		// username nay thoat roi
+	if (CheckUserList(&cstrReceiver))		// username nay thoat roi
 	{
 		m_vComm[iSenderIdx].SendPrivMessErr(&cstrReceiver, &CString(L"\r\n[This user logged out, your action was ignored]"));
 		return;
@@ -515,14 +515,28 @@ void CServerConfDlg::ProcessPrivFileOffer( CString *cstrMessContent, int iSender
 void CServerConfDlg::ProcessPrivFileAccept( CString *cstrMessContent, int iSenderIdx /*= -1*/ )
 {
 	CString cstrSender = MessProcessor::PeelMess(cstrMessContent);
-	//CString cstrReceiver = MessProcessor::PeelMess(cstrMessContent);
+	CString cstrReceiver = MessProcessor::PeelMess(cstrMessContent);
 
-	if (CheckUsername(cstrMessContent))		// username nay thoat roi
+	if (CheckUserList(&cstrReceiver))		// username nay thoat roi
 	{
-		m_vComm[iSenderIdx].SendPrivMessErr(cstrMessContent, &CString(L"\r\n[This user logged out, your action was ignored]"));
+		m_vComm[iSenderIdx].SendPrivMessErr(&cstrReceiver, &CString(L"\r\n[This user logged out, your action was ignored]"));
 		return;
 	}
 
-	int i = FindComm(cstrMessContent);
-	m_vComm[i].SendPrivFileAccept(&cstrSender);
+	int iPort = m_serviceShare->OnClientNeedShareFilePrivate(*cstrMessContent, cstrSender, cstrReceiver);
+
+	CString cstrServerPort;
+	cstrServerPort.Format(L"%d", iPort);
+
+	int iReceiver = FindComm(&cstrReceiver);
+	m_vComm[iReceiver].SendPrivFileAccept(&cstrSender, &cstrServerPort);
+}
+
+void CServerConfDlg::AnnouncePrivFile( CString *cstrFileSize, CString *cstrPort, CString *cstrFileName, CString *cstrSender, CString *cstrReceiver )
+{
+	int i = FindComm(cstrReceiver);
+	if (i == -1)
+		return;
+
+	m_vComm[i].SendPrivFileDownload(cstrSender, cstrFileName, cstrFileSize, cstrPort);
 }

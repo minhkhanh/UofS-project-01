@@ -105,7 +105,7 @@ int ServerComm::SendUploadReadyMess(CString *cstrPort )
 
 int ServerComm::SendDownloadOffer( CString *cstrFileName, CString *cstrFileSize, CString *cstrPort )
 {
-	TCHAR *arrStr[] = {MessProcessor::MC_DOWNLOAD_OFFER, cstrFileName->GetBuffer(), cstrFileSize->GetBuffer(), cstrPort->GetBuffer()};
+	TCHAR *arrStr[] = {MessProcessor::MC_PUBLIC_FILE_OFFER, cstrFileSize->GetBuffer(), cstrPort->GetBuffer(), cstrFileName->GetBuffer()};
 	CString cstrMess = MessProcessor::JoinMess(arrStr, 4);
 
 	return this->Send(cstrMess.GetBuffer());
@@ -119,10 +119,18 @@ int ServerComm::SendPrivateFileOffer( CString *cstrSender, CString *cstrFileName
 	return this->Send(cstrMess.GetBuffer());
 }
 
-int ServerComm::SendPrivFileAccept( CString *cstrSender )
+int ServerComm::SendPrivFileAccept( CString *cstrSender, CString *cstrServerPort )
 {
-	TCHAR *arrStr[] = {MessProcessor::MC_PRIVATE_FILE_ACCEPT, cstrSender->GetBuffer()};
-	CString cstrMess = MessProcessor::JoinMess(arrStr, 2);
+	TCHAR *arrStr[] = {MessProcessor::MC_PRIVATE_FILE_ACCEPT, cstrSender->GetBuffer(), cstrServerPort->GetBuffer()};
+	CString cstrMess = MessProcessor::JoinMess(arrStr, 3);
+
+	return this->Send(cstrMess.GetBuffer());
+}
+
+int ServerComm::SendPrivFileDownload( CString *cstrSender, CString *cstrFileName, CString *cstrFileSize, CString *cstrPort )
+{
+	TCHAR *arrStr[] = {MessProcessor::MC_PRIVATE_FILE_DOWNLOAD, cstrSender->GetBuffer(), cstrFileSize->GetBuffer(), cstrPort->GetBuffer(), cstrFileName->GetBuffer()};
+	CString cstrMess = MessProcessor::JoinMess(arrStr, 5);
 
 	return this->Send(cstrMess.GetBuffer());
 }
