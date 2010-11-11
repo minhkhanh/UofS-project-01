@@ -89,9 +89,10 @@ private:
 	void ProcessPrivChatMess(CString *cstrPubChatMess);
 	void ProcessPrivChatErr(CString *cstrErrMess);
 	void ProcessUploadReadyMess(CString *cstrMessContent);
-	void ProcessPubDownloadOffer(CString *cstrMessContent);
+	void ProcessPubFileOffer(CString *cstrMessContent);
 	void ProcessPrivFileOffer(CString *cstrMessContent);
 	void ProcessPrivFileAccept(CString *cstrMessContent);
+	void ProcessPrivFileDownload(CString *cstrMessContent);
 
 	// chen chuoi vao cuoi khung noi dung chat public
 	void WriteToPubContent(TCHAR *strMess);
@@ -117,7 +118,7 @@ public:
 	// ham xu ly click nut OK
 	afx_msg void OnClicked_BtnConnect();
 	// ham xu ly click nut Send
-	afx_msg void OnClicked_BtnSend();
+	afx_msg void OnClicked_BtnSendPubMess();
 	// ham xu ly su kien chon user chat private
 	afx_msg void OnClicked_BtnSelectUser();
 
@@ -127,7 +128,6 @@ public:
 	CButton m_btnConnect;
 	CButton m_btnSendMess;
 	afx_msg void OnClicked_BtnUpload();
-	afx_msg void OnBnClickedButtonGetfile();
 private:
 	CButton m_btnDownload;
 };

@@ -75,10 +75,18 @@ int ClientComm::SendPrivFileOffer( CString *cstrRemoteUser, CString *cstrFileNam
 	return this->Send(cstrMess.GetBuffer());
 }
 
-int ClientComm::SendPrivFileAccept(CString *cstrReciever)
+int ClientComm::SendPrivFileAccept(CString *cstrReciever, CString *cstrFileName)
 {
-	TCHAR *arrStr[] = {MessProcessor::MC_PRIVATE_FILE_ACCEPT, cstrLocalUsername.GetBuffer(), cstrReciever->GetBuffer()};
-	CString cstrMess = MessProcessor::JoinMess(arrStr, 3);
+	TCHAR *arrStr[] = {MessProcessor::MC_PRIVATE_FILE_ACCEPT, cstrLocalUsername.GetBuffer(), cstrReciever->GetBuffer(), cstrFileName->GetBuffer()};
+	CString cstrMess = MessProcessor::JoinMess(arrStr, 4);
 
 	return this->Send(cstrMess.GetBuffer());
 }
+
+//int ClientComm::SendPrivFileDecline( CString *cstrReciever )
+//{
+//	TCHAR *arrStr[] = {MessProcessor::MC_PRIVATE_FILE_DECLINE, cstrLocalUsername.GetBuffer(), cstrReciever->GetBuffer()};
+//	CString cstrMess = MessProcessor::JoinMess(arrStr, 3);
+//
+//	return this->Send(cstrMess.GetBuffer());
+//}

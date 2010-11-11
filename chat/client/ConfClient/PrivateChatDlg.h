@@ -35,6 +35,7 @@ public:
 	afx_msg void OnClicked_BtnSend();
 
 	void ProcessPrivFileOffer(CString *cstrFileName);
+	CString ProcessPrivFileDownload(CString cstrMessage);
 
 private:
 	//int m_iDx;
@@ -44,5 +45,5 @@ private:
 
 	CString m_cstrCurrFileUp;
 public:
-	afx_msg void OnBnClickedButton2();
+	afx_msg void OnClicked_BtnSendFile();
 };

@@ -43,5 +43,8 @@ public:
 	int SendPrivFileOffer(CString *cstrRemoteUser, CString *cstrFileName);
 
 	// client chap nhan nhan file private share
-	int SendPrivFileAccept(CString *cstrReciever);
+	int SendPrivFileAccept(CString *cstrReciever, CString *cstrFileName);
+
+	// client tu choi nhan file private share
+	//int SendPrivFileDecline(CString *cstrReciever);
 };
