@@ -30,7 +30,7 @@ void CPrivateChatDlg::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CPrivateChatDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON1, &CPrivateChatDlg::OnClicked_BtnSend)
-	ON_BN_CLICKED(IDC_BUTTON2, &CPrivateChatDlg::OnBnClickedButton2)
+	ON_BN_CLICKED(IDC_BUTTON2, &CPrivateChatDlg::OnClicked_BtnSendFile)
 END_MESSAGE_MAP()
 
 void CPrivateChatDlg::WriteToPrivContent( TCHAR *strMess )
@@ -71,12 +71,9 @@ void CPrivateChatDlg::PostNcDestroy()
 
 	delete this;
 }
-void CPrivateChatDlg::OnBnClickedButton2()
+void CPrivateChatDlg::OnClicked_BtnSendFile()
 {
 	// TODO: Add your control notification handler code here
-
-	// filepath + ip + port
-	// goi message
 
 	if (m_cstrCurrFileUp != "")
 	{
@@ -98,10 +95,27 @@ void CPrivateChatDlg::OnBnClickedButton2()
 
 void CPrivateChatDlg::ProcessPrivFileOffer( CString *cstrFileName )
 {
-	CString cstrOffer = m_cstrRemoteUser + L"has 1 file to share: " + cstrFileName->GetBuffer();
+	CString cstrOffer = m_cstrRemoteUser + L" has 1 file to share: " + cstrFileName->GetBuffer();
 
 	if (AfxMessageBox(cstrOffer, NULL, MB_OKCANCEL|MB_ICONQUESTION) != IDOK)
+		//m_pClientConf->m_comm.SendPrivFileDecline(&m_cstrRemoteUser);
 		return;
 
-	m_pClientConf->m_comm.SendPrivFileAccept(&m_cstrRemoteUser);
+	m_pClientConf->m_comm.SendPrivFileAccept(&m_cstrRemoteUser, cstrFileName);
+}
+
+CString CPrivateChatDlg::ProcessPrivFileDownload( CString cstrMessage )
+{
+	//CString stTemp = CString(L"Server have 1 file to share: ") + cstrFileName + L" " + cstrFileSize + L".\r\nDo you want to save?";
+	if (MessageBox(cstrMessage, NULL, MB_OKCANCEL|MB_ICONQUESTION) != IDOK) // co loi voi MB_OK
+		return L"";
+
+	CFileDialog dlgSave(false, L"", L"",
+		OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,
+		L"All files|*.*||");
+
+	if (dlgSave.DoModal() == IDCANCEL)
+		return L"";
+
+	return dlgSave.GetPathName();
 }
