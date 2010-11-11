@@ -74,6 +74,7 @@ private:
 	void ProcessUploadReq(CString *cstrFileName, int iSenderIdx = -1);
 	void ProcessPrivFileOffer(CString *cstrMessContent, int iSenderIdx = -1);
 	void ProcessPrivFileAccept(CString *cstrMessContent, int iSenderIdx = -1);
+	//void ProcessPrivFileDecline(CString *cstrMessContent, int iSenderIdx = -1);
 
 	// ham gui thong diep chat public cho tat ca client
 	void AnnouncePubChatMess(CString *cstrMessContent);
@@ -93,7 +94,7 @@ private:
 	// xoa bo username ra khoi list view users
 	void RemoveUsername(CString *cstrUsername);
 	// kiem tra username co tren list view username hay ko. false: co
-	bool CheckUsername(CString *cstrUsername);
+	bool CheckUserList(CString *cstrUsername);
 
 	// thay doi trang thai cac control khi server thay doi trang thai
 	void ControlSwitch(bool bval);
@@ -108,7 +109,8 @@ private:
 	bool CheckFile(CString *cstrFileName);
 
 public:
-	void AnnounceFileForShare( CString *cstrFileSize, CString *cstrPort, CString *cstrFileName);
+	void AnnouncePubFile( CString *cstrFileSize, CString *cstrPort, CString *cstrFileName);
+	void AnnouncePrivFile( CString *cstrFileSize, CString *cstrPort, CString *cstrFileName, CString *cstrSender, CString *cstrReceiver);
 
 	// ham bat su kien socket
 	LRESULT SockMsg(WPARAM wParam, LPARAM lParam);

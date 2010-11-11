@@ -9,12 +9,14 @@ TCHAR *MessProcessor::MC_USERNAME_LIST = L"04";
 TCHAR *MessProcessor::MC_USER_LOGGEDOUT = L"05";
 TCHAR *MessProcessor::MC_PRIVATE_CHAT = L"06";
 TCHAR *MessProcessor::EC_USERNAME_LOGGEDOUT = L"07";
-TCHAR *MessProcessor::MC_DOWNLOAD_OFFER = L"08";
+TCHAR *MessProcessor::MC_PUBLIC_FILE_OFFER = L"08";
 TCHAR *MessProcessor::EC_FILE_NOTFOUND = L"09";
 TCHAR *MessProcessor::MC_UPLOAD_REQUEST = L"10";
 TCHAR *MessProcessor::MC_UPLOAD_READY = L"11";
 TCHAR *MessProcessor::MC_PRIVATE_FILE_OFFER = L"12";
 TCHAR *MessProcessor::MC_PRIVATE_FILE_ACCEPT = L"13";
+TCHAR *MessProcessor::MC_PRIVATE_FILE_DECLINE = L"14";
+TCHAR *MessProcessor::MC_PRIVATE_FILE_DOWNLOAD = L"15";
 
 MessProcessor::MessProcessor(void)
 {
