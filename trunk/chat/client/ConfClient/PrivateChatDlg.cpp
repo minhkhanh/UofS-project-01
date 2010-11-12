@@ -97,7 +97,7 @@ void CPrivateChatDlg::ProcessPrivFileOffer( CString *cstrFileName )
 {
 	CString cstrOffer = m_cstrRemoteUser + L" has 1 file to share: " + cstrFileName->GetBuffer();
 
-	if (AfxMessageBox(cstrOffer, NULL, MB_OKCANCEL|MB_ICONQUESTION) != IDOK)
+	if (AfxMessageBox(cstrOffer, MB_OKCANCEL|MB_ICONQUESTION) != IDOK)
 		//m_pClientConf->m_comm.SendPrivFileDecline(&m_cstrRemoteUser);
 		return;
 
@@ -107,7 +107,7 @@ void CPrivateChatDlg::ProcessPrivFileOffer( CString *cstrFileName )
 CString CPrivateChatDlg::ProcessPrivFileDownload( CString cstrMessage )
 {
 	//CString stTemp = CString(L"Server have 1 file to share: ") + cstrFileName + L" " + cstrFileSize + L".\r\nDo you want to save?";
-	if (MessageBox(cstrMessage, NULL, MB_OKCANCEL|MB_ICONQUESTION) != IDOK) // co loi voi MB_OK
+	if (AfxMessageBox(cstrMessage, MB_OKCANCEL|MB_ICONQUESTION) != IDOK) // co loi voi MB_OK
 		return L"";
 
 	CFileDialog dlgSave(false, L"", L"",
