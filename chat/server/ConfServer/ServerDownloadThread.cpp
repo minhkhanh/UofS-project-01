@@ -126,5 +126,25 @@ bool CServerDownloadThread::IsPublicShare()
 	return m_bIsPublicShare;
 }
 
+CString CServerDownloadThread::GetSender()
+{
+	return m_stSender;
+}
+
+void CServerDownloadThread::SetSender( CString st )
+{
+	m_stSender = st;
+}
+
+CString CServerDownloadThread::GetReceiver()
+{
+	return m_stReceiver;
+}
+
+void CServerDownloadThread::SetReceiver( CString st )
+{
+	m_stReceiver = st;
+}
+
 
 // CServerDownloadThread message handlers

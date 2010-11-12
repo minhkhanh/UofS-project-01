@@ -49,7 +49,7 @@ public:
 	int SendUploadReadyMess(CString *cstrPort);
 
 	// gui di loi de nghi download trong public share
-	int SendDownloadOffer(CString *cstrFileName, CString *cstrFileSize, CString *cstrPort);
+	int SendDownloadOffer(CString *cstrFileSize, CString *cstrPort, CString *cstrFileName);
 
 	// client gui de nghi share file private
 	int SendPrivateFileOffer(CString *cstrSender, CString *cstrFileName);
