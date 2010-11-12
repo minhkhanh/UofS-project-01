@@ -514,22 +514,22 @@ void CServerConfDlg::ProcessPrivFileOffer( CString *cstrMessContent, int iSender
 
 void CServerConfDlg::ProcessPrivFileAccept( CString *cstrMessContent, int iSenderIdx /*= -1*/ )
 {
-	CString cstrSender = MessProcessor::PeelMess(cstrMessContent);
-	CString cstrReceiver = MessProcessor::PeelMess(cstrMessContent);
+	CString cstrFileReceiver = MessProcessor::PeelMess(cstrMessContent);
+	CString cstrFileSender = MessProcessor::PeelMess(cstrMessContent);
 
-	if (CheckUserList(&cstrReceiver))		// username nay thoat roi
+	if (CheckUserList(&cstrFileSender))		// username nay thoat roi
 	{
-		m_vComm[iSenderIdx].SendPrivMessErr(&cstrReceiver, &CString(L"\r\n[This user logged out, your action was ignored]"));
+		m_vComm[iSenderIdx].SendPrivMessErr(&cstrFileSender, &CString(L"\r\n[This user logged out, your action was ignored]"));
 		return;
 	}
 
-	int iPort = m_serviceShare->OnClientNeedShareFilePrivate(*cstrMessContent, cstrSender, cstrReceiver);
+	int iPort = m_serviceShare->OnClientNeedShareFilePrivate(*cstrMessContent, cstrFileSender, cstrFileReceiver);
 
 	CString cstrServerPort;
 	cstrServerPort.Format(L"%d", iPort);
 
-	int iReceiver = FindComm(&cstrReceiver);
-	m_vComm[iReceiver].SendPrivFileAccept(&cstrSender, &cstrServerPort);
+	int iReceiver = FindComm(&cstrFileSender);
+	m_vComm[iReceiver].SendPrivFileAccept(&cstrFileReceiver, &cstrServerPort);
 }
 
 void CServerConfDlg::AnnouncePrivFile( CString *cstrFileSize, CString *cstrPort, CString *cstrFileName, CString *cstrSender, CString *cstrReceiver )

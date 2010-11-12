@@ -103,7 +103,7 @@ int ServerComm::SendUploadReadyMess(CString *cstrPort )
 	return this->Send(cstrMess.GetBuffer());
 }
 
-int ServerComm::SendDownloadOffer( CString *cstrFileName, CString *cstrFileSize, CString *cstrPort )
+int ServerComm::SendDownloadOffer( CString *cstrFileSize, CString *cstrPort, CString *cstrFileName )
 {
 	TCHAR *arrStr[] = {MessProcessor::MC_PUBLIC_FILE_OFFER, cstrFileSize->GetBuffer(), cstrPort->GetBuffer(), cstrFileName->GetBuffer()};
 	CString cstrMess = MessProcessor::JoinMess(arrStr, 4);

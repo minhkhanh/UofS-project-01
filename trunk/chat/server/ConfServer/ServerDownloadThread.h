@@ -22,8 +22,14 @@ public:
 	int GetExitCode();
 	CString GetFilePath();
 	bool IsPublicShare();
+	CString GetSender();
+	void SetSender(CString st);
+	CString GetReceiver();
+	void SetReceiver(CString st);
 
 private:
+	CString m_stSender;
+	CString m_stReceiver;
 	bool m_bIsPublicShare;
 	CString m_stFilePath;
 	int m_iPort;
