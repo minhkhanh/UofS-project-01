@@ -11,31 +11,34 @@ namespace _0812239
 {
     public partial class Form1 : Form
     {
-        private Class1 cls = new Class1();
-        private Class2 cls2 = new Class2();
+        //Bitmap _bmp;
 
+        string _strAppPath = System.Reflection.Assembly.GetExecutingAssembly().GetModules()[0].FullyQualifiedName.Replace(System.Reflection.Assembly.GetExecutingAssembly().GetModules()[0].Name, "");
+        GamePanel _gamePanel;
         public Form1()
         {
             InitializeComponent();
+            _gamePanel = new GamePanel(this);
+            //this.Create
         }
 
         private void menuItem1_Click(object sender, EventArgs e)
         {
-            int[] aaa = {1,2};
-            aaa.OrderBy(g => g);
-            IMyInterface inf = cls as IMyInterface;
+            IBitmap ibmp = _gamePanel.IGameGracphics.CreateBitmap(_strAppPath + @"Resources\Cards\1-2.png", true);
+            ibmp.SourceKey = Color.White;
 
-            inf.Printf();
+            //_gamePanel.IGameGracphics.DrawBitmap(0, 0, new Rectangle(0, 0, ibmp.Width, ibmp.Height), ibmp);
+            //_gamePanel.IGameGracphics.DrawImageTransparent(ibmp, new Rectangle(0,0,20,20));
+            //_gamePanel.IGameGracphics.DrawImageTransparent(ibmp, new Rectangle(20, 20, 50, 50), 0, 0);
 
-            inf = cls2 as IMyInterface;
-            //Font a = new Font();
+            _gamePanel.IGameGracphics.Flip();
 
-            inf.Printf();
+            ibmp.Dispose();
         }
 
         private void menuItem2_Click(object sender, EventArgs e)
         {
-            //IGra
+
         }
     }
 }

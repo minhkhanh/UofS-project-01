@@ -26,6 +26,21 @@ namespace _0812239
         int _iCurCell;
         public int CurCell { get; set; }
 
+        public void SetCycle()
+        {
+            //!!!CHUA CAI DAT
+        }
+
+        public void StartOneShot()
+        {
+            //!!!CHUA CAI DAT
+        }
+
+        public void Update()
+        {
+            //!!!CHUA CAI DAT
+        }
+
         public void Dispose()
         {
             _ibitmImage.Dispose();
