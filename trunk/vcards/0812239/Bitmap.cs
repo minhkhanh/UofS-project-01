@@ -18,7 +18,20 @@ namespace _0812239
     {
         public GdiBitmap(string strFileName, bool bTransparent)
         {
-            //!!! CHUA CAI DAT
+            bmp = new Bitmap(strFileName);
+            transparentValue = bTransparent;
+        }
+
+        public GdiBitmap(Bitmap bmpImage, bool bTransparent)
+        {
+            bmp = new Bitmap(bmpImage);
+            transparentValue = bTransparent;
+        }
+
+        public GdiBitmap(System.IO.Stream strm, bool bTransparent)
+        {
+            bmp = new Bitmap(strm);
+            transparentValue = bTransparent;
         }
 
         private Bitmap bmp;
@@ -29,7 +42,7 @@ namespace _0812239
         }
 
         private Color sourceKeyValue;
-        private bool transparentValue;
+        private bool transparentValue;  // true: xoa nen khi ve bitmap
 
         #region IBitmap Members
 
