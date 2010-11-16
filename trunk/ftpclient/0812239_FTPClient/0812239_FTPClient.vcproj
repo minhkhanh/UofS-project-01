@@ -186,7 +186,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\0812239_FTPClient.cpp"
+				RelativePath=".\FTPClient.cpp"
 				>
 			</File>
 			<File
@@ -220,7 +220,7 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\0812239_FTPClient.h"
+				RelativePath=".\FTPClient.h"
 				>
 			</File>
 			<File
@@ -246,15 +246,15 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 			<File
-				RelativePath=".\res\0812239_FTPClient.ico"
+				RelativePath=".\res\FTPClient.ico"
 				>
 			</File>
 			<File
-				RelativePath=".\0812239_FTPClient.rc"
+				RelativePath=".\FTPClient.rc"
 				>
 			</File>
 			<File
-				RelativePath=".\res\My0812239_FTPClient.rc2"
+				RelativePath=".\res\FTPClient.rc2"
 				>
 			</File>
 		</Filter>

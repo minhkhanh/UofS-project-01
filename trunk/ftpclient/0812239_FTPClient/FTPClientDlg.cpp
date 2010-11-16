@@ -151,3 +151,7 @@ HCURSOR CFTPClientDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
+void CFTPClientDlg::InitListViews()
+{
+
+}

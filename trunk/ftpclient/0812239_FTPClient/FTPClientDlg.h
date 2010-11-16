@@ -1,8 +1,9 @@
 
-// FTPClientDlg.h : header file
 //
 
 #pragma once
+
+#include "FTPClientDlg.h"	// FTPClientDlg.h : header file
 
 
 // CFTPClientDlg dialog
@@ -13,7 +14,7 @@ public:
 	CFTPClientDlg(CWnd* pParent = NULL);	// standard constructor
 
 // Dialog Data
-	enum { IDD = IDD_MY0812239_FTPCLIENT_DIALOG };
+	enum { IDD = IDD_FTPCLIENT_DIALOG };
 
 	protected:
 	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV support
@@ -29,4 +30,7 @@ protected:
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
+
+public:
+	void InitListViews();
 };
