@@ -3,7 +3,7 @@
 //
 
 #include "stdafx.h"
-#include "0812239_FTPClient.h"
+#include "FTPClient.h"
 #include "FTPClientDlg.h"
 
 #ifdef _DEBUG
