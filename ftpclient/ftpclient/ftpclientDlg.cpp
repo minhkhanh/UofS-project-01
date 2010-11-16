@@ -58,6 +58,7 @@ void CftpclientDlg::DoDataExchange(CDataExchange* pDX)
 	CDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_LIST1, m_lvClient);
 	DDX_Control(pDX, IDC_LIST2, m_lvServer);
+	DDX_Control(pDX, IDC_IPADDRESS1, m_ipaddrServer);
 }
 
 BEGIN_MESSAGE_MAP(CftpclientDlg, CDialog)
@@ -101,6 +102,8 @@ BOOL CftpclientDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 
 	// TODO: Add extra initialization here
+
+	InitListViews();
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -159,4 +162,12 @@ void CftpclientDlg::OnBnClickedCancel()
 {
 	// TODO: Add your control notification handler code here
 	OnCancel();
+}
+
+void CftpclientDlg::InitListViews()
+{
+	m_lvClient.InsertColumn(0, L"Modified", LVCFMT_LEFT, 80);
+	m_lvClient.InsertColumn(0, L"Size", LVCFMT_LEFT, 80);
+	m_lvClient.InsertColumn(0, L"Type", LVCFMT_LEFT, 50);
+	m_lvClient.InsertColumn(0, L"Name", LVCFMT_LEFT, 150);	
 }
