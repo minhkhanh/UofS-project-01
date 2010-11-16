@@ -32,9 +32,13 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnBnClickedCancel();
+
+	void InitListViews();
 private:
 	// list view file/folder ben phia client
 	CListCtrl m_lvClient;
 	// list view file/folder ben phia server
 	CListCtrl m_lvServer;
+	// dia chi IP cua server
+	CIPAddressCtrl m_ipaddrServer;
 };
