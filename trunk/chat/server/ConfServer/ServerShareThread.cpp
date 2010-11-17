@@ -62,7 +62,7 @@ int CServerShareThread::Run()
 		SOCKET soc;
 		m_SemaphoreShare->Lock();
 		soc = accept(m_SocketListen,NULL,NULL);
-		CServerShareTranportThread * cSSTT = CServerShareTranportThread::CreateServerShareTranportThread(&soc, m_File, m_SemaphoreFile);
+		CServerShareTranportThread * cSSTT = CServerShareTranportThread::CreateServerShareTranportThread(soc, m_File, m_SemaphoreFile);
 		m_SemaphoreListThread->Lock();
 		m_ListTranportThread->push_back(cSSTT);
 		m_SemaphoreListThread->Unlock();
