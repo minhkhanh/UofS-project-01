@@ -16,7 +16,7 @@ CServerShareTranportThread::CServerShareTranportThread()
 
 CServerShareTranportThread::~CServerShareTranportThread()
 {
-	closesocket(*m_Socket);
+	closesocket(m_Socket);
 }
 
 BOOL CServerShareTranportThread::InitInstance()
@@ -29,7 +29,7 @@ int CServerShareTranportThread::ExitInstance()
 {
 	// TODO:  perform any per-thread cleanup here
 	//HardStop();
-	closesocket(*m_Socket);
+	closesocket(m_Socket);
 	return CWinThread::ExitInstance();
 }
 
@@ -39,7 +39,7 @@ END_MESSAGE_MAP()
 int CServerShareTranportThread::Run()
 {
 	LONG64 llFileLength = m_File->GetLength();
-	send(*m_Socket,(char*)&llFileLength,sizeof(LONG64),0);
+	int itam = send(m_Socket,(char*)&llFileLength,sizeof(LONG64),0);
 	LONG64 llCurSend = 0;
 	while (llCurSend < llFileLength)
 	{
@@ -51,22 +51,22 @@ int CServerShareTranportThread::Run()
 		int i = 0; 
 		while (i < len)
 		{
-			int j = send(*m_Socket, buffer + i, len - i, 0);
+			int j = send(m_Socket, buffer + i, len - i, 0);
 			if (j == 0)
 			{
 				m_File->Close();
-				closesocket(*m_Socket);
+				closesocket(m_Socket);
 				ExitThread(0);
 			}
 			i += j;
 		}
 		llCurSend += len;
 	}
-	closesocket(*m_Socket);
+	closesocket(m_Socket);
 	ExitThread(0);
 }
 
-CServerShareTranportThread * CServerShareTranportThread::CreateServerShareTranportThread(SOCKET * soc, CFile * file, CSemaphore * sema )
+CServerShareTranportThread * CServerShareTranportThread::CreateServerShareTranportThread(SOCKET  soc, CFile * file, CSemaphore * sema )
 {
 	CServerShareTranportThread * tSSTT;
 	tSSTT = (CServerShareTranportThread *) AfxBeginThread(RUNTIME_CLASS(CServerShareTranportThread), THREAD_PRIORITY_NORMAL, 0, CREATE_SUSPENDED, NULL);
