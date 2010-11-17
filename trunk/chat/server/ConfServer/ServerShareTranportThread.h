@@ -20,8 +20,8 @@ public:
 	static void HardDelete(CServerShareTranportThread ** t);
 	CFile * m_File;
 	CSemaphore * m_SemaphoreFile;
-	SOCKET * m_Socket;
-	static CServerShareTranportThread * CreateServerShareTranportThread(SOCKET * soc, CFile * file, CSemaphore * sema);
+	SOCKET  m_Socket;
+	static CServerShareTranportThread * CreateServerShareTranportThread(SOCKET  soc, CFile * file, CSemaphore * sema);
 
 protected:
 	DECLARE_MESSAGE_MAP()
