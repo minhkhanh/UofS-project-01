@@ -540,3 +540,8 @@ void CServerConfDlg::AnnouncePrivFile( CString *cstrFileSize, CString *cstrPort,
 
 	m_vComm[i].SendPrivFileDownload(cstrSender, cstrFileName, cstrFileSize, cstrPort);
 }
+
+CServerConfDlg::~CServerConfDlg()
+{
+	CServerShareService::HardDelete(&m_serviceShare);
+}

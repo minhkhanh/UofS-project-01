@@ -27,6 +27,13 @@ CServerShareThread::~CServerShareThread()
 	if (m_SemaphoreListThread != NULL) delete m_SemaphoreListThread;
 	if (m_iCountEdle != NULL) delete m_iCountEdle;
 	CGarbageCollectorThread::HardDelete(&m_GarbageCollectorThread);
+	if (m_File->m_hFile != CFile::hFileNull)
+	{
+		CString stTemp = m_File->GetFilePath();
+		m_File->Close();
+		TRACE1("Xoa file %s \n", stTemp);
+		CFile::Remove(stTemp);
+	}
 	if (m_File != NULL) delete m_File;
 	closesocket(m_SocketListen);
 }
