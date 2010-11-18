@@ -218,7 +218,8 @@ LRESULT Cftp_clientDlg::SockMsg(WPARAM wParam, LPARAM lParam)
 		{
 			TCHAR strRecvBuff[512];
 
-			recv(wParam, (char*)strRecvBuff, 512*sizeof(TCHAR), 0);
+			int iLength = recv(wParam, (char*)strRecvBuff, 512*sizeof(TCHAR), 0);
+			strRecvBuff[iLength] = '\0';
 
 			AfxMessageBox(strRecvBuff);
 		}
