@@ -21,6 +21,7 @@ class CServerConfDlg : public CDialog
 // Construction
 public:
 	CServerConfDlg(CWnd* pParent = NULL);	// standard constructor
+	~CServerConfDlg();
 
 // Dialog Data
 	enum { IDD = IDD_CONFSERVER_DIALOG };
