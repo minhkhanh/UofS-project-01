@@ -85,6 +85,7 @@ int CClientUploadThread::Run()
 		llCurSend += len;
 		m_iPercent = (char)(float)(llCurSend*100/llFileLength);
 	}
+	m_File.Close();
 	closesocket(m_Socket);
 	ExitThread(1);
 }
