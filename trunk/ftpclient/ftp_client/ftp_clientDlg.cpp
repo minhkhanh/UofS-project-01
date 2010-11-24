@@ -57,6 +57,14 @@ void Cftp_clientDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_IPADDRESS1, m_ipaddrServer);
+	DDX_Control(pDX, IDC_EDIT3, m_ebMessage);
+	DDX_Control(pDX, IDC_LIST1, m_lvClient);
+	DDX_Control(pDX, IDC_LIST2, m_lvServer);
+	DDX_Control(pDX, IDC_EDIT2, m_ebUser);
+	DDX_Control(pDX, IDC_EDIT1, m_ebPassword);
+	DDX_Control(pDX, IDC_RADIO1, m_optActive);
+	DDX_Control(pDX, IDC_RADIO2, m_optPassive);
+	DDX_Control(pDX, IDC_BUTTON4, m_btnLog);
 }
 
 BEGIN_MESSAGE_MAP(Cftp_clientDlg, CDialog)
@@ -64,8 +72,11 @@ BEGIN_MESSAGE_MAP(Cftp_clientDlg, CDialog)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	//}}AFX_MSG_MAP
-	ON_BN_CLICKED(IDC_BUTTON4, &Cftp_clientDlg::OnBnClickedButton4)
-	ON_MESSAGE(WM_SOCKET, SockMsg)
+	ON_BN_CLICKED(IDC_BUTTON4, &Cftp_clientDlg::OnClicked_BtnLog)
+	ON_MESSAGE(WM_SOCKET_CMD, CmdSockMsg)
+	ON_MESSAGE(WM_SOCKET_DATA, DataSockMsg)
+	ON_WM_DESTROY()
+	ON_NOTIFY(LVN_ITEMACTIVATE, IDC_LIST2, &Cftp_clientDlg::OnLvnItemActivateList2)
 END_MESSAGE_MAP()
 
 
@@ -102,6 +113,16 @@ BOOL Cftp_clientDlg::OnInitDialog()
 
 	// TODO: Add extra initialization here
 
+	InitSock();
+	InitListViews();
+	InitStuff();
+
+	if (m_datasock.CreateSock() != 0)
+	{
+		AfxMessageBox(_T("data socket init failed!"));;
+		//return;
+	}
+
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
 
@@ -116,6 +137,8 @@ void Cftp_clientDlg::OnSysCommand(UINT nID, LPARAM lParam)
 	{
 		CDialog::OnSysCommand(nID, lParam);
 	}
+
+	//s.
 }
 
 // If you add a minimize button to your dialog, you will need the code below
@@ -155,56 +178,71 @@ HCURSOR Cftp_clientDlg::OnQueryDragIcon()
 }
 
 
-void Cftp_clientDlg::OnBnClickedButton4()
+void Cftp_clientDlg::OnClicked_BtnLog()
 {
 	// TODO: Add your control notification handler code here
 
-	m_sockCmd = socket(AF_INET, SOCK_STREAM, 0);
-	if (m_sockCmd == INVALID_SOCKET)
+	if (CheckLogging() == false)
+		return;
+
+	if (m_cmdsock.IsConnecting() == true)
+		m_cmdsock.QUIT();
+
+	if (m_cmdsock.CreateSock() != 0)
 	{
-		AfxMessageBox(_T("socket() failed!"));
+		AfxMessageBox(_T("command socket init failed!"));;
 		return;
 	}
-
-	IN_ADDR ia;
 
 	DWORD dwServIpAddr;
 	m_ipaddrServer.GetAddress(dwServIpAddr);
-	ia.S_un.S_addr = ntohl(dwServIpAddr);
 
-	sockaddr_in addrServer;
-	addrServer.sin_family = AF_INET;
-	addrServer.sin_port = htons(FTP_SERVER_CMD_PORT);
-	addrServer.sin_addr.s_addr = inet_addr(inet_ntoa(ia));
-
-	//sockaddr_in.sin_addr
-
-	if (addrServer.sin_addr.s_addr == INADDR_NONE)
+	if (m_cmdsock.Connect(dwServIpAddr, FTP_SERVER_CMD_PORT) != 0)
 	{
-		AfxMessageBox(_T("Server address unknown!"));
+		AfxMessageBox(_T("connect failed!"));
 		return;
 	}
 
-	int err = connect(m_sockCmd, (struct sockaddr*)&addrServer, sizeof(addrServer));
-	if (err == SOCKET_ERROR)
+	if (m_cmdsock.SetSelectMode(m_hWnd, WM_SOCKET_CMD, FD_READ | FD_CLOSE) != 0)
 	{
-		AfxMessageBox(_T("connect() failed!"));
-		return;
-	}
-
-	err = WSAAsyncSelect(m_sockCmd, m_hWnd, WM_SOCKET, FD_READ | FD_CLOSE);
-	if (err == SOCKET_ERROR)
-	{
-		AfxMessageBox(_T("WSAAsyncSelect() error!"));
-		closesocket(m_sockCmd);
+		AfxMessageBox(_T("set select mode error!"));
 		return;
 	}
 
 	// cmd socket ket noi thanh cong
-	m_commCmd.SockComm(m_sockCmd);
+
+	//TCHAR
+	CString cstrTmp;
+	m_ebUser.GetWindowText(cstrTmp);
+	m_cmdsock.USER(&cstrTmp);
+	m_ebPassword.GetWindowText(cstrTmp);
+	m_cmdsock.PASS(&cstrTmp);
+
+	//sockaddr_in addrCmd;
+	//int iSize;
+	//getsockname(m_sockCmd, (sockaddr*)&addrCmd, &iSize);
+	//int iPort = 0;
+	//iPort = ntohs(addrCmd.sin_port);
+	//iSize += iPort;
+
+	
+	//ULONG k = htonl(.S_un.S_addr);
+	//cstrTmp = inet_ntoa(addrCmd.sin_addr);
 }
 
-LRESULT Cftp_clientDlg::SockMsg(WPARAM wParam, LPARAM lParam)
+void Cftp_clientDlg::ProcessCmd( CString * pcsCmd )
+{
+	CString csCode = MyTools::PeelMessage(pcsCmd);
+
+	if (csCode.CompareNoCase(MyTools::CR_230) == 0)			// User logged in, proceed.
+		Handle230(pcsCmd);
+	else if (csCode.CompareNoCase(MyTools::CR_227) == 0)	// Entering Passive Mode (h1,h2,h3,h4,p1,p2).
+		Handle227(pcsCmd);
+	else if (csCode.CompareNoCase(MyTools::CR_250) == 0)	// Requested file action okay, completed.
+		Handle250(pcsCmd);
+}
+
+LRESULT Cftp_clientDlg::CmdSockMsg(WPARAM wParam, LPARAM lParam)
 {
 	WORD WERROR = WSAGETSELECTERROR(lParam);
 	if (WERROR)
@@ -216,12 +254,16 @@ LRESULT Cftp_clientDlg::SockMsg(WPARAM wParam, LPARAM lParam)
 	{
 	case FD_READ:
 		{
-			TCHAR strRecvBuff[512];
+			TCHAR sRecvBuff[CMDBUFF_MAXLEN];
 
-			int iLength = recv(wParam, (char*)strRecvBuff, 512*sizeof(TCHAR), 0);
-			strRecvBuff[iLength] = '\0';
+			int iLength = recv(wParam, (char*)sRecvBuff, CMDBUFF_MAXLEN*sizeof(TCHAR), 0);
+			//strRecvBuff[iLength] = '\0';
+			CString csRecv(sRecvBuff, iLength);
 
-			AfxMessageBox(strRecvBuff);
+			PrintMessage(&csRecv);
+			//AfxMessageBox(csRecv);
+
+			ProcessCmd(&csRecv);
 		}
 		break;
 	case FD_CLOSE:
@@ -232,4 +274,268 @@ LRESULT Cftp_clientDlg::SockMsg(WPARAM wParam, LPARAM lParam)
 	}
 
 	return 0;
+}
+
+LRESULT Cftp_clientDlg::DataSockMsg( WPARAM wParam, LPARAM lParam )
+{
+	WORD WERROR = WSAGETSELECTERROR(lParam);
+	if (WERROR)
+	{
+		closesocket(wParam);
+	}
+
+	switch(WSAGETSELECTEVENT(lParam))
+	{
+	case FD_READ:
+		{
+			TCHAR sRecvBuff[DATABUFF_MAXLEN];
+
+			int iLength = recv(wParam, (char*)sRecvBuff, DATABUFF_MAXLEN*sizeof(TCHAR), 0);
+			if (iLength == DATABUFF_MAXLEN*sizeof(TCHAR))
+			{
+				m_csRecvBuff += CString(sRecvBuff, iLength);
+				if (m_csRecvBuff.Right(2) != _T("\r\n"))
+					return 0;
+			}
+			else
+				m_csRecvBuff += CString(sRecvBuff, iLength);
+
+			//PrintMessage(&m_csRecvBuff);
+
+			ProcessData(&m_csRecvBuff);
+
+			m_csRecvBuff.Empty();
+		}
+		break;
+	case FD_CLOSE:
+		{
+
+		}
+		break;
+	}
+
+	return 0;
+}
+
+void Cftp_clientDlg::PrintMessage( CString * pcsMess )
+{
+	m_ebMessage.SetSel(0xffff,0xffff);
+	m_ebMessage.ReplaceSel(*pcsMess);
+}
+
+void Cftp_clientDlg::InitListViews()
+{
+	m_lvClient.InsertColumn(0, _T("Modified"), LVCFMT_LEFT, 80);
+	m_lvClient.InsertColumn(0, _T("Size"), LVCFMT_LEFT, 80);
+	m_lvClient.InsertColumn(0, _T("Type"), LVCFMT_LEFT, 50);
+	m_lvClient.InsertColumn(0, _T("Name"), LVCFMT_LEFT, 100);
+	m_lvClient.SetExtendedStyle(LVS_EX_FULLROWSELECT);
+
+	m_lvServer.InsertColumn(0, _T("Modified"), LVCFMT_LEFT, 80);
+	m_lvServer.InsertColumn(0, _T("Size"), LVCFMT_LEFT, 80);
+	m_lvServer.InsertColumn(0, _T("Type"), LVCFMT_LEFT, 50);
+	m_lvServer.InsertColumn(0, _T("Name"), LVCFMT_LEFT, 100);
+	m_lvServer.SetExtendedStyle(LVS_EX_FULLROWSELECT);
+}
+
+bool Cftp_clientDlg::CheckLogging()
+{
+	if (m_ebUser.GetWindowTextLength() == 0)
+	{
+		AfxMessageBox(_T("Username must be not null!"));
+		return false;
+	}
+
+	if (m_ebPassword.GetWindowTextLength() == 0)
+	{
+		AfxMessageBox(_T("Password must be not null!"));
+		return false;
+	}
+
+	if (m_optActive.GetCheck() == false && m_optPassive.GetCheck() == false)
+	{
+		AfxMessageBox(_T("You must select one Mode!"));
+		return false;
+	}
+
+	return true;
+}
+
+void Cftp_clientDlg::ControlSwitch()
+{
+	m_bControlSwitch = !m_bControlSwitch;
+
+	//m_ebUser.EnableWindow(m_bControlSwitch);
+	//m_ebPassword.EnableWindow(m_bControlSwitch);
+	//m_ipaddrServer.EnableWindow(m_bControlSwitch);
+	//m_optActive.EnableWindow(m_bControlSwitch);
+	//m_optPassive.EnableWindow(m_bControlSwitch);
+
+	//if (m_bControlSwitch)
+	//	m_btnLog.SetWindowText(_T("Log in"));
+	//else
+	//	m_btnLog.SetWindowText(_T("Log out"));
+}
+
+void Cftp_clientDlg::InitStuff()
+{
+	m_csRemotePath = _T("/");
+	m_bControlSwitch = true;
+}
+
+void Cftp_clientDlg::UpdateClientLV()
+{
+
+}
+
+void Cftp_clientDlg::UpdateServerLV()
+{
+
+}
+
+//void Cftp_clientDlg::HandlePORT(CString * pcsCmd)
+//{
+//	CString csIP;
+//	int iPort;
+//
+//	MyTools::GetIPnPort(pcsCmd, &csIP, &iPort);
+//	
+//	//m_datasock.SetServInfo(csIP.GetBuffer(), iPort);
+//}
+
+void Cftp_clientDlg::Handle230( CString * pcsCmd )
+{
+	m_csRemotePath = _T("/");
+	m_cmdsock.LIST(&m_csRemotePath, m_optPassive.GetCheck());
+}
+
+void Cftp_clientDlg::Handle227( CString * pcsCmd )
+{
+	CString csCmd(*pcsCmd);		// giu lai ban goc cua message
+
+	MyTools::PeelMessage(&csCmd, 1, _T("("));
+	CString csIPnPort = MyTools::PeelMessage(&csCmd, 1, _T(")"));
+
+	CString csIP;
+	int iPort;
+	MyTools::GetIPnPort(&csIPnPort, &csIP, &iPort);
+
+	m_datasock.CreateSock();
+	m_datasock.Connect(csIP.GetBuffer(), iPort);
+	m_datasock.SetSelectMode(m_hWnd, WM_SOCKET_DATA, FD_READ | FD_CLOSE);
+}
+
+void Cftp_clientDlg::ProcessData( CString * pcsData )
+{
+	if (m_cmdsock.LastestCmd().CompareNoCase(MyTools::FC_LIST) == 0)
+		HandleLIST(pcsData);
+}
+
+void Cftp_clientDlg::HandleLIST( CString * pcsData )
+{
+	m_lvServer.DeleteAllItems();
+
+	//m_lvServer.InsertItem(0, _T("[..]"));
+
+	CString csLine = MyTools::PeelMessage(pcsData, 1, _T("\n"));
+	while (csLine != _T(""))
+	{
+		int iCount = 0;
+		int iSizePos = -1, iDatePos = -1, iNamePos = -1;
+		for (int i = 1; i < csLine.GetLength(); ++i)
+		{
+			if (csLine[i] != _T(' ') && csLine[i-1] == _T(' '))
+			{
+				++iCount;
+				if (iCount == 4)
+					iSizePos = i;
+
+				if (iCount == 5)
+					iDatePos = i;
+
+				if (iCount == 8)
+				{
+					iNamePos = i;
+					break;
+				}
+			}
+		}
+
+		CString csFileName = csLine.Right(csLine.GetLength() - iNamePos);
+		CString csFileTitle, csFileType, csSize;
+		if (csLine[0] == _T('d'))
+		{
+			csFileTitle = csFileName;
+			csFileType = _T("");
+			csSize = _T("<DIR>");
+		}
+		else if (csLine[0] == _T('-') || csLine[0] == _T('l'))
+		{
+			int iDotPos = csFileName.ReverseFind(_T('.'));
+			if (iDotPos == -1)
+			{
+				csFileTitle = csFileName;
+				csFileType = _T("<UNK>");
+			}
+			else
+			{
+				csFileTitle = csFileName.Left(iDotPos);
+				csFileType = csFileName.Right(csFileName.GetLength()-iDotPos-1);
+			}
+
+			csSize = csLine.Mid(iSizePos, iDatePos-iSizePos);
+		}
+		
+		CString csDateTime = csLine.Mid(iDatePos, iNamePos-iDatePos);
+
+		int iItem = m_lvServer.GetItemCount();
+		m_lvServer.InsertItem(iItem, csFileTitle);
+		m_lvServer.SetItemText(iItem, 1, csFileType);
+		m_lvServer.SetItemText(iItem, 2, csSize);
+		m_lvServer.SetItemText(iItem, 3, csDateTime);
+		
+		csLine = MyTools::PeelMessage(pcsData, 1, _T("\n"));
+	}
+}
+
+void Cftp_clientDlg::InitSock()
+{
+	WORD wVersionRequested;
+	WSADATA wsaData;
+
+	wVersionRequested = MAKEWORD(2,2);
+
+	int err = WSAStartup(wVersionRequested, &wsaData);
+	if (err != 0)
+		AfxMessageBox(_T("WSAStartup() failed"));
+}
+void Cftp_clientDlg::OnDestroy()
+{
+	CDialog::OnDestroy();
+
+	// TODO: Add your message handler code here
+	WSACleanup();
+}
+
+void Cftp_clientDlg::OnLvnItemActivateList2(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMITEMACTIVATE pNMIA = reinterpret_cast<LPNMITEMACTIVATE>(pNMHDR);
+	// TODO: Add your control notification handler code here
+	*pResult = 0;
+
+	CString csFileType = m_lvServer.GetItemText(pNMIA->iItem, 2);
+	if (csFileType != _T("<DIR>"))
+	{
+		//!!! thao tac voi file o day
+		return;
+	}
+
+	CString csPath = m_lvServer.GetItemText(pNMIA->iItem, 0);
+	m_cmdsock.CWD(&csPath);
+}
+
+void Cftp_clientDlg::Handle250( CString * pcsCmd )
+{
+	if (m_cmdsock.LastestCmd().CompareNoCase(MyTools::FC_CWD) == 0)
+		m_cmdsock.LIST(NULL, m_optPassive.GetCheck());
 }

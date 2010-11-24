@@ -186,7 +186,11 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\Comm.cpp"
+				RelativePath=".\CmdSock.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\DataSock.cpp"
 				>
 			</File>
 			<File
@@ -195,6 +199,14 @@
 			</File>
 			<File
 				RelativePath=".\ftp_clientDlg.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\MySock.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\MyTools.cpp"
 				>
 			</File>
 			<File
@@ -224,7 +236,11 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\Comm.h"
+				RelativePath=".\CmdSock.h"
+				>
+			</File>
+			<File
+				RelativePath=".\DataSock.h"
 				>
 			</File>
 			<File
@@ -233,6 +249,14 @@
 			</File>
 			<File
 				RelativePath=".\ftp_clientDlg.h"
+				>
+			</File>
+			<File
+				RelativePath=".\MySock.h"
+				>
+			</File>
+			<File
+				RelativePath=".\MyTools.h"
 				>
 			</File>
 			<File
@@ -266,6 +290,10 @@
 				>
 			</File>
 		</Filter>
+		<File
+			RelativePath=".\Program.manifest"
+			>
+		</File>
 		<File
 			RelativePath=".\ReadMe.txt"
 			>
