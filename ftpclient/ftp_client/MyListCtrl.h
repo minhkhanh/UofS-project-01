@@ -11,6 +11,10 @@ public:
 	CMyListCtrl();
 	virtual ~CMyListCtrl();
 	void InitListViewClient();
+	void GoHome();
+
+public:
+	afx_msg void OnLvnColumnclick(NMHDR *pNMHDR, LRESULT *pResult);
 
 protected:
 	DECLARE_MESSAGE_MAP()
