@@ -9,6 +9,7 @@
 #define IDP_SOCKETS_INIT_FAILED         103
 #define IDR_MAINFRAME                   128
 #define IDC_LIST1                       1000
+#define IDC_LIST_CLIENT                 1000
 #define IDC_LIST2                       1001
 #define IDC_BUTTON1                     1002
 #define IDC_BUTTON2                     1003
