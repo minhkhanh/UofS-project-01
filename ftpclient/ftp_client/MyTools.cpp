@@ -1,12 +1,23 @@
 #include "StdAfx.h"
 #include "MyTools.h"
 
+int MyTools::DATAPORT = 30000;
+
 TCHAR* MyTools::FC_LIST = _T("list");
 TCHAR* MyTools::FC_CWD = _T("cwd");
+TCHAR* MyTools::FC_PORT = _T("port");
+TCHAR* MyTools::FC_PASV = _T("pasv");
+TCHAR* MyTools::FC_USER = _T("user");
+TCHAR* MyTools::FC_PWD = _T("pwd");
 
 TCHAR* MyTools::CR_230 = _T("230");
 TCHAR* MyTools::CR_227 = _T("227");
 TCHAR* MyTools::CR_250 = _T("250");
+TCHAR* MyTools::CR_200 = _T("200");
+TCHAR* MyTools::CR_331 = _T("331");
+TCHAR* MyTools::CR_220 = _T("220");
+TCHAR* MyTools::CR_226 = _T("226");
+TCHAR* MyTools::CR_257 = _T("257");
 
 MyTools::MyTools(void)
 {
@@ -52,42 +63,67 @@ CString MyTools::PeelMessage( CString* pcsMess, int iDirect, TCHAR sToken[] )
 	return csOut;
 }
 
-void MyTools::GetIPnPort( CString * pcsCmd, CString * pcsIP, int * iPort )
+void MyTools::GetCmdIPnPort( CString * pcsCmd, CString * pcsIP, int * pPort )
 {
-	pcsIP->Empty();
-
 	int count = 0;
 	int i = 0;
-	for ( ; i < pcsCmd->GetLength(); ++i)
+
+	if (pcsIP != NULL)
 	{
-		if ((*pcsCmd)[i] != _T(','))
-			*pcsIP += (*pcsCmd)[i];
-		else
+		pcsIP->Empty();
+
+		for ( ; i < pcsCmd->GetLength(); ++i)
 		{
-			if (++count == 4)
+			if ((*pcsCmd)[i] != _T(','))
+				*pcsIP += (*pcsCmd)[i];
+			else
 			{
-				++i;
-				break;
+				if (++count == 4)
+				{
+					++i;
+					break;
+				}
+				*pcsIP += _T('.');
 			}
-			*pcsIP += _T('.');
 		}
 	}
 
-	*iPort = 0;
-	CString csTmp;
-	int iTmp = 256;
-	for ( ; i < pcsCmd->GetLength(); ++i)
+	if (pPort != NULL)
 	{
-		if ((*pcsCmd)[i] != _T(','))
-			csTmp += (*pcsCmd)[i];
-		else
+		*pPort = 0;
+		CString csTmp;
+		int iTmp = 256;
+		for ( ; i < pcsCmd->GetLength(); ++i)
 		{
-			*iPort += _tcstoi64(csTmp.GetBuffer(), NULL, 10 ) * iTmp;
-			csTmp.Empty();
+			if ((*pcsCmd)[i] != _T(','))
+				csTmp += (*pcsCmd)[i];
+			else
+			{
+				*pPort += _tcstoi64(csTmp.GetBuffer(), NULL, 10 ) * iTmp;
+				csTmp.Empty();
 
-			iTmp -= 255;
-		}			
+				iTmp -= 255;
+			}			
+		}
+
+		*pPort += _tcstoi64(csTmp.GetBuffer(), NULL, 10 );
+	}
+}
+
+void MyTools::GetSockIPnPort( SOCKET sock, CString * pcsIP, int * pPort )
+{
+	sockaddr_in addrSock;	
+	int iSize = sizeof(addrSock);
+	getsockname(sock, (sockaddr*)&addrSock, &iSize);
+
+	if (pcsIP != NULL)
+	{
+		pcsIP->Empty();
+		*pcsIP = inet_ntoa(addrSock.sin_addr);
 	}
 
-	*iPort += _tcstoi64(csTmp.GetBuffer(), NULL, 10 );
+	if (pPort != NULL)
+	{
+		*pPort = ntohs(addrSock.sin_port);
+	}
 }

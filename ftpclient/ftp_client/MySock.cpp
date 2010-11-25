@@ -19,7 +19,10 @@ int MySock::CloseSocket()
 {
 	if (m_sock != INVALID_SOCKET)
 		if (closesocket(m_sock) != 0)
+		{
+			AfxMessageBox(_T("MySock::CloseSocket() fail!"));
 			return WSAGetLastError();
+		}
 
 	m_bIsConnecting = false;
 	return 0;
@@ -35,6 +38,7 @@ int MySock::CreateSock()
 	if (m_sock == INVALID_SOCKET)
 	{
 		m_bIsConnecting = false;
+		AfxMessageBox(_T("MySock::CreateSock() fail!"));
 		return WSAGetLastError();
 	}
 
@@ -62,6 +66,7 @@ int MySock::Connect( DWORD dwIPAddr, int iPort )
 	if (connect(m_sock, (struct sockaddr*)&addrServer, sizeof(addrServer))== SOCKET_ERROR)
 	{
 		m_bIsConnecting = false;
+		AfxMessageBox(_T("MySock::Connect() fail!"));
 		return WSAGetLastError();
 	}
 
@@ -80,14 +85,47 @@ int MySock::Connect(char* sIP, int iPort )
 		return -1;
 
 	if (connect(m_sock, (struct sockaddr*)&addrServer, sizeof(addrServer))== SOCKET_ERROR)
+	{
+		AfxMessageBox(_T("MySock::Connect() fail!"));
 		return WSAGetLastError();
+	}
 
 	return 0;
 }
 int MySock::SetSelectMode( HWND hWnd, int iHandler, int iFD )
 {
 	if (WSAAsyncSelect(m_sock, hWnd, iHandler, iFD) == SOCKET_ERROR)
+	{
+		AfxMessageBox(_T("MySock::SetSelectMode() fail!"));
 		return WSAGetLastError();
+	}
+
+	return 0;
+}
+
+int MySock::Bind()
+{
+	sockaddr_in addrServer;
+	addrServer.sin_family = AF_INET;
+	addrServer.sin_port = htons(MyTools::DATAPORT);
+	addrServer.sin_addr.s_addr = htonl(INADDR_ANY);
+
+	if (bind(m_sock, (SOCKADDR *)&addrServer, sizeof(addrServer)) == SOCKET_ERROR)
+	{
+		AfxMessageBox(_T("MySock::Bind() error"));
+		return WSAGetLastError();
+	}
+
+	return 0;
+}
+
+int MySock::Listen( int iBklg )
+{
+	if (listen(m_sock, iBklg) == SOCKET_ERROR)
+	{
+		AfxMessageBox(_T("MySock::Listen() error"));
+		return WSAGetLastError();
+	}
 
 	return 0;
 }
