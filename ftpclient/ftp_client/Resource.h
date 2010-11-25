@@ -2,6 +2,14 @@
 // Microsoft Visual C++ generated include file.
 // Used by ftp_client.rc
 //
+#define IS_DISK                         1
+#define IDC_MYICON                      2
+#define IS_COMPUTER                     2
+#define IS_NOT_LOAD                     4
+#define IS_UNUSED                       8
+#define IS_FOLDER                       16
+
+
 #define IDM_ABOUTBOX                    0x0010
 #define IDD_ABOUTBOX                    100
 #define IDS_ABOUTBOX                    101
