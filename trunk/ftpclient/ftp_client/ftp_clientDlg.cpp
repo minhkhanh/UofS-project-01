@@ -325,11 +325,7 @@ void Cftp_clientDlg::PrintMessage( CString * pcsMess )
 
 void Cftp_clientDlg::InitListViews()
 {
-	m_lvClient.InsertColumn(0, _T("Modified"), LVCFMT_LEFT, 80);
-	m_lvClient.InsertColumn(0, _T("Size"), LVCFMT_LEFT, 80);
-	m_lvClient.InsertColumn(0, _T("Type"), LVCFMT_LEFT, 50);
-	m_lvClient.InsertColumn(0, _T("Name"), LVCFMT_LEFT, 100);
-	m_lvClient.SetExtendedStyle(LVS_EX_FULLROWSELECT);
+	m_lvClient.InitListViewClient();
 
 	m_lvServer.InsertColumn(0, _T("Modified"), LVCFMT_LEFT, 80);
 	m_lvServer.InsertColumn(0, _T("Size"), LVCFMT_LEFT, 80);
