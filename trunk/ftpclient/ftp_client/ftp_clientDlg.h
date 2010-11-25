@@ -10,14 +10,6 @@
 #include "afxwin.h"
 #include "MyListCtrl.h"
 
-#define WM_SOCKET_CMD	WM_USER + 1
-#define WM_SOCKET_DATA	WM_USER + 2
-
-#define  FTP_SERVER_CMD_PORT	21
-
-#define CMDBUFF_MAXLEN	256
-#define DATABUFF_MAXLEN	512
-
 
 // Cftp_clientDlg dialog
 class Cftp_clientDlg : public CDialog
@@ -47,14 +39,23 @@ public:
 	afx_msg void OnClicked_BtnLog();
 	LRESULT CmdSockMsg(WPARAM wParam, LPARAM lParam);
 	LRESULT DataSockMsg(WPARAM wParam, LPARAM lParam);
+	LRESULT DataSockMsg2(WPARAM wParam, LPARAM lParam);
 
 	void ProcessCmd(CString * pcsCmd);
 	void Handle230(CString * pcsCmd);
 	void Handle227(CString * pcsCmd);
 	void Handle250(CString * pcsCmd);
+	void Handle200(CString * pcsCmd);
+	void Handle331(CString * pcsCmd);
+	void Handle220(CString * pcsCmd);
+	void Handle226(CString * pcsCmd);
+	void Handle257(CString * pcsCmd);
 
 	void ProcessData(CString * pcsData);
 	void HandleLIST(CString * pcsData);
+
+	void Upload();
+	void Download();
 	
 	void PrintMessage(CString * pcsMess);
 
@@ -67,14 +68,16 @@ public:
 	bool m_bControlSwitch;
 	void ControlSwitch();
 
-	void UpdateClientLV();
-	void UpdateServerLV();
-
 private:
+	SOCKET m_sockTmp;
 	CString m_csRemotePath;
-	CString m_csRecvBuff;
+	CString m_csDataBuff2;
+	CString m_csDataBuff;
 	CmdSock m_cmdsock;
 	DataSock m_datasock;
+	DataSock m_datasock2;
+	//SOCKET m_sockActServer;
+	MySock m_sockActClient;
 	CIPAddressCtrl m_ipaddrServer;
 	CEdit m_ebMessage;
 	// list view file ben phia client
@@ -91,9 +94,15 @@ private:
 	CButton m_optPassive;
 	// nut dang nhat/dang xuat
 	CButton m_btnLog;
+	CString m_csCmdBuff;
 public:
 	afx_msg void OnDestroy();
 
 public:
 	afx_msg void OnLvnItemActivateList2(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnBnClickedRadio1();
+	afx_msg void OnBnClickedRadio2();
+	afx_msg void OnClicked_BtnRefresh();
+	afx_msg void OnClicked_BtnUpload();
+	afx_msg void OnLvnItemActivateListClient(NMHDR *pNMHDR, LRESULT *pResult);
 };

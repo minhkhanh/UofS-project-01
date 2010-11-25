@@ -11,6 +11,4 @@ private:
 public:
 	DataSock(void);
 	~DataSock(void);
-
-	//int SetServInfo(char * sIP, int iPort);
 };
