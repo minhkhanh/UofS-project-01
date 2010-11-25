@@ -10,7 +10,7 @@
 #define new DEBUG_NEW
 #endif
 
-
+CMyListCtrl * mListView;
 // CAboutDlg dialog used for App About
 
 class CAboutDlg : public CDialog
@@ -107,6 +107,7 @@ BOOL Cftp_clientDlg::OnInitDialog()
 	}
 
 	// Set the icon for this dialog.  The framework does this automatically
+	mListView = & m_lvClient;
 	//  when the application's main window is not a dialog
 	SetIcon(m_hIcon, TRUE);			// Set big icon
 	SetIcon(m_hIcon, FALSE);		// Set small icon
