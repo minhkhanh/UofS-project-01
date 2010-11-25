@@ -41,7 +41,13 @@
 #include <afxsock.h>            // MFC socket extensions
 
 
-
+#include <shlobj.h>
+#include <shellapi.h>
+#include <imagehlp.h>
+#pragma comment(lib, "imagehlp.lib")
+#pragma comment(lib, "shell32.lib")
+#pragma comment(lib, "comctl32.lib")
+#pragma warning(disable:4995 4715 4996 4800)
 
 
 
