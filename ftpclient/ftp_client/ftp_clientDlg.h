@@ -8,6 +8,7 @@
 #include "DataSock.h"
 #include "MyTools.h"
 #include "afxwin.h"
+#include "MyListCtrl.h"
 
 #define WM_SOCKET_CMD	WM_USER + 1
 #define WM_SOCKET_DATA	WM_USER + 2
@@ -77,7 +78,7 @@ private:
 	CIPAddressCtrl m_ipaddrServer;
 	CEdit m_ebMessage;
 	// list view file ben phia client
-	CListCtrl m_lvClient;
+	CMyListCtrl m_lvClient;
 	// list view file ben phia server
 	CListCtrl m_lvServer;
 	// edit box ten dang nhap

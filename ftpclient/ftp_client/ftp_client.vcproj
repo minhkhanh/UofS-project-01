@@ -202,6 +202,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\MyListCtrl.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\MySock.cpp"
 				>
 			</File>
@@ -249,6 +253,10 @@
 			</File>
 			<File
 				RelativePath=".\ftp_clientDlg.h"
+				>
+			</File>
+			<File
+				RelativePath=".\MyListCtrl.h"
 				>
 			</File>
 			<File
