@@ -117,6 +117,7 @@ BOOL Cftp_clientDlg::OnInitDialog()
 	InitSock();
 	InitListViews();
 	InitStuff();
+	mListView->GoHome();
 
 	if (m_datasock.CreateSock() != 0)
 	{
@@ -182,7 +183,7 @@ HCURSOR Cftp_clientDlg::OnQueryDragIcon()
 void Cftp_clientDlg::OnClicked_BtnLog()
 {
 	// TODO: Add your control notification handler code here
-
+mListView->GoHome();
 	if (CheckLogging() == false)
 		return;
 

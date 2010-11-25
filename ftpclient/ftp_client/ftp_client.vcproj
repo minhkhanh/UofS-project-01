@@ -194,6 +194,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\DiskManager.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\ftp_client.cpp"
 				>
 			</File>
@@ -245,6 +249,10 @@
 			</File>
 			<File
 				RelativePath=".\DataSock.h"
+				>
+			</File>
+			<File
+				RelativePath=".\DiskManager.h"
 				>
 			</File>
 			<File
