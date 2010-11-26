@@ -35,23 +35,27 @@ private:
 	void AddSubItem(TCHAR *szText, int iParentItem, int iSub);
 	bool CheckName(TCHAR szText[]);
 
+	int GetSortColumn();
+	void LoadListDisk();
+	void LoadDir(TCHAR * szPath);
+
 public:
 	CMyListCtrl();
 	virtual ~CMyListCtrl();
 	void InitListViewClient();
 	void GoHome();
-	int GetSortColumn();
-	void LoadListDisk();
 
 public:
 	afx_msg void OnLvnColumnclick(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnLvnItemActivate(NMHDR *pNMHDR, LRESULT *pResult);
+
+	friend int CALLBACK CompareFuncInc(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort);
+	friend int CALLBACK CompareFuncDec(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort);
+
 
 protected:
 	DECLARE_MESSAGE_MAP()
 };
-
-int CALLBACK CompareFuncInc(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort);
-int CALLBACK CompareFuncDec(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort);
 
 void DDWORD2Size( __int64 Number, double & Size, TCHAR Units[3]);
 void DDWORD2Size(DWORD Number, DWORD lowNum, double & Size, TCHAR Units[3]);
