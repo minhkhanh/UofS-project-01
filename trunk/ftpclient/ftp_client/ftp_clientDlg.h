@@ -9,6 +9,7 @@
 #include "MyTools.h"
 #include "afxwin.h"
 #include "MyListCtrl.h"
+#include "AddressBar.h"
 
 
 // Cftp_clientDlg dialog
@@ -82,6 +83,8 @@ private:
 	CEdit m_ebMessage;
 	// list view file ben phia client
 	CMyListCtrl m_lvClient;
+	//
+	CAddressBar m_eAddressBar;
 	// list view file ben phia server
 	CListCtrl m_lvServer;
 	// edit box ten dang nhap
@@ -105,4 +108,10 @@ public:
 	afx_msg void OnClicked_BtnRefresh();
 	afx_msg void OnClicked_BtnUpload();
 	afx_msg void OnLvnItemActivateListClient(NMHDR *pNMHDR, LRESULT *pResult);
+	
+	afx_msg void OnBnClickedButton11();
+	afx_msg void OnBnClickedButton10();
+	afx_msg void OnBnClickedButton9();
+	afx_msg void OnBnClickedButton8();
+	afx_msg void OnBnClickedButton7();
 };

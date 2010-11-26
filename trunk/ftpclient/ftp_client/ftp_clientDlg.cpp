@@ -65,6 +65,7 @@ void Cftp_clientDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_RADIO1, m_optActive);
 	DDX_Control(pDX, IDC_RADIO2, m_optPassive);
 	DDX_Control(pDX, IDC_BUTTON4, m_btnLog);
+	DDX_Control(pDX, IDC_EDIT4, m_eAddressBar);
 }
 
 BEGIN_MESSAGE_MAP(Cftp_clientDlg, CDialog)
@@ -83,6 +84,11 @@ BEGIN_MESSAGE_MAP(Cftp_clientDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON5, &Cftp_clientDlg::OnClicked_BtnRefresh)
 	ON_BN_CLICKED(IDC_BUTTON1, &Cftp_clientDlg::OnClicked_BtnUpload)
 	ON_NOTIFY(LVN_ITEMACTIVATE, IDC_LIST_CLIENT, &Cftp_clientDlg::OnLvnItemActivateListClient)
+	ON_BN_CLICKED(IDC_BUTTON11, &Cftp_clientDlg::OnBnClickedButton11)
+	ON_BN_CLICKED(IDC_BUTTON10, &Cftp_clientDlg::OnBnClickedButton10)
+	ON_BN_CLICKED(IDC_BUTTON9, &Cftp_clientDlg::OnBnClickedButton9)
+	ON_BN_CLICKED(IDC_BUTTON8, &Cftp_clientDlg::OnBnClickedButton8)
+	ON_BN_CLICKED(IDC_BUTTON7, &Cftp_clientDlg::OnBnClickedButton7)
 END_MESSAGE_MAP()
 
 
@@ -368,7 +374,7 @@ void Cftp_clientDlg::PrintMessage( CString * pcsMess )
 void Cftp_clientDlg::InitListViews()
 {
 	m_lvClient.InitListViewClient();
-	m_lvClient.ModifyStyle(0, LVS_SINGLESEL);		// ko cho chon nhieu item
+	m_lvClient.SetAddressBar(&m_eAddressBar);		
 
 	m_lvServer.InsertColumn(0, _T("Modified"), LVCFMT_LEFT, 80);
 	m_lvServer.InsertColumn(0, _T("Size"), LVCFMT_LEFT, 80);
@@ -728,4 +734,34 @@ void Cftp_clientDlg::OnLvnItemActivateListClient(NMHDR *pNMHDR, LRESULT *pResult
 	LPNMITEMACTIVATE pNMIA = reinterpret_cast<LPNMITEMACTIVATE>(pNMHDR);
 	// TODO: Add your control notification handler code here
 	*pResult = 0;
+}
+
+void Cftp_clientDlg::OnBnClickedButton11()
+{
+	m_lvClient.GoHome();
+	// TODO: Add your control notification handler code here
+}
+
+void Cftp_clientDlg::OnBnClickedButton10()
+{
+	m_lvClient.GoUp();
+	// TODO: Add your control notification handler code here
+}
+
+void Cftp_clientDlg::OnBnClickedButton9()
+{
+	m_lvClient.GoBack();
+	// TODO: Add your control notification handler code here
+}
+
+void Cftp_clientDlg::OnBnClickedButton8()
+{
+	m_lvClient.GoForward();
+	// TODO: Add your control notification handler code here
+}
+
+void Cftp_clientDlg::OnBnClickedButton7()
+{
+	m_lvClient.GoCreateFolder();
+	// TODO: Add your control notification handler code here
 }

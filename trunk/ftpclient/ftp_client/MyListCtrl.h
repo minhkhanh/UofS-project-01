@@ -1,6 +1,7 @@
 #pragma once
 #include "String.h"
 #include <vector>
+#include "AddressBar.h"
 using namespace std;
 // CMyListCtrl
 #define MAX_BACK_FARWARD	200
@@ -25,6 +26,7 @@ private:
 	vector<String *> vForward;
 	vector<String *> vCopy;
 	int iBack, iForward;
+	CAddressBar * m_eAddressBar;
 
 private:
 	void AddToBackList(TCHAR *pData, int flag);
@@ -34,6 +36,7 @@ private:
 	void AddItem(WIN32_FIND_DATA ffd, SHFILEINFO &sfi,int iImage, int iStatus);
 	void AddSubItem(TCHAR *szText, int iParentItem, int iSub);
 	bool CheckName(TCHAR szText[]);
+	void Update();
 
 	int GetSortColumn();
 	void LoadListDisk();
@@ -44,10 +47,19 @@ public:
 	virtual ~CMyListCtrl();
 	void InitListViewClient();
 	void GoHome();
+	void GoUp();
+	void GoBack();
+	void GoForward();
+	void GoCreateFolder();
+	void SetAddressBar(CAddressBar * p);
 
 public:
 	afx_msg void OnLvnColumnclick(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnLvnItemActivate(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnLvnDeleteitem(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnLvnBeginlabeledit(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnLvnEndlabeledit(NMHDR *pNMHDR, LRESULT *pResult);
+
 
 	friend int CALLBACK CompareFuncInc(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort);
 	friend int CALLBACK CompareFuncDec(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort);
@@ -60,3 +72,4 @@ protected:
 void DDWORD2Size( __int64 Number, double & Size, TCHAR Units[3]);
 void DDWORD2Size(DWORD Number, DWORD lowNum, double & Size, TCHAR Units[3]);
 void DeleteVector(vector<String *> &v);
+bool Rename(TCHAR szPathS[], TCHAR szPathD[]);
