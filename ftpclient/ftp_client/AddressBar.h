@@ -3,13 +3,14 @@
 
 // AddressBar
 
-class AddressBar : public CEdit
+class CAddressBar : public CEdit
 {
-	DECLARE_DYNAMIC(AddressBar)
+	DECLARE_DYNAMIC(CAddressBar)
 
 public:
-	AddressBar();
-	virtual ~AddressBar();
+	CAddressBar();
+	virtual ~CAddressBar();
+	void SetText(LPCTSTR sText);
 
 protected:
 	DECLARE_MESSAGE_MAP()

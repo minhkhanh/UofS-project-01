@@ -8,20 +8,25 @@
 
 // AddressBar
 
-IMPLEMENT_DYNAMIC(AddressBar, CEdit)
+IMPLEMENT_DYNAMIC(CAddressBar, CEdit)
 
-AddressBar::AddressBar()
+CAddressBar::CAddressBar()
 {
 
 }
 
-AddressBar::~AddressBar()
+CAddressBar::~CAddressBar()
 {
 }
 
 
-BEGIN_MESSAGE_MAP(AddressBar, CEdit)
+BEGIN_MESSAGE_MAP(CAddressBar, CEdit)
 END_MESSAGE_MAP()
+
+void CAddressBar::SetText( LPCTSTR sText )
+{
+	SendMessage(WM_SETTEXT, 0, (LPARAM)sText);
+}
 
 
 
