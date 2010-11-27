@@ -40,7 +40,8 @@
 
 #include <afxsock.h>            // MFC socket extensions
 
-
+#include <tchar.h>
+#include <direct.h>
 #include <shlobj.h>
 #include <shellapi.h>
 #include <imagehlp.h>
