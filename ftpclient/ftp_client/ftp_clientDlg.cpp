@@ -716,6 +716,9 @@ void Cftp_clientDlg::Handle257( CString * pcsCmd )
 }
 void Cftp_clientDlg::OnClicked_BtnUpload()
 {
+	//TCHAR * t = m_lvClient.GetSelectPath();
+	//delete t;
+	//return;
 	//m_lvClient.GetFocus()
 	POSITION pos = m_lvClient.GetFirstSelectedItemPosition();
 	if (pos != NULL)

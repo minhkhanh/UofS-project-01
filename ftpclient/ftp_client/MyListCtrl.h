@@ -52,6 +52,8 @@ public:
 	void GoForward();
 	void GoCreateFolder();
 	void SetAddressBar(CAddressBar * p);
+	TCHAR* GetSelectPath(); // tra ve NULL neu dang o computer hoac chon nhieu, tra full path neu la file, tra c:\temp\ neu chon thu muc c:\temp  , tra ve current path neu ko chon ma ko o trong mycomputer
+							// fai xoa vung nho nay khi dung xong
 
 public:
 	afx_msg void OnLvnColumnclick(NMHDR *pNMHDR, LRESULT *pResult);
