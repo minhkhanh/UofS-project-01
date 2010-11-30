@@ -7,7 +7,7 @@ class MySock
 protected:
 	SOCKET m_sock;
 	bool m_bIsConnecting;
-	//Cftp_clientDlg * m_dlgFTPClient;
+	FTPMode m_eMode;
 
 public:
 	MySock(void);
@@ -21,7 +21,4 @@ public:
 	int Connect(char* sIP, int iPort);
 	int SetSelectMode(HWND hWnd, int iHandler, int iFD);
 	int CloseSocket();
-
-	int Bind();
-	int Listen(int iBklg);
 };

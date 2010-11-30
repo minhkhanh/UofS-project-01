@@ -223,6 +223,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\NewFolderDlg.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\StatusBar.cpp"
 				>
 			</File>
@@ -286,6 +290,10 @@
 			</File>
 			<File
 				RelativePath=".\MyTools.h"
+				>
+			</File>
+			<File
+				RelativePath=".\NewFolderDlg.h"
 				>
 			</File>
 			<File

@@ -36,13 +36,15 @@ private:
 	void AddItem(WIN32_FIND_DATA ffd, SHFILEINFO &sfi,int iImage, int iStatus);
 	void AddSubItem(TCHAR *szText, int iParentItem, int iSub);
 	bool CheckName(TCHAR szText[]);
-	void Update();
+
 
 	int GetSortColumn();
 	void LoadListDisk();
 	void LoadDir(TCHAR * szPath);
 
 public:
+	void Update();
+
 	CMyListCtrl();
 	virtual ~CMyListCtrl();
 	void InitListViewClient();

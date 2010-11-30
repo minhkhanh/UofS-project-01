@@ -55,11 +55,8 @@ void CmdSock::PASV()
 {
 	CString csMess = _T("PASV\r\n");
 
-	int err = send(m_sock, (char*)csMess.GetBuffer(), csMess.GetLength()*sizeof(TCHAR), 0);
-	if (err != 0)
-		return;
+	send(m_sock, (char*)csMess.GetBuffer(), csMess.GetLength()*sizeof(TCHAR), 0);
 
-	//m_eMode = FTPMode::Passive;
 	m_csLastestCmd = MyTools::FC_PASV;
 }
 
@@ -82,8 +79,10 @@ void CmdSock::CWD( CString * pcsDir )
 
 void CmdSock::PORT( DataSock* pMyDataSock, HWND hWnd, int iHandler )
 {
+
 	CString csClientIP;
-	MyTools::GetSockIPnPort(m_sock, &csClientIP, NULL);
+	int iPort;
+	MyTools::GetSockIPnPort(m_sock, &csClientIP, &iPort);
 	csClientIP.Replace(_T('.'), _T(','));
 
 	++MyTools::DATAPORT;
@@ -97,14 +96,12 @@ void CmdSock::PORT( DataSock* pMyDataSock, HWND hWnd, int iHandler )
 	csMess.Format(_T("PORT %s,%s\r\n"), csClientIP, csPort);
 
 	pMyDataSock->CreateSock();
-	pMyDataSock->Bind();
-	pMyDataSock->Listen(5);
+	pMyDataSock->BindAndListen();
+	//pMyDataSock->Listen();
 	pMyDataSock->SetSelectMode(hWnd, iHandler, FD_ACCEPT | FD_READ | FD_CLOSE);
 
 	send(m_sock, (char*)csMess.GetBuffer(), csMess.GetLength()*sizeof(TCHAR), 0);
 
-	//m_csLastestCmd = MyTools::FC_PORT;
-	//m_eMode = FTPMode::Active;
 	m_csLastestCmd = MyTools::FC_PORT;
 }
 
@@ -119,7 +116,7 @@ void CmdSock::SetMode( int iPassiveFlag, DataSock* pMyDataSock, HWND hWnd, int i
 	{
 		PORT(pMyDataSock, hWnd, iHandler);
 		//m_csLastestCmd = MyTools::FC_PORT;
-	}	
+	}
 }
 
 void CmdSock::PWD()
@@ -130,4 +127,41 @@ void CmdSock::PWD()
 	send(m_sock, (char*)csMess.GetBuffer(), csMess.GetLength()*sizeof(TCHAR), 0);
 
 	m_csLastestCmd = MyTools::FC_PWD;
+}
+
+void CmdSock::TYPE( TCHAR tcType )
+{
+	CString csMess = _T("TYPE ");
+	csMess += tcType;
+	csMess += _T("\r\n");
+
+	send(m_sock, (char*)csMess.GetBuffer(), csMess.GetLength()*sizeof(TCHAR), 0);
+	m_csLastestCmd = MyTools::FC_TYPE;
+}
+
+void CmdSock::STOR( CString * pcsName )
+{
+	CString csMess;
+	csMess.Format(_T("STOR %s\r\n"), *pcsName);
+
+	send(m_sock, (char*)csMess.GetBuffer(), csMess.GetLength()*sizeof(TCHAR), 0);
+	m_csLastestCmd = MyTools::FC_STOR;
+}
+
+void CmdSock::DELE( CString * pcsName )
+{
+	CString csMess;
+	csMess.Format(_T("DELE %s\r\n"), *pcsName);
+
+	send(m_sock, (char*)csMess.GetBuffer(), csMess.GetLength()*sizeof(TCHAR), 0);
+	m_csLastestCmd = MyTools::FC_DELE;
+}
+
+void CmdSock::RETR( CString * pcsName )
+{
+	CString csMess;
+	csMess.Format(_T("RETR %s\r\n"), *pcsName);
+
+	send(m_sock, (char*)csMess.GetBuffer(), csMess.GetLength()*sizeof(TCHAR), 0);
+	m_csLastestCmd = MyTools::FC_RETR;
 }

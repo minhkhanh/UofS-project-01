@@ -28,4 +28,8 @@ public:
 	void QUIT();
 	void CWD(CString * pcsDir);
 	void PWD();
+	void TYPE(TCHAR tcType);
+	void STOR(CString * pcsName);
+	void DELE(CString * pcsName);
+	void RETR(CString * pcsName);
 };
