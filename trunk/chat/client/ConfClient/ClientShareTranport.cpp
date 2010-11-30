@@ -64,7 +64,7 @@ int CClientShareTranport::Run()
 		if(file.Open(m_PathFile,CFile::modeCreate | CFile ::modeWrite,NULL))
 		{
 			LONG64 leng = 0;
-			recv(m_Socket,(char*)&leng,sizeof(LONG64),0);
+			int tmpLg = recv(m_Socket,(char*)&leng,sizeof(LONG64),0);
 			LONG64 count = 0;
 			char buffer[BUFFER_LEN];
 			file.Seek(0, CFile::begin);
