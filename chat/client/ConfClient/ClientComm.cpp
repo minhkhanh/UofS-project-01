@@ -67,10 +67,10 @@ int ClientComm::SendPublicUploadReq(CString *cstrFileName)
 	return this->Send(cstrMess.GetBuffer());
 }
 
-int ClientComm::SendPrivFileOffer( CString *cstrRemoteUser, CString *cstrFileName )
+int ClientComm::SendPrivFileOffer( CString *cstrRemoteUser, CString *cstrFileName, CString * cstrFileSize )
 {
-	TCHAR *arrStr[] = {MessProcessor::MC_PRIVATE_FILE_OFFER, cstrLocalUsername.GetBuffer(), cstrRemoteUser->GetBuffer(), cstrFileName->GetBuffer()};
-	CString cstrMess = MessProcessor::JoinMess(arrStr, 4);
+	TCHAR *arrStr[] = {MessProcessor::MC_PRIVATE_FILE_OFFER, cstrLocalUsername.GetBuffer(), cstrRemoteUser->GetBuffer(), cstrFileSize->GetBuffer(), cstrFileName->GetBuffer()};
+	CString cstrMess = MessProcessor::JoinMess(arrStr, 5);
 
 	return this->Send(cstrMess.GetBuffer());
 }

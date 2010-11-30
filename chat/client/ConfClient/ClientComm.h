@@ -40,7 +40,7 @@ public:
 	int SendPublicUploadReq(CString *cstrFileName);
 
 	// client gui de nghi share file private
-	int SendPrivFileOffer(CString *cstrRemoteUser, CString *cstrFileName);
+	int SendPrivFileOffer(CString *cstrRemoteUser, CString *cstrFileName, CString * cstrFileSize);
 
 	// client chap nhan nhan file private share
 	int SendPrivFileAccept(CString *cstrReciever, CString *cstrFileName);

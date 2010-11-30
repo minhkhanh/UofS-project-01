@@ -35,7 +35,7 @@ public:
 	afx_msg void OnClicked_BtnSend();
 
 	void ProcessPrivFileOffer(CString *cstrFileName);
-	CString ProcessPrivFileDownload(CString cstrMessage);
+	CString ProcessPrivFileDownload(CString cstrMessage, CString cstrFileName);
 
 private:
 	//int m_iDx;
