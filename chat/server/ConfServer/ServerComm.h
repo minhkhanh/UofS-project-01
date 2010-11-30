@@ -52,7 +52,7 @@ public:
 	int SendDownloadOffer(CString *cstrFileSize, CString *cstrPort, CString *cstrFileName);
 
 	// client gui de nghi share file private
-	int SendPrivateFileOffer(CString *cstrSender, CString *cstrFileName);
+	int SendPrivateFileOffer(CString *cstrSender, CString *cstrMessContent);
 
 	int SendPrivFileAccept(CString *cstrSender, CString *cstrServerPort);
 
