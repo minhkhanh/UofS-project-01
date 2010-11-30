@@ -183,6 +183,8 @@ LRESULT CServerConfDlg::SockMsg( WPARAM wParam, LPARAM lParam )
 				recv(wParam, (char*)strBuff, m_iBuffLength*sizeof(TCHAR), 0);
 
 				cstrMess = strBuff;
+				delete[] strBuff;
+
 				cstrMess.Insert(m_iBuffLength, L'\0');
 
 				this->ProcessMessage(wParam, &cstrMess);

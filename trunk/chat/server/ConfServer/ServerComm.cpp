@@ -111,9 +111,9 @@ int ServerComm::SendDownloadOffer( CString *cstrFileSize, CString *cstrPort, CSt
 	return this->Send(cstrMess.GetBuffer());
 }
 
-int ServerComm::SendPrivateFileOffer( CString *cstrSender, CString *cstrFileName )
+int ServerComm::SendPrivateFileOffer( CString *cstrSender, CString *cstrMessContent )
 {
-	TCHAR *arrStr[] = {MessProcessor::MC_PRIVATE_FILE_OFFER, cstrSender->GetBuffer(), cstrFileName->GetBuffer()};
+	TCHAR *arrStr[] = {MessProcessor::MC_PRIVATE_FILE_OFFER, cstrSender->GetBuffer(), cstrMessContent->GetBuffer()};
 	CString cstrMess = MessProcessor::JoinMess(arrStr, 3);
 
 	return this->Send(cstrMess.GetBuffer());
