@@ -5,6 +5,7 @@ MySock::MySock(void)
 {
 	m_sock = INVALID_SOCKET;
 	m_bIsConnecting = false;
+	m_eMode = FTPMode::None;
 }
 
 MySock::~MySock(void)
@@ -30,6 +31,8 @@ int MySock::CloseSocket()
 
 int MySock::CreateSock()
 {
+	m_bIsConnecting = false;
+
 	int iErr = CloseSocket();
 	if (iErr != 0)
 		return iErr;
@@ -37,12 +40,12 @@ int MySock::CreateSock()
 	m_sock = socket(AF_INET, SOCK_STREAM, 0);
 	if (m_sock == INVALID_SOCKET)
 	{
-		m_bIsConnecting = false;
+		
 		AfxMessageBox(_T("MySock::CreateSock() fail!"));
 		return WSAGetLastError();
 	}
 
-	m_bIsConnecting = true;
+	//m_bIsConnecting = true;
 
 	return 0;
 }
@@ -71,6 +74,7 @@ int MySock::Connect( DWORD dwIPAddr, int iPort )
 	}
 
 	m_bIsConnecting = true;
+	m_eMode = FTPMode::Passive;
 	return 0;
 }
 
@@ -82,13 +86,20 @@ int MySock::Connect(char* sIP, int iPort )
 	addrServer.sin_addr.s_addr = inet_addr(sIP);
 
 	if (addrServer.sin_addr.s_addr == INADDR_NONE)
+	{
+		m_bIsConnecting = false;
 		return -1;
+	}
 
 	if (connect(m_sock, (struct sockaddr*)&addrServer, sizeof(addrServer))== SOCKET_ERROR)
 	{
+		m_bIsConnecting = false;
 		AfxMessageBox(_T("MySock::Connect() fail!"));
 		return WSAGetLastError();
 	}
+
+	m_bIsConnecting = true;
+	m_eMode = FTPMode::Passive;
 
 	return 0;
 }
@@ -97,33 +108,6 @@ int MySock::SetSelectMode( HWND hWnd, int iHandler, int iFD )
 	if (WSAAsyncSelect(m_sock, hWnd, iHandler, iFD) == SOCKET_ERROR)
 	{
 		AfxMessageBox(_T("MySock::SetSelectMode() fail!"));
-		return WSAGetLastError();
-	}
-
-	return 0;
-}
-
-int MySock::Bind()
-{
-	sockaddr_in addrServer;
-	addrServer.sin_family = AF_INET;
-	addrServer.sin_port = htons(MyTools::DATAPORT);
-	addrServer.sin_addr.s_addr = htonl(INADDR_ANY);
-
-	if (bind(m_sock, (SOCKADDR *)&addrServer, sizeof(addrServer)) == SOCKET_ERROR)
-	{
-		AfxMessageBox(_T("MySock::Bind() error"));
-		return WSAGetLastError();
-	}
-
-	return 0;
-}
-
-int MySock::Listen( int iBklg )
-{
-	if (listen(m_sock, iBklg) == SOCKET_ERROR)
-	{
-		AfxMessageBox(_T("MySock::Listen() error"));
 		return WSAGetLastError();
 	}
 
