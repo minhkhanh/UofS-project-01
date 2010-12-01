@@ -152,6 +152,8 @@ private:
 
 	CString m_csServIPnPort;
 
+	bool m_bSTORReady;
+
 private:
 	CIPAddressCtrl m_ipaddrServer;
 	CEdit m_ebMessage;
