@@ -455,6 +455,11 @@ void Cftp_clientDlg::HandleLIST()
 		m_lvServer.SetItemText(iItem, 3, csDate);
 		
 		csLine = m_csDataBuff.Tokenize(_T("\r\n"), iStart);
+
+		csTitle.Empty();
+		csType.Empty();
+		csSize.Empty();
+		csDate.Empty();
 	}
 
 	//CloseConnections();
@@ -846,7 +851,7 @@ void Cftp_clientDlg::Handle150()
 		int iPort;
 		MyTools::GetCmdIPnPort(&m_csServIPnPort, &csIP, &iPort);
 
-		if (m_tcType == _T('A'))
+		if (m_tcType == _T('A'))// || (m_tcType == _T('I') && m_csTodoCmd.CompareNoCase(_T("retr")) != 0))
 		{
 			if (ConnectSocket(m_sockData, &csIP, iPort) != 0)
 				return;
@@ -863,9 +868,10 @@ void Cftp_clientDlg::Handle150()
 
 	if (m_csTodoCmd.CompareNoCase(_T("stor")) == 0)// && m_bSTORReady == true)
 	{
-		//AcceptServer();
+		if (m_eFtpMode == FTPMode::Passive)
+		{
 
-		//HandleSTOR();
+		}
 	}
 	else if (m_csLastCmd.CompareNoCase(_T("retr")) == 0 && m_csTodoCmd.CompareNoCase(_T("retr")) == 0)
 	{
@@ -1230,7 +1236,7 @@ void Cftp_clientDlg::HandleNameList()
 	int iStart = 0;
 	CString csLine = m_csDataBuff.Tokenize(_T("\r\n"), iStart);
 	while (csLine.IsEmpty() == false)
-	{		
+	{
 		MyTools::ExtractFileDetails(&csLine, &csTitle, &csType, &csSize, &csDate);
 
 		if (csTitle != _T('.') && csTitle != _T("..") && csTitle != (_T("")))
@@ -1245,6 +1251,11 @@ void Cftp_clientDlg::HandleNameList()
 			}
 
 		csLine = m_csDataBuff.Tokenize(_T("\r\n"), iStart);
+
+		csTitle.Empty();
+		csType.Empty();
+		csSize.Empty();
+		csDate.Empty();
 	}
 }
 
