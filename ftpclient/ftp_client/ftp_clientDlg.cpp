@@ -5,6 +5,7 @@
 #include "stdafx.h"
 #include "ftp_client.h"
 #include "ftp_clientDlg.h"
+#include "ServerDownloadThread.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -198,7 +199,9 @@ HCURSOR Cftp_clientDlg::OnQueryDragIcon()
 void Cftp_clientDlg::OnClicked_BtnLog()
 {
 	// TODO: Add your control notification handler code here
-mListView->GoHome();
+	mListView->ShowWindow(SW_SHOW);
+	m_lvClient.ShowWindow(SW_SHOW);
+	mListView->GoHome();
 	if (CheckLogging() == false)
 		return;
 
@@ -245,6 +248,8 @@ void Cftp_clientDlg::ProcessCmd()
 		Handle257();
 	else if (csCode.CompareNoCase(_T("550")) == 0)			//
 		Handle550();
+	else if (csCode.CompareNoCase(_T("425")) == 0)			//
+		Handle425();
 
 	m_csCmdBuff.Empty();
 }
@@ -356,10 +361,10 @@ void Cftp_clientDlg::PrintMessage( CString * pcsMess )
 	if (m_ebMessage.GetLineCount() % 50 == 0)
 	{
 		m_ebMessage.SetSel(0, -1);
-		m_ebMessage.Clear();
 	}
+	else
+		m_ebMessage.SetSel(-1, -1);
 
-	m_ebMessage.SetSel(-1, -1);
 	m_ebMessage.ReplaceSel(*pcsMess);
 }
 
@@ -420,7 +425,7 @@ void Cftp_clientDlg::InitStuff()
 	m_bControlSwitch = true;
 	m_ebUser.SetWindowText(_T("s"));
 	m_ebPassword.SetWindowText(_T("s"));
-	m_ipaddrServer.SetWindowText(_T("192.168.111.111"));
+	m_ipaddrServer.SetWindowText(_T("127.0.0.1"));
 	m_optActive.SetCheck(BST_CHECKED);
 	m_bIsConnecting = false;
 	m_tcType = _T('A');
@@ -436,28 +441,27 @@ void Cftp_clientDlg::Handle230()
 // Entering Passive Mode (h1,h2,h3,h4,p1,p2).
 void Cftp_clientDlg::Handle227()
 {
-	MyTools::PeelMessage(&m_csCmdBuff, 1, _T("("));
-	//m_csPassiveIPnPort = MyTools::PeelMessage(&m_csCmdBuff, 1, _T(")"));
-	CString csIPnPort = m_csPassiveIPnPort = MyTools::PeelMessage(&m_csCmdBuff, 1, _T(")"));
+	m_eFtpMode = FTPMode::Passive;
 
-	CString csIP;
-	int iPort;
-	MyTools::GetCmdIPnPort(&csIPnPort, &csIP, &iPort);
+	MyTools::PeelMessage(&m_csCmdBuff, 1, _T("("));
+	CString csIPnPort = m_csServIPnPort = MyTools::PeelMessage(&m_csCmdBuff, 1, _T(")"));
+
+	//CString csIP;
+	//int iPort;
+	//MyTools::GetCmdIPnPort(&csIPnPort, &csIP, &iPort);
 
 	if (CreateSocket(m_sockData) != 0)
 		return;
 
-	if (ConnectSocket(m_sockData, &csIP, iPort) != 0)
-		return;
+	//else if (m_tcType == _T('I'))
+	//	iHandler = WM_SOCKET_DATA_BINARY;
 
-	int iHandler = 0;
-	if (m_tcType == _T('A'))
-		iHandler = WM_SOCKET_DATA;
-	else if (m_tcType == _T('I'))
-		iHandler = WM_SOCKET_DATA_BINARY;
+	//if (ConnectSocket(m_sockData, &csIP, iPort) != 0)
+	//	return;
 
-	if (SetSelectMode(m_sockData, iHandler, FD_READ | FD_CLOSE) != 0)
-		return;
+	//if (m_tcType == _T('A'))
+	//	if (SetSelectMode(m_sockData, WM_SOCKET_DATA, FD_READ | FD_CLOSE) != 0)
+	//		return;
 
 	OnFtpModeResponse();
 }
@@ -572,31 +576,15 @@ void Cftp_clientDlg::Handle200()
 {
 	if (m_csLastCmd.CompareNoCase(_T("port")) == 0)		// PORT successfully
 	{
+		m_eFtpMode = FTPMode::Active;
 		OnFtpModeResponse();
 	}
 	else if (m_csLastCmd.CompareNoCase(_T("type")) == 0)	// TYPE set to ...
 	{
 		if (m_tcType >= 97)
-			m_tcType -= 32;		// get upper case
+			m_tcType -= 32;		// !!!important: get upper case
 
 		SetFtpMode();
-
-		//if (m_csTodoCmd.CompareNoCase(_T("retr")) == 0)
-		//{
-		//	SetFtpMode();
-		//}
-		//else if (m_csTodoCmd.CompareNoCase(_T("list")) == 0)
-		//{
-		//	SetFtpMode();
-		//}
-		//else if (m_csTodoCmd.CompareNoCase(_T("dele")) == 0)
-		//{
-		//	SetFtpMode();
-		//}
-		//else if (m_csTodoCmd.CompareNoCase(_T("stor")) == 0)
-		//{
-		//	SetFtpMode();
-		//}
 	}
 }
 
@@ -784,11 +772,16 @@ void Cftp_clientDlg::Handle257()
 			{
 				TYPE('i');
 			}
+			else
+				BackToWrkDir();
 		}
 	}
 }
 void Cftp_clientDlg::OnClicked_BtnUpload()
 {
+	DemoUpload();
+	return;
+
 	FreeContainers();
 
 	POSITION pos = m_lvClient.GetFirstSelectedItemPosition();
@@ -798,31 +791,25 @@ void Cftp_clientDlg::OnClicked_BtnUpload()
 		CString csCurrPath = sCurrPath;
 		delete[] sCurrPath;
 
-		//CString csCurrPath = _T("E:\\09-10");
-
 		int idx = m_lvClient.GetNextSelectedItem(pos);
 		String* lpData = (String*)m_lvClient.GetItemData(idx);
 
 		CString csName = m_lvClient.GetItemText(idx, 0);
-		//CString csName;
 
-		int iPos = -1;
-		m_iSavedDirLevel = 0;
-		while ((iPos = csCurrPath.Find(_T('\\'), iPos+1)) != -1)
-		{
-			++m_iSavedDirLevel;
-		}
+		CalcSavedDirLevel(&csCurrPath, _T('\\'));
 
 		m_csTodoCmd = _T("stor");
+		m_csSavedDir = m_csWorkingDir;
 
-		if (lpData->GetFlags() == 0)	// upload file
+		int iFlag = lpData->GetFlags();
+		if ( iFlag != IS_FOLDER && iFlag != IS_DISK)	// upload file
 		{
 			csName = csName + CString(_T('.')) + m_lvClient.GetItemText(idx, 1);
 			m_qFiles.push(csCurrPath + csName);
 
 			TYPE(_T('i'));
 		}
-		else if (lpData->GetFlags() == IS_FOLDER)	// upload file
+		else if (iFlag == IS_FOLDER)	// upload file
 		{
 			m_stkFolders.push(csCurrPath + csName);
 
@@ -879,22 +866,45 @@ void Cftp_clientDlg::OnLvnItemActivateListClient(NMHDR *pNMHDR, LRESULT *pResult
 	*pResult = 0;
 }
 
-void Cftp_clientDlg::doLIST( CString * pcsPath )
-{
-	//m_cmdsock.LIST(pcsPath);
-	//m_cmdsock.ToDoCmd().Empty();
-}
-
 // File status okay; about to open data connection.
 void Cftp_clientDlg::Handle150()
 {
+	if (m_eFtpMode == FTPMode::Passive)
+	{
+		CString csIP;
+		int iPort;
+		MyTools::GetCmdIPnPort(&m_csServIPnPort, &csIP, &iPort);
+
+		if (m_tcType == _T('A'))
+		{
+			if (ConnectSocket(m_sockData, &csIP, iPort) != 0)
+				return;
+
+			if (SetSelectMode(m_sockData, WM_SOCKET_DATA, FD_READ | FD_CLOSE) != 0)
+				return;
+		}
+	}
+
 	if (m_csTodoCmd.CompareNoCase(_T("stor")) == 0)
 	{
 		if (m_eFtpMode == FTPMode::Passive)
 		{
 			HandleSTOR();
-			//closesocket(m_sockData);
 		}
+	}
+	else if (m_csLastCmd.CompareNoCase(_T("retr")) == 0 && m_csTodoCmd.CompareNoCase(_T("retr")) == 0)
+	{
+		if (m_qFiles.size() != 0)
+		{
+			CString csFile = m_qFiles.front();
+			m_qFiles.pop();
+			NetPathToHost(&csFile);
+
+			SOCKET sock = m_eFtpMode == FTPMode::Active ? m_sockActiveClient : m_sockData;
+			CServerDownloadThread * t = CServerDownloadThread::CreateCServerDownloadThread(csFile, sock, m_csServIPnPort,m_eFtpMode);
+		}
+		else
+			BackToWrkDir();
 	}
 }
 
@@ -951,41 +961,17 @@ void Cftp_clientDlg::OnClicked_BtnDownload()
 		CString csPath;
 		csPath = m_csWorkingDir == _T('/') ? m_csWorkingDir : m_csWorkingDir + CString(_T('/'));
 
-		int iPos = -1;
-		m_iSavedDirLevel = 0;
-		while ((iPos = csPath.Find(_T('/'), iPos+1)) != -1)
-		{
-			++m_iSavedDirLevel;
-		}
+		CalcSavedDirLevel(&csPath, _T('/'));
 
 		m_csSavedDir = m_csWorkingDir;
 
 		if (csSize == _T("<DIR>"))
 		{
-			//////////////////////////////////////////////////////////////////////////
-			//if (_tmkdir(csName.GetBuffer()) != 0)
-			//{
-			//	AfxMessageBox(_T("Folder creating failed!"));
-			//	return;
-			//}
-			//int iPos = -1;
-			//m_iDownDirLevel = 0;
-			//while ((iPos = m_csWorkingDir->Find(_T('/'), iPos+1)) != -1)
-			//{
-			//	++m_iDownDirLevel;
-			//}
-			//m_csSavedDir = m_csWorkingDir + CString(_T('/')) + csName;
-			//CWD(&csName);
-			//////////////////////////////////////////////////////////////////////////
-
 			if (MkDirAndCWD(&(csPath + csName)) != 0)
 				return;
 		}
 		else
 		{
-			//if (m_csWorkingDir != _T('/'))
-				//++m_iSavedDirLevel;
-
 			csName = csPath + csName + CString(_T('.')) + m_lvServer.GetItemText(idx, 1);
 			m_qFiles.push(csName);
 			TYPE(_T('i'));
@@ -1030,44 +1016,6 @@ void Cftp_clientDlg::OnBnClickedButton7()
 
 void Cftp_clientDlg::HandleRETR()
 {
-	CStdioFile file;
-	CString csTmpNetFilePath = m_qFiles.front();
-	m_qFiles.pop();
-
-	GetRETRDirRoot(&csTmpNetFilePath);
-	NetPathToHost(&csTmpNetFilePath);
-
-	if (file.Open(csTmpNetFilePath, CStdioFile::modeCreate | CStdioFile::modeWrite | CStdioFile::typeBinary) == 0)
-	{
-		AfxMessageBox(_T("File opening failed."));
-		BackToWrkDir();
-		return;
-	}
-	
-	for (int i = 0; i < m_vBinBuff.size(); ++i)
-		file.Write(m_vBinBuff[i], m_vBinBuffLen[i]);
-
-	file.Close();
-	//CloseActiveSocks();
-	
-	//////////////////////////////////////////////////////////////////////////
-	//if (m_vFileName.size() != 0)
-	//{
-	//	SetFtpMode();		// khong can set type 'i' nua vi dang download
-	//}
-	//else if (m_vFolderPath.size() != 0)
-	//{
-	//	CString csNetAbsPath = m_vFolderPath[m_vFolderPath.size()-1];
-	//	m_vFolderPath.pop_back();
-	//	if (MkDirAndCWD(&csNetAbsPath) != 0)
-	//		return;
-	//}
-	//else
-	//{
-	//	FinishRETR();
-	//}
-	//////////////////////////////////////////////////////////////////////////
-
 	if (m_qFiles.size() != 0)
 	{
 		SetFtpMode();
@@ -1123,14 +1071,16 @@ void Cftp_clientDlg::PORT()
 	if (ListenOnActiveSock() != 0)
 		return;
 
-	int iHandler = 0;
+	//int iHandler = 0;
 	if (m_tcType == _T('A'))
-		iHandler = WM_SOCKET_DATA;
-	else if (m_tcType == _T('I'))
-		iHandler = WM_SOCKET_DATA_BINARY;
+	{
+		//iHandler = WM_SOCKET_DATA;
+		if (SetSelectMode(m_sockActiveClient, WM_SOCKET_DATA, FD_READ | FD_ACCEPT | FD_CLOSE) != 0)
+			return;
+	}
 
-	if (SetSelectMode(m_sockActiveClient, iHandler, FD_READ | FD_ACCEPT | FD_CLOSE) != 0)
-		return;
+	//else if (m_tcType == _T('I'))
+	//	iHandler = WM_SOCKET_DATA_BINARY;
 
 	CString csIP;
 	MyTools::GetSockIPnPort(m_sockCmd, &csIP, NULL);
@@ -1158,27 +1108,6 @@ int Cftp_clientDlg::CreateSocket( SOCKET& sock )
 	if ((sock = socket(AF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET)
 	{
 		AfxMessageBox(_T("CreateSocket() failed!"));
-		return WSAGetLastError();
-	}
-
-	return 0;
-}
-
-int Cftp_clientDlg::ConnectFTPCmd()
-{
-	DWORD dwServIpAddr;
-	m_ipaddrServer.GetAddress(dwServIpAddr);
-
-	IN_ADDR ia;
-	ia.S_un.S_addr = ntohl(dwServIpAddr);
-	sockaddr_in addrServer;
-	addrServer.sin_family = AF_INET;
-	addrServer.sin_port = htons(FTP_SERVER_CMD_PORT);
-	addrServer.sin_addr.s_addr = inet_addr(inet_ntoa(ia));
-
-	if (connect(m_sockCmd, (sockaddr*)&addrServer, sizeof(addrServer)) == SOCKET_ERROR)
-	{
-		AfxMessageBox(_T("command socket connect failed!"));
 		return WSAGetLastError();
 	}
 
@@ -1254,13 +1183,11 @@ int Cftp_clientDlg::SetFtpMode()
 {
 	if (m_optPassive.GetCheck() == BST_CHECKED)
 	{
-		m_eFtpMode = FTPMode::Passive;
 		PASV();
 	}
 	else
 	{
-		m_eFtpMode = FTPMode::Active;
-		PORT();		
+		PORT();
 	}
 
 	return 0;
@@ -1290,8 +1217,8 @@ void Cftp_clientDlg::LIST( CString* pcsDir /* = NULL */ )
 
 int Cftp_clientDlg::CloseActiveSocks()
 {
-	closesocket(m_sockServer);
-	closesocket(m_sockActiveClient);
+	//closesocket(m_sockServer);
+	//closesocket(m_sockActiveClient);
 
 	return 0;
 }
@@ -1330,54 +1257,19 @@ void Cftp_clientDlg::HandleNameList()
 	{		
 		MyTools::ExtractFileDetails(&csLine, &csTitle, &csType, &csSize, &csDate);
 
-		if (csSize == _T("<DIR>"))
-		{
-			if (csTitle != _T('.') && csTitle != _T(".."))
+		if (csTitle != _T('.') && csTitle != _T("..") && csTitle != (_T("")))
+			if (csSize == _T("<DIR>"))
+			{
+
 				m_qFolders.push(m_csWorkingDir + CString(_T('/')) + csTitle);
-		}
-		else
-		{
-			m_qFiles.push(m_csWorkingDir + CString(_T("/")) + csTitle + CString(_T('.')) + csType);
-		}
+			}
+			else
+			{
+				m_qFiles.push(m_csWorkingDir + CString(_T("/")) + csTitle + CString(_T('.')) + csType);
+			}
 
 		csLine = m_csDataBuff.Tokenize(_T("\r\n"), iStart);
 	}
-
-	//////////////////////////////////////////////////////////////////////////
-	//if (m_vFileName.size() != 0)
-	//	TYPE(_T('i'));	// to begin download
-	//else if (m_vFolderPath.size() != 0)
-	//{
-	//	CString csNetAbsPath = m_vFolderPath[m_vFolderPath.size()-1];
-	//	m_vFolderPath.pop_back();
-	//	if (MkDirAndCWD(*csNetAbsPath) != 0)
-	//		return;
-	//}
-	//else
-	//{
-	//	FinishRETR();	// end RETR
-	//}
-	//////////////////////////////////////////////////////////////////////////
-
-	//if (m_qFolders.size() != 0)		// tao san het cac thu muc va thu muc con
-	//{
-	//	CString csNetAbsPath = m_qFolders.front();
-	//	m_qFolders.pop();
-
-	//	if (MkDirAndCWD(&csNetAbsPath) != 0)
-	//	{
-	//		//AfxMessageBox(_T("Mk"))
-	//		return;
-	//	}
-	//}
-	//else if (m_qFiles.size() != 0)
-	//{
-	//	TYPE(_T('i'));		// bat dau download file
-	//}
-	//else
-	//{
-	//	EndRETR();
-	//}
 }
 
 void Cftp_clientDlg::RETR( CString * pcsName )
@@ -1439,17 +1331,6 @@ int Cftp_clientDlg::MkDirAndCWD( CString * pcsNetDir )
 {
 	CString csHostDir = *pcsNetDir;
 
-	int i = 0;
-	int iCount = 0;
-	for ( ; i < csHostDir.GetLength(); ++i)
-		if (csHostDir[i] == _T('/'))
-		{
-			++iCount;
-			if (iCount == m_iSavedDirLevel)
-				break;
-		}
-	csHostDir = csHostDir.Right(csHostDir.GetLength() - i);
-
 	NetPathToHost(&csHostDir);
 
 	if (_tmkdir(csHostDir.GetBuffer()) != 0)
@@ -1466,13 +1347,28 @@ int Cftp_clientDlg::MkDirAndCWD( CString * pcsNetDir )
 
 void Cftp_clientDlg::NetPathToHost( CString * pcsPath )
 {
-	TCHAR* sCurrPath = m_lvClient.GetSelectPath();
+	int i = 0;
+	int iCount = 0;
+	for ( ; i < pcsPath->GetLength(); ++i)
+		if ((*pcsPath)[i] == _T('/'))
+		{
+			++iCount;
+			if (iCount == m_iSavedDirLevel)
+				break;
+		}
+	*pcsPath = pcsPath->Right(pcsPath->GetLength() - i);
 
-	if (*(pcsPath)[0] == _T('/'))
-		pcsPath->Delete(0,1);		// delete because current path has one '\' at end
+	TCHAR* sCurrPath = m_lvClient.GetSelectPath();		// luon co '\' o cuoi
 
-	pcsPath->Replace(_T("/"), _T("\\\\"));
-	pcsPath->Insert(0, sCurrPath);
+	if ((*pcsPath)[0] == _T('/'))
+	{
+		pcsPath->Delete(0,1);		// delete because current path has one '\' at end	
+	}
+
+	pcsPath->Replace(_T("/"), _T("\\\\"));	
+	if (sCurrPath != NULL)
+		pcsPath->Insert(0, _T('\\'));
+	pcsPath->Insert(0, sCurrPath);	
 
 	delete sCurrPath;
 }
@@ -1491,20 +1387,20 @@ void Cftp_clientDlg::NetPathToHost( CString * pcsPath )
 //	return iCount;
 //}
 
-void Cftp_clientDlg::GetRETRDirRoot( CString * pcsDir )
-{
-	int i = 0;
-	int iCount = 0;
-	for ( ; i < pcsDir->GetLength(); ++i)
-		if ((*pcsDir)[i] == _T('/'))
-		{
-			++iCount;
-			if (iCount == m_iSavedDirLevel)
-				break;
-		}
-
-	*pcsDir = pcsDir->Right(pcsDir->GetLength() - i);
-}
+//void Cftp_clientDlg::GetRETRDirRoot( CString * pcsDir )
+//{
+//	int i = 0;
+//	int iCount = 0;
+//	for ( ; i < pcsDir->GetLength(); ++i)
+//		if ((*pcsDir)[i] == _T('/'))
+//		{
+//			++iCount;
+//			if (iCount == m_iSavedDirLevel)
+//				break;
+//		}
+//
+//	*pcsDir = pcsDir->Right(pcsDir->GetLength() - i);
+//}
 
 void Cftp_clientDlg::OnFtpModeResponse()
 {
@@ -1518,7 +1414,7 @@ void Cftp_clientDlg::OnFtpModeResponse()
 			LIST();
 		else if (m_tcType == _T('I'))
 		{
-			if (m_qFiles.size() != 0)
+			if (m_qFiles.size() != 0)		// da tao het thu muc, bat dau download file
 			{
 				RETR(&m_qFiles.front());
 			}
@@ -1583,9 +1479,9 @@ int Cftp_clientDlg::ConnectSocket( SOCKET& sock, CString * pcsIP, int iPort )
 
 void Cftp_clientDlg::CloseDataConnections()
 {
-	closesocket(m_sockActiveClient);
-	closesocket(m_sockServer);
-	closesocket(m_sockData);
+	//closesocket(m_sockActiveClient);
+	//closesocket(m_sockServer);
+	//closesocket(m_sockData);
 }
 
 void Cftp_clientDlg::PopFileAndDELE()
@@ -1671,8 +1567,8 @@ void Cftp_clientDlg::HandleSTOR()
 	CString csFile = m_qFiles.front();
 	m_qFiles.pop();
 
-	CStdioFile file;
-	if (file.Open(csFile, CStdioFile::modeRead | CStdioFile::typeBinary) == 0)
+	CFile file;
+	if (file.Open(csFile, CFile::modeRead) == 0)
 		return;
 
 	ULONGLONG ullFSize = file.GetLength();
@@ -1680,25 +1576,31 @@ void Cftp_clientDlg::HandleSTOR()
 
 	SOCKET sock = m_eFtpMode == FTPMode::Active ? m_sockServer : m_sockData;
 
-	char sBuff[DATABUFF_MAXLEN];
 	while (ullCurPos < ullFSize)
 	{
-		UINT uLen = file.Read(sBuff, DATABUFF_MAXLEN);
-		send(sock, sBuff, uLen, 0);
-		ullCurPos += uLen;
+		char sBuff[DATABUFF_MAXLEN] = {0};
+		UINT len = file.Read(sBuff, DATABUFF_MAXLEN);
+		int i = 0;
+		while (i < len)
+		{
+			int j = send(sock, sBuff + i, len - i, 0);
+			if (j <= 0)
+			{
+				break;
+			}
+			i += j;
+		}
+		ullCurPos += len;
 	}
 
-	file.Close();
-	
-	if (m_eFtpMode == FTPMode::Active)
-		CloseActiveSocks();
-	else if (m_eFtpMode == FTPMode::Passive)
-		closesocket(m_sockData);
+	file.Close();	
+	//closesocket(sock);
 }
 
-void Cftp_clientDlg::Handle451()
+void Cftp_clientDlg::Handle425()
 {
-
+	AfxMessageBox(_T("Server cannot open data connection."));
+	BackToWrkDir();
 }
 
 void Cftp_clientDlg::FreeContainers()
@@ -1710,4 +1612,122 @@ void Cftp_clientDlg::FreeContainers()
 	while (m_stkFolders.size() != 0)
 		m_qFolders.pop();
 	
+}
+
+void Cftp_clientDlg::DemoUpload()
+{
+	FreeContainers();
+
+	CString csCurrPath = _T("E:\\09-10");
+	//CString csName;
+
+	CalcSavedDirLevel(&csCurrPath, _T('\\'));
+
+	m_csTodoCmd = _T("stor");
+
+	//if (lpData->GetFlags() == 0)	// upload file
+	//{
+	//	csName = csName + CString(_T('.')) + m_lvClient.GetItemText(idx, 1);
+	//	m_qFiles.push(csCurrPath + csName);
+
+	//	TYPE(_T('i'));
+	//}
+	//else if (lpData->GetFlags() == IS_FOLDER)	// upload file
+	{
+		m_stkFolders.push(csCurrPath);
+
+		while (m_stkFolders.size() != 0)
+		{
+			csCurrPath = m_stkFolders.top();
+			m_qFolders.push(csCurrPath);
+			m_stkFolders.pop();
+
+			CString csTmpPath = csCurrPath;
+			csTmpPath += _T("\\*");
+
+			WIN32_FIND_DATA file;
+			HANDLE hFile;
+
+			hFile = FindFirstFile(csTmpPath.GetBuffer(), &file);
+			if (hFile != INVALID_HANDLE_VALUE)					// neu co item con
+				do
+				{
+					if ((_tcscmp(file.cFileName, _T(".")) != 0)
+						&& (_tcscmp(file.cFileName,_T("..")) != 0))		// neu khong phai la 2 thu muc dac biet
+					{
+						CString csPath = csCurrPath;
+						csPath = csPath + CString(_T('\\')) + file.cFileName;
+
+						if ((file.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) == 0)	// neu item khong phai la folder
+							m_qFiles.push(csPath);
+						else
+							m_stkFolders.push(csPath);
+					}
+				} while (FindNextFile(hFile, &file) != 0);		// tiep tuc tim file cho den khi nao het
+		}
+
+		CString csFolder = HostPathToNet(m_qFolders.front());
+		m_qFolders.pop();
+		MKD(&csFolder);
+	}
+}
+
+void Cftp_clientDlg::CalcSavedDirLevel( CString * pcsPath, TCHAR tcLevelType )
+{
+	int iPos = -1;
+	m_iSavedDirLevel = 0;
+	while ((iPos = pcsPath->Find(tcLevelType, iPos+1)) != -1)
+	{
+		++m_iSavedDirLevel;
+	}
+}
+
+DWORD WINAPI Cftp_clientDlg::MyThread(LPVOID param)
+{
+	ThreadStruct * a = (ThreadStruct*) param;
+	
+	CFile m_File;
+	if (!m_File.Open(a->f, CFile::modeCreate|CFile::modeWrite))
+	{
+		//ExitThread(0);
+		return 0;
+	}
+
+	SOCKET soc;
+	sockaddr_in sockaddrClient;
+	int iSize = sizeof(sockaddrClient);
+	soc = accept(a->s,(sockaddr*)&sockaddrClient, &iSize);
+	if (soc == INVALID_SOCKET )
+	{
+		int i = WSAGetLastError();
+		closesocket(a->s);
+		m_File.Close();
+		ExitThread(0);
+		//return 0;
+	}
+
+	LONG64 leng = 0;
+	//recv(soc,(char*)&leng,sizeof(LONG64),0);
+	LONG64 count = 0;
+	char buffer[1024];
+	m_File.Seek(0, CFile::begin);
+	while(TRUE)//count < leng)
+	{
+		int len = recv(soc, buffer, 1024,0);
+		if (len==0)
+		{
+			m_File.Close();
+			closesocket(soc);
+			closesocket(a->s);
+			//ExitThread(1);
+			return 1;
+		}
+		m_File.Write(buffer, len);
+		count += len;
+	}
+	m_File.Close();
+	closesocket(soc);
+	closesocket(a->s);
+	//ExitThread(1);
+	return 1;
 }

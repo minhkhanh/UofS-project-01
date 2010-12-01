@@ -191,14 +191,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\CmdSock.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\DataSock.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\DiskManager.cpp"
 				>
 			</File>
@@ -215,15 +207,15 @@
 				>
 			</File>
 			<File
-				RelativePath=".\MySock.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\MyTools.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\NewFolderDlg.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ServerDownloadThread.cpp"
 				>
 			</File>
 			<File
@@ -261,14 +253,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\CmdSock.h"
-				>
-			</File>
-			<File
-				RelativePath=".\DataSock.h"
-				>
-			</File>
-			<File
 				RelativePath=".\DiskManager.h"
 				>
 			</File>
@@ -285,10 +269,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\MySock.h"
-				>
-			</File>
-			<File
 				RelativePath=".\MyTools.h"
 				>
 			</File>
@@ -298,6 +278,10 @@
 			</File>
 			<File
 				RelativePath=".\Resource.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ServerDownloadThread.h"
 				>
 			</File>
 			<File
