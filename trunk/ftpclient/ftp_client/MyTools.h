@@ -9,6 +9,8 @@
 #define CMDBUFF_MAXLEN	512
 #define DATABUFF_MAXLEN	1024
 
+#define MAX_BKLG 5
+
 //#include <tchar.h>
 #include <direct.h>
 #include <vector>

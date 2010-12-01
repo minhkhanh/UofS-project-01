@@ -4,14 +4,20 @@
 
 #pragma once
 #include "afxcmn.h"
-#include "CmdSock.h"
-#include "DataSock.h"
 #include "MyTools.h"
 #include "afxwin.h"
 #include "MyListCtrl.h"
 #include "AddressBar.h"
 #include "Resource.h"
 #include "NewFolderDlg.h"
+
+//static UINT MyThread(LPVOID param);
+
+struct ThreadStruct
+{
+	SOCKET s;
+	CString f;
+};
 
 
 // Cftp_clientDlg dialog
@@ -44,9 +50,6 @@ public:
 	LRESULT DataSockMsg(WPARAM wParam, LPARAM lParam);
 	LRESULT DataSockMsgBinary(WPARAM wParam, LPARAM lParam);
 
-	void doLIST(CString * pcsPath = NULL);
-	//void do
-
 	void ProcessCmd();
 	void Handle230();
 	void Handle227();
@@ -58,7 +61,7 @@ public:
 	void Handle257();
 	void Handle150();
 	void Handle550();
-	void Handle451();
+	void Handle425();
 
 	void ProcessData();
 	void HandleLIST();
@@ -83,17 +86,15 @@ public:
 	void NetPathToHost(CString * pcsPath);
 	CString HostPathToNet(CString csHostDir);
 
-	int MkDirAndCWD(CString * pcsNetDir);
-	//int MKDAndCWD(CString * pcsDir);
+	void CalcSavedDirLevel(CString * pcsPath, TCHAR tcLevelType);
 
-	void GetRETRDirRoot(CString * pcsDir);
+	int MkDirAndCWD(CString * pcsNetDir);
 
 	void BackToWrkDir();
 
 	int CreateSocket(SOCKET& sock);
 	int ConnectSocket(SOCKET& sock, DWORD dwIP, int iPort);
 	int ConnectSocket(SOCKET& sock, CString * pcsIP, int iPort);
-	int ConnectFTPCmd();
 	int BindActiveSock();
 	int ListenOnActiveSock();
 	int SetSelectMode(SOCKET& sock, int iHandler, int iEvents);
@@ -102,6 +103,8 @@ public:
 	void CloseDataConnections();
 
 	int SetFtpMode();
+
+	static DWORD WINAPI MyThread(LPVOID param);
 
 	void PopFileAndDELE();
 	void PopFolderAndRMD();
@@ -123,9 +126,9 @@ public:
 
 private:
 	SOCKET m_sockCmd;		// for port 21
-	SOCKET m_sockActiveClient;
-	SOCKET m_sockServer;
-	SOCKET m_sockData;
+	SOCKET m_sockActiveClient;		// lang nghe trong mode active
+	SOCKET m_sockServer;	// giao tiep data voi server trong mode active
+	SOCKET m_sockData;		// giao tiep data voi server trong mode passive
 
 	CString m_csLastCmd;
 	CString m_csTodoCmd;
@@ -136,8 +139,6 @@ private:
 	vector<char*> m_vBinBuff;
 	vector<int> m_vBinBuffLen;
 
-	//vector<CString> m_vFileName;
-	//vector<CString> m_vFolderPath;
 	queue<CString> m_qFiles;
 	queue<CString> m_qFolders;
 	stack<CString> m_stkFolders;
@@ -149,22 +150,9 @@ private:
 	
 	FTPMode m_eFtpMode;
 
-	CString m_csPassiveIPnPort;
+	CString m_csServIPnPort;
 
 private:
-	//int m_iBuffLen;
-	//CString m_csRemotePath;
-
-	
-
-	//SOCKET m_sockTmp;
-	//CString m_csDataBuff2;
-	//CmdSock m_cmdsock;
-	//DataSock m_datasock;
-	//DataSock m_binaryDataSock;
-	//SOCKET m_sockActServer;
-	//MySock m_sockActClient;
-
 	CIPAddressCtrl m_ipaddrServer;
 	CEdit m_ebMessage;
 	// list view file ben phia client
@@ -193,7 +181,10 @@ public:
 	afx_msg void OnBnClickedRadio1();
 	afx_msg void OnBnClickedRadio2();
 	afx_msg void OnClicked_BtnRefresh();
+
+	void DemoUpload();
 	afx_msg void OnClicked_BtnUpload();
+
 	afx_msg void OnLvnItemActivateListClient(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnClicked_BtnDelete();
 	afx_msg void OnClicked_BtnDownload();
