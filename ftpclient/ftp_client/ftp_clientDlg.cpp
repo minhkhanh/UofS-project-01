@@ -851,7 +851,7 @@ void Cftp_clientDlg::Handle150()
 		int iPort;
 		MyTools::GetCmdIPnPort(&m_csServIPnPort, &csIP, &iPort);
 
-		if (m_tcType == _T('A'))// || (m_tcType == _T('I') && m_csTodoCmd.CompareNoCase(_T("retr")) != 0))
+		if (m_tcType == _T('A') || (m_tcType == _T('I') && m_csTodoCmd.CompareNoCase(_T("retr")) != 0))
 		{
 			if (ConnectSocket(m_sockData, &csIP, iPort) != 0)
 				return;
@@ -870,7 +870,7 @@ void Cftp_clientDlg::Handle150()
 	{
 		if (m_eFtpMode == FTPMode::Passive)
 		{
-
+			HandleSTOR();
 		}
 	}
 	else if (m_csLastCmd.CompareNoCase(_T("retr")) == 0 && m_csTodoCmd.CompareNoCase(_T("retr")) == 0)
