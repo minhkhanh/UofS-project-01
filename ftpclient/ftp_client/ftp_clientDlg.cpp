@@ -272,18 +272,8 @@ LRESULT Cftp_clientDlg::CmdSockMsg(WPARAM wParam, LPARAM lParam)
 			if (iLength > 0)
 			{
 				m_csCmdBuff += CString(sRecvBuff, iLength);
-				//if (iLength == CMDBUFF_MAXLEN && m_csCmdBuff.Right(2) != _T("\r\n"))
-				//	return 0;
+			
 			}
-
-			//int iPos = 0;
-			//CString csMess;
-			//while ((csMess = m_csCmdBuff.Tokenize(_T("\r\n"), iPos)) != _T(""))
-			//{
-			//	csMess += _T("\r\n");
-			//	PrintMessage(&csMess);
-			//	ProcessCmd(&csMess);
-			//}
 
 			PrintMessage(&m_csCmdBuff);
 			ProcessCmd();			
@@ -316,29 +306,8 @@ LRESULT Cftp_clientDlg::DataSockMsg( WPARAM wParam, LPARAM lParam )
 			TCHAR sRecvBuff[DATABUFF_MAXLEN];
 
 			int iLength = recv(wParam, (char*)sRecvBuff, DATABUFF_MAXLEN*sizeof(TCHAR), 0);
-			m_csDataBuff += CString(sRecvBuff, iLength);
-			//CString csMess;
-			//csMess.Format(_T("%d "), m_csDataBuff.GetLength());
-			//PrintMessage(&csMess);
-
-			//if (iLength > 0)
-			//{
-			//	m_csDataBuff += CString(sRecvBuff, iLength);
-			//	if (iLength == DATABUFF_MAXLEN*sizeof(TCHAR))
-			//		//if (m_csDataBuff.Right(2) != _T("\r\n"))
-			//		return 0;
-			//}
-			//else
-			//{
-			//	CString csTmp;
-			//	csTmp.Format(_T("%d"), iLength);
-			//	AfxMessageBox(csTmp);
-			//	return 0;
-			//}
-
-			//ProcessData(&m_csDataBuff);
-			//
-			//m_csDataBuff.Empty();
+			if (iLength > 0)
+				m_csDataBuff += CString(sRecvBuff, iLength);
 		}
 		break;
 	case FD_CLOSE:
@@ -429,6 +398,8 @@ void Cftp_clientDlg::InitStuff()
 	m_optActive.SetCheck(BST_CHECKED);
 	m_bIsConnecting = false;
 	m_tcType = _T('A');
+
+	m_bSTORReady = false;
 }
 
 // User logged in, proceed. [Uni]
@@ -624,8 +595,8 @@ LRESULT Cftp_clientDlg::DataSockMsgBinary( WPARAM wParam, LPARAM lParam )
 
 			if (m_csTodoCmd.CompareNoCase(_T("stor")) == 0)
 			{
+				//m_bSTORReady = true;
 				HandleSTOR();
-				//closesocket(m_sockServer);
 			}
 		}
 		break;
@@ -779,8 +750,8 @@ void Cftp_clientDlg::Handle257()
 }
 void Cftp_clientDlg::OnClicked_BtnUpload()
 {
-	DemoUpload();
-	return;
+	//DemoUpload();
+	//return;
 
 	FreeContainers();
 
@@ -884,13 +855,17 @@ void Cftp_clientDlg::Handle150()
 				return;
 		}
 	}
-
-	if (m_csTodoCmd.CompareNoCase(_T("stor")) == 0)
+	else if (m_eFtpMode == FTPMode::Active)
 	{
-		if (m_eFtpMode == FTPMode::Passive)
-		{
-			HandleSTOR();
-		}
+		////if (m_tcType == _T('A'))
+		//	AcceptServer();
+	}
+
+	if (m_csTodoCmd.CompareNoCase(_T("stor")) == 0)// && m_bSTORReady == true)
+	{
+		//AcceptServer();
+
+		//HandleSTOR();
 	}
 	else if (m_csLastCmd.CompareNoCase(_T("retr")) == 0 && m_csTodoCmd.CompareNoCase(_T("retr")) == 0)
 	{
@@ -1074,13 +1049,14 @@ void Cftp_clientDlg::PORT()
 	//int iHandler = 0;
 	if (m_tcType == _T('A'))
 	{
-		//iHandler = WM_SOCKET_DATA;
 		if (SetSelectMode(m_sockActiveClient, WM_SOCKET_DATA, FD_READ | FD_ACCEPT | FD_CLOSE) != 0)
 			return;
 	}
-
-	//else if (m_tcType == _T('I'))
-	//	iHandler = WM_SOCKET_DATA_BINARY;
+	else if (m_tcType == _T('I') && m_csTodoCmd.CompareNoCase(_T("retr")) != 0)
+	{
+		if (SetSelectMode(m_sockActiveClient, WM_SOCKET_DATA_BINARY, FD_READ | FD_ACCEPT | FD_CLOSE) != 0)
+			return;
+	}
 
 	CString csIP;
 	MyTools::GetSockIPnPort(m_sockCmd, &csIP, NULL);
@@ -1594,7 +1570,7 @@ void Cftp_clientDlg::HandleSTOR()
 	}
 
 	file.Close();	
-	//closesocket(sock);
+	closesocket(sock);
 }
 
 void Cftp_clientDlg::Handle425()
