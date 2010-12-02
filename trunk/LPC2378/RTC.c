@@ -16,9 +16,9 @@
 {
 	RTCInit(hour, min, sec);
 }
-void RTCGet(int &hour, int &min, int &sec)
+void RTCGet(int * hour, int * min, int * sec)
 {
-	sec = RTC_SEC;
-	min = RTC_MIN;
-	hour = RTC_HOUR;
+	*sec = RTC_SEC;
+	*min = RTC_MIN;
+	*hour = RTC_HOUR;
 }

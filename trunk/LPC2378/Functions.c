@@ -1,4 +1,4 @@
-#include "lpc23xx.h"
+#include <LPC23xx.H> 
 #include "stdlib.h"
 
 void sendchars(char s[])
@@ -47,3 +47,29 @@ void reverse(char s[])
 	for( ; i<size; ++i)
 		st[i] = 0;
  }
+char * GetString(char * des, char * source,int iStart, int iNum)
+{
+	int i = iStart;
+	if (strlen(source)>iStart+iNum)
+	{
+		FillChars(des, MAX_SIZE);
+		return des;
+	}
+	for( ; i<iNum; ++i)
+		des[i] = source[i];
+	des[iNum] = 0;
+	return des;
+}
+void ProcCmdNow(char *sCmd, char *sTemp)
+{
+	char sec[3];
+	char min[3];
+	char hour[3];
+	if (strcmp(GetString(sTemp, sCmd, 5, 3), "set") == 0)
+	{
+		GetString(hour, sCmd, 9, 2);
+		GetString(min, sCmd, 12, 2);
+		GetString(sec, sCmd, 15, 2);
+		RTCSet(atoi(hour), atoi(min), atoi(sec));
+	}
+}
