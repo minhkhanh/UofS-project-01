@@ -12,6 +12,7 @@ File 1,1,<.\LCD_4bit.c><LCD_4bit.c>
 File 1,1,<.\Serial.c><Serial.c>
 File 1,1,<.\RTC.c><RTC.c>
 File 1,5,<.\MyDefine.h><MyDefine.h>
+File 1,1,<.\WDT.c><WDT.c>
 
 
 Options 1,0,0  // Target '0812223-0812239'

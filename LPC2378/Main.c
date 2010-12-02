@@ -17,8 +17,18 @@ void Process()
 	{
 		ProcCmdNow(sCmd, sTemp);
 	}
-	//else if (strcmp())
-
+	else if (strcmp(GetString(sTemp, sCmd, 0, 5), "reset") == 0)
+	{
+		ProcCmdReset(sCmd, sTemp);
+	}
+	else if (strcmp(GetString(sTemp, sCmd, 0, 3), "led") == 0)
+	{
+		ProcCmdLed(sCmd, sTemp);
+	}
+	else if (strcmp(GetString(sTemp, sCmd, 0, 3), "lcd") == 0)
+	{
+		ProcCmdLcd(sCmd, sTemp);
+	}
 }
 
 int main()
@@ -33,7 +43,7 @@ int main()
 		if (cKey >= 65 && cKey <= 90)		//chuan hoa thanh ki tu thuong
 			cKey += 32;		
 
-		//sendchar(cKey);
+		if ((iPos>0)&&(cKey == 32)&&(sCmd[iPos-1] == 32)) continue;	   //bo 2 khoang trang lien nhau
 
 		if (cKey != 13)
 		{
