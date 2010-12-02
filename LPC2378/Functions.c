@@ -1,5 +1,5 @@
 #include <LPC23xx.H> 
-#include "stdlib.h"
+#include "MyDefine.h"
 
 void sendchars(char s[])
 {
@@ -65,11 +65,34 @@ void ProcCmdNow(char *sCmd, char *sTemp)
 	char sec[3];
 	char min[3];
 	char hour[3];
+	char result[9];
 	if (strcmp(GetString(sTemp, sCmd, 5, 3), "set") == 0)
 	{
 		GetString(hour, sCmd, 9, 2);
 		GetString(min, sCmd, 12, 2);
 		GetString(sec, sCmd, 15, 2);
 		RTCSet(atoi(hour), atoi(min), atoi(sec));
+		sendchars("Set time complete!\n\r");
+	}
+	else if (strcmp(GetString(sTemp, sCmd, 5, 3), "get") == 0)
+	{
+		RTCGet(result);
+		sendchars("The time is: ");
+		sendchars(result);
+		sendchars("\n\r");
+	}
+	else if ((strcmp(GetString(sTemp, sCmd, 5, 4), "help") == 0)||(strcmp(GetString(sTemp, sCmd, 5, 1), "?") == 0))
+	{
+		sendchars("Set or get time on Embedded system.\n\r");
+		sendchars("   now set hh:mm:ss     set time.\n\r");
+		sendchars("   now get              get time.\n\r");
+		sendchars("   now ?                show help.\n\r");
 	}
 }
+void ProcCmdMSSV()
+{
+	sendchars("Show MSSV of us.\n\r");
+	sendchars("   0812223     Tran Minh Khanh.\n\r");
+	sendchars("   0812239     Nguyen Anh Khoi.\n\r");	
+}
+

@@ -15,7 +15,7 @@
 ### ADS-LD Output File: '0812223_0812239_LPC2378.axf'
 ### ADS-LD Command File: '0812223_0812239_LPC2378.lnp'
 ### Checking for dirty Components...
-### Creating CmdFile '0812223_0812239_LPC2378.lnp', Handle=0x00000234
+### Creating CmdFile '0812223_0812239_LPC2378.lnp', Handle=0x000006C8
 ### Writing '.lnp' file
 ### ADS-LD Command file '0812223_0812239_LPC2378.lnp' is ready.
 ### ADS-LD: About to start ADS-LD Thread.
