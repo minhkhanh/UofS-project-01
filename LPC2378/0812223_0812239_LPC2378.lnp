@@ -1,4 +1,0 @@
-"lpc2300.o" "functions.o" "main.o" "lcd_4bit.o" "serial.o" "rtc.o" --device DARMP --strict --scatter "0812223_0812239_LPC2378.sct" 
---autoat --summary_stderr --info summarysizes --map --xref --callgraph --symbols 
---info sizes --info totals --info unused --info veneers 
- --list ".\0812223_0812239_LPC2378.map" -o "0812223_0812239_LPC2378.axf"
