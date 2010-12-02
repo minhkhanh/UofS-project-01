@@ -47,6 +47,5 @@ int main()
 			Process();
 		}
 	}
-	return 0;
 }
 
