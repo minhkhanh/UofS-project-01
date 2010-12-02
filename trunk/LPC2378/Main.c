@@ -1,8 +1,6 @@
 #include <LPC23xx.H> 
 #include "LCD.h"
-#include "stdlib.h"
-//#include "string.h"
-
+#include "MyDefine.h"
 
 int iPos = 0;
 char cKey = 0;
@@ -11,18 +9,16 @@ char sTemp[MAX_SIZE] = {0};
 
 void Process()
 {
-	if (strcmp(GetString(sTemp, sCmd, 4), "mssv") == 0)
+	if (strcmp(GetString(sTemp, sCmd, 0, 4), "mssv") == 0)
 	{
-		sendchars("0812223_0812239");
+		ProcCmdMSSV();
 	}
-	else if (strcmp(GetString(sTemp, sCmd, 3), "now") == 0)
+	else if (strcmp(GetString(sTemp, sCmd, 0, 3), "now") == 0)
 	{
 		ProcCmdNow(sCmd, sTemp);
 	}
 	//else if (strcmp())
 
-	sendchar(13);
-	sendchar(10);
 }
 
 int main()
@@ -51,6 +47,6 @@ int main()
 			Process();
 		}
 	}
-
 	return 0;
 }
+

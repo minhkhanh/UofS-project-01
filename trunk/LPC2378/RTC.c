@@ -1,4 +1,6 @@
  #include "lpc23xx.h"
+ #include "MyDefine.h"
+
  void RTCInit(int hour, int min, int sec)
 {
 	//Diable CCR;
@@ -12,13 +14,31 @@
 	//Enable CCR;
 	RTC_CCR	 = 1;
 }
- void RTCSet(int hour, int min, int sec)
+void RTCSet(int hour, int min, int sec)
 {
 	RTCInit(hour, min, sec);
 }
-void RTCGet(int * hour, int * min, int * sec)
+void RTCGet(char * result)
 {
-	*sec = RTC_SEC;
-	*min = RTC_MIN;
-	*hour = RTC_HOUR;
+	itoa(RTC_HOUR, result);
+	if (RTC_HOUR<10) 
+	{
+		result[1] = result[0];
+		result[0] = '0';
+	}
+	itoa(RTC_MIN, result+3);
+	if (RTC_MIN<10) 
+	{
+		result[4] = result[3];
+		result[3] = '0';
+	}
+	itoa(RTC_SEC, result+6);
+	if (RTC_SEC<10) 
+	{
+		result[7] = result[6];
+		result[6] = '0';
+	}
+	result[2] = result[5] = ':';
 }
+
+
