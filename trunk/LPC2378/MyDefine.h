@@ -19,4 +19,11 @@ int sendchar (int ch);
 void sendchars(char s[]);
 void init_serial (void);
 int getkey (void);
+void ProcCmdReset(char *sCmd, char *sTemp);
+void WDTFeed(void);
+void WDTInit(int sec);
+void ProcCmdLed(char *sCmd, char *sTemp);
+void ProcCmdLcd(char *sCmd, char *sTemp);
+void lcd_clear (void);
+void lcd_print (unsigned char const *string);
 
