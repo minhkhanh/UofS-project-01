@@ -3,7 +3,361 @@
 <pre>
 <h1>µVision3 Build Log</h1>
 <h2>Project:</h2>
-C:\Users\Admin\Desktop\0812223_0812239_LPC2378\0812223_0812239_LPC2378.uv2
-Project File Date:  11/30/2010
+D:\Giao Trinh\DH KHTN\Lap trinh nhung co ban\Thuc hanh\0812223_0812239_LPC2378\0812223_0812239_LPC2378.uv2
+Project File Date:  12/02/2010
 
 <h2>Output:</h2>
+Build target 'Target 1'
+assembling LPC2300.s...
+compiling Functions.c...
+Functions.c(6): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(10): warning:  #223-D: function "sendchar" declared implicitly
+Functions.c(21): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(58): error:  #247: function "GetString" has already been defined
+Functions.c(60): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(62): error:  #20: identifier "MAX_SIZE" is undefined
+Functions.c(65): error:  #268: declaration may not appear after executable statement in block
+Functions.c(70): warning:  #1-D: last line of file ends without a newline
+compiling Main.c...
+Main.c(14): warning:  #223-D: function "strcmp" declared implicitly
+Main.c(14): warning:  #223-D: function "GetString" declared implicitly
+Main.c(16): warning:  #223-D: function "sendchars" declared implicitly
+Main.c(24): warning:  #223-D: function "RTC_Init" declared implicitly
+Main.c(26): warning:  #223-D: function "itoa" declared implicitly
+Main.c(30): warning:  #223-D: function "sendchars" declared implicitly
+Main.c(36): warning:  #223-D: function "sendchar" declared implicitly
+Main.c(42): warning:  #223-D: function "init_serial" declared implicitly
+Main.c(43): warning:  #223-D: function "sendchars" declared implicitly
+Main.c(47): warning:  #223-D: function "getkey" declared implicitly
+Main.c(67): warning:  #111-D: statement is unreachable
+Main.c(68): warning:  #1-D: last line of file ends without a newline
+compiling LCD_4bit.c...
+compiling Serial.c...
+compiling RTC.c...
+RTC.c(19): error:  #18: expected a ")"
+RTC.c(19): error:  #141-D: unnamed prototyped parameters not allowed when body is present
+RTC.c(21): error:  #20: identifier "sec" is undefined
+RTC.c(22): error:  #20: identifier "min" is undefined
+RTC.c(23): error:  #20: identifier "hour" is undefined
+RTC.c(24): warning:  #1-D: last line of file ends without a newline
+Target not created
+Build target 'Target 1'
+assembling LPC2300.s...
+compiling Functions.c...
+Functions.c(6): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(10): warning:  #223-D: function "sendchar" declared implicitly
+Functions.c(21): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(52): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(54): error:  #20: identifier "MAX_SIZE" is undefined
+Functions.c(57): error:  #268: declaration may not appear after executable statement in block
+Functions.c(62): warning:  #1-D: last line of file ends without a newline
+compiling Main.c...
+Main.c(14): warning:  #223-D: function "strcmp" declared implicitly
+Main.c(14): warning:  #223-D: function "GetString" declared implicitly
+Main.c(16): warning:  #223-D: function "sendchars" declared implicitly
+Main.c(24): warning:  #223-D: function "RTC_Init" declared implicitly
+Main.c(26): warning:  #223-D: function "itoa" declared implicitly
+Main.c(30): warning:  #223-D: function "sendchars" declared implicitly
+Main.c(36): warning:  #223-D: function "sendchar" declared implicitly
+Main.c(42): warning:  #223-D: function "init_serial" declared implicitly
+Main.c(43): warning:  #223-D: function "sendchars" declared implicitly
+Main.c(47): warning:  #223-D: function "getkey" declared implicitly
+Main.c(67): warning:  #111-D: statement is unreachable
+Main.c(68): warning:  #1-D: last line of file ends without a newline
+compiling LCD_4bit.c...
+compiling Serial.c...
+compiling RTC.c...
+RTC.c(19): error:  #18: expected a ")"
+RTC.c(19): error:  #141-D: unnamed prototyped parameters not allowed when body is present
+RTC.c(21): error:  #20: identifier "sec" is undefined
+RTC.c(22): error:  #20: identifier "min" is undefined
+RTC.c(23): error:  #20: identifier "hour" is undefined
+RTC.c(24): warning:  #1-D: last line of file ends without a newline
+Target not created
+Build target 'Target 1'
+assembling LPC2300.s...
+compiling Functions.c...
+Functions.c(6): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(10): warning:  #223-D: function "sendchar" declared implicitly
+Functions.c(21): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(52): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(54): error:  #20: identifier "MAX_SIZE" is undefined
+Functions.c(57): error:  #268: declaration may not appear after executable statement in block
+Functions.c(62): warning:  #1-D: last line of file ends without a newline
+compiling Main.c...
+Main.c(14): warning:  #223-D: function "strcmp" declared implicitly
+Main.c(14): warning:  #223-D: function "GetString" declared implicitly
+Main.c(16): warning:  #223-D: function "sendchars" declared implicitly
+Main.c(24): warning:  #223-D: function "RTC_Init" declared implicitly
+Main.c(26): warning:  #223-D: function "itoa" declared implicitly
+Main.c(30): warning:  #223-D: function "sendchars" declared implicitly
+Main.c(36): warning:  #223-D: function "sendchar" declared implicitly
+Main.c(42): warning:  #223-D: function "init_serial" declared implicitly
+Main.c(43): warning:  #223-D: function "sendchars" declared implicitly
+Main.c(47): warning:  #223-D: function "getkey" declared implicitly
+Main.c(67): warning:  #111-D: statement is unreachable
+Main.c(68): warning:  #1-D: last line of file ends without a newline
+compiling LCD_4bit.c...
+compiling Serial.c...
+compiling RTC.c...
+RTC.c(19): error:  #18: expected a ")"
+RTC.c(19): error:  #141-D: unnamed prototyped parameters not allowed when body is present
+RTC.c(21): error:  #20: identifier "sec" is undefined
+RTC.c(22): error:  #20: identifier "min" is undefined
+RTC.c(23): error:  #20: identifier "hour" is undefined
+RTC.c(24): warning:  #1-D: last line of file ends without a newline
+Target not created
+Build target 'Target 1'
+assembling LPC2300.s...
+compiling Functions.c...
+Functions.c(6): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(10): warning:  #223-D: function "sendchar" declared implicitly
+Functions.c(21): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(52): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(54): error:  #20: identifier "MAX_SIZE" is undefined
+Functions.c(57): error:  #268: declaration may not appear after executable statement in block
+Functions.c(62): warning:  #1-D: last line of file ends without a newline
+compiling Main.c...
+Main.c(14): warning:  #223-D: function "strcmp" declared implicitly
+Main.c(14): warning:  #223-D: function "GetString" declared implicitly
+Main.c(16): warning:  #223-D: function "sendchars" declared implicitly
+Main.c(24): warning:  #223-D: function "RTC_Init" declared implicitly
+Main.c(26): warning:  #223-D: function "itoa" declared implicitly
+Main.c(30): warning:  #223-D: function "sendchars" declared implicitly
+Main.c(36): warning:  #223-D: function "sendchar" declared implicitly
+Main.c(42): warning:  #223-D: function "init_serial" declared implicitly
+Main.c(43): warning:  #223-D: function "sendchars" declared implicitly
+Main.c(47): warning:  #223-D: function "getkey" declared implicitly
+Main.c(67): warning:  #111-D: statement is unreachable
+Main.c(68): warning:  #1-D: last line of file ends without a newline
+compiling LCD_4bit.c...
+compiling Serial.c...
+compiling RTC.c...
+RTC.c(21): error:  #513: a value of type "unsigned long" cannot be assigned to an entity of type "int *"
+RTC.c(22): error:  #513: a value of type "unsigned long" cannot be assigned to an entity of type "int *"
+RTC.c(23): error:  #513: a value of type "unsigned long" cannot be assigned to an entity of type "int *"
+RTC.c(24): warning:  #1-D: last line of file ends without a newline
+RTC.c(19): warning:  #550-D: parameter "hour" was set but never used
+RTC.c(19): warning:  #550-D: parameter "min" was set but never used
+RTC.c(19): warning:  #550-D: parameter "sec" was set but never used
+Target not created
+Build target 'Target 1'
+assembling LPC2300.s...
+compiling Functions.c...
+Functions.c(6): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(10): warning:  #223-D: function "sendchar" declared implicitly
+Functions.c(21): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(52): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(54): error:  #20: identifier "MAX_SIZE" is undefined
+Functions.c(57): error:  #268: declaration may not appear after executable statement in block
+Functions.c(62): warning:  #1-D: last line of file ends without a newline
+compiling Main.c...
+Main.c(14): warning:  #223-D: function "strcmp" declared implicitly
+Main.c(14): warning:  #223-D: function "GetString" declared implicitly
+Main.c(16): warning:  #223-D: function "sendchars" declared implicitly
+Main.c(24): warning:  #223-D: function "RTC_Init" declared implicitly
+Main.c(26): warning:  #223-D: function "itoa" declared implicitly
+Main.c(30): warning:  #223-D: function "sendchars" declared implicitly
+Main.c(36): warning:  #223-D: function "sendchar" declared implicitly
+Main.c(42): warning:  #223-D: function "init_serial" declared implicitly
+Main.c(43): warning:  #223-D: function "sendchars" declared implicitly
+Main.c(47): warning:  #223-D: function "getkey" declared implicitly
+Main.c(67): warning:  #111-D: statement is unreachable
+Main.c(68): warning:  #1-D: last line of file ends without a newline
+compiling LCD_4bit.c...
+compiling Serial.c...
+compiling RTC.c...
+RTC.c(24): warning:  #1-D: last line of file ends without a newline
+Target not created
+Build target 'Target 1'
+assembling LPC2300.s...
+compiling Functions.c...
+Functions.c(6): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(10): warning:  #223-D: function "sendchar" declared implicitly
+Functions.c(21): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(53): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(55): error:  #20: identifier "MAX_SIZE" is undefined
+Functions.c(62): warning:  #1-D: last line of file ends without a newline
+compiling Main.c...
+Main.c(14): warning:  #223-D: function "strcmp" declared implicitly
+Main.c(14): warning:  #223-D: function "GetString" declared implicitly
+Main.c(16): warning:  #223-D: function "sendchars" declared implicitly
+Main.c(24): warning:  #223-D: function "RTC_Init" declared implicitly
+Main.c(26): warning:  #223-D: function "itoa" declared implicitly
+Main.c(30): warning:  #223-D: function "sendchars" declared implicitly
+Main.c(36): warning:  #223-D: function "sendchar" declared implicitly
+Main.c(42): warning:  #223-D: function "init_serial" declared implicitly
+Main.c(43): warning:  #223-D: function "sendchars" declared implicitly
+Main.c(47): warning:  #223-D: function "getkey" declared implicitly
+Main.c(67): warning:  #111-D: statement is unreachable
+Main.c(68): warning:  #1-D: last line of file ends without a newline
+compiling LCD_4bit.c...
+compiling Serial.c...
+compiling RTC.c...
+RTC.c(24): warning:  #1-D: last line of file ends without a newline
+Target not created
+Build target 'Target 1'
+assembling LPC2300.s...
+compiling Functions.c...
+Functions.c(6): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(10): warning:  #223-D: function "sendchar" declared implicitly
+Functions.c(21): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(53): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(55): error:  #20: identifier "MAX_SIZE" is undefined
+Functions.c(62): warning:  #1-D: last line of file ends without a newline
+compiling Main.c...
+Main.c(14): warning:  #223-D: function "strcmp" declared implicitly
+Main.c(14): warning:  #223-D: function "GetString" declared implicitly
+Main.c(16): warning:  #223-D: function "sendchars" declared implicitly
+Main.c(24): warning:  #223-D: function "RTC_Init" declared implicitly
+Main.c(26): warning:  #223-D: function "itoa" declared implicitly
+Main.c(30): warning:  #223-D: function "sendchars" declared implicitly
+Main.c(36): warning:  #223-D: function "sendchar" declared implicitly
+Main.c(42): warning:  #223-D: function "init_serial" declared implicitly
+Main.c(43): warning:  #223-D: function "sendchars" declared implicitly
+Main.c(47): warning:  #223-D: function "getkey" declared implicitly
+Main.c(67): warning:  #111-D: statement is unreachable
+Main.c(68): warning:  #1-D: last line of file ends without a newline
+compiling LCD_4bit.c...
+compiling Serial.c...
+compiling RTC.c...
+RTC.c(24): warning:  #1-D: last line of file ends without a newline
+Target not created
+Build target 'Target 1'
+assembling LPC2300.s...
+compiling Functions.c...
+Functions.c(6): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(10): warning:  #223-D: function "sendchar" declared implicitly
+Functions.c(21): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(53): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(55): error:  #20: identifier "MAX_SIZE" is undefined
+Functions.c(62): warning:  #1-D: last line of file ends without a newline
+compiling Main.c...
+Main.c(14): warning:  #223-D: function "strcmp" declared implicitly
+Main.c(14): warning:  #223-D: function "GetString" declared implicitly
+Main.c(16): warning:  #223-D: function "sendchars" declared implicitly
+Main.c(24): warning:  #223-D: function "RTC_Init" declared implicitly
+Main.c(26): warning:  #223-D: function "itoa" declared implicitly
+Main.c(30): warning:  #223-D: function "sendchars" declared implicitly
+Main.c(36): warning:  #223-D: function "sendchar" declared implicitly
+Main.c(42): warning:  #223-D: function "init_serial" declared implicitly
+Main.c(43): warning:  #223-D: function "sendchars" declared implicitly
+Main.c(47): warning:  #223-D: function "getkey" declared implicitly
+Main.c(67): warning:  #111-D: statement is unreachable
+Main.c(68): warning:  #1-D: last line of file ends without a newline
+compiling LCD_4bit.c...
+compiling Serial.c...
+compiling RTC.c...
+RTC.c(24): warning:  #1-D: last line of file ends without a newline
+Target not created
+Build target 'Target 1'
+assembling LPC2300.s...
+LPC2300.s(12): error: A1163E: Unknown opcode MAX_SIZE , expecting opcode or Macro
+compiling Functions.c...
+Functions.c(6): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(10): warning:  #223-D: function "sendchar" declared implicitly
+Functions.c(21): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(53): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(55): error:  #20: identifier "MAX_SIZE" is undefined
+Functions.c(62): warning:  #1-D: last line of file ends without a newline
+compiling Main.c...
+Main.c(9): error:  #20: identifier "MAX_SIZE" is undefined
+Main.c(14): warning:  #223-D: function "strcmp" declared implicitly
+Main.c(14): warning:  #223-D: function "GetString" declared implicitly
+Main.c(16): warning:  #223-D: function "sendchars" declared implicitly
+Main.c(24): warning:  #223-D: function "RTC_Init" declared implicitly
+Main.c(26): warning:  #223-D: function "itoa" declared implicitly
+Main.c(30): warning:  #223-D: function "sendchars" declared implicitly
+Main.c(36): warning:  #223-D: function "sendchar" declared implicitly
+Main.c(42): warning:  #223-D: function "init_serial" declared implicitly
+Main.c(43): warning:  #223-D: function "sendchars" declared implicitly
+Main.c(47): warning:  #223-D: function "getkey" declared implicitly
+Main.c(67): warning:  #111-D: statement is unreachable
+Main.c(68): warning:  #1-D: last line of file ends without a newline
+compiling LCD_4bit.c...
+compiling Serial.c...
+compiling RTC.c...
+RTC.c(24): warning:  #1-D: last line of file ends without a newline
+Target not created
+Build target 'Target 1'
+assembling LPC2300.s...
+compiling Functions.c...
+Functions.c(6): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(10): warning:  #223-D: function "sendchar" declared implicitly
+Functions.c(21): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(53): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(62): warning:  #1-D: last line of file ends without a newline
+compiling Main.c...
+Main.c(14): warning:  #223-D: function "strcmp" declared implicitly
+Main.c(14): warning:  #223-D: function "GetString" declared implicitly
+Main.c(16): warning:  #223-D: function "sendchars" declared implicitly
+Main.c(24): warning:  #223-D: function "RTC_Init" declared implicitly
+Main.c(26): warning:  #223-D: function "itoa" declared implicitly
+Main.c(30): warning:  #223-D: function "sendchars" declared implicitly
+Main.c(36): warning:  #223-D: function "sendchar" declared implicitly
+Main.c(42): warning:  #223-D: function "init_serial" declared implicitly
+Main.c(43): warning:  #223-D: function "sendchars" declared implicitly
+Main.c(47): warning:  #223-D: function "getkey" declared implicitly
+Main.c(67): warning:  #111-D: statement is unreachable
+Main.c(68): warning:  #1-D: last line of file ends without a newline
+compiling LCD_4bit.c...
+compiling Serial.c...
+compiling RTC.c...
+RTC.c(24): warning:  #1-D: last line of file ends without a newline
+linking...
+0812223_0812239_LPC2378.axf: Error: L6218E: Undefined symbol RTC_Init (referred from main.o).
+Target not created
+Build target 'Target 1'
+assembling LPC2300.s...
+compiling Functions.c...
+Functions.c(6): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(10): warning:  #223-D: function "sendchar" declared implicitly
+Functions.c(21): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(53): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(66): warning:  #1-D: last line of file ends without a newline
+compiling Main.c...
+Main.c(14): warning:  #223-D: function "strcmp" declared implicitly
+Main.c(14): warning:  #223-D: function "GetString" declared implicitly
+Main.c(16): warning:  #223-D: function "sendchars" declared implicitly
+Main.c(20): warning:  #223-D: function "ProcCmdNow" declared implicitly
+Main.c(24): warning:  #223-D: function "sendchar" declared implicitly
+Main.c(30): warning:  #223-D: function "init_serial" declared implicitly
+Main.c(31): warning:  #223-D: function "sendchars" declared implicitly
+Main.c(35): warning:  #223-D: function "getkey" declared implicitly
+Main.c(55): warning:  #111-D: statement is unreachable
+Main.c(56): warning:  #1-D: last line of file ends without a newline
+compiling LCD_4bit.c...
+compiling Serial.c...
+compiling RTC.c...
+RTC.c(24): warning:  #1-D: last line of file ends without a newline
+linking...
+Program Size: Code=2964 RO-data=32 RW-data=8 ZI-data=1896  
+"0812223_0812239_LPC2378.axf" - 0 Error(s), 16 Warning(s).
+Build target 'Target 1'
+assembling LPC2300.s...
+compiling Functions.c...
+Functions.c(6): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(10): warning:  #223-D: function "sendchar" declared implicitly
+Functions.c(21): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(53): warning:  #223-D: function "strlen" declared implicitly
+Functions.c(68): warning:  #223-D: function "strcmp" declared implicitly
+Functions.c(73): warning:  #223-D: function "RTCSet" declared implicitly
+Functions.c(75): warning:  #1-D: last line of file ends without a newline
+compiling Main.c...
+Main.c(14): warning:  #223-D: function "strcmp" declared implicitly
+Main.c(14): warning:  #223-D: function "GetString" declared implicitly
+Main.c(16): warning:  #223-D: function "sendchars" declared implicitly
+Main.c(20): warning:  #223-D: function "ProcCmdNow" declared implicitly
+Main.c(24): warning:  #223-D: function "sendchar" declared implicitly
+Main.c(30): warning:  #223-D: function "init_serial" declared implicitly
+Main.c(31): warning:  #223-D: function "sendchars" declared implicitly
+Main.c(35): warning:  #223-D: function "getkey" declared implicitly
+Main.c(55): warning:  #111-D: statement is unreachable
+Main.c(56): warning:  #1-D: last line of file ends without a newline
+compiling LCD_4bit.c...
+compiling Serial.c...
+compiling RTC.c...
+RTC.c(24): warning:  #1-D: last line of file ends without a newline
+linking...
+Program Size: Code=3764 RO-data=304 RW-data=8 ZI-data=1896  
+"0812223_0812239_LPC2378.axf" - 0 Error(s), 18 Warning(s).
