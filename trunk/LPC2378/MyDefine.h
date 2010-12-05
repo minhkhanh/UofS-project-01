@@ -26,4 +26,11 @@ void ProcCmdLed(char *sCmd, char *sTemp);
 void ProcCmdLcd(char *sCmd, char *sTemp);
 void lcd_clear (void);
 void lcd_print (unsigned char const *string);
+void lcd_init (void);
+void set_cursor (unsigned char column, unsigned char line);
+void LED_Init(void);
+void ProcCmdSong(char* sCmd, char* sTmp);
+void ProcCmdHelp();
+__irq void T0_IRQHandler (void);
+
 

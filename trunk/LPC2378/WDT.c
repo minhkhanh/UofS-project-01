@@ -1,13 +1,9 @@
  #include "lpc23xx.h"
  #include "MyDefine.h"
- __irq void WDTHandler()
-{
-	VICVectAddr = 0;
-}
 __irq void WDTIRQTimer()
 {
 	char sec[9];
-	itoa(WDTV*16 / 12000000, sec);
+	itoa(WDTV >> 20, sec);
 	sendchars("Board restart sau ");
 	sendchars(sec);
 	sendchars(" giay nua!\r\n");
@@ -25,11 +21,10 @@ void WDTTimerInit()
 }
 void WDTInit(int sec)
 {
-	VICVectAddr0 = (unsigned long)WDTHandler;	/*Set Interrupt Vector*/
-	VICVectCntl0 = 0;				/*use it for Timer0 Interrupt*/
-	VICIntEnable = (1 << 0);		/*Enable Timer0 Interrupt*/
-	WDTC = (int)((float)sec * 1200000 / 16);					// 300000 khoang 4 giay		 t = clc * WDTC * 4
-	WDMOD = 0x03;					/* 0x01= Interrupt */ /* 0x02= reset */
+	WDTC = sec << 20;
+	WDMOD = 0x03;	
+	WDFEED = 0xAA;
+	WDFEED = 0x55;
 
 	WDTTimerInit();
 }
