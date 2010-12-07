@@ -1,8 +1,0 @@
-D:\Giao Trinh\DH KHTN\Lap trinh mobile device\Sources\VCard\VCard\obj\Debug\ResolveAssemblyReference.cache
-D:\Giao Trinh\DH KHTN\Lap trinh mobile device\Sources\VCard\VCard\obj\Debug\VCard.frmMain.resources
-D:\Giao Trinh\DH KHTN\Lap trinh mobile device\Sources\VCard\VCard\obj\Debug\VCard.Properties.Resources.resources
-D:\Giao Trinh\DH KHTN\Lap trinh mobile device\Sources\VCard\VCard\obj\Debug\VCard.csproj.GenerateResource.Cache
-D:\Giao Trinh\DH KHTN\Lap trinh mobile device\Sources\VCard\VCard\bin\Debug\VCard.exe
-D:\Giao Trinh\DH KHTN\Lap trinh mobile device\Sources\VCard\VCard\bin\Debug\VCard.pdb
-D:\Giao Trinh\DH KHTN\Lap trinh mobile device\Sources\VCard\VCard\obj\Debug\VCard.exe
-D:\Giao Trinh\DH KHTN\Lap trinh mobile device\Sources\VCard\VCard\obj\Debug\VCard.pdb
