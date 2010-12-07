@@ -32,6 +32,7 @@
             this.mainMenu1 = new System.Windows.Forms.MainMenu();
             this.menuItem1 = new System.Windows.Forms.MenuItem();
             this.menuItem2 = new System.Windows.Forms.MenuItem();
+            this.timer1 = new System.Windows.Forms.Timer();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -49,6 +50,11 @@
             this.menuItem2.Text = "TEST2";
             this.menuItem2.Click += new System.EventHandler(this.menuItem2_Click);
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -59,6 +65,7 @@
             this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);
             this.ResumeLayout(false);
 
         }
@@ -67,6 +74,7 @@
 
         private System.Windows.Forms.MenuItem menuItem1;
         private System.Windows.Forms.MenuItem menuItem2;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

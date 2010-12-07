@@ -68,7 +68,9 @@
     </Compile>
     <Compile Include="GamePanel.cs" />
     <Compile Include="Graphics.cs" />
-    <Compile Include="Image.cs" />
+    <Compile Include="IBitmap.cs" />
+    <Compile Include="ImageControl.cs" />
+    <Compile Include="ImagingAPI.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -82,7 +84,9 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Sprite.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Cards\1-1.png">
@@ -241,6 +245,15 @@
     <Content Include="Resources\Cards\4-9.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\fx_bubble_d0.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\_bonus_creature_death.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
   <ProjectExtensions>

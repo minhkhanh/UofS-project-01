@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="_0812239.Animation" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASAAAAAgKAAAAAAAAAAAAAkICAARBAAASAgCAAAAsA=</HashCode>
+      <FileName>Animation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="_0812239.GdiBitmap" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAEAABCAAAAIAAAAAAEAAAAAAABAAQAAgAAAAAAA=</HashCode>
+      <FileName>Bitmap.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="_0812239.Class1" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Class1.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="_0812239.Class2" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Class1.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="_0812239.GdiFont" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAE=</HashCode>
+      <FileName>Font.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="_0812239.Form1" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAQAAAAABCAQCAAAAACQAAACAAAAMgBAAAAAAAAAAAA=</HashCode>
+      <FileName>Form1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="_0812239.GamePanel" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAQAAAAIAAAAAAAAIAAAQAAAAAgA=</HashCode>
+      <FileName>GamePanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="_0812239.GdiGraphics" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAHAAAAAIAAQCAgUAAMBAAAAhCQQAAQIAAIA=</HashCode>
+      <FileName>Graphics.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="_0812239.ImageControl" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ImageControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="_0812239.Program" Collapsed="true">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="_0812239.Sprite" Collapsed="true">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASAAAAAAAAAAAACAAAAAAIAAAAABAAAAGAAAAAIAoA=</HashCode>
+      <FileName>Sprite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="_0812239.Properties.Resources" Collapsed="true">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAwAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="_0812239.BitmapData" Collapsed="true">
+    <Position X="0.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAgAAAAEAAAAAEAAAAAAAQAAAAAAEAAAAAA=</HashCode>
+      <FileName>ImagingAPI.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="_0812239.ImageInfo" Collapsed="true">
+    <Position X="2.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABgAABAQAAQAAAAAAAGAAAAAAAAAAAAAAAQAAABA=</HashCode>
+      <FileName>ImagingAPI.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="_0812239.IBitmap" Collapsed="true">
+    <Position X="0.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAABAAAAAAAAAAAAEAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Bitmap.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="_0812239.IMyInterface2" Collapsed="true">
+    <Position X="5.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Class1.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="_0812239.IMyInterface" Collapsed="true">
+    <Position X="4" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Class1.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="_0812239.IFont" Collapsed="true">
+    <Position X="4" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Font.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="_0812239.IGraphics" Collapsed="true">
+    <Position X="5.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAFAAAAAIAAACAgEAAMBAAAABAAQAAQIAAIA=</HashCode>
+      <FileName>Graphics.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="_0812239.IImagingFactory" Collapsed="true">
+    <Position X="2.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAQAAAAAAQAQAAAAAAAAAAIoIIAAAAwAAAAQIAA=</HashCode>
+      <FileName>ImagingAPI.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="_0812239.IImage" Collapsed="true">
+    <Position X="0.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gBGAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>ImagingAPI.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="_0812239.IBitmapImage" Collapsed="true">
+    <Position X="2.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAKAAAAAAAAAAAAAEAAAIAAAAAgAAAA=</HashCode>
+      <FileName>ImagingAPI.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="_0812239.FontDrawOptions" Collapsed="true">
+    <Position X="4" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAIBAAAAAAACAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Font.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="_0812239.DrawOptions" Collapsed="true">
+    <Position X="2.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAEIAAA=</HashCode>
+      <FileName>Graphics.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="_0812239.PixelFormatID" Collapsed="true">
+    <Position X="0.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>VQAAAAAAAAAEQCAAABgQRAAAABAAAAIAAAAAACAACII=</HashCode>
+      <FileName>ImagingAPI.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="_0812239.BufferDisposalFlag" Collapsed="true">
+    <Position X="0.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgBAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>ImagingAPI.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="_0812239.InterpolationHint" Collapsed="true">
+    <Position X="5.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAAAAAAAIAAAAACAQABAAAAAAAAA=</HashCode>
+      <FileName>ImagingAPI.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

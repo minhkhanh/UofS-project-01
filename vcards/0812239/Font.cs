@@ -9,9 +9,11 @@ namespace _0812239
     [FlagsAttribute]
     public enum FontDrawOptions
     {
-        DrawTextCenter = 0x0,
-        DrawTextRight = 0x1,
-        DrawTextLeft = 0x2
+        DrawTextCenter = 0,
+        DrawTextRight = 1,
+        DrawTextLeft = 2,
+        DrawTextTop = 4,
+        DrawTextBottom = 8
     }
 
     public interface IFont
@@ -24,6 +26,11 @@ namespace _0812239
         public GdiFont(string strFontName)
         {
             //!!! CHUA CAI DAT
+        }
+
+        public GdiFont(string strFontName, float fontSize, FontStyle fontStye)
+        {
+            fontValue = new Font(strFontName, fontSize, fontStye);
         }
 
         private Font fontValue;
