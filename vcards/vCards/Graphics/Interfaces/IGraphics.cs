@@ -38,6 +38,8 @@ namespace vCards
         /// Animation to be drawn 
         void DrawAnimation(int x, int y, Animation animation);
 
+        void DrawBitmap(int x, int y, IBitmap bmp);
+
         ///  
         /// Draw the bitmap to the back buffer. 
         ///  
