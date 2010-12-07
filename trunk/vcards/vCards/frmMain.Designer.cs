@@ -29,14 +29,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.mainMenu1 = new System.Windows.Forms.MainMenu();
-            this.Menu = this.mainMenu1;
+            this.menuItem1 = new System.Windows.Forms.MenuItem();
+            this.SuspendLayout();
+            // 
+            // mainMenu1
+            // 
+            this.mainMenu1.MenuItems.Add(this.menuItem1);
+            // 
+            // menuItem1
+            // 
+            this.menuItem1.Text = "TEST01";
+            this.menuItem1.Click += new System.EventHandler(this.menuItem1_Click);
+            // 
+            // frmMain
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.Text = "frmMain";
             this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(240, 268);
+            this.Menu = this.mainMenu1;
+            this.Name = "frmMain";
+            this.Text = "frmMain";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.MenuItem menuItem1;
     }
 }

@@ -27,7 +27,7 @@ using System.Drawing.Imaging;
 //using Microsoft.WindowsMobile.DirectX.Direct3D;
 //#endif
 
-namespace _0812239
+namespace vCards
 {
     ///  
     /// A GDI implementation of the IGraphics 
@@ -72,7 +72,7 @@ namespace _0812239
         /// Owner control (Form) 
         public GdiGraphics(Control owner)
         {
-            back = new Bitmap(240, 320);
+            back = new Bitmap(owner.ClientSize.Width, owner.ClientSize.Height); // ? back = new Bitmap(240, 320);
             gBack = Graphics.FromImage(back);
             screen = owner.CreateGraphics();
         }

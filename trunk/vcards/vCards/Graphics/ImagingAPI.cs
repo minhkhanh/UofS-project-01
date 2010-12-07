@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using System.Drawing;
 using System.IO;
 
-namespace _0812239
+namespace vCards
 {
     // Pulled from gdipluspixelformats.h in the Windows Mobile 5.0 Pocket PC SDK
     public enum PixelFormatID : int

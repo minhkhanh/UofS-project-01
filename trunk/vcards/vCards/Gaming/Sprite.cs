@@ -6,7 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Drawing.Imaging;
 
-namespace _0812239
+namespace vCards
 {
     public class Sprite
     {

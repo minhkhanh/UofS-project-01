@@ -18,7 +18,7 @@ using System.IO;
 using System.Drawing;
 using System.Diagnostics;
 
-namespace _0812239
+namespace vCards
 {
     ///  
     /// Summary description for Animation. 
