@@ -45,6 +45,7 @@
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.WindowsMobile.DirectX" />
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -56,25 +57,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Animation.cs" />
-    <Compile Include="Bitmap.cs" />
+    <Compile Include="Gaming Class\Animation.cs" />
+    <Compile Include="Graphics\DirectX\DirectXFont.cs" />
+    <Compile Include="Graphics\Gdi\GdiBitmap.cs" />
     <Compile Include="Class1.cs" />
-    <Compile Include="Font.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Graphics\DirectX\DirectXBitmap.cs" />
+    <Compile Include="Graphics\DirectX\DirectXGraphics.cs" />
+    <Compile Include="Graphics\Gdi\GdiFont.cs" />
+    <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="GamePanel.cs" />
-    <Compile Include="Graphics.cs" />
-    <Compile Include="IBitmap.cs" />
-    <Compile Include="ImageControl.cs" />
-    <Compile Include="ImagingAPI.cs" />
+    <Compile Include="Gaming Class\GamePanel.cs" />
+    <Compile Include="Graphics\Gdi\GdiGraphics.cs" />
+    <Compile Include="Graphics\Interfaces\IFont.cs" />
+    <Compile Include="Graphics\Interfaces\IBitmap.cs" />
+    <Compile Include="Graphics\Interfaces\IGraphics.cs" />
+    <Compile Include="Gaming Class\ImageControl.cs" />
+    <Compile Include="Gaming Class\ImagingAPI.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -86,7 +92,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Sprite.cs" />
+    <Compile Include="Gaming Class\Sprite.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Cards\1-1.png">
