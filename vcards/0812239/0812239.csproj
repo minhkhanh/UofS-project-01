@@ -57,7 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Gaming Class\Animation.cs" />
+    <Compile Include="Gaming\Animation.cs" />
     <Compile Include="Graphics\DirectX\DirectXFont.cs" />
     <Compile Include="Graphics\Gdi\GdiBitmap.cs" />
     <Compile Include="Class1.cs" />
@@ -70,13 +70,13 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gaming Class\GamePanel.cs" />
+    <Compile Include="Gaming\GamePanel.cs" />
     <Compile Include="Graphics\Gdi\GdiGraphics.cs" />
     <Compile Include="Graphics\Interfaces\IFont.cs" />
     <Compile Include="Graphics\Interfaces\IBitmap.cs" />
     <Compile Include="Graphics\Interfaces\IGraphics.cs" />
-    <Compile Include="Gaming Class\ImageControl.cs" />
-    <Compile Include="Gaming Class\ImagingAPI.cs" />
+    <Compile Include="Gaming\ImageControl.cs" />
+    <Compile Include="Gaming\ImagingAPI.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmMain.resx">
@@ -92,7 +92,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Gaming Class\Sprite.cs" />
+    <Compile Include="Gaming\Sprite.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Cards\1-1.png">
