@@ -27,7 +27,7 @@ using Microsoft.DirectX;
 using Microsoft.DirectX.Direct3D; 
 #endif
 
-namespace _0812239
+namespace vCards
 {
     ///  
     /// Summary description for Bitmap. 

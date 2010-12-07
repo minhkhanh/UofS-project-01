@@ -13,7 +13,7 @@ using Microsoft.WindowsMobile.DirectX;
 using Microsoft.WindowsMobile.DirectX.Direct3D;
 #endif
 
-namespace _0812239
+namespace vCards
 {
     public class DirectXGraphics : IGraphics
     {

@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 
-namespace _0812239
+namespace vCards
 {
     public class GamePanel
     {
-        static IImagingFactory factory = (IImagingFactory)Activator.CreateInstance(Type.GetTypeFromCLSID(new Guid("327ABDA8-072B-11D3-9D7B-0000F81EF32E")));
-        static public IImagingFactory IGameImagingFactory
+        IImagingFactory factory = (IImagingFactory)Activator.CreateInstance(Type.GetTypeFromCLSID(new Guid("327ABDA8-072B-11D3-9D7B-0000F81EF32E")));
+        public IImagingFactory IGameImgFactory
         {
             get { return factory; }
             set { factory = value; }
@@ -25,12 +25,17 @@ namespace _0812239
         public GamePanel(Control owner)
         {
             g = new GdiGraphics(owner);
+            playing = true;
         }
 
-        bool m_bPlaying;
+        bool playing;
+
         public void GameLoop()
         {
-            while (true) ;
+            while (playing)
+            {
+
+            }
         }
     }
 }

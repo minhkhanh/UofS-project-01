@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 
-namespace _0812239
+namespace vCards
 {
     public interface IBitmap : IDisposable
     {
