@@ -4,9 +4,15 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Runtime.InteropServices;
 
 namespace _0812239
 {
+    public interface IMyInterface2
+    {
+        void Printf();
+    }
+
     public interface IMyInterface
     {
         void Printf();
@@ -20,10 +26,12 @@ namespace _0812239
             MessageBox.Show("class1");
         }
 
+        //[StructLayout(LayoutKind.Sequential)]
+
         public IMyInterface CreateInstance()
         {
-            Font a = new Font("a", 1, FontStyle.Bold);
-            //DrawOptions.
+            
+
             return new Class1();
         }
     }
@@ -32,7 +40,10 @@ namespace _0812239
     {
         public void Printf()
         {
-            MessageBox.Show("class2");
+            IMyInterface2 a = (IMyInterface2)new Class1();
+            a.Printf();
+
+            //MessageBox.Show("class2");
         }
 
         public IMyInterface CreateInstance()

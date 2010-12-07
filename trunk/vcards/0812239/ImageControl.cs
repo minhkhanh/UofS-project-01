@@ -5,11 +5,7 @@ using System.Text;
 
 namespace _0812239
 {
-    public interface IImage
-    {
-    }
-
-    public class GdiImage: IImage
+    public abstract class ImageControl
     {
 
     }

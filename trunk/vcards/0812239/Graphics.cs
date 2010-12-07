@@ -62,6 +62,9 @@ namespace _0812239
         /// <param name="animation">Animation to be drawn</param>
         void DrawAnimation(int x, int y, Animation animation);
 
+        void DrawAnimation(int x, int y, Rectangle rectSrc, Animation animation);
+        void DrawAnimationScale(int x, int y, int w, int h, Animation animation);
+
         /// <summary>
         /// Ve anh trong suot
         /// </summary>
@@ -89,6 +92,38 @@ namespace _0812239
         void DrawImageTransparent(IBitmap image, Rectangle srcRect, int x, int y);
 
         /// <summary>
+        /// Ve mot vung anh len mot vung tren thiet bi do hoa
+        /// </summary>
+        /// <param name="image"></param>
+        /// <param name="srcRect"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        void DrawImageTransparent(IBitmap image, Rectangle rectSrc, Rectangle rectDest);
+
+        /// <summary>
+        /// Ve anh trong suot len toa do x, y cua man hinh
+        /// </summary>
+        /// <param name="image"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        void DrawImageAlphaChannel(IImage image, int x, int y);
+
+        /// <summary>
+        /// Ve anh trong suot len mot vung xac dinh tren man hinh
+        /// </summary>
+        /// <param name="image"></param>
+        /// <param name="dest"></param>
+        void DrawImageAlphaChannel(IImage image, Rectangle dest);
+
+        /// <summary>
+        /// Ve mot vung anh trong suot len mot vung xac dinh tren man hinh
+        /// </summary>
+        /// <param name="image"></param>
+        /// <param name="dest"></param>
+        /// <param name="src"></param>
+        //void DrawImageAlphaChannel(IImage image, Rectangle dest, Rectangle src);
+
+        /// <summary>
         /// Draw the bitmap to the back buffer.
         /// </summary>
         /// <param name="x">X destination of the draw</param>
@@ -96,6 +131,8 @@ namespace _0812239
         /// <param name="sourceRegion">Source region of the draw</param>
         /// <param name="bmp">Bitmap to be drawn</param>
         void DrawBitmap(int x, int y, Rectangle sourceRegion, IBitmap bmp);
+
+        void DrawBitmap(int x, int y, IBitmap bmp);
 
         /// <summary>
         /// Draw a filled rectangle to the back buffer.
@@ -109,6 +146,9 @@ namespace _0812239
         /// </summary>
         void Flip();
 
+        void Flip(Rectangle listRect);
+        void Flip(List<Rectangle> listRect);
+
         /// <summary>
         /// Draw the string to the back buffer.
         /// </summary>
@@ -120,6 +160,9 @@ namespace _0812239
         /// <param name="options">Font draw options</param>
         void DrawText(int x, int y, string text, Color color, IFont font,
             FontDrawOptions options);
+
+        void DrawString(string text, IFont font, Brush brush, Rectangle textRect);
+        void DrawText(Rectangle rectText, string text, Color color, IFont font, FontDrawOptions options);
 
         /// <summary>
         /// Set the current draw mode.
@@ -142,6 +185,10 @@ namespace _0812239
         /// <returns>A bitmap compatible with this graphics device</returns>
         IBitmap CreateBitmap(string fileName, bool transparent);
 
+        IBitmap CreateBitmap(Bitmap bmp, bool transparent);
+        IBitmap CreateBitmap(System.IO.Stream strm, bool transparent);
+        IBitmap CreateBitmap(IBitmap ibmp, bool trans);
+
         /// <summary>
         /// Creates a font object compatible with this graphics device
         /// </summary>
@@ -149,6 +196,8 @@ namespace _0812239
         /// <returns>A font object compatible with this graphics device
         /// </returns>
         IFont CreateFont(string fontName);
+
+        IFont CreateFont(string fontName, float fontSize, FontStyle fontStyle);
     }
 
     /// <summary>
@@ -156,6 +205,8 @@ namespace _0812239
     /// </summary>
     public class GdiGraphics : IGraphics
     {
+        List<Rectangle> m_listRect = new List<Rectangle>();
+
         /// <summary>
         /// Gets the width of the screen.
         /// </summary>
@@ -193,7 +244,7 @@ namespace _0812239
         /// <param name="owner">Owner control (Form)</param>
         public GdiGraphics(Control owner)
         {
-            back = new Bitmap(owner.Width, owner.Height);
+            back = new Bitmap(owner.ClientSize.Width, owner.ClientSize.Height);
             gBack = Graphics.FromImage(back);
             screen = owner.CreateGraphics();
         }
@@ -215,7 +266,22 @@ namespace _0812239
         /// <param name="animation">Animation to be drawn</param>
         public void DrawAnimation(int x, int y, Animation animation)
         {
-            DrawBitmap(x, y, animation.Region, animation.Image);
+            DrawBitmap(x, y, animation.Region, (IBitmap)animation.Image);
+
+            animation.Update();
+        }
+
+        public void DrawAnimation(int x, int y, Rectangle rectSrc, Animation animation)
+        {
+            if (animation.ValidateRegions(ref rectSrc) == false)
+                return;
+
+            DrawBitmap(x, y, rectSrc, (IBitmap)animation.Image);
+        }
+
+        public void DrawAnimationScale(int x, int y, int w, int h, Animation animation)
+        {
+            DrawImageTransparent((IBitmap)animation.Image, animation.Region, new Rectangle(x, y, w, h));
         }
 
         /// <summary>
@@ -249,7 +315,7 @@ namespace _0812239
                 //    sourceRegion.Height);
 
                 ImageAttributes attr = new ImageAttributes();
-                attr.SetColorKey(gdiBitmap.SourceKey, gdiBitmap.SourceKey);
+                attr.SetColorKey(gdiBitmap.KeyColor, gdiBitmap.KeyColor);
                 gBack.DrawImage(gdiBitmap.Image, destRect,
                     gdiBitmap.Width, 0,
                     -gdiBitmap.Width, gdiBitmap.Height,
@@ -261,7 +327,7 @@ namespace _0812239
                 //    sourceRegion.Height);
 
                 ImageAttributes attr = new ImageAttributes();
-                attr.SetColorKey(gdiBitmap.SourceKey, gdiBitmap.SourceKey);
+                attr.SetColorKey(gdiBitmap.KeyColor, gdiBitmap.KeyColor);
                 gBack.DrawImage(gdiBitmap.Image, destRect,
                     0, 0,
                     gdiBitmap.Width, gdiBitmap.Height,
@@ -292,7 +358,7 @@ namespace _0812239
                 Rectangle dest = new Rectangle(x, y, srcRect.Width, srcRect.Height);
 
                 ImageAttributes attr = new ImageAttributes();
-                attr.SetColorKey(gdiBitmap.SourceKey, gdiBitmap.SourceKey);
+                attr.SetColorKey(gdiBitmap.KeyColor, gdiBitmap.KeyColor);
                 gBack.DrawImage(gdiBitmap.Image, dest,
                     srcRect.X + srcRect.Width, srcRect.Y,
                     -srcRect.Width, srcRect.Height,
@@ -303,13 +369,95 @@ namespace _0812239
                 Rectangle dest = new Rectangle(x, y, srcRect.Width, srcRect.Height);
 
                 ImageAttributes attr = new ImageAttributes();
-                attr.SetColorKey(gdiBitmap.SourceKey, gdiBitmap.SourceKey);
+                attr.SetColorKey(gdiBitmap.KeyColor, gdiBitmap.KeyColor);
                 gBack.DrawImage(gdiBitmap.Image, dest,
                     srcRect.X, srcRect.Y,
                     srcRect.Width, srcRect.Height,
                     GraphicsUnit.Pixel, attr);
             }
         }
+
+        public void DrawImageTransparent(IBitmap image, Rectangle rectSrc, Rectangle rectDest)
+        {
+            GdiBitmap gdiBitmap = null;
+            try
+            {
+                gdiBitmap = (GdiBitmap)image;
+            }
+            catch (InvalidCastException e)
+            {
+                throw new ApplicationException(
+                    "The bitmap given was not created by" +
+                    "this class' CreateBitmap() method.", e);
+            }
+
+            // Clip the regions to the screen
+            int x = rectDest.X;
+            int y = rectDest.Y;
+            if (!ValidateRegions(ref x, ref y, ref rectDest))
+                return;
+
+            //rectDest.X = x;
+            //rectDest.Y = y;
+
+            if ((drawOptions & DrawOptions.BlitMirrorLeftRight) != 0)
+            {
+                //Rectangle dest = new Rectangle(x, y, srcRect.Width, srcRect.Height);
+
+                ImageAttributes attr = new ImageAttributes();
+                attr.SetColorKey(gdiBitmap.KeyColor, gdiBitmap.KeyColor);
+                gBack.DrawImage(gdiBitmap.Image, rectDest,
+                    rectSrc.X + rectSrc.Width, rectSrc.Y,
+                    -rectSrc.Width, rectSrc.Height,
+                    GraphicsUnit.Pixel, attr);
+            }
+            else
+            {
+                //Rectangle dest = new Rectangle(x, y, srcRect.Width, srcRect.Height);
+
+                ImageAttributes attr = new ImageAttributes();
+                attr.SetColorKey(gdiBitmap.KeyColor, gdiBitmap.KeyColor);
+                gBack.DrawImage(gdiBitmap.Image, rectDest,
+                    rectSrc.X, rectSrc.Y,
+                    rectSrc.Width, rectSrc.Height,
+                    GraphicsUnit.Pixel, attr);
+            }
+        }
+
+        public void DrawImageAlphaChannel(IImage image, int x, int y)
+        {
+            ImageInfo imgInfo;
+            image.GetImageInfo(out imgInfo);
+            Rectangle desRect = new Rectangle(x, y, (int)imgInfo.Width, (int)imgInfo.Height);
+            //Rectangle rectSrc = new Rectangle(0, 0, (int)imgInfo.Width, (int)imgInfo.Height);
+            IntPtr hdc = gBack.GetHdc();
+            //Rectangle src = Rectangle.Empty;
+            image.Draw(hdc, ref desRect, IntPtr.Zero);
+
+            gBack.ReleaseHdc(hdc);  // !!! phai thuc hien thao tac nay
+        }
+
+        public void DrawImageAlphaChannel(IImage image, Rectangle dest)
+        {
+            //ImageInfo imgInfo;
+            //image.GetImageInfo(out imgInfo);
+            //Rectangle rectSrc = new Rectangle(0, 0, (int)imgInfo.Width, (int)imgInfo.Height);
+            IntPtr hdc = gBack.GetHdc();
+            //Rectangle src = Rectangle.Empty;
+            image.Draw(hdc, ref dest, IntPtr.Zero);
+
+            gBack.ReleaseHdc(hdc);  // !!! phai thuc hien thao tac nay
+        }
+
+        //public void DrawImageAlphaChannel(IImage image, Rectangle dest, Rectangle src)
+        //{
+        //    //ImageInfo imgInfo;
+        //    //image.GetImageInfo(out imgInfo);
+        //    IntPtr hdc = gBack.GetHdc();
+        //    image.Draw(hdc, ref dest, ref src); // !!! xem lai src (tinh bang don vi DPI)
+
+        //    gBack.ReleaseHdc(hdc);  // !!! phai thuc hien thao tac nay
+        //}
 
         /// <summary>
         /// Draw the bitmap to the back buffer.
@@ -346,7 +494,7 @@ namespace _0812239
                     Rectangle dest = new Rectangle(x, y, sourceRegion.Width,
                         sourceRegion.Height);
                     ImageAttributes attr = new ImageAttributes();
-                    attr.SetColorKey(gdiBitmap.SourceKey, gdiBitmap.SourceKey);
+                    attr.SetColorKey(gdiBitmap.KeyColor, gdiBitmap.KeyColor);
                     gBack.DrawImage(gdiBitmap.Image, dest,
                         sourceRegion.X + sourceRegion.Width, sourceRegion.Y,
                         -sourceRegion.Width, sourceRegion.Height,
@@ -357,7 +505,7 @@ namespace _0812239
                     Rectangle dest = new Rectangle(x, y, sourceRegion.Width,
                         sourceRegion.Height);
                     ImageAttributes attr = new ImageAttributes();
-                    attr.SetColorKey(gdiBitmap.SourceKey, gdiBitmap.SourceKey);
+                    attr.SetColorKey(gdiBitmap.KeyColor, gdiBitmap.KeyColor);
                     gBack.DrawImage(gdiBitmap.Image, dest, sourceRegion.X,
                         sourceRegion.Y,
                         sourceRegion.Width, sourceRegion.Height,
@@ -391,6 +539,13 @@ namespace _0812239
 #endif
                 }
             }
+        }
+
+        public void DrawBitmap(int x, int y, IBitmap bmp)
+        {
+            Rectangle rectSrc = new Rectangle(0, 0, bmp.Width, bmp.Height);
+
+            DrawBitmap(x, y, rectSrc, bmp);
         }
 
         /// <summary>
@@ -462,8 +617,30 @@ namespace _0812239
             }
 
             Brush brush = new SolidBrush(color);
-            gBack.DrawString(text, gdiFont.Font, brush, drawX, drawY);
+        }
 
+        public void DrawString(string text, IFont font, Brush brush, Rectangle textRect)
+        {
+            gBack.DrawString(text, ((GdiFont)font).Font, brush, textRect);
+        }
+
+        public void DrawText(Rectangle rectText, string text, Color color, IFont font, FontDrawOptions options)
+        {
+            StringFormat stringFormat = new StringFormat();
+
+            if ((options & FontDrawOptions.DrawTextCenter) != 0)
+                stringFormat.Alignment = StringAlignment.Center;
+            else if ((options & FontDrawOptions.DrawTextCenter) != 0)
+                stringFormat.Alignment = StringAlignment.Center;
+            else if ((options & FontDrawOptions.DrawTextCenter) != 0)
+                stringFormat.Alignment = StringAlignment.Center;
+
+            if ((options & FontDrawOptions.DrawTextTop) != 0)
+                stringFormat.LineAlignment = StringAlignment.Near;
+            else if ((options & FontDrawOptions.DrawTextBottom) != 0)
+                stringFormat.Alignment = StringAlignment.Far;
+
+            gBack.DrawString(text, ((GdiFont)font).Font, new SolidBrush(color), rectText, stringFormat);
         }
 
         /// <summary>
@@ -569,6 +746,11 @@ namespace _0812239
             return new GdiBitmap(bmp, transparent);
         }
 
+        public IBitmap CreateBitmap(IBitmap ibmp, bool trans)
+        {
+            return new GdiBitmap(((GdiBitmap)ibmp).Image, trans);
+        }
+
 
         /// <summary>
         /// Creates a font object compatible with this graphics device
@@ -579,6 +761,11 @@ namespace _0812239
         public IFont CreateFont(string fontName)
         {
             return new GdiFont(fontName);
+        }
+
+        public IFont CreateFont(string fontName, float fontSize, FontStyle fontStyle)
+        {
+            return new GdiFont(fontName, fontSize, fontStyle);
         }
     }
 

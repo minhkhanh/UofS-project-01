@@ -6,32 +6,24 @@ using System.Drawing;
 
 namespace _0812239
 {
-    public interface IBitmap : IDisposable
-    {
-        int Height { get;}
-        Color SourceKey { get; set; }
-        bool Transparent { get; set; }
-        int Width { get;}
-    }
-
     public class GdiBitmap : IBitmap
     {
         public GdiBitmap(string strFileName, bool bTransparent)
         {
             bmp = new Bitmap(strFileName);
-            transparentValue = bTransparent;
+            transparent = bTransparent;
         }
 
         public GdiBitmap(Bitmap bmpImage, bool bTransparent)
         {
             bmp = new Bitmap(bmpImage);
-            transparentValue = bTransparent;
+            transparent = bTransparent;
         }
 
         public GdiBitmap(System.IO.Stream strm, bool bTransparent)
         {
             bmp = new Bitmap(strm);
-            transparentValue = bTransparent;
+            transparent = bTransparent;
         }
 
         private Bitmap bmp;
@@ -41,8 +33,8 @@ namespace _0812239
             set { bmp = value; }
         }
 
-        private Color sourceKeyValue;
-        private bool transparentValue;  // true: xoa nen khi ve bitmap
+        private Color keycolor;
+        private bool transparent;  // true: xoa nen khi ve bitmap
 
         #region IBitmap Members
 
@@ -56,16 +48,16 @@ namespace _0812239
             get { return bmp.Width; }
         }
 
-        public Color SourceKey
+        public Color KeyColor
         {
-            get { return sourceKeyValue; }
-            set { sourceKeyValue = value; }
+            get { return keycolor; }
+            set { keycolor = value; }
         }
 
         public bool Transparent
         {
-            get { return transparentValue; }
-            set { transparentValue = value; }
+            get { return transparent; }
+            set { transparent = value; }
         }
 
         #endregion

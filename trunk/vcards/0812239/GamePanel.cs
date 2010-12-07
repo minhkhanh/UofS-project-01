@@ -8,6 +8,13 @@ namespace _0812239
 {
     public class GamePanel
     {
+        static IImagingFactory factory = (IImagingFactory)Activator.CreateInstance(Type.GetTypeFromCLSID(new Guid("327ABDA8-072B-11D3-9D7B-0000F81EF32E")));
+        static public IImagingFactory IGameImagingFactory
+        {
+            get { return factory; }
+            set { factory = value; }
+        }
+
         IGraphics g;
         public IGraphics IGameGracphics
         {
@@ -18,6 +25,12 @@ namespace _0812239
         public GamePanel(Control owner)
         {
             g = new GdiGraphics(owner);
+        }
+
+        bool m_bPlaying;
+        public void GameLoop()
+        {
+            while (true) ;
         }
     }
 }
