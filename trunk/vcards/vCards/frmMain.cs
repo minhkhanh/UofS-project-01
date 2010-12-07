@@ -27,9 +27,29 @@ namespace vCards
             
         }
 
+        int i = 1;
+        int j = 1;
         private void frmMain_Paint(object sender, PaintEventArgs e)
         {
-            IBitmap a = new GdiBitmap(pathApp + @"Resources\Images\Cards\1-1.png", false) as IBitmap;
+            
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (j == 13)
+            {
+                ++i;
+                j = 1;
+
+                if (i > 4)
+                    i = 1;
+            }
+            else
+                ++j;
+
+            string filename = pathApp + @"Resources\Images\Cards\" + i.ToString() + "-" + j.ToString() + ".png";
+
+            IBitmap a = new GdiBitmap(filename, false) as IBitmap;
             igphics.DrawBitmap(0, 0, a);
             igphics.Flip();
 
