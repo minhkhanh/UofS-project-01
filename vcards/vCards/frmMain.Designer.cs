@@ -31,6 +31,7 @@
         {
             this.mainMenu1 = new System.Windows.Forms.MainMenu();
             this.menuItem1 = new System.Windows.Forms.MenuItem();
+            this.timer1 = new System.Windows.Forms.Timer();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -41,6 +42,11 @@
             // 
             this.menuItem1.Text = "TEST01";
             this.menuItem1.Click += new System.EventHandler(this.menuItem1_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // frmMain
             // 
@@ -60,5 +66,6 @@
         #endregion
 
         private System.Windows.Forms.MenuItem menuItem1;
+        private System.Windows.Forms.Timer timer1;
     }
 }
