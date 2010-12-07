@@ -11,6 +11,8 @@ namespace vCards
 {
     public partial class frmMain : Form
     {
+        string pathApp = System.Reflection.Assembly.GetExecutingAssembly().GetModules()[0].FullyQualifiedName.Replace(System.Reflection.Assembly.GetExecutingAssembly().GetModules()[0].Name, "");
+
         IGraphics igphics;
 
         public frmMain()
@@ -22,7 +24,16 @@ namespace vCards
 
         private void menuItem1_Click(object sender, EventArgs e)
         {
-            //Bitmap a
+            
+        }
+
+        private void frmMain_Paint(object sender, PaintEventArgs e)
+        {
+            IBitmap a = new GdiBitmap(pathApp + @"Resources\Images\Cards\1-1.png", false) as IBitmap;
+            igphics.DrawBitmap(0, 0, a);
+            igphics.Flip();
+
+            a.Dispose();
         }
     }
 }

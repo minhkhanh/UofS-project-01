@@ -96,6 +96,13 @@ namespace vCards
             DrawBitmap(x, y, animation.Region, animation.Image);
         }
 
+        public void DrawBitmap(int x, int y, IBitmap bmp)
+        {
+            Rectangle rectSrc = new Rectangle(0, 0, bmp.Width, bmp.Height);
+
+            DrawBitmap(x, y, rectSrc, bmp);
+        }
+
         ///  
         /// Draw the bitmap to the back buffer. 
         ///  

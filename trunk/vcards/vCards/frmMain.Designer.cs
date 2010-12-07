@@ -49,8 +49,10 @@
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(240, 268);
             this.Menu = this.mainMenu1;
+            this.MinimizeBox = false;
             this.Name = "frmMain";
             this.Text = "frmMain";
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.frmMain_Paint);
             this.ResumeLayout(false);
 
         }
