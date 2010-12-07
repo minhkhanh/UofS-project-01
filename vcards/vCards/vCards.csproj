@@ -45,6 +45,7 @@
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.WindowsMobile.DirectX" />
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -59,10 +60,19 @@
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
+    <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Gaming\Animation.cs" />
+    <Compile Include="Gaming\GamePanel.cs" />
+    <Compile Include="Graphics\ImagingAPI.cs" />
+    <Compile Include="Gaming\Sprite.cs" />
+    <Compile Include="Graphics\DirectX\DirectXBitmap.cs" />
+    <Compile Include="Graphics\DirectX\DirectXFont.cs" />
+    <Compile Include="Graphics\DirectX\DirectXGraphics.cs" />
+    <Compile Include="Graphics\Gdi\GdiBitmap.cs" />
+    <Compile Include="Graphics\Gdi\GdiFont.cs" />
+    <Compile Include="Graphics\Gdi\GdiGraphics.cs" />
     <Compile Include="Graphics\Interfaces\IBitmap.cs" />
     <Compile Include="Graphics\Interfaces\IFont.cs" />
     <Compile Include="Graphics\Interfaces\IGraphics.cs" />
@@ -77,10 +87,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Graphics\DirectX\" />
-    <Folder Include="Graphics\Gdi\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
   <ProjectExtensions>

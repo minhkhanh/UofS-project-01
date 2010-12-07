@@ -1,6 +1,6 @@
 ﻿namespace vCards
 {
-    partial class Form1
+    partial class frmMain
     {
         /// <summary>
         /// Required designer variable.
@@ -29,15 +29,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.mainMenu1 = new System.Windows.Forms.MainMenu();
             this.Menu = this.mainMenu1;
-            this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.Text = "Form1";
+            this.Text = "frmMain";
             this.AutoScroll = true;
         }
 
         #endregion
     }
 }
-
