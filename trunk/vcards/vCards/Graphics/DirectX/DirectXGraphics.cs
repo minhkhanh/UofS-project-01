@@ -15,7 +15,7 @@ using Microsoft.WindowsMobile.DirectX.Direct3D;
 
 namespace vCards
 {
-    public class DirectXGraphics : IGraphics
+    public class DirectXGraphics// : IGraphics
     {
         ///  
         /// The rendering device for D3D 
@@ -130,7 +130,7 @@ namespace vCards
         /// Animation to be drawn 
         public void DrawAnimation(int x, int y, Animation animation)
         {
-            DrawBitmap(x, y, animation.Region, animation.Image);
+            DrawBitmap(x, y, animation.Region, animation.IBmpImage);
         }
 
         public void DrawBitmap(int x, int y, IBitmap bmp)

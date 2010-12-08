@@ -18,6 +18,8 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Drawing.Imaging;
+using System.IO;
+using System.Collections.Generic;
 
 //#if DESKTOP 
 //using Microsoft.DirectX; 
@@ -85,6 +87,160 @@ namespace vCards
             screen.Dispose();
         }
 
+        public void DrawImageTransparent(IBitmap ibmp, Rectangle srcRect, int x, int y)
+        {
+            GdiBitmap gdiBitmap = null;
+            try
+            {
+                gdiBitmap = (GdiBitmap)ibmp;
+            }
+            catch (InvalidCastException e)
+            {
+                throw new ApplicationException(
+                    "The bitmap given was not created by" +
+                    "this class' CreateBitmap() method.", e);
+            }
+
+            // Clip the regions to the screen
+            if (!ValidateRegions(ref x, ref y, ref srcRect))
+                return;
+
+            if ((drawOptions & DrawOptions.BlitMirrorLeftRight) != 0)
+            {
+                Rectangle dest = new Rectangle(x, y, srcRect.Width, srcRect.Height);
+
+                ImageAttributes attr = new ImageAttributes();
+                attr.SetColorKey(gdiBitmap.SourceKey, gdiBitmap.SourceKey);
+                gBack.DrawImage(gdiBitmap.Image, dest,
+                    srcRect.X + srcRect.Width, srcRect.Y,
+                    -srcRect.Width, srcRect.Height,
+                    GraphicsUnit.Pixel, attr);
+            }
+            else
+            {
+                Rectangle dest = new Rectangle(x, y, srcRect.Width, srcRect.Height);
+
+                ImageAttributes attr = new ImageAttributes();
+                attr.SetColorKey(gdiBitmap.SourceKey, gdiBitmap.SourceKey);
+                gBack.DrawImage(gdiBitmap.Image, dest,
+                    srcRect.X, srcRect.Y,
+                    srcRect.Width, srcRect.Height,
+                    GraphicsUnit.Pixel, attr);
+            }
+        }
+
+        /// <summary>
+        /// Ve anh len mot vung nao do voi mau nen trong suot. Anh se tu dong bien doi cho phu hop voi vung can ve
+        /// </summary>
+        /// <param name="image"></param>
+        /// <param name="destRect"></param>
+        public void DrawImageTransparent(IBitmap ibmp, Rectangle destRect)
+        {
+            GdiBitmap gdiBitmap = null;
+            try
+            {
+                gdiBitmap = (GdiBitmap)ibmp;
+            }
+            catch (InvalidCastException e)
+            {
+                throw new ApplicationException(
+                    "The bitmap given was not created by" +
+                    "this class' CreateBitmap() method.", e);
+            }
+
+            // Clip the regions to the screen
+            int x = destRect.X;      // temp variable for function param, not used
+            int y = destRect.Y;      // temp variable for function param, not used
+            if (!ValidateRegions(ref x, ref y, ref destRect))
+                return;
+
+            if ((drawOptions & DrawOptions.BlitMirrorLeftRight) != 0)
+            {
+                //Rectangle dest = new Rectangle(x, y, sourceRegion.Width,
+                //    sourceRegion.Height);
+
+                ImageAttributes attr = new ImageAttributes();
+                attr.SetColorKey(gdiBitmap.SourceKey, gdiBitmap.SourceKey);
+                gBack.DrawImage(gdiBitmap.Image, destRect,
+                    gdiBitmap.Width, 0,
+                    -gdiBitmap.Width, gdiBitmap.Height,
+                    GraphicsUnit.Pixel, attr);
+            }
+            else
+            {
+                //Rectangle dest = new Rectangle(x, y, sourceRegion.Width,
+                //    sourceRegion.Height);
+
+                ImageAttributes attr = new ImageAttributes();
+                attr.SetColorKey(gdiBitmap.SourceKey, gdiBitmap.SourceKey);
+                gBack.DrawImage(gdiBitmap.Image, destRect,
+                    0, 0,
+                    gdiBitmap.Width, gdiBitmap.Height,
+                    GraphicsUnit.Pixel, attr);
+            }
+        }
+
+        public void DrawImageAlphaChannel(IImage image, int x, int y)
+        {
+            ImageInfo imgInfo;
+            image.GetImageInfo(out imgInfo);
+            Rectangle desRect = new Rectangle(x, y, (int)imgInfo.Width, (int)imgInfo.Height);
+            
+            IntPtr hdc = gBack.GetHdc();
+
+            //imgInfo.
+            
+            image.Draw(hdc, ref desRect, IntPtr.Zero);
+
+            gBack.ReleaseHdc(hdc);  // !!! phai thuc hien thao tac Release nay!
+        }
+
+        public void DrawImageAlphaChannel(IImage image, Rectangle dest)
+        {
+            IntPtr hdc = gBack.GetHdc();
+            
+            image.Draw(hdc, ref dest, IntPtr.Zero);
+
+            gBack.ReleaseHdc(hdc);  // !!! phai thuc hien thao tac Release nay!
+        }
+
+        public void DrawImageAlphaChannel(IImage image, Rectangle dest, Rectangle src)
+        {
+            ImageInfo imgInfo;
+            image.GetImageInfo(out imgInfo);
+
+            IntPtr hdc = gBack.GetHdc();
+
+            src.X = src.X * (2540 / (int)imgInfo.Xdpi);
+            src.Y = src.Y * (2540 / (int)imgInfo.Ydpi);
+            src.Width = src.Width * (2540 / (int)imgInfo.Xdpi);
+            src.Height = src.Height * (2540 / (int)imgInfo.Ydpi);
+
+            //image.Draw(hdc, ref dest, ref src); // !!! xem lai src (tinh bang don vi DPI)
+
+            gBack.ReleaseHdc(hdc);  // !!! phai thuc hien thao tac Release nay!
+        }
+
+        public void DrawAnimation(int x, int y, Rectangle rectSrc, Animation animation)
+        {
+            rectSrc.X += animation.Region.X;
+            rectSrc.Y += animation.Region.Y;
+
+            if (animation.ImageKind == true)        // animation la bitmap
+                DrawBitmap(x, y, rectSrc, animation.IBmpImage);
+            else
+                DrawImageAlphaChannel(animation.IImgImage, new Rectangle(x, y, rectSrc.Width, rectSrc.Height), rectSrc);
+        }
+
+        public void DrawAnimationScale(int x, int y, int w, int h, Animation animation)
+        {
+            if (animation.ImageKind == true)        // animation la bitmap
+                DrawBitmap(animation.Region, new Rectangle(x,y,w,h), animation.IBmpImage);
+            else
+                DrawImageAlphaChannel(animation.IImgImage, new Rectangle(x, y, w, h), animation.Region);
+        }
+
+
         ///  
         /// Draw the current cell of the animation to the back buffer. 
         ///  
@@ -93,14 +249,109 @@ namespace vCards
         /// Animation to be drawn 
         public void DrawAnimation(int x, int y, Animation animation)
         {
-            DrawBitmap(x, y, animation.Region, animation.Image);
+            if (animation.ImageKind == true)        // animation la bitmap
+                DrawBitmap(x, y, animation.Region, animation.IBmpImage);
+            else
+                DrawImageAlphaChannel(animation.IImgImage, x, y);
+        }
+
+        public void DrawBitmap(Rectangle rectDest, IBitmap ibmp)
+        {
+            DrawBitmap(new Rectangle(0, 0, ibmp.Width, ibmp.Height), rectDest, ibmp);
         }
 
         public void DrawBitmap(int x, int y, IBitmap bmp)
         {
-            Rectangle rectSrc = new Rectangle(0, 0, bmp.Width, bmp.Height);
+            DrawBitmap(x, y, new Rectangle(0, 0, bmp.Width, bmp.Height), bmp);
+        }
 
-            DrawBitmap(x, y, rectSrc, bmp);
+        public void DrawBitmap(Rectangle sourceRegion, Rectangle destRect, 
+            IBitmap bmp)
+        {
+            // make sure the function is passed an appropriate implementation 
+            GdiBitmap gdi_bmp = null;
+            try
+            {
+                gdi_bmp = (GdiBitmap)bmp;
+            }
+            catch (InvalidCastException e)
+            {
+                throw new ApplicationException(
+                    "The bitmap given was not created by" +
+                    "this class' CreateBitmap() method.", e);
+            }
+
+            // Clip the regions to the screen
+            int x = destRect.X;      // temp variable for function param, not used
+            int y = destRect.Y;      // temp variable for function param, not used
+
+            if (!ValidateRegions(ref x, ref y, ref destRect))
+                return;
+
+            if (!ValidateRegions(ref x, ref y, ref sourceRegion))
+                return;
+
+            // Draw the bitmap 
+            if (gdi_bmp.Transparent)
+            {
+                if ((drawOptions & DrawOptions.BlitMirrorLeftRight) != 0)
+                {
+                    //Rectangle dest = new Rectangle(x, y, sourceRegion.Width,
+                    //    sourceRegion.Height);
+                    ImageAttributes attr = new ImageAttributes();
+                    attr.SetColorKey(gdi_bmp.SourceKey, gdi_bmp.SourceKey);
+                    gBack.DrawImage(gdi_bmp.Image, destRect, sourceRegion.X +
+                        sourceRegion.Width,
+                        sourceRegion.Y, -sourceRegion.Width, sourceRegion.Height,
+                        GraphicsUnit.Pixel, attr);
+                }
+                else
+                {
+                    //Rectangle dest = new Rectangle(x, y, sourceRegion.Width,
+                    //    sourceRegion.Height);
+                    ImageAttributes attr = new ImageAttributes();
+                    attr.SetColorKey(gdi_bmp.SourceKey, gdi_bmp.SourceKey);
+                    gBack.DrawImage(gdi_bmp.Image, destRect, sourceRegion.X,
+                        sourceRegion.Y,
+                        sourceRegion.Width, sourceRegion.Height,
+                        GraphicsUnit.Pixel, attr);
+                }
+            }
+            else
+            {
+                if ((drawOptions & DrawOptions.BlitMirrorLeftRight) != 0)
+                {
+                    //Rectangle dest = new Rectangle(x + sourceRegion.Width - 1,
+                    //    y, 1, sourceRegion.Height);
+                    //Rectangle src = new Rectangle(sourceRegion.X, sourceRegion.Y,
+                    //    1, sourceRegion.Height);
+                    //for (int i = 0; i < sourceRegion.Width; i++)
+                    //{
+                    //    gBack.DrawImage(gdi_bmp.Image, dest.X, dest.Y, src,
+                    //        GraphicsUnit.Pixel);
+                    //    dest.X--;
+                    //    src.X++;
+                    //}
+
+                    ImageAttributes attr = new ImageAttributes();
+                    attr.ClearColorKey();
+                    //attr.SetColorKey(gdi_bmp.SourceKey, gdi_bmp.SourceKey);
+                    gBack.DrawImage(gdi_bmp.Image, destRect,
+                        sourceRegion.X + sourceRegion.Width,
+                        sourceRegion.Y, -sourceRegion.Width, sourceRegion.Height,
+                        GraphicsUnit.Pixel, attr);
+                }
+                else
+                {
+#if !DESKTOP
+                    gBack.DrawImage(gdi_bmp.Image, destRect, sourceRegion,
+                        GraphicsUnit.Pixel);
+#else  
+                    gBack.DrawImage(gdi_bmp.Image, destRect, 
+                        sourceRegion.Width, sourceRegion.Height); 
+#endif
+                }
+            }
         }
 
         ///  
@@ -195,12 +446,49 @@ namespace vCards
             gBack.FillRectangle(new SolidBrush(c), r);
         }
 
+        public void Flip(Rectangle rect)
+        {
+            screen.DrawImage(back, rect, new Rectangle(0,0,back.Width, back.Height), GraphicsUnit.Pixel);
+        }
+
+        public void Flip(List<Rectangle> listRect)
+        {
+            foreach (Rectangle i in listRect)
+            {
+                screen.DrawImage(back, i, new Rectangle(0, 0, back.Width, back.Height), GraphicsUnit.Pixel);
+            }
+        }
+
         ///  
         /// Flip the back buffer to the display. 
         ///  
         public void Flip()
         {
             screen.DrawImage(back, 0, 0);
+        }
+
+        public void DrawString(string text, IFont font, Brush brush, Rectangle textRect)
+        {
+            gBack.DrawString(text, ((GdiFont)font).Font, brush, textRect);
+        }
+
+        public void DrawText(Rectangle rectText, string text, Color color, IFont font, FontDrawOptions options)
+        {
+            StringFormat stringFormat = new StringFormat();
+
+            if ((options & FontDrawOptions.DrawTextCenter) != 0)
+                stringFormat.LineAlignment = StringAlignment.Center;
+            else if ((options & FontDrawOptions.DrawTextLeft) != 0)
+                stringFormat.LineAlignment = StringAlignment.Near;
+            else if ((options & FontDrawOptions.DrawTextRight) != 0)
+                stringFormat.LineAlignment = StringAlignment.Far;
+
+            if ((options & FontDrawOptions.DrawTextTop) != 0)
+                stringFormat.Alignment = StringAlignment.Near;
+            else if ((options & FontDrawOptions.DrawTextBottom) != 0)
+                stringFormat.Alignment = StringAlignment.Far;
+
+            gBack.DrawString(text, ((GdiFont)font).Font, new SolidBrush(color), rectText, stringFormat);
         }
 
         ///  
@@ -328,6 +616,16 @@ namespace vCards
             return true;
         }
 
+        public IBitmap CreateBitmap(Stream stream, bool transparent)
+        {
+            return new GdiBitmap(stream, transparent);
+        }
+
+        public IBitmap CreateBitmap(System.Drawing.Bitmap bmp, bool transparent)
+        {
+            return new GdiBitmap(bmp, transparent);
+        }
+
         ///  
         /// Creates a bitmap compatible with this graphics device 
         ///  
@@ -340,7 +638,6 @@ namespace vCards
             return new GdiBitmap(fileName, transparent);
         }
 
-
         ///  
         /// Creates a font object compatible with this graphics device 
         ///  
@@ -350,6 +647,11 @@ namespace vCards
         public IFont CreateFont(string fontName)
         {
             return new GdiFont(fontName);
+        }
+
+        public IFont CreateFont(string fontName, float fontSize, FontStyle fontStyle)
+        {
+            return new GdiFont(fontName, fontSize, fontStyle);
         }
     }
 }

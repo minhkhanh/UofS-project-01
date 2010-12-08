@@ -66,6 +66,18 @@ namespace vCards
         ///  
         public int Height { get { return bmp.Height; } }
 
+        public GdiBitmap(Bitmap bmp, bool bTransparent)
+        {
+            bmp = new Bitmap(bmp);
+            transparentValue = bTransparent;
+        }
+
+        public GdiBitmap(System.IO.Stream strm, bool bTransparent)
+        {
+            bmp = new Bitmap(strm);
+            transparentValue = bTransparent;
+        }
+
         ///  
         /// Allocate and load an image from the specified file. 
         ///  

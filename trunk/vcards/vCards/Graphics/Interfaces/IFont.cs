@@ -14,7 +14,10 @@ namespace vCards
         None = 0,
         DrawTextLeft = 0x0001,
         DrawTextCenter = 0x0002,
-        DrawTextRight = 0x0004
+        DrawTextRight = 0x0004,
+
+        DrawTextTop = 0x0008,
+        DrawTextBottom = 0x0010
     }
 
 
