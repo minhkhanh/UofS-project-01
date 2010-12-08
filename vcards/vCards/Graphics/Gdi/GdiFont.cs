@@ -15,6 +15,7 @@
 
 using System;
 using System.Runtime.InteropServices;
+using System.Drawing;
 
 #if DESKTOP 
 using Microsoft.DirectX.Direct3D; 
@@ -36,6 +37,12 @@ namespace vCards
         /// Gets the GDI font associated with this font data. 
         ///  
         public System.Drawing.Font Font { get { return fontValue; } }
+
+        public GdiFont(string fontName, float fontSize, FontStyle fontStyle)
+        {
+            fontValue = new System.Drawing.Font(fontName, fontSize,
+                fontStyle);
+        }
 
         ///  
         /// Allocate and load a font. 

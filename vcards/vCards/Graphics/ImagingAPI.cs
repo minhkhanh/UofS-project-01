@@ -113,6 +113,7 @@ namespace vCards
         uint GetImageInfo(out ImageInfo info);
         uint SetImageFlags(uint flags);
         // "Correct" declaration: uint Draw(IntPtr hdc, ref Rectangle dstRect, ref Rectangle srcRect);
+        //uint Draw(IntPtr hdc, ref Rectangle dstRect, ref Rectangle srcRect);
         uint Draw(IntPtr hdc, ref Rectangle dstRect, IntPtr NULL);
         //uint Draw(IntPtr hdc, ref Rectangle dstRect, ref Rectangle srcRect);
         uint PushIntoSink(); // This is a place holder

@@ -55,8 +55,14 @@ namespace vCards
         ///  
         /// Bitmap to be used for animating. 
         ///  
-        public IBitmap Image { get { return bmp; } }
-        IBitmap bmp;
+        public IBitmap IBmpImage { get { return ibmpImage; } }
+        IBitmap ibmpImage;
+
+        ///  
+        /// Transparent image to be used for animating. 
+        ///  
+        public IImage IImgImage { get { return iimgImage; } }
+        IImage iimgImage;
 
         ///  
         /// Index of the animation cell currently being displayed.  This 
@@ -125,6 +131,16 @@ namespace vCards
         ///  
         bool allocated = false;
 
+        /// <summary>
+        /// true: ibitmap
+        /// false: iimage
+        /// </summary>
+        bool imgKind;
+        public bool ImageKind
+        {
+            get { return imgKind; }
+        }
+
         ///  
         /// Specifies whether the animation has been properly initialized or 
         /// not. 
@@ -180,6 +196,126 @@ namespace vCards
             }
         }
 
+        Animation(IBitmap ibmp, IGraphics graphics, int numberRows,
+            int numberColumns, int startCell, int cellWidth, int cellHeight,
+            int cellsPerSecond)
+        {
+            initialized = false;
+
+            // Initialize the cell information 
+            this.cellWidthValue = cellWidth;
+            this.cellHeightValue = cellHeight;
+            this.numberRows = numberRows;
+            this.numberColumns = numberColumns;
+
+            startCell = 0;
+            endCell = numberRows * numberColumns - 1;
+
+            // Load and initialize the Bitmap object 
+
+            ibmpImage = ibmp;//? graphics.CreateBitmap(ibmp, true);
+            if (ibmpImage == null)
+            {
+                initialized = false;
+                return;
+            }
+
+            allocated = true;
+            imgKind = true;
+
+            // Initialize timing information 
+            this.cellsPerSecond = (float)cellsPerSecond;
+
+            // Initialize the draw region rectangle 
+            sourceRegion.Width = cellWidth;
+            sourceRegion.Height = cellHeight;
+
+            // Validate information for drawing the first cell 
+            Update(0.0F);
+
+            initialized = true;
+        }
+
+        Animation(IImage iimg, IGraphics graphics, int numberRows,
+            int numberColumns, int startCell, int cellWidth, int cellHeight,
+            int cellsPerSecond)
+        {
+            initialized = false;
+
+            // Initialize the cell information 
+            this.cellWidthValue = cellWidth;
+            this.cellHeightValue = cellHeight;
+            this.numberRows = numberRows;
+            this.numberColumns = numberColumns;
+
+            startCell = 0;
+            endCell = numberRows * numberColumns - 1;
+
+            // Load and initialize the Bitmap object 
+            //IBitmap ibmp = (IBitmap)iimg;
+            iimgImage = iimg;//? graphics.CreateBitmap(ibmp, true);
+
+            if (iimgImage == null)
+            {
+                initialized = false;
+                return;
+            }
+
+            allocated = true;
+            imgKind = false;
+
+            // Initialize timing information 
+            this.cellsPerSecond = (float)cellsPerSecond;
+
+            // Initialize the draw region rectangle 
+            sourceRegion.Width = cellWidth;
+            sourceRegion.Height = cellHeight;
+
+            // Validate information for drawing the first cell 
+            Update(0.0F);
+
+            initialized = true;
+        }
+
+        public Animation(Stream strm, IGraphics graphics, int numberRows,
+            int numberColumns, int startCell, int cellWidth, int cellHeight,
+            int cellsPerSecond)
+        {
+            initialized = false;
+
+            // Initialize the cell information 
+            this.cellWidthValue = cellWidth;
+            this.cellHeightValue = cellHeight;
+            this.numberRows = numberRows;
+            this.numberColumns = numberColumns;
+
+            startCell = 0;
+            endCell = numberRows * numberColumns - 1;
+
+            // Load and initialize the Bitmap object 
+            ibmpImage = graphics.CreateBitmap(strm, true);
+            if (ibmpImage == null)
+            {
+                initialized = false;
+                return;
+            }
+
+            allocated = true;
+            imgKind = true;
+
+            // Initialize timing information 
+            this.cellsPerSecond = (float)cellsPerSecond;
+
+            // Initialize the draw region rectangle 
+            sourceRegion.Width = cellWidth;
+            sourceRegion.Height = cellHeight;
+
+            // Validate information for drawing the first cell 
+            Update(0.0F);
+
+            initialized = true;
+        }
+
         ///  
         /// Create an animation from a Bitmap stream. 
         ///  
@@ -216,14 +352,15 @@ namespace vCards
             endCell = numberRows * numberColumns - 1;
 
             // Load and initialize the Bitmap object 
-            bmp = graphics.CreateBitmap(fileName, true);
-            if (bmp == null)
+            ibmpImage = graphics.CreateBitmap(fileName, true);
+            if (ibmpImage == null)
             {
                 initialized = false;
                 return;
             }
 
             allocated = true;
+            imgKind = true;
 
             // Initialize timing information 
             this.cellsPerSecond = (float)cellsPerSecond;
@@ -264,14 +401,15 @@ namespace vCards
             endCell = numberRows * numberColumns - 1;
 
             // Copy the reference to the original bitmap 
-            bmp = animation.bmp;
-            if (bmp == null)
+            ibmpImage = animation.ibmpImage;
+            if (ibmpImage == null)
             {
                 initialized = false;
                 return;
             }
 
             allocated = false;
+            imgKind = true;
 
             // Initialize timing information 
             this.cellsPerSecond = (float)cellsPerSecond;
@@ -313,6 +451,57 @@ namespace vCards
             oneShotEndCell = (float)endCell;
             oneShotCellsPerSecond = (float)animationRate;
             curOneShotCell = oneShotStartCell;
+        }
+
+        void Update(ref bool cycleFinished, float deltaTime_s)
+        {
+            float deltaFrames = AnimationRate * deltaTime_s;
+
+            // Animations look bad if frames are skipped even though the 
+            // frame-rate might be too slow so don't allow it 
+            if (deltaFrames > 1.0F)
+                deltaFrames = 1.0F;
+
+            int currentCell;
+
+            if (InvalidOneShotIndex != curOneShotCell)
+            {
+                curOneShotCell += deltaFrames;
+                if (curOneShotCell >= oneShotEndCell + 1.0F)
+                {
+                    curOneShotCell = InvalidOneShotIndex;
+                    currentCell = (int)curCellValue;
+
+                    cycleFinished = true;
+                }
+                else
+                {
+                    currentCell = (int)curOneShotCell;
+
+                    cycleFinished = false;
+                }
+            }
+            else
+            {
+                curCellValue += deltaFrames;
+                if (curCellValue >= endCell + 1.0F)
+                {
+                    curCellValue = startCell;
+
+                    cycleFinished = true;
+                }
+                else
+                    cycleFinished = false;
+
+                currentCell = (int)curCellValue;
+            }
+
+            Debug.Assert(numberColumns > 0,
+                "Animation.Update: Invalid number of columns specified");
+
+            // Set up the draw region rectangle for the current cell 
+            sourceRegion.X = (int)((currentCell % numberColumns) * cellWidthValue);
+            sourceRegion.Y = (int)((currentCell / numberColumns) * cellHeightValue);
         }
 
         ///  
@@ -369,8 +558,8 @@ namespace vCards
             if (!allocated)
                 return;
 
-            if (bmp != null)
-                bmp.Dispose();
+            if (ibmpImage != null)
+                ibmpImage.Dispose();
         }
     }
 }
