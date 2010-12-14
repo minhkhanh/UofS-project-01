@@ -185,14 +185,8 @@ namespace vCards
             ImageInfo imgInfo;
             image.GetImageInfo(out imgInfo);
             Rectangle desRect = new Rectangle(x, y, (int)imgInfo.Width, (int)imgInfo.Height);
-            
-            IntPtr hdc = gBack.GetHdc();
 
-            //imgInfo.
-            
-            image.Draw(hdc, ref desRect, IntPtr.Zero);
-
-            gBack.ReleaseHdc(hdc);  // !!! phai thuc hien thao tac Release nay!
+            DrawImageAlphaChannel(image, desRect);
         }
 
         public void DrawImageAlphaChannel(IImage image, Rectangle dest)
@@ -206,38 +200,29 @@ namespace vCards
 
         public void DrawImageAlphaChannel(IImage image, Rectangle dest, Rectangle src)
         {
-            ImageInfo imgInfo;
-            image.GetImageInfo(out imgInfo);
+            //ImageInfo imgInfo;
+            //image.GetImageInfo(out imgInfo);
 
-            IntPtr hdc = gBack.GetHdc();
+            //IntPtr hdc = gBack.GetHdc();
 
-            src.X = src.X * (2540 / (int)imgInfo.Xdpi);
-            src.Y = src.Y * (2540 / (int)imgInfo.Ydpi);
-            src.Width = src.Width * (2540 / (int)imgInfo.Xdpi);
-            src.Height = src.Height * (2540 / (int)imgInfo.Ydpi);
+            //src.X = src.X * (2540 / (int)imgInfo.Xdpi);
+            //src.Y = src.Y * (2540 / (int)imgInfo.Ydpi);
+            //src.Width = src.Width * (2540 / (int)imgInfo.Xdpi);
+            //src.Height = src.Height * (2540 / (int)imgInfo.Ydpi);
 
-            //image.Draw(hdc, ref dest, ref src); // !!! xem lai src (tinh bang don vi DPI)
+            ////image.Draw(hdc, ref dest, ref src); // !!! xem lai src (tinh bang don vi DPI)
 
-            gBack.ReleaseHdc(hdc);  // !!! phai thuc hien thao tac Release nay!
+            //gBack.ReleaseHdc(hdc);  // !!! phai thuc hien thao tac Release nay!
         }
 
         public void DrawAnimation(int x, int y, Rectangle rectSrc, Animation animation)
         {
-            rectSrc.X += animation.Region.X;
-            rectSrc.Y += animation.Region.Y;
-
-            if (animation.ImageKind == true)        // animation la bitmap
-                DrawBitmap(x, y, rectSrc, animation.IBmpImage);
-            else
-                DrawImageAlphaChannel(animation.IImgImage, new Rectangle(x, y, rectSrc.Width, rectSrc.Height), rectSrc);
+            animation.Draw(this, x, y, rectSrc);
         }
 
         public void DrawAnimationScale(int x, int y, int w, int h, Animation animation)
         {
-            if (animation.ImageKind == true)        // animation la bitmap
-                DrawBitmap(animation.Region, new Rectangle(x,y,w,h), animation.IBmpImage);
-            else
-                DrawImageAlphaChannel(animation.IImgImage, new Rectangle(x, y, w, h), animation.Region);
+            animation.Draw(this, x, y, w, h);
         }
 
 
@@ -249,10 +234,7 @@ namespace vCards
         /// Animation to be drawn 
         public void DrawAnimation(int x, int y, Animation animation)
         {
-            if (animation.ImageKind == true)        // animation la bitmap
-                DrawBitmap(x, y, animation.Region, animation.IBmpImage);
-            else
-                DrawImageAlphaChannel(animation.IImgImage, x, y);
+            animation.Draw(this, x, y);
         }
 
         public void DrawBitmap(Rectangle rectDest, IBitmap ibmp)
@@ -288,8 +270,8 @@ namespace vCards
             if (!ValidateRegions(ref x, ref y, ref destRect))
                 return;
 
-            if (!ValidateRegions(ref x, ref y, ref sourceRegion))
-                return;
+            //if (!ValidateRegions(ref x, ref y, ref sourceRegion))
+            //    return;
 
             // Draw the bitmap 
             if (gdi_bmp.Transparent)
@@ -477,16 +459,18 @@ namespace vCards
             StringFormat stringFormat = new StringFormat();
 
             if ((options & FontDrawOptions.DrawTextCenter) != 0)
-                stringFormat.LineAlignment = StringAlignment.Center;
+                stringFormat.Alignment = StringAlignment.Center;
             else if ((options & FontDrawOptions.DrawTextLeft) != 0)
-                stringFormat.LineAlignment = StringAlignment.Near;
+                stringFormat.Alignment = StringAlignment.Near;
             else if ((options & FontDrawOptions.DrawTextRight) != 0)
-                stringFormat.LineAlignment = StringAlignment.Far;
+                stringFormat.Alignment = StringAlignment.Far;
 
             if ((options & FontDrawOptions.DrawTextTop) != 0)
-                stringFormat.Alignment = StringAlignment.Near;
+                stringFormat.LineAlignment = StringAlignment.Near;
             else if ((options & FontDrawOptions.DrawTextBottom) != 0)
-                stringFormat.Alignment = StringAlignment.Far;
+                stringFormat.LineAlignment = StringAlignment.Far;
+            else if ((options & FontDrawOptions.DrawTextMiddle) != 0)
+                stringFormat.LineAlignment = StringAlignment.Center;
 
             gBack.DrawString(text, ((GdiFont)font).Font, new SolidBrush(color), rectText, stringFormat);
         }

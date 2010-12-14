@@ -6,29 +6,39 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace vCards
 {
     public partial class frmMain : Form
     {
-        string pathApp = System.Reflection.Assembly.GetExecutingAssembly().GetModules()[0].FullyQualifiedName.Replace(System.Reflection.Assembly.GetExecutingAssembly().GetModules()[0].Name, "");
+        //public static string pathApp = System.Reflection.Assembly.GetExecutingAssembly().GetModules()[0].FullyQualifiedName.Replace(System.Reflection.Assembly.GetExecutingAssembly().GetModules()[0].Name, "");
 
         GamePanel gpanel;
+
+        Thread threadLogic;
 
         public frmMain()
         {
             InitializeComponent();
 
             gpanel = new GamePanel(this);
-            //igphics = new GdiGraphics(this) as IGraphics;
+
+            threadLogic = new Thread(new ThreadStart(ThreadFunc));
+            threadLogic.Start();
+        }
+
+        void ThreadFunc()
+        {
+            gpanel.GameLoop();
         }
 
         void Test01()
         {
             int i = 1;
             int j = 1;
-            string filename = pathApp + @"Resources\Images\Cards\" + i.ToString() + "-" + j.ToString() + ".png";
-            string filename2 = pathApp + @"Resources\Images\Misc\Untitled-1.png";
+            string filename = gpanel.AppPath + @"Resources\Images\Cards\" + i.ToString() + "-" + j.ToString() + ".png";
+            string filename2 = gpanel.AppPath + @"Resources\Images\Misc\Untitled-1.png";
 
             IBitmap a = gpanel.IGameGracphics.CreateBitmap(filename, false);
             //a.SourceKey
@@ -38,16 +48,11 @@ namespace vCards
 
             IImage b;
             gpanel.IGameImgFactory.CreateImageFromFile(filename2, out b);
-            //gpanel.IGameGracphics.DrawImageAlphaChannel(b, new Rectangle(0, 0, 100, 100), new Rectangle(0, 0, 100, 100));
+            gpanel.IGameGracphics.DrawImageAlphaChannel(b, 0, 0);
 
             gpanel.IGameGracphics.Flip();
 
             a.Dispose();
-        }
-
-        private void menuItem1_Click(object sender, EventArgs e)
-        {
-            //Test01();
         }
 
         private void frmMain_Paint(object sender, PaintEventArgs e)
@@ -75,6 +80,28 @@ namespace vCards
             //gpanel.IGameGracphics.Flip();
 
             //a.Dispose();
+        }
+
+        private void frmMain_Closing(object sender, CancelEventArgs e)
+        {
+            threadLogic.Abort();
+        }
+
+        private void frmMain_MouseDown(object sender, MouseEventArgs e)
+        {
+            gpanel.Click = new Point(e.X, e.Y);
+
+            //Test01();
+        }
+
+        private void frmMain_MouseUp(object sender, MouseEventArgs e)
+        {
+            gpanel.Click = Point.Empty;
+        }
+
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
+            //base.OnPaintBackground(e);
         }
     }
 }
