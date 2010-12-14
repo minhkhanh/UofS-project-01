@@ -107,7 +107,7 @@ namespace vCards
     // Pulled from imaging.h in the Windows Mobile 5.0 Pocket PC SDK
     [ComImport, Guid("327ABDA9-072B-11D3-9D7B-0000F81EF32E"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
     [ComVisible(true)]
-    public interface IImage//: IDisposable
+    public interface IImage: IDisposable
     {
         uint GetPhysicalDimension(out Size size);
         uint GetImageInfo(out ImageInfo info);
