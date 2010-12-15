@@ -73,6 +73,7 @@
     <Compile Include="Gaming\GraphicsControls\MyTransControl.cs" />
     <Compile Include="Gaming\GraphicsControls\MyUserControl.cs" />
     <Compile Include="Gaming\TransAnimation.cs" />
+    <Compile Include="Graphics\PlatformAPIs.cs" />
     <Compile Include="Graphics\DirectX\DirectXBitmap.cs" />
     <Compile Include="Graphics\DirectX\DirectXFont.cs" />
     <Compile Include="Graphics\DirectX\DirectXGraphics.cs" />

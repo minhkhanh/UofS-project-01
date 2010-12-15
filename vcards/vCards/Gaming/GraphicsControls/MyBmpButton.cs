@@ -19,6 +19,11 @@ namespace vCards
         IBitmap ibmpHolding;
 
         MyButtonState btnState = MyButtonState.Up;
+        public MyButtonState State
+        {
+            get { return btnState; }
+            set { btnState = value; }
+        }
 
         public MyBmpButton(string cap, Rectangle loc, IBitmap bkgr, IBitmap holding, string filename, IImagingFactory fac)
             : base(cap, loc, bkgr)
@@ -56,7 +61,6 @@ namespace vCards
         public void Draw(IGraphics igr)
         {
             if (btnState == MyButtonState.Down)
-                //igr.DrawImageAlphaChannel(iimgHolding, Region.X, Region.Y);
                 DrawHolding(igr);
             else if (btnState == MyButtonState.Up)
                 DrawBkgr(igr);
@@ -64,16 +68,6 @@ namespace vCards
             DrawText(igr);
 
             DrawCover(igr);
-        }
-
-        public void OnMouseDown()
-        {
-            btnState = MyButtonState.Down;
-        }
-
-        public void OnMouseUp()
-        {
-            btnState = MyButtonState.Up;
         }
     }
 }

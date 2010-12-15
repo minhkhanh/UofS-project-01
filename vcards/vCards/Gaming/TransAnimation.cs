@@ -65,7 +65,7 @@ namespace vCards
 
         public override void Draw(IGraphics igr, int x, int y, int w, int h)
         {
-            igr.DrawImageAlphaChannel(iimgImage, new Rectangle(x, y, w, h), Region);
+            //igr.DrawImageAlphaChannel(iimgImage, new RECT(x, y, w, h), new RECT(Region));
         }
 
         public override void Draw(IGraphics igr, int x, int y, Rectangle rectSrc)
@@ -73,12 +73,12 @@ namespace vCards
             rectSrc.X += Region.X;
             rectSrc.Y += Region.Y;
 
-            igr.DrawImageAlphaChannel(iimgImage, new Rectangle(x, y, rectSrc.Width, rectSrc.Height), rectSrc);
+            //igr.DrawImageAlphaChannel(iimgImage, new RECT(x, y, rectSrc.Width, rectSrc.Height), new RECT(rectSrc));
         }
 
         public override void Draw(IGraphics igr, int x, int y)
         {
-            igr.DrawImageAlphaChannel(iimgImage, new Rectangle(x, y, CellWidth, CellHeight), Region);
+            //igr.DrawImageAlphaChannel(iimgImage, new RECT(x, y, CellWidth, CellHeight), new RECT(Region));
         }
 
         public override void Dispose()
