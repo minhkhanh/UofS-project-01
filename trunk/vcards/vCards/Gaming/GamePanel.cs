@@ -97,6 +97,13 @@ namespace vCards
             }
         }
 
+        //MyButtonState clickState = MyButtonState.Up;
+        //public MyButtonState ClickState
+        //{
+        //    get { return clickState; }
+        //    set { clickState = value; }
+        //}
+
         Point click = Point.Empty;
         public Point Click
         {

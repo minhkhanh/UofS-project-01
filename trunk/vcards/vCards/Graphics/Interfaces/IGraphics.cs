@@ -19,6 +19,35 @@ namespace vCards
         BlitMirrorUpDown = 0x0020
     }
 
+    //public class RECT
+    //{
+    //    int left;
+    //    int top;
+    //    int right;
+    //    int bottom;
+
+    //    public RECT()
+    //    {
+
+    //    }
+
+    //    public RECT(Rectangle rec)
+    //    {
+    //        left = rec.X;
+    //        top = rec.Y;
+    //        right = rec.X + rec.Width;
+    //        bottom = rec.Y + rec.Height;
+    //    }
+
+    //    public RECT(int l, int t, int w, int h)
+    //    {
+    //        left = l;
+    //        top = t;
+    //        right = w+l;
+    //        bottom = h+t;
+    //    }
+    //}
+
     public interface IGraphics : IDisposable
     {
         ///  
@@ -34,6 +63,10 @@ namespace vCards
         void DrawImageAlphaChannel(IImage image, int x, int y);
         void DrawImageAlphaChannel(IImage image, Rectangle dest);
         void DrawImageAlphaChannel(IImage image, Rectangle dest, Rectangle src);
+
+        void AlphaBlend(byte alpha, IBitmap ibmp, int x, int y);
+        void AlphaBlend(byte alpha, IBitmap image, Rectangle dest);
+        void AlphaBlend(byte alpha, IBitmap image, Rectangle dest, Rectangle src);
 
         void DrawImageTransparent(IBitmap image, Rectangle destRect);
         void DrawImageTransparent(IBitmap image, Rectangle srcRect, int x, int y);

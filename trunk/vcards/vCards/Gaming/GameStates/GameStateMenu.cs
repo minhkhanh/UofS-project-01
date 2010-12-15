@@ -16,7 +16,6 @@ namespace vCards
         }
 
         IImage iimgCover;
-        //int nButtons = 3;
         List<MyBmpButton> buttons = new List<MyBmpButton>();
         public void InitButtons()
         {
@@ -27,13 +26,13 @@ namespace vCards
 
             Rectangle origin = new Rectangle((Gpnel.IGameGracphics.ScreenWidth - 100)/2, 50, 100, 30);
 
-            buttons.Add(new MyBmpButton("New Game", origin, ibmpBtnUp, ibmpBtnDown, Gpnel.AppPath + @"Resources\Images\Misc\Untitled-1.png", Gpnel.IGameImgFactory));
+            buttons.Add(new MyBmpButton("New Game", origin, ibmpBtnUp, ibmpBtnDown, Gpnel.AppPath + @"Resources\Images\Misc\btnCover.png", Gpnel.IGameImgFactory));
 
             origin.Y += 10 + origin.Height;
-            buttons.Add(new MyBmpButton("Options", origin, ibmpBtnUp, ibmpBtnDown, Gpnel.AppPath + @"Resources\Images\Misc\Untitled-1.png", Gpnel.IGameImgFactory));
+            buttons.Add(new MyBmpButton("Options", origin, ibmpBtnUp, ibmpBtnDown, Gpnel.AppPath + @"Resources\Images\Misc\btnCover.png", Gpnel.IGameImgFactory));
 
             origin.Y += 10 + origin.Height;
-            buttons.Add(new MyBmpButton("Quit", origin, ibmpBtnUp, ibmpBtnDown, Gpnel.AppPath + @"Resources\Images\Misc\Untitled-1.png", Gpnel.IGameImgFactory));
+            buttons.Add(new MyBmpButton("Quit", origin, ibmpBtnUp, ibmpBtnDown, Gpnel.AppPath + @"Resources\Images\Misc\btnCover.png", Gpnel.IGameImgFactory));
         }
         
         public override void EnterState()
@@ -50,17 +49,23 @@ namespace vCards
                 {
                     if (i.IsIn(Gpnel.Click))
                     {
-                        i.OnMouseDown();
-                        //break;
+                        //Gpnel.ClickState = ;
+                        i.State = MyButtonState.Down;
+                        // = MyButtonState.Down;
                     }
                     else
-                        i.OnMouseUp();
+                        //Gpnel.ClickState = 
+                        i.State = MyButtonState.Up;
                 }
             else
+            {
+                //Gpnel.ClickState = MyButtonState.Up;
+
                 foreach (MyBmpButton i in buttons)
                 {
-                    i.OnMouseUp();
+                    i.State = MyButtonState.Up;
                 }
+            }
         }
 
         public override void RenderState()
@@ -72,7 +77,7 @@ namespace vCards
                 i.Draw(Gpnel.IGameGracphics);
             }
 
-            Gpnel.IGameGracphics.DrawImageAlphaChannel(iimgCover, 0, 0);
+            Gpnel.IGameGracphics.DrawImageAlphaChannel(iimgCover, new Rectangle(0, 0, 100, 100), new Rectangle(0, 0, 100, 100));
         }
 
         public override void DrawState()

@@ -96,7 +96,8 @@ namespace vCards
 
         private void frmMain_MouseUp(object sender, MouseEventArgs e)
         {
-            gpanel.Click = Point.Empty;
+            //if (gpanel.ClickState == MyButtonState.Down)
+                gpanel.Click = Point.Empty;
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)

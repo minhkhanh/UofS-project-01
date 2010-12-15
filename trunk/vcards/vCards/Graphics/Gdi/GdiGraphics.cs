@@ -184,35 +184,99 @@ namespace vCards
         {
             ImageInfo imgInfo;
             image.GetImageInfo(out imgInfo);
-            Rectangle desRect = new Rectangle(x, y, (int)imgInfo.Width, (int)imgInfo.Height);
+            Rectangle desRect = new Rectangle(x, y, (int)imgInfo.Width+x, (int)imgInfo.Height+y);
+            Rectangle rectSrc = new Rectangle(0, 0, (int)imgInfo.Width, (int)imgInfo.Height);
 
-            DrawImageAlphaChannel(image, desRect);
+            IntPtr hdc = gBack.GetHdc();
+            image.Draw(hdc, ref desRect, ref rectSrc);
+            gBack.ReleaseHdc(hdc);  // !!! phai thuc hien thao tac Release nay!
         }
 
         public void DrawImageAlphaChannel(IImage image, Rectangle dest)
         {
             IntPtr hdc = gBack.GetHdc();
             
-            image.Draw(hdc, ref dest, IntPtr.Zero);
+            ImageInfo imgInfo;
+            image.GetImageInfo(out imgInfo);
+            Rectangle rectSrc = new Rectangle(0, 0, (int)imgInfo.Width, (int)imgInfo.Height);
+
+            image.Draw(hdc, ref dest, ref rectSrc);
 
             gBack.ReleaseHdc(hdc);  // !!! phai thuc hien thao tac Release nay!
         }
 
         public void DrawImageAlphaChannel(IImage image, Rectangle dest, Rectangle src)
         {
-            //ImageInfo imgInfo;
-            //image.GetImageInfo(out imgInfo);
+            ImageInfo imgInfo;
+            image.GetImageInfo(out imgInfo);
 
-            //IntPtr hdc = gBack.GetHdc();
+            IntPtr hdc = gBack.GetHdc();
 
-            //src.X = src.X * (2540 / (int)imgInfo.Xdpi);
-            //src.Y = src.Y * (2540 / (int)imgInfo.Ydpi);
-            //src.Width = src.Width * (2540 / (int)imgInfo.Xdpi);
-            //src.Height = src.Height * (2540 / (int)imgInfo.Ydpi);
+            src.X = src.X * (2540 / (int)imgInfo.Xdpi);
+            src.Y = src.Y * (2540 / (int)imgInfo.Ydpi);
+            src.Width = src.Width * (2540 / (int)imgInfo.Xdpi);
+            src.Height = src.Height * (2540 / (int)imgInfo.Ydpi);
 
-            ////image.Draw(hdc, ref dest, ref src); // !!! xem lai src (tinh bang don vi DPI)
+            image.Draw(hdc, ref dest, ref src); // !!! xem lai src (tinh bang don vi DPI)
 
-            //gBack.ReleaseHdc(hdc);  // !!! phai thuc hien thao tac Release nay!
+            gBack.ReleaseHdc(hdc);  // !!! phai thuc hien thao tac Release nay!
+        }
+
+        public void AlphaBlend(byte alpha, IBitmap ibmp, int x, int y)
+        {
+            Graphics gSrc = Graphics.FromImage(((GdiBitmap)ibmp).Image);
+
+            IntPtr hdcSrc = gSrc.GetHdc();
+            IntPtr hdcDes = gBack.GetHdc();
+
+            BlendFunction blendFunction = new BlendFunction();
+            blendFunction.BlendOp = (byte)BlendOperation.AC_SRC_OVER;   // Only supported blend operation
+            blendFunction.BlendFlags = (byte)BlendFlags.Zero;           // Documentation says put 0 here
+            blendFunction.SourceConstantAlpha = (byte)alpha;            // Constant alpha factor
+            blendFunction.AlphaFormat = (byte)0;                        // Don't look for per pixel alpha
+
+            PlatformAPIs.AlphaBlend(hdcDes, x, y, x + ibmp.Width, y + ibmp.Height, hdcSrc, 0, 0, ibmp.Width, ibmp.Height, blendFunction);
+
+            gSrc.ReleaseHdc(hdcSrc);
+            gBack.ReleaseHdc(hdcDes);
+        }
+
+        public void AlphaBlend(byte alpha, IBitmap ibmp, Rectangle dest)
+        {
+            Graphics gSrc = Graphics.FromImage(((GdiBitmap)ibmp).Image);
+
+            IntPtr hdcSrc = gSrc.GetHdc();
+            IntPtr hdcDes = gBack.GetHdc();
+
+            BlendFunction blendFunction = new BlendFunction();
+            blendFunction.BlendOp = (byte)BlendOperation.AC_SRC_OVER;   // Only supported blend operation
+            blendFunction.BlendFlags = (byte)BlendFlags.Zero;           // Documentation says put 0 here
+            blendFunction.SourceConstantAlpha = (byte)alpha;            // Constant alpha factor
+            blendFunction.AlphaFormat = (byte)0;                        // Don't look for per pixel alpha
+
+            PlatformAPIs.AlphaBlend(hdcDes, dest.X, dest.Y, dest.X + dest.Width, dest.Y + dest.Height, hdcSrc, 0, 0, ibmp.Width, ibmp.Height, blendFunction);
+
+            gSrc.ReleaseHdc(hdcSrc);
+            gBack.ReleaseHdc(hdcDes);
+        }
+
+        public void AlphaBlend(byte alpha, IBitmap ibmp, Rectangle dest, Rectangle src)
+        {
+            Graphics gSrc = Graphics.FromImage(((GdiBitmap)ibmp).Image);
+
+            IntPtr hdcSrc = gSrc.GetHdc();
+            IntPtr hdcDes = gBack.GetHdc();
+
+            BlendFunction blendFunction = new BlendFunction();
+            blendFunction.BlendOp = (byte)BlendOperation.AC_SRC_OVER;   // Only supported blend operation
+            blendFunction.BlendFlags = (byte)BlendFlags.Zero;           // Documentation says put 0 here
+            blendFunction.SourceConstantAlpha = (byte)alpha;            // Constant alpha factor
+            blendFunction.AlphaFormat = (byte)0;                        // Don't look for per pixel alpha
+
+            PlatformAPIs.AlphaBlend(hdcDes, dest.X, dest.Y, dest.Width+dest.X, dest.Height+dest.Y, hdcSrc, src.X, src.Y, src.Width+src.X, src.Height+src.Y, blendFunction);
+
+            gSrc.ReleaseHdc(hdcSrc);
+            gBack.ReleaseHdc(hdcDes);
         }
 
         public void DrawAnimation(int x, int y, Rectangle rectSrc, Animation animation)
