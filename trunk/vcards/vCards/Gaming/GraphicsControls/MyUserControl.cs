@@ -14,13 +14,6 @@ namespace vCards
 
         }
 
-        string text = "";
-        public string Text
-        {
-            get { return text; }
-            set { text = value; }
-        }
-
         Rectangle region;
         public Rectangle Region
         {
@@ -28,17 +21,10 @@ namespace vCards
             set { region = value; }
         }
 
-        public MyUserControl(string cap, Rectangle loc)
+        public MyUserControl(Rectangle loc)
         {
-            text = cap;
+            //text = cap;
             region = loc;
-        }
-
-        public void DrawText(IGraphics igr)
-        {
-            IFont font = igr.CreateFont("Tahoma", 10, FontStyle.Bold);
-            //igr.DrawString(text, font, new SolidBrush(Color.Black), region);
-            igr.DrawText(Region, text, Color.Black, font, FontDrawOptions.DrawTextCenter | FontDrawOptions.DrawTextMiddle);
         }
     }
 }

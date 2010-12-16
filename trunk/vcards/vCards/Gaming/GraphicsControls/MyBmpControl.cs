@@ -20,13 +20,13 @@ namespace vCards
 
         }
 
-        public MyBmpControl(string cap, Rectangle loc, IBitmap ibmp)
-            : base(cap, loc)
+        public MyBmpControl(Rectangle loc, IBitmap ibmp)
+            : base(loc)
         {
             ibmpBkgr = ibmp;
         }
 
-        public void DrawBkgr(IGraphics igr)
+        public virtual void DrawBkgr(IGraphics igr)
         {
             igr.DrawBitmap(Region, ibmpBkgr);
         }

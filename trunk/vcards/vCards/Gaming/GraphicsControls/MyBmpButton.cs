@@ -13,7 +13,7 @@ namespace vCards
         Down
     }
 
-    public class MyBmpButton : MyBmpControl
+    public class MyBmpButton : MyBmpTextControl
     {
         IImage iimgCover;
         IBitmap ibmpHolding;

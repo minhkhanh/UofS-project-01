@@ -21,5 +21,10 @@ namespace vCards
             gpanel.IGameImgFactory.CreateImageFromFile(gpanel.AppPath + @"Resources\Images\Cards\" + num.ToString("D2") + ".png", out iimgCover);
             return iimgCover; 
         }
+        public static IBitmap GetCardBitmap(int num)
+        {
+            if (num < 0) return null;
+            return gpanel.IGameGracphics.CreateBitmap(gpanel.AppPath + @"Resources\Images\Cards\" + num.ToString("D2") + ".png", false);
+        }
     }
 }
