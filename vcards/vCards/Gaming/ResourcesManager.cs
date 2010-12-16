@@ -8,12 +8,12 @@ namespace vCards
     public class ResourcesManager
     {
         public static GamePanel gpanel;
-        public static IImage GetImageResource(string path)
-        {
-            IImage iimgCover;
-            gpanel.IGameImgFactory.CreateImageFromFile(gpanel.AppPath + @"Resources\Images\Misc\Untitled-1.png", out iimgCover);
-            return iimgCover; 
-        }
+        //public static IImage GetImageResource(string path)
+        //{
+        //    IImage iimgCover;
+        //    gpanel.IGameImgFactory.CreateImageFromFile(gpanel.AppPath + @"Resources\Images\Misc\Untitled-1.png", out iimgCover);
+        //    return iimgCover; 
+        //}
         public static IImage GetCardImage(int num)
         {
             if (num < 0) return null;
