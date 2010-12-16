@@ -44,7 +44,7 @@ namespace vCards
         List<GameState> listGameStates = new List<GameState>();
         public void InitGameStates()
         {
-            listGameStates.Add(new GameStateMenu(this));
+            listGameStates.Add(new GameTestState(this));
         }
 
         public GamePanel(Control frm)

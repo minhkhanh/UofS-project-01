@@ -68,10 +68,12 @@
     <Compile Include="Gaming\GameStates\GameStateMenu.cs" />
     <Compile Include="Gaming\Animation.cs" />
     <Compile Include="Gaming\GamePanel.cs" />
+    <Compile Include="Gaming\GameStates\GameTestState.cs" />
     <Compile Include="Gaming\GraphicsControls\MyBmpButton.cs" />
     <Compile Include="Gaming\GraphicsControls\MyBmpControl.cs" />
     <Compile Include="Gaming\GraphicsControls\MyTransControl.cs" />
     <Compile Include="Gaming\GraphicsControls\MyUserControl.cs" />
+    <Compile Include="Gaming\GraphicsControls\MyBmpTextControl.cs" />
     <Compile Include="Gaming\TransAnimation.cs" />
     <Compile Include="Graphics\PlatformAPIs.cs" />
     <Compile Include="Graphics\DirectX\DirectXBitmap.cs" />
@@ -85,6 +87,8 @@
     <Compile Include="Graphics\Interfaces\IBitmap.cs" />
     <Compile Include="Graphics\Interfaces\IFont.cs" />
     <Compile Include="Graphics\Interfaces\IGraphics.cs" />
+    <Compile Include="Logic\LaBai.cs" />
+    <Compile Include="Logic\TapCacLaBai.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmMain.resx">
@@ -273,9 +277,6 @@
     <Content Include="Resources\Images\Misc\Untitled-1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Logic\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
   <ProjectExtensions>

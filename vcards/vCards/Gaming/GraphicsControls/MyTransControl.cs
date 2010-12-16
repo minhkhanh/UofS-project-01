@@ -10,8 +10,8 @@ namespace vCards
     {
         IImage iimgBkgr;
 
-        public MyTransControl(string cap, Rectangle loc, IImage iimg)
-            : base(cap, loc)
+        public MyTransControl(Rectangle loc, IImage iimg)
+            : base(loc)
         {
             iimgBkgr = iimg;
         }
