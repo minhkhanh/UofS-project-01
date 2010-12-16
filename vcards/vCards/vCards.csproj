@@ -99,162 +99,163 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Gaming\ResourcesManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Images\Cards\1-1.png">
+    <Content Include="Resources\Images\Cards\00.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\1-10.png">
+    <Content Include="Resources\Images\Cards\01.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\1-11.png">
+    <Content Include="Resources\Images\Cards\02.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\1-12.png">
+    <Content Include="Resources\Images\Cards\03.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\1-13.png">
+    <Content Include="Resources\Images\Cards\04.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\1-2.png">
+    <Content Include="Resources\Images\Cards\05.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\1-3.png">
+    <Content Include="Resources\Images\Cards\06.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\1-4.png">
+    <Content Include="Resources\Images\Cards\07.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\1-5.png">
+    <Content Include="Resources\Images\Cards\08.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\1-6.png">
+    <Content Include="Resources\Images\Cards\09.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\1-7.png">
+    <Content Include="Resources\Images\Cards\10.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\1-8.png">
+    <Content Include="Resources\Images\Cards\11.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\1-9.png">
+    <Content Include="Resources\Images\Cards\12.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\2-1.png">
+    <Content Include="Resources\Images\Cards\13.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\2-10.png">
+    <Content Include="Resources\Images\Cards\14.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\2-11.png">
+    <Content Include="Resources\Images\Cards\15.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\2-12.png">
+    <Content Include="Resources\Images\Cards\16.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\2-13.png">
+    <Content Include="Resources\Images\Cards\17.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\2-2.png">
+    <Content Include="Resources\Images\Cards\18.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\2-3.png">
+    <Content Include="Resources\Images\Cards\19.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\2-4.png">
+    <Content Include="Resources\Images\Cards\20.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\2-5.png">
+    <Content Include="Resources\Images\Cards\21.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\2-6.png">
+    <Content Include="Resources\Images\Cards\22.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\2-7.png">
+    <Content Include="Resources\Images\Cards\23.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\2-8.png">
+    <Content Include="Resources\Images\Cards\24.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\2-9.png">
+    <Content Include="Resources\Images\Cards\25.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\3-1.png">
+    <Content Include="Resources\Images\Cards\26.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\3-10.png">
+    <Content Include="Resources\Images\Cards\27.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\3-11.png">
+    <Content Include="Resources\Images\Cards\28.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\3-12.png">
+    <Content Include="Resources\Images\Cards\29.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\3-13.png">
+    <Content Include="Resources\Images\Cards\30.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\3-2.png">
+    <Content Include="Resources\Images\Cards\31.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\3-3.png">
+    <Content Include="Resources\Images\Cards\32.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\3-4.png">
+    <Content Include="Resources\Images\Cards\33.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\3-5.png">
+    <Content Include="Resources\Images\Cards\34.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\3-6.png">
+    <Content Include="Resources\Images\Cards\35.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\3-7.png">
+    <Content Include="Resources\Images\Cards\36.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\3-8.png">
+    <Content Include="Resources\Images\Cards\37.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\3-9.png">
+    <Content Include="Resources\Images\Cards\38.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\4-1.png">
+    <Content Include="Resources\Images\Cards\39.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\4-10.png">
+    <Content Include="Resources\Images\Cards\40.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\4-11.png">
+    <Content Include="Resources\Images\Cards\41.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\4-12.png">
+    <Content Include="Resources\Images\Cards\42.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\4-13.png">
+    <Content Include="Resources\Images\Cards\43.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\4-2.png">
+    <Content Include="Resources\Images\Cards\44.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\4-3.png">
+    <Content Include="Resources\Images\Cards\45.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\4-4.png">
+    <Content Include="Resources\Images\Cards\46.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\4-5.png">
+    <Content Include="Resources\Images\Cards\47.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\4-6.png">
+    <Content Include="Resources\Images\Cards\48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\4-7.png">
+    <Content Include="Resources\Images\Cards\49.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\4-8.png">
+    <Content Include="Resources\Images\Cards\50.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cards\4-9.png">
+    <Content Include="Resources\Images\Cards\51.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\Misc\btnCover.png">

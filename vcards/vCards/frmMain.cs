@@ -23,7 +23,7 @@ namespace vCards
             InitializeComponent();
 
             gpanel = new GamePanel(this);
-
+            ResourcesManager.gpanel = gpanel;
             threadLogic = new Thread(new ThreadStart(ThreadFunc));
             threadLogic.Start();
         }
