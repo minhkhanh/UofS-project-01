@@ -43,9 +43,11 @@ namespace vCards
 
         #endregion
 
-        //public virtual void DrawBkgr(IGraphics igr)
-        //{
-        //    igr.DrawBitmap(Region.X, Region.Y, BmpBackground);
-        //}
+        public virtual void DrawBkgr(IGraphics igr)
+        {
+            //igr.DrawBitmap(Region.X, Region.Y, BmpBackground);
+            IFont font = igr.CreateFont("Tahoma", 15, FontStyle.Bold);
+            igr.DrawText(Region, "K", Color.Blue, font, FontDrawOptions.DrawTextCenter | FontDrawOptions.DrawTextMiddle);
+        }
     }
 }
