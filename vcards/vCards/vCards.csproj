@@ -87,8 +87,8 @@
     <Compile Include="Graphics\Interfaces\IBitmap.cs" />
     <Compile Include="Graphics\Interfaces\IFont.cs" />
     <Compile Include="Graphics\Interfaces\IGraphics.cs" />
-    <Compile Include="Logic\LaBai.cs" />
-    <Compile Include="Logic\TapCacLaBai.cs" />
+    <Compile Include="Logic\Card.cs" />
+    <Compile Include="Logic\Deck.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmMain.resx">

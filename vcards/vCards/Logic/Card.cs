@@ -6,7 +6,7 @@ using System.Drawing;
 
 namespace vCards
 {
-    public class LaBai : MyBmpControl, IComparable<LaBai>
+    public class Card : MyBmpControl, IComparable<Card>
     {
         public static int iBaseHeight; //bề cao lá bài
         public static int iBaseWidth;   //bề rộng lá bài
@@ -17,12 +17,12 @@ namespace vCards
             get { return iIndex; }
             set { iIndex = value; }
         }
-        protected LaBai()
+        protected Card()
         {
 
         }
-        public LaBai(int index)
-            : base(new Rectangle(0, 0, LaBai.iBaseWidth, LaBai.iBaseHeight), ResourcesManager.GetCardBitmap(index))
+        public Card(int index)
+            : base(new Rectangle(0, 0, Card.iBaseWidth, Card.iBaseHeight), ResourcesManager.GetCardBitmap(index))
         {
             //this.BmpBackground = ResourcesManager.GetCardBitmap(index);
             iIndex = index;
@@ -31,7 +31,7 @@ namespace vCards
 
         #region IComparable<LaBai> Members
 
-        public int CompareTo(LaBai other)
+        public int CompareTo(Card other)
         {
             /* LEGEND
             * < 0 means that this object is less than other

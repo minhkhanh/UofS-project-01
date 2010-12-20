@@ -88,5 +88,31 @@ namespace vCards
         public override void ExitState()
         {
         }
+
+        public override void OnMouseDown(params object[] paras)
+        {
+            Point click = (Point)paras[0];
+
+            foreach (MyBmpButton i in buttons)
+            {
+                if (i.IsIn(click))
+                {
+                    i.State = MyButtonState.Down;
+                }
+                else
+                    i.State = MyButtonState.Up;
+            }
+        }
+
+        public override void OnMouseUp()
+        {
+            foreach (MyBmpButton i in buttons)
+            {
+                if (i.State == MyButtonState.Down)
+                {
+                    i.State = MyButtonState.Up;
+                }
+            }
+        }
     }
 }

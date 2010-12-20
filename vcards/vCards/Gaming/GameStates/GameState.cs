@@ -42,13 +42,16 @@ namespace vCards
             set { ibmpBack = value; }
         }
 
-        public abstract void EnterState();
-        public abstract void UpdateState();
-        public abstract void RenderState();
-        public abstract void DrawState();
-        public abstract void ExitState();
+        public virtual void EnterState(){}
+        public virtual void UpdateState(){}
+        public virtual void RenderState(){}
+        public virtual void DrawState(){}
+        public virtual void ExitState(){}
 
-        public void HandleMessage(MessageID messID)
+        public virtual void OnMouseDown(params object[] paras){}
+        public virtual void OnMouseUp(){}
+
+        public void HandleMessage(MessageID messID, params object[] paras)
         {
             switch (messID)
             {
@@ -66,6 +69,12 @@ namespace vCards
                     break;
                 case MessageID.MessageExit:
                     ExitState();
+                    break;
+                case MessageID.MouseDown:
+                    OnMouseDown(paras);
+                    break;
+                case MessageID.MouseUp:
+                    OnMouseUp();
                     break;
                 default:
                     throw new ApplicationException("HandleMessage() : Message ID unknown.");

@@ -13,21 +13,22 @@ namespace vCards
             Gpnel = gpn;
             StateID = GameStateID.StateMenu;
         }
-        TapCacLaBai list;
+
+        Deck list;
         public override void EnterState()
         {
             BackIBmp = Gpnel.IGameGracphics.CreateBitmap(Gpnel.AppPath + @"Resources\Images\Misc\MenuBkgr.bmp", true);
-            list = new TapCacLaBai(new Rectangle(0, 0, Gpnel.IGameGracphics.ScreenWidth, Gpnel.IGameGracphics.ScreenHeight));
-            LaBai.iBaseHeight = 83;
-            LaBai.iBaseWidth = 66;
-            LaBai.iMaxWidth = 22;
-            LaBai lb = new LaBai(4);
+            list = new Deck(new Rectangle(0, 0, Gpnel.IGameGracphics.ScreenWidth, Gpnel.IGameGracphics.ScreenHeight));
+            Card.iBaseHeight = 83;
+            Card.iBaseWidth = 66;
+            Card.iMaxWidth = 22;
+            Card lb = new Card(4);
             list.Add(lb);
-            lb = new LaBai(7);
+            lb = new Card(7);
             list.Add(lb);
-            lb = new LaBai(11);
+            lb = new Card(11);
             list.Add(lb);
-            lb = new LaBai(27);
+            lb = new Card(27);
             list.Add(lb);
         }
 
@@ -54,5 +55,6 @@ namespace vCards
         {
             throw new NotImplementedException();
         }
+
     }
 }
