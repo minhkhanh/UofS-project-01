@@ -15,7 +15,10 @@ namespace vCards
         MessageUpdate,
         MessageRender,
         MessageDraw,
-        MessageExit
+        MessageExit,
+
+        MouseDown,
+        MouseUp
     }
 
     public class GamePanel
@@ -56,11 +59,11 @@ namespace vCards
 
         GameStateID currStateID = GameStateID.StateMenu;
 
-        public void SendMessage(MessageID messID)
+        public void SendMessage(MessageID messID, params object[] paras)
         {
             GameState target = listGameStates.Find(i => i.StateID == currStateID);
             if (target != null)
-                target.HandleMessage(messID);
+                target.HandleMessage(messID, paras);
         }
 
         bool playing = true;
@@ -93,6 +96,17 @@ namespace vCards
                     SendMessage(MessageID.MessageDraw);
                 }
 
+                Thread.Sleep(10);
+            }
+        }
+
+        public void GameLoop2()
+        {
+            while (playing)
+            {
+                SendMessage(MessageID.MessageRender);
+                SendMessage(MessageID.MessageDraw);
+             
                 Thread.Sleep(10);
             }
         }
