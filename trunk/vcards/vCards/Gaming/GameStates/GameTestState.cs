@@ -11,7 +11,7 @@ namespace vCards
         public GameTestState(GamePanel gpn)
         {
             Gpnel = gpn;
-            StateID = GameStateID.StateMenu;
+            StateID = GameStateID.StateTest;
         }
 
         Deck list;

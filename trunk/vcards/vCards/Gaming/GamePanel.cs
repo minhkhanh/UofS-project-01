@@ -48,6 +48,7 @@ namespace vCards
         public void InitGameStates()
         {
             listGameStates.Add(new GameTestState(this));
+            listGameStates.Add(new GameStateMenu(this));
         }
 
         public GamePanel(Control frm)
@@ -75,13 +76,15 @@ namespace vCards
         {
             while (playing)
             {
+                int tickPrev = Environment.TickCount;
+
                 if (enterState)
                 {
                     enterState = false;
                     SendMessage(MessageID.MessageEnter);
                 }
 
-                SendMessage(MessageID.MessageUpdate);
+                //SendMessage(MessageID.MessageUpdate);
 
                 if (exitState)
                 {
@@ -96,7 +99,10 @@ namespace vCards
                     SendMessage(MessageID.MessageDraw);
                 }
 
-                Thread.Sleep(10);
+                int tickSleep = tickPrev + 100 - Environment.TickCount;
+                Thread.Sleep(Math.Abs(tickSleep));
+
+                //tickPrev = Environment.TickCount;
             }
         }
 
