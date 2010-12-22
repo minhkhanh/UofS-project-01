@@ -67,7 +67,7 @@ namespace vCards
 
             DrawText(igr);
 
-            DrawCover(igr);
+            //DrawCover(igr);
         }
     }
 }

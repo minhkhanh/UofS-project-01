@@ -8,7 +8,7 @@ namespace vCards
 {
     public class Card : MyBmpControl, IComparable<Card>
     {
-        public static int iBaseHeight; //bề cao lá bài
+        public static int iBaseHeight;  //bề cao lá bài
         public static int iBaseWidth;   //bề rộng lá bài
         public static int iMaxWidth;    //khoảng cách lớn nhất giữa 2 lá bài
         private int iIndex;

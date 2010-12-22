@@ -235,7 +235,7 @@ namespace vCards
             blendFunction.SourceConstantAlpha = (byte)alpha;            // Constant alpha factor
             blendFunction.AlphaFormat = (byte)0;                        // Don't look for per pixel alpha
 
-            PlatformAPIs.AlphaBlend(hdcDes, x, y, x + ibmp.Width, y + ibmp.Height, hdcSrc, 0, 0, ibmp.Width, ibmp.Height, blendFunction);
+            PlatformAPIs.AlphaBlend(hdcDes, x, y, ibmp.Width, ibmp.Height, hdcSrc, 0, 0, ibmp.Width, ibmp.Height, blendFunction);
 
             gSrc.ReleaseHdc(hdcSrc);
             gBack.ReleaseHdc(hdcDes);
@@ -254,7 +254,7 @@ namespace vCards
             blendFunction.SourceConstantAlpha = (byte)alpha;            // Constant alpha factor
             blendFunction.AlphaFormat = (byte)0;                        // Don't look for per pixel alpha
 
-            PlatformAPIs.AlphaBlend(hdcDes, dest.X, dest.Y, dest.X + dest.Width, dest.Y + dest.Height, hdcSrc, 0, 0, ibmp.Width, ibmp.Height, blendFunction);
+            PlatformAPIs.AlphaBlend(hdcDes, dest.X, dest.Y, dest.Width, dest.Height, hdcSrc, 0, 0, ibmp.Width, ibmp.Height, blendFunction);
 
             gSrc.ReleaseHdc(hdcSrc);
             gBack.ReleaseHdc(hdcDes);
@@ -273,7 +273,7 @@ namespace vCards
             blendFunction.SourceConstantAlpha = (byte)alpha;            // Constant alpha factor
             blendFunction.AlphaFormat = (byte)0;                        // Don't look for per pixel alpha
 
-            PlatformAPIs.AlphaBlend(hdcDes, dest.X, dest.Y, dest.Width+dest.X, dest.Height+dest.Y, hdcSrc, src.X, src.Y, src.Width+src.X, src.Height+src.Y, blendFunction);
+            PlatformAPIs.AlphaBlend(hdcDes, dest.X, dest.Y, dest.Width, dest.Height, hdcSrc, src.X, src.Y, src.Width, src.Height, blendFunction);
 
             gSrc.ReleaseHdc(hdcSrc);
             gBack.ReleaseHdc(hdcDes);

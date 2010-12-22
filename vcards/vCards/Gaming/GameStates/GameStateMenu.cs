@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace vCards
 {
@@ -45,22 +46,20 @@ namespace vCards
         public override void UpdateState()
         {
             if (Gpnel.Click.IsEmpty == false)
+            {
+                //MessageBox.Show("update");
                 foreach (MyBmpButton i in buttons)
                 {
                     if (i.IsIn(Gpnel.Click))
                     {
-                        //Gpnel.ClickState = ;
                         i.State = MyButtonState.Down;
-                        // = MyButtonState.Down;
                     }
                     else
-                        //Gpnel.ClickState = 
                         i.State = MyButtonState.Up;
                 }
+            }
             else
             {
-                //Gpnel.ClickState = MyButtonState.Up;
-
                 foreach (MyBmpButton i in buttons)
                 {
                     i.State = MyButtonState.Up;
@@ -91,11 +90,11 @@ namespace vCards
 
         public override void OnMouseDown(params object[] paras)
         {
-            Point click = (Point)paras[0];
-
+            Point pos = (Point)paras[0];
+            
             foreach (MyBmpButton i in buttons)
             {
-                if (i.IsIn(click))
+                if (i.IsIn(pos))
                 {
                     i.State = MyButtonState.Down;
                 }
@@ -104,8 +103,10 @@ namespace vCards
             }
         }
 
-        public override void OnMouseUp()
+        public override void OnMouseUp(params object[] paras)
         {
+            Point pos = (Point)paras[0];
+
             foreach (MyBmpButton i in buttons)
             {
                 if (i.State == MyButtonState.Down)

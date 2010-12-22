@@ -28,7 +28,8 @@ namespace vCards
 
         public virtual void DrawBkgr(IGraphics igr)
         {
-            igr.DrawBitmap(Region, ibmpBkgr);
+            igr.DrawImageTransparent(ibmpBkgr, Region);
+            //igr.AlphaBlend(50, ibmpBkgr, Region);
         }
     }
 }

@@ -89,20 +89,21 @@ namespace vCards
 
         private void frmMain_MouseDown(object sender, MouseEventArgs e)
         {
-            gpanel.Click = new Point(e.X, e.Y);
+            Point pos = new Point(e.X, e.Y);
+            gpanel.SendMessage(MessageID.MouseDown, pos);
 
             //Test01();
-        }
-
-        private void frmMain_MouseUp(object sender, MouseEventArgs e)
-        {
-            //if (gpanel.ClickState == MyButtonState.Down)
-                gpanel.Click = Point.Empty;
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)
         {
             //base.OnPaintBackground(e);
+        }
+
+        private void frmMain_MouseUp(object sender, MouseEventArgs e)
+        {
+            Point pos = new Point(e.X, e.Y);
+            gpanel.SendMessage(MessageID.MouseUp, pos);
         }
     }
 }

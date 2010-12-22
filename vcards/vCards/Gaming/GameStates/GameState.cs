@@ -9,7 +9,8 @@ namespace vCards
     public enum GameStateID
     {
         StateUknown,
-        StateMenu
+        StateMenu,
+        StateTest
     }
 
     public abstract class GameState
@@ -49,7 +50,7 @@ namespace vCards
         public virtual void ExitState(){}
 
         public virtual void OnMouseDown(params object[] paras){}
-        public virtual void OnMouseUp(){}
+        public virtual void OnMouseUp(params object[] paras){}
 
         public void HandleMessage(MessageID messID, params object[] paras)
         {
@@ -74,7 +75,7 @@ namespace vCards
                     OnMouseDown(paras);
                     break;
                 case MessageID.MouseUp:
-                    OnMouseUp();
+                    OnMouseUp(paras);
                     break;
                 default:
                     throw new ApplicationException("HandleMessage() : Message ID unknown.");
