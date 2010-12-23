@@ -13,7 +13,7 @@ namespace vCards
         public GameStateMenu(GamePanel gpn)
         {
             Gpnel = gpn;
-            StateID = GameStateID.StateMenu;
+            ID = GameStateID.StateMenu;
         }
 
         IImage iimgCover;
@@ -27,13 +27,13 @@ namespace vCards
 
             Rectangle origin = new Rectangle((Gpnel.IGameGracphics.ScreenWidth - 100)/2, 50, 100, 30);
 
-            buttons.Add(new MyBmpButton("New Game", origin, ibmpBtnUp, ibmpBtnDown, Gpnel.AppPath + @"Resources\Images\Misc\btnCover.png", Gpnel.IGameImgFactory));
+            buttons.Add(new MyBmpButton("New Game", origin, MyButtonID.MainMenuNewGame, ibmpBtnUp, ibmpBtnDown, Gpnel.AppPath + @"Resources\Images\Misc\btnCover.png", Gpnel.IGameImgFactory));
 
             origin.Y += 10 + origin.Height;
-            buttons.Add(new MyBmpButton("Options", origin, ibmpBtnUp, ibmpBtnDown, Gpnel.AppPath + @"Resources\Images\Misc\btnCover.png", Gpnel.IGameImgFactory));
+            buttons.Add(new MyBmpButton("Options", origin, MyButtonID.MainMenuOption, ibmpBtnUp, ibmpBtnDown, Gpnel.AppPath + @"Resources\Images\Misc\btnCover.png", Gpnel.IGameImgFactory));
 
             origin.Y += 10 + origin.Height;
-            buttons.Add(new MyBmpButton("Quit", origin, ibmpBtnUp, ibmpBtnDown, Gpnel.AppPath + @"Resources\Images\Misc\btnCover.png", Gpnel.IGameImgFactory));
+            buttons.Add(new MyBmpButton("Quit", origin, MyButtonID.MainMenuQuit, ibmpBtnUp, ibmpBtnDown, Gpnel.AppPath + @"Resources\Images\Misc\btnCover.png", Gpnel.IGameImgFactory));
         }
         
         public override void EnterState()
@@ -45,31 +45,13 @@ namespace vCards
 
         public override void UpdateState()
         {
-            if (Gpnel.Click.IsEmpty == false)
-            {
-                //MessageBox.Show("update");
-                foreach (MyBmpButton i in buttons)
-                {
-                    if (i.IsIn(Gpnel.Click))
-                    {
-                        i.State = MyButtonState.Down;
-                    }
-                    else
-                        i.State = MyButtonState.Up;
-                }
-            }
-            else
-            {
-                foreach (MyBmpButton i in buttons)
-                {
-                    i.State = MyButtonState.Up;
-                }
-            }
+            
         }
 
         public override void RenderState()
         {
-            Gpnel.IGameGracphics.DrawBitmap(new Rectangle(0, 0, Gpnel.IGameGracphics.ScreenWidth, Gpnel.IGameGracphics.ScreenHeight), BackIBmp);
+            //Gpnel.IGameGracphics.DrawBitmap(new Rectangle(0, 0, Gpnel.IGameGracphics.ScreenWidth, Gpnel.IGameGracphics.ScreenHeight), BackIBmp);
+            DrawBkgr();
 
             foreach (MyBmpButton i in buttons)
             {
@@ -79,39 +61,50 @@ namespace vCards
             Gpnel.IGameGracphics.DrawImageAlphaChannel(iimgCover, new Rectangle(0, 0, 100, 100), new Rectangle(0, 0, 100, 100));
         }
 
-        public override void DrawState()
-        {
-            Gpnel.IGameGracphics.Flip();
-        }
+        //public override void DrawState()
+        //{
+        //    Gpnel.IGameGracphics.Flip();
+        //}
 
         public override void ExitState()
         {
         }
 
-        public override void OnMouseDown(params object[] paras)
-        {
-            Point pos = (Point)paras[0];
-            
+        MyBmpButton btnClicked = null;
+        public override void OnMouseDown()
+        {                        
             foreach (MyBmpButton i in buttons)
             {
-                if (i.IsIn(pos))
-                {
-                    i.State = MyButtonState.Down;
-                }
-                else
-                    i.State = MyButtonState.Up;
+                if (i.ValidateClick(Gpnel.Click))
+                    btnClicked = i;
             }
         }
 
-        public override void OnMouseUp(params object[] paras)
+        public override void OnMouseUp()
         {
-            Point pos = (Point)paras[0];
-
             foreach (MyBmpButton i in buttons)
             {
                 if (i.State == MyButtonState.Down)
                 {
                     i.State = MyButtonState.Up;
+                }
+            }
+
+            if (btnClicked != null)
+            {
+                switch (btnClicked.ID)
+                {
+                    case MyButtonID.MainMenuNewGame:
+                        Gpnel.ChangeState(GameStateID.StateGameCustom);
+                        break;
+
+                    case MyButtonID.MainMenuOption:
+                        ExitState();
+                        break;
+
+                    case MyButtonID.MainMenuQuit:
+                        ExitState();
+                        break;
                 }
             }
         }

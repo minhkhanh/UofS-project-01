@@ -23,6 +23,13 @@ namespace vCards
 
     public class GamePanel
     {
+        Control ownerForm;
+        public Control OwnerForm
+        {
+            get { return ownerForm; }
+            set { ownerForm = value; }
+        }
+
         IImagingFactory factory = (IImagingFactory)Activator.CreateInstance(Type.GetTypeFromCLSID(new Guid("327ABDA8-072B-11D3-9D7B-0000F81EF32E")));
         public IImagingFactory IGameImgFactory
         {
@@ -49,20 +56,29 @@ namespace vCards
         {
             listGameStates.Add(new GameTestState(this));
             listGameStates.Add(new GameStateMenu(this));
+            listGameStates.Add(new GameStatePlay(this));
+            listGameStates.Add(new GameStateCustom(this));
         }
 
         public GamePanel(Control frm)
         {
             g = new GdiGraphics(frm);
 
+            ownerForm = frm;
+
             InitGameStates();
         }
 
         GameStateID currStateID = GameStateID.StateMenu;
+        public GameStateID CurrentState
+        {
+            get { return currStateID; }
+            set { currStateID = value; }
+        }
 
         public void SendMessage(MessageID messID, params object[] paras)
         {
-            GameState target = listGameStates.Find(i => i.StateID == currStateID);
+            GameState target = listGameStates.Find(i => i.ID == currStateID);
             if (target != null)
                 target.HandleMessage(messID, paras);
         }
@@ -72,28 +88,41 @@ namespace vCards
         bool enterState = true;
         bool exitState = false;
 
+        bool stateReady = false;
+        public bool StateReady
+        {
+            get { return stateReady; }
+            set { stateReady = value; }
+        }
+
         public void GameLoop()
         {
             while (playing)
             {
                 int tickPrev = Environment.TickCount;
 
-                if (enterState)
-                {
-                    enterState = false;
-                    SendMessage(MessageID.MessageEnter);
-                }
+                //if (enterState)
+                //{
+                //    enterState = false;
+                //    SendMessage(MessageID.MessageEnter);
+                //}
 
                 //SendMessage(MessageID.MessageUpdate);
 
-                if (exitState)
-                {
-                    SendMessage(MessageID.MessageExit);
+                //if (exitState)
+                //{
+                //    SendMessage(MessageID.MessageExit);
 
-                    exitState = false;
-                    enterState = true;
-                }
-                else
+                //    exitState = false;
+                //    enterState = true;
+                //}
+                //else
+                //{
+                //    SendMessage(MessageID.MessageRender);
+                //    SendMessage(MessageID.MessageDraw);
+                //}
+
+                if (stateReady)
                 {
                     SendMessage(MessageID.MessageRender);
                     SendMessage(MessageID.MessageDraw);
@@ -115,6 +144,14 @@ namespace vCards
              
                 Thread.Sleep(10);
             }
+        }
+
+        public void ChangeState(GameStateID id)
+        {
+            SendMessage(MessageID.MessageExit);
+
+            currStateID = id;
+            SendMessage(MessageID.MessageEnter);            
         }
 
         //MyButtonState clickState = MyButtonState.Up;

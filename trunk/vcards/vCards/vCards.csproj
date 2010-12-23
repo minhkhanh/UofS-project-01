@@ -68,7 +68,13 @@
     <Compile Include="Gaming\GameStates\GameStateMenu.cs" />
     <Compile Include="Gaming\Animation.cs" />
     <Compile Include="Gaming\GamePanel.cs" />
+    <Compile Include="Gaming\GameStates\GameStatePlay.cs" />
+    <Compile Include="Gaming\GameStates\GameStateCustom.cs" />
     <Compile Include="Gaming\GameStates\GameTestState.cs" />
+    <Compile Include="Gaming\GraphicsControls\ImageButton.cs" />
+    <Compile Include="Gaming\GraphicsControls\ImageControl.cs">
+    </Compile>
+    <Compile Include="Gaming\GraphicsControls\ImageLabel.cs" />
     <Compile Include="Gaming\GraphicsControls\MyBmpButton.cs" />
     <Compile Include="Gaming\GraphicsControls\MyBmpControl.cs" />
     <Compile Include="Gaming\GraphicsControls\MyTransControl.cs" />
@@ -106,6 +112,12 @@
     <Compile Include="Gaming\ResourcesManager.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\Images\Buttons\OKBtn_Bkgr.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Buttons\OKBtn_Hover.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\Cards\00.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -272,6 +284,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\Misc\MenuBkgr.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Misc\PlayBkgr.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\Misc\Untitled-1.png">

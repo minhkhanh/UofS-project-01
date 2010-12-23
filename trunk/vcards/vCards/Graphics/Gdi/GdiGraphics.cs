@@ -36,6 +36,22 @@ namespace vCards
     ///  
     public class GdiGraphics : IGraphics
     {
+        IImagingFactory imagingFactory = (IImagingFactory)Activator.CreateInstance(Type.GetTypeFromCLSID(new Guid("327ABDA8-072B-11D3-9D7B-0000F81EF32E")));
+        public IImage CreateIImage(string filename)
+        {
+            IImage iimg;
+            imagingFactory.CreateImageFromFile(filename, out iimg);
+
+            return iimg;
+        }
+
+        public IImage CreateIImage(Stream strm)
+        {
+            IImage iimg;
+            imagingFactory.CreateImageFromStream(strm, out iimg);
+
+            return iimg;
+        }
 
         ///  
         /// Gets the width of the screen. 
@@ -672,6 +688,12 @@ namespace vCards
         public IBitmap CreateBitmap(System.Drawing.Bitmap bmp, bool transparent)
         {
             return new GdiBitmap(bmp, transparent);
+        }
+
+        public IBitmap CreateBitmap(IBitmap ibmp)
+        {
+            GdiBitmap gdiBmp = (GdiBitmap)ibmp;
+            return new GdiBitmap(gdiBmp);
         }
 
         ///  

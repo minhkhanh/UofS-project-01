@@ -41,10 +41,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(240, 294);
+            this.ClientSize = new System.Drawing.Size(240, 320);
+            this.Location = new System.Drawing.Point(0, 0);
             this.MinimizeBox = false;
             this.Name = "frmMain";
             this.Text = "frmMain";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.frmMain_MouseUp);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.frmMain_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmMain_MouseDown);

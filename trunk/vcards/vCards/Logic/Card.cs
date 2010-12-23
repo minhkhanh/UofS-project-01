@@ -43,7 +43,16 @@ namespace vCards
 
         #endregion
 
-        public virtual void DrawBkgr(IGraphics igr)
+        #region IDisposable Members
+
+        public override void Dispose()
+        {
+            
+        }
+        
+        #endregion
+
+        public override void DrawBkgr(IGraphics igr)
         {
             //igr.DrawBitmap(Region.X, Region.Y, BmpBackground);
             IFont font = igr.CreateFont("Tahoma", 15, FontStyle.Bold);

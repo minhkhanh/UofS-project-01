@@ -20,5 +20,14 @@ namespace vCards
         {
             igr.DrawImageAlphaChannel(iimgBkgr, Region);
         }
+
+        #region IDisposable Members
+
+        public override void Dispose()
+        {
+
+        }
+
+        #endregion
     }
 }

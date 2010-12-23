@@ -19,37 +19,11 @@ namespace vCards
         BlitMirrorUpDown = 0x0020
     }
 
-    //public class RECT
-    //{
-    //    int left;
-    //    int top;
-    //    int right;
-    //    int bottom;
-
-    //    public RECT()
-    //    {
-
-    //    }
-
-    //    public RECT(Rectangle rec)
-    //    {
-    //        left = rec.X;
-    //        top = rec.Y;
-    //        right = rec.X + rec.Width;
-    //        bottom = rec.Y + rec.Height;
-    //    }
-
-    //    public RECT(int l, int t, int w, int h)
-    //    {
-    //        left = l;
-    //        top = t;
-    //        right = w+l;
-    //        bottom = h+t;
-    //    }
-    //}
-
     public interface IGraphics : IDisposable
     {
+        IImage CreateIImage(string filename);
+        IImage CreateIImage(Stream strm);
+
         ///  
         /// Gets the height of the screen. 
         ///  
@@ -139,6 +113,7 @@ namespace vCards
 
         IBitmap CreateBitmap(Stream stream, bool transparent);
         IBitmap CreateBitmap(System.Drawing.Bitmap bmp, bool transparent);
+        IBitmap CreateBitmap(IBitmap ibmp);
 
         ///  
         /// Creates a bitmap compatible with this graphics device 
