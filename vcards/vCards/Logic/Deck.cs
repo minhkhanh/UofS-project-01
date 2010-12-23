@@ -60,5 +60,14 @@ namespace vCards
                 listCard[i].Region = rect;
             }
         }
+
+        #region IDisposable Members
+
+        public override void Dispose()
+        {
+
+        }
+
+        #endregion
     }
 }

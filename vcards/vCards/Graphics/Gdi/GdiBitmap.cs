@@ -78,6 +78,12 @@ namespace vCards
             transparentValue = bTransparent;
         }
 
+        public GdiBitmap(GdiBitmap gdiBmp)
+        {
+            bmp = new Bitmap(gdiBmp.bmp);
+            transparentValue = gdiBmp.transparentValue;
+        }
+
         ///  
         /// Allocate and load an image from the specified file. 
         ///  

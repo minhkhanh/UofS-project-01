@@ -13,10 +13,26 @@ namespace vCards
         Down
     }
 
+    public enum MyButtonID
+    {
+        MainMenuNewGame,
+        MainMenuQuit,
+        MainMenuOption,
+
+        None
+    }
+
     public class MyBmpButton : MyBmpTextControl
     {
         IImage iimgCover;
         IBitmap ibmpHolding;
+
+        MyButtonID btnID = MyButtonID.None;
+        public MyButtonID ID
+        {
+            get { return btnID; }
+            //set { btnID = value; }
+        }
 
         MyButtonState btnState = MyButtonState.Up;
         public MyButtonState State
@@ -25,9 +41,10 @@ namespace vCards
             set { btnState = value; }
         }
 
-        public MyBmpButton(string cap, Rectangle loc, IBitmap bkgr, IBitmap holding, string filename, IImagingFactory fac)
+        public MyBmpButton(string cap, Rectangle loc, MyButtonID id, IBitmap bkgr, IBitmap holding, string filename, IImagingFactory fac)
             : base(cap, loc, bkgr)
         {
+            btnID = id;
             ibmpHolding = holding;
             fac.CreateImageFromFile(filename, out iimgCover);
         }
@@ -38,6 +55,25 @@ namespace vCards
             //iimgHolding = hover;
             //BmpBackground = gpn.IGameGracphics.CreateBitmap(bmpFile, true);
             //gpn.IGameImgFactory.CreateImageFromFile(imgFile, out iimgHolding);
+        }
+
+        /// <summary>
+        /// Kiem tra click co trung button khong.
+        /// </summary>
+        /// <param name="pos">Toa do click chuot.</param>
+        /// <returns>true neu click trung, nguoc lai la false.</returns>
+        public bool ValidateClick(Point pos)
+        {
+            if (IsIn(pos))
+            {
+                btnState = MyButtonState.Down;
+                return true;
+            }
+            else
+            {
+                btnState = MyButtonState.Up;
+                return false;
+            }
         }
 
         public bool IsIn(Point pos)
@@ -69,5 +105,14 @@ namespace vCards
 
             //DrawCover(igr);
         }
+
+        #region IDisposable Members
+
+        public override void Dispose()
+        {
+
+        }
+
+        #endregion
     }
 }

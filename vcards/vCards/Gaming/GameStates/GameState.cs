@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace vCards
 {
@@ -10,13 +11,15 @@ namespace vCards
     {
         StateUknown,
         StateMenu,
-        StateTest
+        StateTest,
+        StatePlay,
+        StateGameCustom
     }
 
     public abstract class GameState
     {
         GameStateID idState = GameStateID.StateUknown;
-        public GameStateID StateID
+        public GameStateID ID
         {
             get { return idState; }
             set { idState = value; }
@@ -43,14 +46,19 @@ namespace vCards
             set { ibmpBack = value; }
         }
 
+        public void DrawBkgr()
+        {
+            Gpnel.IGameGracphics.DrawBitmap(new Rectangle(0, 0, Gpnel.IGameGracphics.ScreenWidth, Gpnel.IGameGracphics.ScreenHeight), ibmpBack);
+        }
+
         public virtual void EnterState(){}
         public virtual void UpdateState(){}
         public virtual void RenderState(){}
-        public virtual void DrawState(){}
+        public virtual void DrawState() { gpnel.IGameGracphics.Flip(); }
         public virtual void ExitState(){}
 
-        public virtual void OnMouseDown(params object[] paras){}
-        public virtual void OnMouseUp(params object[] paras){}
+        public virtual void OnMouseDown(){}
+        public virtual void OnMouseUp(){}
 
         public void HandleMessage(MessageID messID, params object[] paras)
         {
@@ -58,6 +66,7 @@ namespace vCards
             {
                 case MessageID.MessageEnter:
                     EnterState();
+                    Gpnel.StateReady = true;
                     break;
                 case MessageID.MessageUpdate:
                     UpdateState();
@@ -70,12 +79,13 @@ namespace vCards
                     break;
                 case MessageID.MessageExit:
                     ExitState();
+                    gpnel.StateReady = false;
                     break;
                 case MessageID.MouseDown:
-                    OnMouseDown(paras);
+                    OnMouseDown();
                     break;
                 case MessageID.MouseUp:
-                    OnMouseUp(paras);
+                    OnMouseUp();
                     break;
                 default:
                     throw new ApplicationException("HandleMessage() : Message ID unknown.");

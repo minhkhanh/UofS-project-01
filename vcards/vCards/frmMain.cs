@@ -23,6 +23,8 @@ namespace vCards
             InitializeComponent();
 
             gpanel = new GamePanel(this);
+            gpanel.SendMessage(MessageID.MessageEnter);
+
             ResourcesManager.gpanel = gpanel;
             threadLogic = new Thread(new ThreadStart(ThreadFunc));
             threadLogic.Start();
@@ -57,7 +59,7 @@ namespace vCards
 
         private void frmMain_Paint(object sender, PaintEventArgs e)
         {
-            
+            //Close();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -89,8 +91,9 @@ namespace vCards
 
         private void frmMain_MouseDown(object sender, MouseEventArgs e)
         {
-            Point pos = new Point(e.X, e.Y);
-            gpanel.SendMessage(MessageID.MouseDown, pos);
+            //Point pos = new Point(e.X, e.Y);
+            gpanel.Click = new Point(e.X, e.Y);
+            gpanel.SendMessage(MessageID.MouseDown);
 
             //Test01();
         }
@@ -102,8 +105,9 @@ namespace vCards
 
         private void frmMain_MouseUp(object sender, MouseEventArgs e)
         {
-            Point pos = new Point(e.X, e.Y);
-            gpanel.SendMessage(MessageID.MouseUp, pos);
+            //Point pos = new Point(e.X, e.Y);
+            gpanel.Click = new Point(e.X, e.Y);
+            gpanel.SendMessage(MessageID.MouseUp);
         }
     }
 }

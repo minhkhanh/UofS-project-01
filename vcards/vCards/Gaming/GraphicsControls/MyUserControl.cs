@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace vCards
 {
-    public abstract class MyUserControl
+    public abstract class MyUserControl: IDisposable
     {
         public MyUserControl()
         {
@@ -26,5 +26,7 @@ namespace vCards
             //text = cap;
             region = loc;
         }
+
+        public abstract void Dispose();
     }
 }
