@@ -9,46 +9,60 @@ namespace vCards
 {
     public class GameStateCustom: GameState
     {
-        List<ImageButton> listButton = new List<ImageButton>();
-        //List<MyBmpTextControl> listTextbox = new List<MyBmpTextControl>();
+        #region  declare all image controls
 
-        public GameStateCustom(GamePanel gp)
+        ImageButton okImgBtn;
+
+        CardShape card01;
+
+        #endregion
+
+        public GameStateCustom(GamePanel gp, string bkgrPath)
+            : base(gp, bkgrPath)
         {
-            Gpnel = gp;
-            ID = GameStateID.StateGameCustom;
+            stateId = GameStateID.StateGameCustom;
+
+            InitControls();
+        }
+        
+        public override void InitControls()
+        {
+            okImgBtn = new ImageButton(new Rectangle(50, 100, 100, 50), true
+                , Program.AppPath + @"\Resources\Images\Buttons\OKBtn_Bkgr.bmp"                
+                , gamePanel.GameGraphics
+                , Program.AppPath + @"\Resources\Images\Buttons\OKBtn_Hover.png"
+                );
+            ManageImgControl(okImgBtn);
+            okImgBtn.MouseDown += new EventHandler<MouseEventArgs>(okImgBtn_MouseDown);
+            okImgBtn.MouseUp += new EventHandler<MouseEventArgs>(okImgBtn_MouseUp);
+            okImgBtn.Click += new EventHandler<EventArgs>(okImgBtn_Click);
+
+
+            card01 = new CardShape(new Rectangle(50, 200, 52, 66), true
+                , Program.AppPath + @"\Resources\Images\Cards\00_75.png"
+                , gamePanel.GameGraphics
+                , new CardValue(CardRank.Ace, CardSuit.Spades)
+                );
+            ManageImgControl(card01);
+            card01.MouseMove += new EventHandler<MouseEventArgs>(card01_MouseMove);
         }
 
-        public void InitButtons()
+        public void card01_MouseMove(object o, MouseEventArgs e)
         {
-            IBitmap ibmpBtnUp = Gpnel.IGameGracphics.CreateBitmap(Program.AppPath + @"\Resources\Images\Buttons\OKBtn_Bkgr.bmp", true);
-
-            imgBtnOK = new ImageButton(new Rectangle(50, 100, ibmpBtnUp.Width, ibmpBtnUp.Height), true, null
-                , ibmpBtnUp, Program.AppPath + @"\Resources\Images\Buttons\OKBtn_Hover.png", Gpnel.IGameGracphics);
-
-            Gpnel.OwnerForm.MouseDown += new System.Windows.Forms.MouseEventHandler(imgBtnOK.OnMouseDown);
-            Gpnel.OwnerForm.MouseUp += new System.Windows.Forms.MouseEventHandler(imgBtnOK.OnMouseUp);
-
-            imgBtnOK.MouseDown += new EventHandler<System.Windows.Forms.MouseEventArgs>(OnBtnOK_Click);
+            card01.MoveTo(new Point(e.X, e.Y));
         }
 
-        ImageButton imgBtnOK;
-        public override void EnterState()
+        public void okImgBtn_Click(object o, EventArgs e)
         {
-            BackIBmp = Gpnel.IGameGracphics.CreateBitmap(Program.AppPath + @"\Resources\Images\Misc\PlayBkgr.bmp", false);
 
-            InitButtons();
         }
 
-        public void OnBtnOK_Click(object o, MouseEventArgs e)
+        public void okImgBtn_MouseDown(object o, MouseEventArgs e)
         {
-            MessageBox.Show("Button OK in Custom state clicked!\n Event them thanh cong!");
-            ((Form)Gpnel.OwnerForm).Close();
         }
 
-        public override void RenderState()
-        {
-            Gpnel.IGameGracphics.DrawBitmap(0, 0, BackIBmp);
-            imgBtnOK.DrawBackground(Gpnel.IGameGracphics);
+        public void okImgBtn_MouseUp(object o, MouseEventArgs e)
+        {         
         }
     }
 }

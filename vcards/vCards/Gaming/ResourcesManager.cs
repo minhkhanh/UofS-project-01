@@ -7,7 +7,7 @@ namespace vCards
 {
     public class ResourcesManager
     {
-        public static GamePanel gpanel;
+        public static GamePanel gamePanel;
         //public static IImage GetImageResource(string path)
         //{
         //    IImage iimgCover;
@@ -18,14 +18,14 @@ namespace vCards
         {
             if (num < 0) return null;
             IImage iimgCover;
-            gpanel.IGameImgFactory.CreateImageFromFile(gpanel.AppPath + @"Resources\Images\Cards\" + num.ToString("D2") + ".png", out iimgCover);
+            gamePanel.GameGraphics.CreateIImage(Program.AppPath + @"\Resources\Images\Cards\" + num.ToString("D2") + ".png", out iimgCover);
             return iimgCover;
         }
 
         public static IBitmap GetCardBitmap(int num)
         {
             if (num < 0) return null;
-            return gpanel.IGameGracphics.CreateBitmap(gpanel.AppPath + @"Resources\Images\Cards\" + num.ToString("D2") + ".png", false);
+            return gamePanel.GameGraphics.CreateBitmap(Program.AppPath + @"\Resources\Images\Cards\" + num.ToString("D2") + ".png", false);
         }
     }
 }

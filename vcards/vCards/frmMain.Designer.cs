@@ -45,12 +45,10 @@
             this.Location = new System.Drawing.Point(0, 0);
             this.MinimizeBox = false;
             this.Name = "frmMain";
-            this.Text = "frmMain";
+            this.Text = "vCards";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.frmMain_MouseUp);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.frmMain_Paint);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmMain_MouseDown);
             this.Closing += new System.ComponentModel.CancelEventHandler(this.frmMain_Closing);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.frmMain_MouseMove);
             this.ResumeLayout(false);
 
         }

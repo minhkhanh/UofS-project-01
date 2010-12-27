@@ -7,66 +7,95 @@ using System.Windows.Forms;
 
 namespace vCards
 {
-    public enum ImageControlState
+    public enum MouseState
     {
         MouseUp,
-        MouseDown
+        MouseDown,
+
+        Click
     }
 
     public abstract class ImageControl
     {
-        ImageControlState state = ImageControlState.MouseUp;
+        #region data members
 
-        public ImageControl(Rectangle regn, bool visi, string capt, IBitmap ibmp, IGraphics igr)
-        {
-            region = regn;
-            visible = visi;
+        protected MouseState mouseState = MouseState.MouseUp;
+        protected Rectangle region;
+        bool enabled = false;
+        //protected IBitmap bkgrBmp;
 
-            ibmpBkgr = igr.CreateBitmap(ibmp);
-        }
+        #endregion
 
-        Rectangle region;
-        public Rectangle Region
-        {
-            get { return region; }
-        }
+        #region events
 
-        public int Width
-        {
-            get { return region.Width; }
-        }
-        public int Height
-        {
-            get { return region.Height; }
-        }
+        public event EventHandler<MouseEventArgs> MouseDown;
+        public event EventHandler<MouseEventArgs> MouseUp;
+        public event EventHandler<MouseEventArgs> MouseMove;
+
+        public event EventHandler<EventArgs> Click;
+
+        #endregion
+
+        #region properties
+
+        //public int Width
+        //{
+        //    get { return region.Width; }
+        //}
+        //public int Height
+        //{
+        //    get { return region.Height; }
+        //}
+
         public int X
         {
+            set { region.X = value; }
             get { return region.X; }
         }
         public int Y
         {
+            set { region.Y = value; }
             get { return region.Y; }
         }
 
-        bool visible = false;
+        //public Point Location
+        //{
+        //    set { region.Location = value; }
+        //}
 
-        protected IBitmap ibmpBkgr;
-
-        public bool IsIn(Point pos)
+        public Rectangle Region
         {
-            return (
-                pos.IsEmpty == false
-                && pos.X >= region.X
-                && pos.X <= region.X + region.Width
-                && pos.Y >= region.Y
-                && pos.Y <= region.Y + region.Height
-                );
+            set { region = value; }
+            get { return region; }
         }
 
-        public event EventHandler<MouseEventArgs> MouseDown;
-        public event EventHandler<MouseEventArgs> MouseUp;
+        #endregion
 
-        public void OnRaiseMouseDownEvent(MouseEventArgs e)
+        #region constructors
+
+        public ImageControl() { }
+
+        public ImageControl(Rectangle regn, bool isEnabled)
+        {
+            region = regn;
+            enabled = isEnabled;
+        }
+
+        #endregion
+
+        #region private methods
+
+        private void RaiseClickEvent(EventArgs e)
+        {
+            EventHandler<EventArgs> handler = Click;
+
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        private void RaiseMouseDownEvent(MouseEventArgs e)
         {
             EventHandler<MouseEventArgs> handler = MouseDown;
 
@@ -76,7 +105,7 @@ namespace vCards
             }
         }
 
-        public void OnRaiseMouseUpEvent(MouseEventArgs e)
+        private void RaiseMouseUpEvent(MouseEventArgs e)
         {
             EventHandler<MouseEventArgs> handler = MouseUp;
 
@@ -86,23 +115,72 @@ namespace vCards
             }
         }
 
-        public void OnMouseDown(object o, MouseEventArgs e)
+        private void RaiseMouseMoveEvent(MouseEventArgs e)
         {
-            if (visible && IsIn(new Point(e.X, e.Y)))
-                OnRaiseMouseDownEvent(e);
-        }
+            EventHandler<MouseEventArgs> handler = MouseMove;
 
-        public void OnMouseUp(object o, MouseEventArgs e)
-        {
-            if (state == ImageControlState.MouseDown)
+            if (handler != null)
             {
-                state = ImageControlState.MouseUp;
+                handler(this, e);
             }
         }
 
-        public void DrawBackground(IGraphics igr)
+        #endregion
+
+        #region public methods
+
+        public void Enable()
         {
-            igr.DrawBitmap(region, ibmpBkgr);
+            enabled = true;
         }
+
+        public void Disable()
+        {
+            enabled = false;
+        }
+
+        #endregion
+
+        #region virtual methods
+
+        public virtual void OnMouseDown(object o, MouseEventArgs e)
+        {
+            if (enabled && region.Contains(e.X, e.Y))
+            {
+                mouseState = MouseState.MouseDown;
+                RaiseMouseDownEvent(e);
+            }
+        }
+
+        public virtual void OnMouseUp(object o, MouseEventArgs e)
+        {
+            if (mouseState == MouseState.MouseDown)
+            {
+                mouseState = MouseState.MouseUp;
+                RaiseMouseUpEvent(e);
+            }
+        }
+
+        public virtual void OnMouseMove(object o, MouseEventArgs e)
+        {
+            if (mouseState == MouseState.MouseDown)
+            {
+                RaiseMouseMoveEvent(e);
+            }
+        }
+
+        public virtual void OnClick(object o, EventArgs e)
+        {
+            if (mouseState == MouseState.MouseDown)
+            {
+                mouseState = MouseState.MouseUp;
+                RaiseClickEvent(e);
+            }
+        }
+
+        public abstract void DrawBackground(IGraphics igr);
+        public abstract void Draw(IGraphics igr);
+
+        #endregion
     }
 }

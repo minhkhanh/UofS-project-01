@@ -7,25 +7,17 @@ namespace vCards
 {
     public class GameStatePlay: GameState
     {
-        public GameStatePlay(GamePanel gp)
+        public GameStatePlay(GamePanel gp, string bkgrPath)
+            : base(gp, bkgrPath)
         {
-            Gpnel = gp;
-            ID = GameStateID.StatePlay;
+            stateId = GameStateID.StatePlay;
+
+            InitControls();
         }
 
-        public override void EnterState()
+        public override void InitControls()
         {
-            BackIBmp = Gpnel.IGameGracphics.CreateBitmap(Gpnel.AppPath + @"Resources\Images\Misc\PlayBkgr.bmp", false);
-        }
-
-        public override void RenderState()
-        {
-            DrawBkgr();
-        }
-
-        public override void DrawState()
-        {
-            Gpnel.IGameGracphics.Flip();
+            
         }
     }
 }

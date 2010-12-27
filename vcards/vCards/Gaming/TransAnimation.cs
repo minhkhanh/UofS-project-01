@@ -86,8 +86,8 @@ namespace vCards
             if (!allocated)
                 return;
 
-            if (iimgImage != null)
-                iimgImage.Dispose();
+            //if (iimgImage != null)
+            //    iimgImage.Dispose();
         }
     }
 }

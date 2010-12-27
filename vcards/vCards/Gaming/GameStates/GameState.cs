@@ -9,7 +9,7 @@ namespace vCards
 {
     public enum GameStateID
     {
-        StateUknown,
+        None,
         StateMenu,
         StateTest,
         StatePlay,
@@ -18,47 +18,108 @@ namespace vCards
 
     public abstract class GameState
     {
-        GameStateID idState = GameStateID.StateUknown;
+        #region all data members
+
+        protected GameStateID stateId = GameStateID.None;
         public GameStateID ID
         {
-            get { return idState; }
-            set { idState = value; }
+            get { return stateId; }
         }
 
-        Control owner;
-        public Control Owner
+        protected GamePanel gamePanel;
+
+        List<ImageControl> listImgControls = new List<ImageControl>();
+
+        protected IBitmap ibmpBack;
+
+        //protected List<Rectangle> listDirtyRect = new List<Rectangle>();
+
+        #endregion       
+
+        public GameState(GamePanel gp, string bmpPath)
         {
-            get { return owner; }
-            set { owner = value; }
+            gamePanel = gp;
+            ibmpBack = gamePanel.GameGraphics.CreateBitmap(bmpPath, false);
+
+            InitControls();
         }
 
-        GamePanel gpnel;
-        public GamePanel Gpnel
+        public void ManageImgControl(ImageControl ic)
         {
-            get { return gpnel; }
-            set { gpnel = value; }
+            listImgControls.Add(ic);
+            gamePanel.ManageImgControl(ic);
         }
 
-        IBitmap ibmpBack;
-        public IBitmap BackIBmp
+        public void DrawStateBkgr()
         {
-            get { return ibmpBack; }
-            set { ibmpBack = value; }
+            gamePanel.GameGraphics.DrawBitmap(0, 0, ibmpBack);
+            //listDirtyRect.Add(new Rectangle(0, 0, gamePanel.GameGraphics.ScreenWidth, gamePanel.GameGraphics.ScreenHeight));
         }
 
-        public void DrawBkgr()
+        public virtual void EnterState()
         {
-            Gpnel.IGameGracphics.DrawBitmap(new Rectangle(0, 0, Gpnel.IGameGracphics.ScreenWidth, Gpnel.IGameGracphics.ScreenHeight), ibmpBack);
+            // - enable tat ca cac control co trong state
+            EnableControls();
         }
 
-        public virtual void EnterState(){}
-        public virtual void UpdateState(){}
-        public virtual void RenderState(){}
-        public virtual void DrawState() { gpnel.IGameGracphics.Flip(); }
-        public virtual void ExitState(){}
+        public virtual void RenderState() 
+        {
+            // - ve anh nen cua state
+            DrawStateBkgr();
 
-        public virtual void OnMouseDown(){}
-        public virtual void OnMouseUp(){}
+            // - ve ra tat ca cac control
+            DrawControls(gamePanel.GameGraphics);
+        }
+
+        public virtual void DrawState()
+        {
+            // flip buffer
+            gamePanel.GameGraphics.Flip();
+        }
+
+        public virtual void ExitState() 
+        {
+            gamePanel.SwitchStateDone(); 
+        }
+
+        /// <summary>
+        /// Khoi tao gia tri, thong so cho cac control
+        /// </summary>
+        public abstract void InitControls();
+
+        /// <summary>
+        /// Kich hoat tat ca cac control thuoc state
+        /// </summary>
+        public virtual void EnableControls()
+        {
+            foreach (ImageControl i in listImgControls)
+            {
+                i.Enable();
+            }
+        }
+
+        /// <summary>
+        /// Vo hieu hoa tat ca cac control thuoc state
+        /// </summary>
+        public virtual void DisableControls()
+        {
+            foreach (ImageControl i in listImgControls)
+            {
+                i.Disable();
+            }
+        }
+
+        /// <summary>
+        /// Hien thi tat ca cac control thuoc state
+        /// </summary>
+        public virtual void DrawControls(IGraphics igp)
+        {
+            foreach (ImageControl i in listImgControls)
+            {
+                i.Draw(igp);
+                //listDirtyRect.Add(i.Region);
+            }
+        }
 
         public void HandleMessage(MessageID messID, params object[] paras)
         {
@@ -66,10 +127,6 @@ namespace vCards
             {
                 case MessageID.MessageEnter:
                     EnterState();
-                    Gpnel.StateReady = true;
-                    break;
-                case MessageID.MessageUpdate:
-                    UpdateState();
                     break;
                 case MessageID.MessageRender:
                     RenderState();
@@ -79,13 +136,6 @@ namespace vCards
                     break;
                 case MessageID.MessageExit:
                     ExitState();
-                    gpnel.StateReady = false;
-                    break;
-                case MessageID.MouseDown:
-                    OnMouseDown();
-                    break;
-                case MessageID.MouseUp:
-                    OnMouseUp();
                     break;
                 default:
                     throw new ApplicationException("HandleMessage() : Message ID unknown.");
