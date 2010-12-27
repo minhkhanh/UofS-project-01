@@ -12,7 +12,6 @@ namespace vCards
     {
         MessageUnknown,
         MessageEnter,
-        MessageUpdate,
         MessageRender,
         MessageDraw,
         MessageExit,
@@ -23,58 +22,43 @@ namespace vCards
 
     public class GamePanel
     {
-        Control ownerForm;
-        public Control OwnerForm
-        {
-            get { return ownerForm; }
-            set { ownerForm = value; }
-        }
-
-        IImagingFactory factory = (IImagingFactory)Activator.CreateInstance(Type.GetTypeFromCLSID(new Guid("327ABDA8-072B-11D3-9D7B-0000F81EF32E")));
-        public IImagingFactory IGameImgFactory
-        {
-            get { return factory; }
-            set { factory = value; }
-        }
+        const int GAME_FPS = 24;
+        Control ownerControl;
 
         IGraphics g;
-        public IGraphics IGameGracphics
+        public IGraphics GameGraphics
         {
             get { return g; }
             set { g = value; }
         }
 
-        string pathApp = System.Reflection.Assembly.GetExecutingAssembly().GetModules()[0].FullyQualifiedName.Replace(System.Reflection.Assembly.GetExecutingAssembly().GetModules()[0].Name, "");
-        public string AppPath
-        {
-            get { return pathApp; }
-            set { pathApp = value; }
-        }
-
         List<GameState> listGameStates = new List<GameState>();
         public void InitGameStates()
         {
-            listGameStates.Add(new GameTestState(this));
-            listGameStates.Add(new GameStateMenu(this));
-            listGameStates.Add(new GameStatePlay(this));
-            listGameStates.Add(new GameStateCustom(this));
+            listGameStates.Add(new GameStateMenu(this, Program.AppPath + @"\Resources\Images\StateBackgrounds\MenuBkgr.bmp"));
+            listGameStates.Add(new GameStateCustom(this, Program.AppPath + @"\Resources\Images\StateBackgrounds\PlayBkgr.bmp"));
+        }
+
+        public void ManageImgControl(ImageControl ic)
+        {
+            ownerControl.MouseDown += new MouseEventHandler(ic.OnMouseDown);
+            ownerControl.MouseUp += new MouseEventHandler(ic.OnMouseUp);
+            ownerControl.MouseMove += new MouseEventHandler(ic.OnMouseMove);
+
+            ownerControl.Click += new EventHandler(ic.OnClick);
         }
 
         public GamePanel(Control frm)
         {
             g = new GdiGraphics(frm);
 
-            ownerForm = frm;
+            ownerControl = frm;
 
             InitGameStates();
         }
 
         GameStateID currStateID = GameStateID.StateMenu;
-        public GameStateID CurrentState
-        {
-            get { return currStateID; }
-            set { currStateID = value; }
-        }
+        GameStateID nextStateID = GameStateID.None;
 
         public void SendMessage(MessageID messID, params object[] paras)
         {
@@ -95,77 +79,59 @@ namespace vCards
             set { stateReady = value; }
         }
 
-        public void GameLoop()
+        public void GameLoop2()
         {
             while (playing)
             {
-                int tickPrev = Environment.TickCount;
-
-                //if (enterState)
-                //{
-                //    enterState = false;
-                //    SendMessage(MessageID.MessageEnter);
-                //}
-
-                //SendMessage(MessageID.MessageUpdate);
-
-                //if (exitState)
-                //{
-                //    SendMessage(MessageID.MessageExit);
-
-                //    exitState = false;
-                //    enterState = true;
-                //}
-                //else
-                //{
-                //    SendMessage(MessageID.MessageRender);
-                //    SendMessage(MessageID.MessageDraw);
-                //}
-
                 if (stateReady)
                 {
                     SendMessage(MessageID.MessageRender);
                     SendMessage(MessageID.MessageDraw);
                 }
-
-                int tickSleep = tickPrev + 100 - Environment.TickCount;
-                Thread.Sleep(Math.Abs(tickSleep));
-
-                //tickPrev = Environment.TickCount;
             }
         }
 
-        public void GameLoop2()
+        public void GameLoop()
         {
+            int sleeptime = 1;
             while (playing)
             {
-                SendMessage(MessageID.MessageRender);
-                SendMessage(MessageID.MessageDraw);
-             
-                Thread.Sleep(10);
+                int t1 = Environment.TickCount;
+                if (enterState)
+                {
+                    SendMessage(MessageID.MessageEnter);
+                    enterState = false;
+                }
+
+                if (sleeptime > 0)
+                {
+                    SendMessage(MessageID.MessageRender);
+                    SendMessage(MessageID.MessageDraw);
+                }
+
+                if (exitState)
+                {
+                    exitState = false;
+                    enterState = true;
+                    SendMessage(MessageID.MessageExit);
+                }
+
+                sleeptime = 1000 / GAME_FPS - (Environment.TickCount - t1);
+                //sleeptime = 10;
+                if (sleeptime > 0)
+                    Thread.Sleep(sleeptime);
             }
         }
 
-        public void ChangeState(GameStateID id)
+        public void SwitchStateDone()
         {
-            SendMessage(MessageID.MessageExit);
-
-            currStateID = id;
-            SendMessage(MessageID.MessageEnter);            
+            currStateID = nextStateID;
         }
 
-        //MyButtonState clickState = MyButtonState.Up;
-        //public MyButtonState ClickState
-        //{
-        //    get { return clickState; }
-        //    set { clickState = value; }
-        //}
-
-        Point click = Point.Empty;
-        public Point Click
+        public void SwitchState(GameStateID next)
         {
-            get { return click; }
-            set { click = value; }
+            exitState = true;
+            nextStateID = next;
         }
     }
 }

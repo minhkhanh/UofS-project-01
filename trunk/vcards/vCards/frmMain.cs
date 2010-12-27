@@ -12,76 +12,20 @@ namespace vCards
 {
     public partial class frmMain : Form
     {
-        //public static string pathApp = System.Reflection.Assembly.GetExecutingAssembly().GetModules()[0].FullyQualifiedName.Replace(System.Reflection.Assembly.GetExecutingAssembly().GetModules()[0].Name, "");
-
-        GamePanel gpanel;
+        GamePanel gamePanel;
 
         Thread threadLogic;
+
+        //IImagingFactory imagingFactory = (IImagingFactory)Activator.CreateInstance(Type.GetTypeFromCLSID(new Guid("327ABDA8-072B-11D3-9D7B-0000F81EF32E")));
 
         public frmMain()
         {
             InitializeComponent();
 
-            gpanel = new GamePanel(this);
-            gpanel.SendMessage(MessageID.MessageEnter);
+            gamePanel = new GamePanel(this);
 
-            ResourcesManager.gpanel = gpanel;
             threadLogic = new Thread(new ThreadStart(ThreadFunc));
             threadLogic.Start();
-        }
-
-        void ThreadFunc()
-        {
-            gpanel.GameLoop();
-        }
-
-        void Test01()
-        {
-            int i = 1;
-            int j = 1;
-            string filename = gpanel.AppPath + @"Resources\Images\Cards\" + i.ToString() + "-" + j.ToString() + ".png";
-            string filename2 = gpanel.AppPath + @"Resources\Images\Misc\Untitled-1.png";
-
-            IBitmap a = gpanel.IGameGracphics.CreateBitmap(filename, false);
-            //a.SourceKey
-            //gpanel.IGameGracphics.DrawBitmap(0, 0, a);
-            gpanel.IGameGracphics.SetDrawOptions(DrawOptions.BlitMirrorLeftRight);
-            gpanel.IGameGracphics.DrawBitmap(0, 0, a);
-
-            IImage b;
-            gpanel.IGameImgFactory.CreateImageFromFile(filename2, out b);
-            gpanel.IGameGracphics.DrawImageAlphaChannel(b, 0, 0);
-
-            gpanel.IGameGracphics.Flip();
-
-            a.Dispose();
-        }
-
-        private void frmMain_Paint(object sender, PaintEventArgs e)
-        {
-            //Close();
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            //if (j == 13)
-            //{
-            //    ++i;
-            //    j = 1;
-
-            //    if (i > 4)
-            //        i = 1;
-            //}
-            //else
-            //    ++j;
-
-            //string filename = pathApp + @"Resources\Images\Cards\" + i.ToString() + "-" + j.ToString() + ".png";
-
-            //IBitmap a = new GdiBitmap(filename, false) as IBitmap;
-            //gpanel.IGameGracphics.DrawBitmap(0, 0, a);
-            //gpanel.IGameGracphics.Flip();
-
-            //a.Dispose();
         }
 
         private void frmMain_Closing(object sender, CancelEventArgs e)
@@ -89,13 +33,18 @@ namespace vCards
             threadLogic.Abort();
         }
 
-        private void frmMain_MouseDown(object sender, MouseEventArgs e)
+        void ThreadFunc()
         {
-            //Point pos = new Point(e.X, e.Y);
-            gpanel.Click = new Point(e.X, e.Y);
-            gpanel.SendMessage(MessageID.MouseDown);
+            gamePanel.GameLoop();
+        }
 
-            //Test01();
+        void Test01()
+        {
+            IImage iimg;
+            gamePanel.GameGraphics.CreateIImage(Program.AppPath + @"\Resources\Images\Misc\Untitled-1.png", out iimg);
+
+            gamePanel.GameGraphics.DrawImageAlphaChannel(iimg, 50, 10);
+            gamePanel.GameGraphics.Flip();
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)
@@ -103,11 +52,14 @@ namespace vCards
             //base.OnPaintBackground(e);
         }
 
-        private void frmMain_MouseUp(object sender, MouseEventArgs e)
+        private void timer1_Tick(object sender, EventArgs e)
         {
-            //Point pos = new Point(e.X, e.Y);
-            gpanel.Click = new Point(e.X, e.Y);
-            gpanel.SendMessage(MessageID.MouseUp);
+            //Test01();
+        }
+
+        private void frmMain_MouseMove(object sender, MouseEventArgs e)
+        {
+
         }
     }
 }

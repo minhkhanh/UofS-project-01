@@ -21,8 +21,9 @@ namespace vCards
 
     public interface IGraphics : IDisposable
     {
-        IImage CreateIImage(string filename);
-        IImage CreateIImage(Stream strm);
+        //IImagingFactory IImgFactory { set; }
+        void CreateIImage(string filename, out IImage iimg);
+        void CreateIImage(Stream strm, out IImage iimg);
 
         ///  
         /// Gets the height of the screen. 

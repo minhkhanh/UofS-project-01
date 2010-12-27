@@ -37,20 +37,15 @@ namespace vCards
     public class GdiGraphics : IGraphics
     {
         IImagingFactory imagingFactory = (IImagingFactory)Activator.CreateInstance(Type.GetTypeFromCLSID(new Guid("327ABDA8-072B-11D3-9D7B-0000F81EF32E")));
-        public IImage CreateIImage(string filename)
-        {
-            IImage iimg;
-            imagingFactory.CreateImageFromFile(filename, out iimg);
 
-            return iimg;
+        public void CreateIImage(string filename, out IImage iimg)
+        {
+            imagingFactory.CreateImageFromFile(filename, out iimg);
         }
 
-        public IImage CreateIImage(Stream strm)
+        public void CreateIImage(Stream strm, out IImage iimg)
         {
-            IImage iimg;
             imagingFactory.CreateImageFromStream(strm, out iimg);
-
-            return iimg;
         }
 
         ///  
@@ -143,6 +138,8 @@ namespace vCards
                     srcRect.Width, srcRect.Height,
                     GraphicsUnit.Pixel, attr);
             }
+
+            listDirtyRect.Add(new Rectangle(x, y, srcRect.Width, srcRect.Height));
         }
 
         /// <summary>
@@ -194,31 +191,29 @@ namespace vCards
                     gdiBitmap.Width, gdiBitmap.Height,
                     GraphicsUnit.Pixel, attr);
             }
+
+            listDirtyRect.Add(destRect);
         }
 
         public void DrawImageAlphaChannel(IImage image, int x, int y)
         {
             ImageInfo imgInfo;
             image.GetImageInfo(out imgInfo);
-            Rectangle desRect = new Rectangle(x, y, (int)imgInfo.Width+x, (int)imgInfo.Height+y);
-            Rectangle rectSrc = new Rectangle(0, 0, (int)imgInfo.Width, (int)imgInfo.Height);
 
-            IntPtr hdc = gBack.GetHdc();
-            image.Draw(hdc, ref desRect, ref rectSrc);
-            gBack.ReleaseHdc(hdc);  // !!! phai thuc hien thao tac Release nay!
+            Rectangle desRect = new Rectangle(x, y, (int)imgInfo.Width, (int)imgInfo.Height);
+            Rectangle srcRect = new Rectangle(0, 0, (int)imgInfo.Width, (int)imgInfo.Height);
+
+            DrawImageAlphaChannel(image, imgInfo, desRect, srcRect);
         }
 
         public void DrawImageAlphaChannel(IImage image, Rectangle dest)
-        {
-            IntPtr hdc = gBack.GetHdc();
-            
+        {       
             ImageInfo imgInfo;
             image.GetImageInfo(out imgInfo);
-            Rectangle rectSrc = new Rectangle(0, 0, (int)imgInfo.Width, (int)imgInfo.Height);
+            
+            Rectangle src = new Rectangle(0, 0, (int)imgInfo.Width, (int)imgInfo.Height);
 
-            image.Draw(hdc, ref dest, ref rectSrc);
-
-            gBack.ReleaseHdc(hdc);  // !!! phai thuc hien thao tac Release nay!
+            DrawImageAlphaChannel(image, imgInfo, dest, src);
         }
 
         public void DrawImageAlphaChannel(IImage image, Rectangle dest, Rectangle src)
@@ -226,15 +221,27 @@ namespace vCards
             ImageInfo imgInfo;
             image.GetImageInfo(out imgInfo);
 
-            IntPtr hdc = gBack.GetHdc();
+            DrawImageAlphaChannel(image, imgInfo, dest, src);
+        }
 
+        private void DrawImageAlphaChannel(IImage image, ImageInfo imgInfo, Rectangle dest, Rectangle src)
+        {
+            listDirtyRect.Add(dest);    // do this before convert Rectangle to RECT
+
+            // convert Rectangle's values into RECT
+            dest.Width += dest.X;
+            dest.Height += dest.Y;
+            src.Width += src.X;
+            src.Height += src.Y;
+
+            // convert unit of src RECT from pixel to dpi
             src.X = src.X * (2540 / (int)imgInfo.Xdpi);
             src.Y = src.Y * (2540 / (int)imgInfo.Ydpi);
             src.Width = src.Width * (2540 / (int)imgInfo.Xdpi);
             src.Height = src.Height * (2540 / (int)imgInfo.Ydpi);
 
-            image.Draw(hdc, ref dest, ref src); // !!! xem lai src (tinh bang don vi DPI)
-
+            IntPtr hdc = gBack.GetHdc();
+            image.Draw(hdc, ref dest, ref src);
             gBack.ReleaseHdc(hdc);  // !!! phai thuc hien thao tac Release nay!
         }
 
@@ -255,6 +262,8 @@ namespace vCards
 
             gSrc.ReleaseHdc(hdcSrc);
             gBack.ReleaseHdc(hdcDes);
+
+            listDirtyRect.Add(new Rectangle(x, y, ibmp.Width, ibmp.Height));
         }
 
         public void AlphaBlend(byte alpha, IBitmap ibmp, Rectangle dest)
@@ -274,6 +283,8 @@ namespace vCards
 
             gSrc.ReleaseHdc(hdcSrc);
             gBack.ReleaseHdc(hdcDes);
+
+            listDirtyRect.Add(new Rectangle(dest.X, dest.Y, dest.Width, dest.Height));
         }
 
         public void AlphaBlend(byte alpha, IBitmap ibmp, Rectangle dest, Rectangle src)
@@ -293,16 +304,22 @@ namespace vCards
 
             gSrc.ReleaseHdc(hdcSrc);
             gBack.ReleaseHdc(hdcDes);
+
+            listDirtyRect.Add(new Rectangle(dest.X, dest.Y, dest.Width, dest.Height));
         }
 
         public void DrawAnimation(int x, int y, Rectangle rectSrc, Animation animation)
         {
             animation.Draw(this, x, y, rectSrc);
+
+            listDirtyRect.Add(new Rectangle(x, y, rectSrc.Width, rectSrc.Height));
         }
 
         public void DrawAnimationScale(int x, int y, int w, int h, Animation animation)
         {
             animation.Draw(this, x, y, w, h);
+
+            listDirtyRect.Add(new Rectangle(x, y, w, h));
         }
 
 
@@ -315,16 +332,22 @@ namespace vCards
         public void DrawAnimation(int x, int y, Animation animation)
         {
             animation.Draw(this, x, y);
+
+            listDirtyRect.Add(new Rectangle(x, y, animation.CellWidth, animation.CellHeight));
         }
 
         public void DrawBitmap(Rectangle rectDest, IBitmap ibmp)
         {
             DrawBitmap(new Rectangle(0, 0, ibmp.Width, ibmp.Height), rectDest, ibmp);
+
+            listDirtyRect.Add(rectDest);
         }
 
         public void DrawBitmap(int x, int y, IBitmap bmp)
         {
             DrawBitmap(x, y, new Rectangle(0, 0, bmp.Width, bmp.Height), bmp);
+
+            listDirtyRect.Add(new Rectangle(x, y, bmp.Width, bmp.Height));
         }
 
         public void DrawBitmap(Rectangle sourceRegion, Rectangle destRect, 
@@ -414,6 +437,8 @@ namespace vCards
 #endif
                 }
             }
+
+            listDirtyRect.Add(destRect);
         }
 
         ///  
@@ -496,6 +521,8 @@ namespace vCards
 #endif
                 }
             }
+
+            listDirtyRect.Add(new Rectangle(x, y, sourceRegion.Width, sourceRegion.Height));
         }
 
         ///  
@@ -506,19 +533,42 @@ namespace vCards
         public void DrawFilledRect(Rectangle r, Color c)
         {
             gBack.FillRectangle(new SolidBrush(c), r);
+
+            listDirtyRect.Add(r);
         }
 
         public void Flip(Rectangle rect)
         {
             screen.DrawImage(back, rect, new Rectangle(0,0,back.Width, back.Height), GraphicsUnit.Pixel);
         }
-
+        
         public void Flip(List<Rectangle> listRect)
         {
-            foreach (Rectangle i in listRect)
+            //for (int i = 0; i < listRect.Count; ++i)
+            //{
+            //    screen.DrawImage(back, listRect[i], listRect[i], GraphicsUnit.Pixel);
+            //    listRect.RemoveAll(tmp => tmp == listRect[i]);
+            //    --i;
+            //}
+
+            //listRect.Clear();
+        }
+
+        List<Rectangle> listDirtyRect = new List<Rectangle>();
+
+        public void FlipByRect()
+        {
+            foreach (Rectangle i in listDirtyRect)
             {
-                screen.DrawImage(back, i, new Rectangle(0, 0, back.Width, back.Height), GraphicsUnit.Pixel);
+                screen.DrawImage(back, i, i, GraphicsUnit.Pixel);
             }
+
+            listDirtyRect.Clear();
+        }
+
+        public void FlipAll()
+        {
+            screen.DrawImage(back, 0, 0);
         }
 
         ///  
@@ -526,12 +576,15 @@ namespace vCards
         ///  
         public void Flip()
         {
+            //FlipByRect();           
             screen.DrawImage(back, 0, 0);
         }
 
         public void DrawString(string text, IFont font, Brush brush, Rectangle textRect)
         {
             gBack.DrawString(text, ((GdiFont)font).Font, brush, textRect);
+
+            listDirtyRect.Add(textRect);
         }
 
         public void DrawText(Rectangle rectText, string text, Color color, IFont font, FontDrawOptions options)
@@ -553,6 +606,8 @@ namespace vCards
                 stringFormat.LineAlignment = StringAlignment.Center;
 
             gBack.DrawString(text, ((GdiFont)font).Font, new SolidBrush(color), rectText, stringFormat);
+
+            listDirtyRect.Add(rectText);
         }
 
         ///  
