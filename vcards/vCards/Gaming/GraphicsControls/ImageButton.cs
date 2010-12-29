@@ -8,25 +8,25 @@ namespace vCards
 {
     public class ImageButton: BmpControl
     {
-        public ImageButton(Rectangle regn, bool enabled, string ibmpPath, IGraphics igr, string iimgPath)
-            : base(regn, enabled, ibmpPath, igr)
+        public ImageButton(Rectangle regn, string ibmpPath, IGraphics igp, string iimgPath)
+            : base(regn, ibmpPath, igp)
         {
-            igr.CreateIImage(iimgPath, out iimgHover);
+            igp.CreateIImage(iimgPath, out iimgHover);
         }
 
         IImage iimgHover;
 
-        public void DrawHover(IGraphics igr)
+        public void DrawHover(IGraphics igp)
         {
-            igr.DrawImageAlphaChannel(iimgHover, region);
+            igp.DrawImageAlphaChannel(iimgHover, region);
         }
 
-        public override void Draw(IGraphics igr)
+        public override void Draw(IGraphics igp)
         {
-            base.Draw(igr);
+            base.Draw(igp);
 
             if (mouseState == MouseState.MouseDown)
-                DrawHover(igr);
+                DrawHover(igp);
         }
     }
 }

@@ -1,2 +1,5 @@
 ﻿Cần nâng cấp:
 - dễ dàng chuyển đổi giữa 2 cách thức load ảnh từ đường dẫn file và từ resource stream
+- linh hoạt khi thay đổi tên hay đường dẫn thư mục chứa resource
+- resource lá bài thiết kế với size lớn hơn
+- tìm hiểu sử dụng lớp ResourceManager

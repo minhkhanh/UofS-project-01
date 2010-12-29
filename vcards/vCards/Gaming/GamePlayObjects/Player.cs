@@ -5,7 +5,17 @@ using System.Text;
 
 namespace vCards
 {
+    public enum PlayerSide
+    {
+        None,
+        Left,
+        Top,
+        Right,
+        Bottom
+    }
+
     public class Player
     {
+        PlayerSide side = PlayerSide.None;
     }
 }

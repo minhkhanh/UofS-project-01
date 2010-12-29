@@ -553,9 +553,9 @@ namespace vCards
         // added code:
         //////////////////////////////////////////////////////////////////////////
 
-        public abstract void Draw(IGraphics igr, int x, int y, int w, int h);
-        public abstract void Draw(IGraphics igr, int x, int y, Rectangle rectSrc);
-        public abstract void Draw(IGraphics igr, int x, int y);
+        public abstract void Draw(IGraphics igp, int x, int y, int w, int h);
+        public abstract void Draw(IGraphics igp, int x, int y, Rectangle rectSrc);
+        public abstract void Draw(IGraphics igp, int x, int y);
 
     }
 }

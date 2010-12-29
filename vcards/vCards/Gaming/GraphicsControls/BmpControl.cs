@@ -10,20 +10,20 @@ namespace vCards
     {
         protected IBitmap bmpBkgr;
 
-        public BmpControl(Rectangle regn, bool enabled, string bmpPath, IGraphics igr)
-            : base(regn, enabled)
+        public BmpControl(Rectangle regn, string bmpPath, IGraphics igp)
+            : base(regn)
         {
-            bmpBkgr = igr.CreateBitmap(bmpPath, true);
+            bmpBkgr = igp.CreateBitmap(bmpPath, true);
         }
 
-        public override void DrawBackground(IGraphics igr)
+        public override void DrawBackground(IGraphics igp)
         {
-            igr.DrawBitmap(region, bmpBkgr);
+            igp.DrawBitmap(region, bmpBkgr);
         }
 
-        public override void Draw(IGraphics igr)
+        public override void Draw(IGraphics igp)
         {
-            DrawBackground(igr);
+            DrawBackground(igp);
         }
     }
 }

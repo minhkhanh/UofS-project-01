@@ -8,22 +8,24 @@ namespace vCards
 {
     public abstract class TransControl: ImageControl
     {
-        IImage iimgBkgr;
+        protected IImage iimgBkgr;
 
-        public TransControl(Rectangle regn, bool enabled, string iimgPath, IGraphics igr)
-            : base(regn, enabled)
+        public TransControl(Rectangle regn, string iimgPath, IGraphics igp)
+            : base(regn)
         {
-            igr.CreateIImage(iimgPath, out iimgBkgr);
+            igp.CreateIImage(iimgPath, out iimgBkgr);
         }
 
-        public override void DrawBackground(IGraphics igr)
+        public TransControl(){}
+
+        public override void DrawBackground(IGraphics igp)
         {
-            igr.DrawImageAlphaChannel(iimgBkgr, region);
+            igp.DrawImageAlphaChannel(iimgBkgr, region);
         }
 
-        public override void Draw(IGraphics igr)
+        public override void Draw(IGraphics igp)
         {
-            DrawBackground(igr);
+            DrawBackground(igp);
         }
     }
 }

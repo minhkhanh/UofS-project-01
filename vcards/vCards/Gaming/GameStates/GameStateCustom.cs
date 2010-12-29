@@ -12,8 +12,9 @@ namespace vCards
         #region  declare all image controls
 
         ImageButton okImgBtn;
-
-        CardShape card01;
+        CardPack pack01;
+        CardPack pack02;
+        Deck deck01 = new Deck();
 
         #endregion
 
@@ -21,48 +22,33 @@ namespace vCards
             : base(gp, bkgrPath)
         {
             stateId = GameStateID.StateGameCustom;
-
-            InitControls();
         }
         
         public override void InitControls()
         {
-            okImgBtn = new ImageButton(new Rectangle(50, 100, 100, 50), true
+            okImgBtn = new ImageButton(new Rectangle(50, 100, 100, 50)
                 , Program.AppPath + @"\Resources\Images\Buttons\OKBtn_Bkgr.bmp"                
                 , gamePanel.GameGraphics
                 , Program.AppPath + @"\Resources\Images\Buttons\OKBtn_Hover.png"
                 );
-            ManageImgControl(okImgBtn);
-            okImgBtn.MouseDown += new EventHandler<MouseEventArgs>(okImgBtn_MouseDown);
-            okImgBtn.MouseUp += new EventHandler<MouseEventArgs>(okImgBtn_MouseUp);
-            okImgBtn.Click += new EventHandler<EventArgs>(okImgBtn_Click);
+            ctrlContainer.AddControl(okImgBtn);
 
+            pack01 = new CardPack(PlayerSide.Bottom, gamePanel.GameGraphics);           
 
-            card01 = new CardShape(new Rectangle(50, 200, 52, 66), true
-                , Program.AppPath + @"\Resources\Images\Cards\00_75.png"
-                , gamePanel.GameGraphics
-                , new CardValue(CardRank.Ace, CardSuit.Spades)
-                );
-            ManageImgControl(card01);
-            card01.MouseMove += new EventHandler<MouseEventArgs>(card01_MouseMove);
+            deck01.Deal(pack01);
+
+            gamePanel.ManageImgControl(pack01);
+            //gamePanel.ManageImgControl(pack02);
+
+            pack01.Rearrange(gamePanel.GameGraphics);
+            //pack02.Rearrange(gamePanel.GameGraphics);
         }
 
-        public void card01_MouseMove(object o, MouseEventArgs e)
+        public override void RenderState()
         {
-            card01.MoveTo(new Point(e.X, e.Y));
-        }
+            base.RenderState();
 
-        public void okImgBtn_Click(object o, EventArgs e)
-        {
-
-        }
-
-        public void okImgBtn_MouseDown(object o, MouseEventArgs e)
-        {
-        }
-
-        public void okImgBtn_MouseUp(object o, MouseEventArgs e)
-        {         
+            pack01.Draw(gamePanel.GameGraphics);
         }
     }
 }
