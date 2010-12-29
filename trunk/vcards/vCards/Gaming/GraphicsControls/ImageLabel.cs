@@ -10,15 +10,15 @@ namespace vCards
     {
         string caption;
 
-        public ImageLabel(Rectangle regn, bool enabled, string ibmpPath, IGraphics igr, string capt)
-            : base(regn, enabled, ibmpPath, igr)
+        public ImageLabel(Rectangle regn, string ibmpPath, IGraphics igp, string capt)
+            : base(regn, ibmpPath, igp)
         {
             caption = capt;
         }
 
-        public void DrawCaption(IGraphics igr, Color clr, IFont font, FontDrawOptions opts)
+        public void DrawCaption(IGraphics igp, Color clr, IFont font, FontDrawOptions opts)
         {
-            igr.DrawText(region, caption, clr, font, opts);
+            igp.DrawText(region, caption, clr, font, opts);
         }
     }
 }

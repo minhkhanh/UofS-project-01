@@ -37,7 +37,7 @@ namespace vCards
             base(numberRows, numberColumns, startCell, cellWidth, cellHeight, cellsPerSecond)
         {
             // Load and initialize the Bitmap object 
-            fac.CreateImageFromStream(filestream, out iimgImage);
+            //fac.CreateImageFromStream(filestream, out iimgImage);
             if (iimgImage == null)
             {
                 initialized = false;
@@ -63,22 +63,22 @@ namespace vCards
             allocated = true;
         }
 
-        public override void Draw(IGraphics igr, int x, int y, int w, int h)
+        public override void Draw(IGraphics igp, int x, int y, int w, int h)
         {
-            //igr.DrawImageAlphaChannel(iimgImage, new RECT(x, y, w, h), new RECT(Region));
+            //igp.DrawImageAlphaChannel(iimgImage, new RECT(x, y, w, h), new RECT(Region));
         }
 
-        public override void Draw(IGraphics igr, int x, int y, Rectangle rectSrc)
+        public override void Draw(IGraphics igp, int x, int y, Rectangle rectSrc)
         {
             rectSrc.X += Region.X;
             rectSrc.Y += Region.Y;
 
-            //igr.DrawImageAlphaChannel(iimgImage, new RECT(x, y, rectSrc.Width, rectSrc.Height), new RECT(rectSrc));
+            //igp.DrawImageAlphaChannel(iimgImage, new RECT(x, y, rectSrc.Width, rectSrc.Height), new RECT(rectSrc));
         }
 
-        public override void Draw(IGraphics igr, int x, int y)
+        public override void Draw(IGraphics igp, int x, int y)
         {
-            //igr.DrawImageAlphaChannel(iimgImage, new RECT(x, y, CellWidth, CellHeight), new RECT(Region));
+            //igp.DrawImageAlphaChannel(iimgImage, new RECT(x, y, CellWidth, CellHeight), new RECT(Region));
         }
 
         public override void Dispose()

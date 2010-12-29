@@ -63,22 +63,22 @@ namespace vCards
             allocated = true;
         }
 
-        public override void Draw(IGraphics igr, int x, int y, int w, int h)
+        public override void Draw(IGraphics igp, int x, int y, int w, int h)
         {
-            igr.DrawBitmap(Region, new Rectangle(x, y, w, h), ibmpImage);
+            igp.DrawBitmap(Region, new Rectangle(x, y, w, h), ibmpImage);
         }
 
-        public override void Draw(IGraphics igr, int x, int y, Rectangle rectSrc)
+        public override void Draw(IGraphics igp, int x, int y, Rectangle rectSrc)
         {
             rectSrc.X += Region.X;
             rectSrc.Y += Region.Y;
 
-            igr.DrawBitmap(x, y, rectSrc, ibmpImage);
+            igp.DrawBitmap(x, y, rectSrc, ibmpImage);
         }
 
-        public override void Draw(IGraphics igr, int x, int y)
+        public override void Draw(IGraphics igp, int x, int y)
         {
-            igr.DrawBitmap(x, y, Region, ibmpImage);
+            igp.DrawBitmap(x, y, Region, ibmpImage);
         }
 
         public override void Dispose()

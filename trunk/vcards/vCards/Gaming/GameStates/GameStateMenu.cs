@@ -26,12 +26,12 @@ namespace vCards
         {         
             Rectangle origin = new Rectangle((gamePanel.GameGraphics.ScreenWidth - 100) / 2, 50, 100, 30);
 
-            newGameImgBtn = new ImageButton(origin, true
+            newGameImgBtn = new ImageButton(origin
                 , Program.AppPath + @"\Resources\Images\Buttons\OKBtn_Bkgr.bmp"                
                 , gamePanel.GameGraphics
                 , Program.AppPath + @"\Resources\Images\Buttons\OKBtn_Hover.png");
 
-            ManageImgControl(newGameImgBtn);
+            ctrlContainer.AddControl(newGameImgBtn);
 
             newGameImgBtn.MouseDown += new EventHandler<MouseEventArgs>(newGameImgBtn_MouseDown);
             newGameImgBtn.MouseUp += new EventHandler<MouseEventArgs>(newGameImgBtn_MouseUp);

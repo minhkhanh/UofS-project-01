@@ -1,0 +1,397 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="vCards.frmMain" Collapsed="true">
+    <Position X="11.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQQAAAAABGAAAAAAAACIAAACAAAAIAAAAQACAAAIAAA=</HashCode>
+      <FileName>frmMain.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vCards.Animation" Collapsed="true">
+    <Position X="1.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACRAAAAAxLAAAqAAAACBQABgIKQAUAAAAEAiCAAAAEA=</HashCode>
+      <FileName>Gaming\Animation.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="vCards.BmpAnimation" Collapsed="true">
+    <Position X="0.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEACAAAgAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Gaming\BmpAnimation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vCards.GamePanel" Collapsed="true">
+    <Position X="13.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAACAQQAACAAISgAAgAAAAIAEACIAAAIBCACAAA=</HashCode>
+      <FileName>Gaming\GamePanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vCards.CardPack" Collapsed="true">
+    <Position X="7.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>KAIACCAAAAAAAgAACIgAAAAQAAAAAAAACAAEAABAAAA=</HashCode>
+      <FileName>Gaming\GamePlayObjects\CardPack.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vCards.CardShape" Collapsed="true">
+    <Position X="0.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAhggAAAAAAAQAAAAICAAAIAAgAAAAAAA=</HashCode>
+      <FileName>Gaming\GamePlayObjects\CardShape.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vCards.CardValue" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAABAAQAAAQQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Gaming\GamePlayObjects\CardValue.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vCards.Deck" Collapsed="true">
+    <Position X="11.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAEAA=</HashCode>
+      <FileName>Gaming\GamePlayObjects\Deck.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vCards.Player" Collapsed="true">
+    <Position X="10" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Gaming\GamePlayObjects\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vCards.GameState" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIEAADAAEwAgUAEAAAAAAAQAACAAAAAAAIIAAAAAAA=</HashCode>
+      <FileName>Gaming\GameStates\GameState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vCards.GameStateCustom" Collapsed="true">
+    <Position X="7.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAgAAAAAAAAAAAAAAAAAAAAAUAAAAAABAAAAgAAA=</HashCode>
+      <FileName>Gaming\GameStates\GameStateCustom.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vCards.GameStateMenu" Collapsed="true">
+    <Position X="0.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAABAAAAAAAAIAAAAAgCAA=</HashCode>
+      <FileName>Gaming\GameStates\GameStateMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vCards.GameStatePlay" Collapsed="true">
+    <Position X="3" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Gaming\GameStates\GameStatePlay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vCards.GameTestState" Collapsed="true">
+    <Position X="5.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAgAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Gaming\GameStates\GameTestState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vCards.BmpControl" Collapsed="true">
+    <Position X="4" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAEAAAEAAAAAAA=</HashCode>
+      <FileName>Gaming\GraphicsControls\BmpControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vCards.ImageButton" Collapsed="true">
+    <Position X="2.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgBAAAAAAAAAAAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>Gaming\GraphicsControls\ImageButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vCards.ImageControl" Collapsed="true">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AACAAAAABAAAAkEAAAKACEQCgBAAEAAAIAAkAACSYgA=</HashCode>
+      <FileName>Gaming\GraphicsControls\ImageControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vCards.ImageLabel" Collapsed="true">
+    <Position X="5.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Gaming\GraphicsControls\ImageLabel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vCards.TransControl" Collapsed="true">
+    <Position X="0.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAgAAAAAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Gaming\GraphicsControls\TransControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vCards.MyResourceManager" Collapsed="true">
+    <Position X="13.5" Y="2.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAggAAAAECAAAAAACAAAAAAQAAAAA=</HashCode>
+      <FileName>Gaming\MyResourcesManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vCards.Sprite" Collapsed="true">
+    <Position X="15.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Gaming\Sprite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vCards.TransAnimation" Collapsed="true">
+    <Position X="2.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAgAAAAAAAAAQAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Gaming\TransAnimation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vCards.DirectXBitmap" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAGAABCAAAAAAAIAAAEAAAAAAACAAQAJgAAAAAAA=</HashCode>
+      <FileName>Graphics\DirectX\DirectXBitmap.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="vCards.DirectXFont" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAE=</HashCode>
+      <FileName>Graphics\DirectX\DirectXFont.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="vCards.DirectXGraphics" Collapsed="true">
+    <Position X="10" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACBHAAAAAAAAQCAkEgAMBAgAAAAQQAAAIAAIA=</HashCode>
+      <FileName>Graphics\DirectX\DirectXGraphics.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vCards.GdiBitmap" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAEAABCAAAAIAAAAAAEAAAAAAABAAQAAgAAAAAAA=</HashCode>
+      <FileName>Graphics\Gdi\GdiBitmap.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="vCards.GdiFont" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAE=</HashCode>
+      <FileName>Graphics\Gdi\GdiFont.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="vCards.GdiGraphics" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAEAAHAAAAAIAAQCAgWAAMBAAAEDSQQAAQIAAIg=</HashCode>
+      <FileName>Graphics\Gdi\GdiGraphics.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="vCards.PlatformAPIs" Collapsed="true">
+    <Position X="15.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Graphics\PlatformAPIs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vCards.Program" Collapsed="true">
+    <Position X="11.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vCards.Properties.Resources" Collapsed="true">
+    <Position X="13.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="vCards.BitmapData" Collapsed="true">
+    <Position X="10" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAgAAAAEAAAAAEAAAAAAAQAAAAAAEAAAAAA=</HashCode>
+      <FileName>Graphics\ImagingAPI.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="vCards.ImageInfo" Collapsed="true">
+    <Position X="13.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABgAABAQAAQAAAAAAAGAAAAAAAAAAAAAAAQAAABA=</HashCode>
+      <FileName>Graphics\ImagingAPI.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="vCards.BlendFunction" Collapsed="true">
+    <Position X="11.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAABAAAAAAAAAAAAAAAAABAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Graphics\PlatformAPIs.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="vCards.IImagingFactory" Collapsed="true">
+    <Position X="11.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAQAAAAAAQAQAAAAAAAAAAIoIIAAAAwAAAAQIAA=</HashCode>
+      <FileName>Graphics\ImagingAPI.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="vCards.IImage" Collapsed="true">
+    <Position X="10" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gBGAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Graphics\ImagingAPI.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="vCards.IBitmapImage" Collapsed="true">
+    <Position X="11.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAKAAAAAAAAAAAAAEAAAIAAAAAgAAAA=</HashCode>
+      <FileName>Graphics\ImagingAPI.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="vCards.IBitmap" Collapsed="true">
+    <Position X="10" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAABAAAAAAAAAAAAEAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Graphics\Interfaces\IBitmap.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="vCards.IFont" Collapsed="true">
+    <Position X="13.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Graphics\Interfaces\IFont.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="vCards.IGraphics" Collapsed="true">
+    <Position X="15.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAFAAAAAIAAACAgEAAMBAAAEBAAQAAQIAAIg=</HashCode>
+      <FileName>Graphics\Interfaces\IGraphics.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="vCards.MessageID" Collapsed="true">
+    <Position X="13.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAEAAgIAAAAAAAAIAEAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Gaming\GamePanel.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="vCards.CardSuit" Collapsed="true">
+    <Position X="11.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAEAAAAAAAAABAAAAAAAAAAAAAAAAAEAACA=</HashCode>
+      <FileName>Gaming\GamePlayObjects\CardValue.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="vCards.CardRank" Collapsed="true">
+    <Position X="10" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAIAAggAAAEAAEAIAAAAAFBAAAAAAAAAkAAEE=</HashCode>
+      <FileName>Gaming\GamePlayObjects\CardValue.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="vCards.PlayerSide" Collapsed="true">
+    <Position X="11.75" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAAIAAAACACAAAEAAAA=</HashCode>
+      <FileName>Gaming\GamePlayObjects\Player.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="vCards.GameStateID" Collapsed="true">
+    <Position X="10" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAACgAAAAAAAAAAAIAEAAAA=</HashCode>
+      <FileName>Gaming\GameStates\GameState.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="vCards.MouseState" Collapsed="true">
+    <Position X="15.25" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAAEAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Gaming\GraphicsControls\ImageControl.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="vCards.PixelFormatID" Collapsed="true">
+    <Position X="10" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>VQAAAAAAAAAEQCAAABgQRAAAABAAAAIAAAAAACAACII=</HashCode>
+      <FileName>Graphics\ImagingAPI.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="vCards.BufferDisposalFlag" Collapsed="true">
+    <Position X="15.25" Y="7.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgBAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>Graphics\ImagingAPI.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="vCards.InterpolationHint" Collapsed="true">
+    <Position X="11.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAAAAAAAIAAAAACAQABAAAAAAAAA=</HashCode>
+      <FileName>Graphics\ImagingAPI.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="vCards.FontDrawOptions" Collapsed="true">
+    <Position X="15.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAIBAAAAAAACAAAAAAAAAAAAEAABI=</HashCode>
+      <FileName>Graphics\Interfaces\IFont.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="vCards.DrawOptions" Collapsed="true">
+    <Position X="13.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAEIAAA=</HashCode>
+      <FileName>Graphics\Interfaces\IGraphics.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="vCards.BlendOperation" Collapsed="true">
+    <Position X="13.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Graphics\PlatformAPIs.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="vCards.BlendFlags" Collapsed="true">
+    <Position X="11.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Graphics\PlatformAPIs.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="vCards.SourceConstantAlpha" Collapsed="true">
+    <Position X="13.5" Y="10" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Graphics\PlatformAPIs.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="vCards.AlphaFormat" Collapsed="true">
+    <Position X="10" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Graphics\PlatformAPIs.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

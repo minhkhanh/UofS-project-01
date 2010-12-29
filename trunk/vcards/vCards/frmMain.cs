@@ -13,6 +13,7 @@ namespace vCards
     public partial class frmMain : Form
     {
         GamePanel gamePanel;
+        MyResourceManager resrcManager;
 
         Thread threadLogic;
 
@@ -23,6 +24,7 @@ namespace vCards
             InitializeComponent();
 
             gamePanel = new GamePanel(this);
+            resrcManager = new MyResourceManager(gamePanel.GameGraphics);
 
             threadLogic = new Thread(new ThreadStart(ThreadFunc));
             threadLogic.Start();

@@ -38,9 +38,14 @@ namespace vCards
         Duece
     }
 
-    public class CardValue: IComparable<CardValue>
+    public class CardValue
     {
         CardSuit suit;
+        public CardSuit Suit
+        {
+            get { return suit; }
+        }
+
         CardRank rank;
 
         public CardValue(CardRank rnk, CardSuit sui)
@@ -52,6 +57,30 @@ namespace vCards
         public int CompareTo(CardValue target)
         {
             return rank - target.rank == 0 ? suit - target.suit : rank - target.rank;
+        }
+
+        public string RankText
+        {
+            get 
+            {
+                switch (rank)
+                {
+                case CardRank.None:
+                        return "";
+                    case CardRank.Jack:
+                        return "J";
+                    case CardRank.Queen:
+                        return "Q";
+                    case CardRank.King:
+                        return "K";
+                    case CardRank.Ace:
+                        return "A";
+                    case CardRank.Duece:
+                        return "2";
+                    default:
+                        return ((int)rank + 2).ToString();
+                }
+            }
         }
     }
 }

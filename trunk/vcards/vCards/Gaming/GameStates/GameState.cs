@@ -18,48 +18,46 @@ namespace vCards
 
     public abstract class GameState
     {
-        #region all data members
+        #region data members
 
         protected GameStateID stateId = GameStateID.None;
+        protected GamePanel gamePanel;
+        protected ImgCtrlContainer ctrlContainer;
+        protected IBitmap ibmpBack;
+
+        #endregion
+
+        #region properties
+
         public GameStateID ID
         {
             get { return stateId; }
         }
 
-        protected GamePanel gamePanel;
-
-        List<ImageControl> listImgControls = new List<ImageControl>();
-
-        protected IBitmap ibmpBack;
-
-        //protected List<Rectangle> listDirtyRect = new List<Rectangle>();
-
-        #endregion       
+        #endregion
 
         public GameState(GamePanel gp, string bmpPath)
         {
             gamePanel = gp;
             ibmpBack = gamePanel.GameGraphics.CreateBitmap(bmpPath, false);
 
-            InitControls();
-        }
+            ctrlContainer = new ImgCtrlContainer(gamePanel.GameGraphics);
+            gamePanel.ManageImgControl(ctrlContainer);
 
-        public void ManageImgControl(ImageControl ic)
-        {
-            listImgControls.Add(ic);
-            gamePanel.ManageImgControl(ic);
+            //InitControls();
         }
 
         public void DrawStateBkgr()
         {
             gamePanel.GameGraphics.DrawBitmap(0, 0, ibmpBack);
-            //listDirtyRect.Add(new Rectangle(0, 0, gamePanel.GameGraphics.ScreenWidth, gamePanel.GameGraphics.ScreenHeight));
         }
 
         public virtual void EnterState()
         {
+            InitControls();
+
             // - enable tat ca cac control co trong state
-            EnableControls();
+            ctrlContainer.Enabled = true;
         }
 
         public virtual void RenderState() 
@@ -68,7 +66,7 @@ namespace vCards
             DrawStateBkgr();
 
             // - ve ra tat ca cac control
-            DrawControls(gamePanel.GameGraphics);
+            ctrlContainer.Draw(gamePanel.GameGraphics);
         }
 
         public virtual void DrawState()
@@ -85,41 +83,7 @@ namespace vCards
         /// <summary>
         /// Khoi tao gia tri, thong so cho cac control
         /// </summary>
-        public abstract void InitControls();
-
-        /// <summary>
-        /// Kich hoat tat ca cac control thuoc state
-        /// </summary>
-        public virtual void EnableControls()
-        {
-            foreach (ImageControl i in listImgControls)
-            {
-                i.Enable();
-            }
-        }
-
-        /// <summary>
-        /// Vo hieu hoa tat ca cac control thuoc state
-        /// </summary>
-        public virtual void DisableControls()
-        {
-            foreach (ImageControl i in listImgControls)
-            {
-                i.Disable();
-            }
-        }
-
-        /// <summary>
-        /// Hien thi tat ca cac control thuoc state
-        /// </summary>
-        public virtual void DrawControls(IGraphics igp)
-        {
-            foreach (ImageControl i in listImgControls)
-            {
-                i.Draw(igp);
-                //listDirtyRect.Add(i.Region);
-            }
-        }
+        public virtual void InitControls(){}
 
         public void HandleMessage(MessageID messID, params object[] paras)
         {

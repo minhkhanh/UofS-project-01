@@ -20,9 +20,8 @@ namespace vCards
         #region data members
 
         protected MouseState mouseState = MouseState.MouseUp;
-        protected Rectangle region;
-        bool enabled = false;
-        //protected IBitmap bkgrBmp;
+        protected Rectangle region = Rectangle.Empty;
+        protected bool enabled = true;
 
         #endregion
 
@@ -38,36 +37,44 @@ namespace vCards
 
         #region properties
 
-        //public int Width
-        //{
-        //    get { return region.Width; }
-        //}
-        //public int Height
-        //{
-        //    get { return region.Height; }
-        //}
-
         public int X
         {
             set { region.X = value; }
             get { return region.X; }
         }
+
         public int Y
         {
             set { region.Y = value; }
             get { return region.Y; }
         }
 
-        //public Point Location
-        //{
-        //    set { region.Location = value; }
-        //}
-
-        public Rectangle Region
+        public int Width
         {
-            set { region = value; }
-            get { return region; }
+            get { return region.Width; }
         }
+
+        public int Height
+        {
+            get { return region.Height; }
+        }
+
+        public Point Location
+        {
+            set { region.Location = value; }
+        }
+
+        public virtual bool Enabled
+        {
+            set { enabled = value; }
+            get { return enabled; }
+        }
+
+        //public Rectangle Region
+        //{
+        //    set { region = value; }
+        //    get { return region; }
+        //}
 
         #endregion
 
@@ -75,15 +82,15 @@ namespace vCards
 
         public ImageControl() { }
 
-        public ImageControl(Rectangle regn, bool isEnabled)
+        public ImageControl(Rectangle regn)
         {
             region = regn;
-            enabled = isEnabled;
+            //enabled = isEnabled;
         }
 
         #endregion
 
-        #region private methods
+        #region event raiser
 
         private void RaiseClickEvent(EventArgs e)
         {
@@ -127,20 +134,6 @@ namespace vCards
 
         #endregion
 
-        #region public methods
-
-        public void Enable()
-        {
-            enabled = true;
-        }
-
-        public void Disable()
-        {
-            enabled = false;
-        }
-
-        #endregion
-
         #region virtual methods
 
         public virtual void OnMouseDown(object o, MouseEventArgs e)
@@ -178,8 +171,8 @@ namespace vCards
             }
         }
 
-        public abstract void DrawBackground(IGraphics igr);
-        public abstract void Draw(IGraphics igr);
+        public virtual void DrawBackground(IGraphics igp){}
+        public virtual void Draw(IGraphics igp){}
 
         #endregion
     }
