@@ -27,24 +27,34 @@ namespace vCards
         /// <returns>true neu dung theo luat, nguoc lai la false.</returns>
         public bool Check(params Card[] cards)
         {
-            if (cards.Count() == 1)
-                return true;
-
-            if (cards.Count() == 2)
-                if (cards[0].Value.RankText == cards[1].Value.RankText)
-                    return true;
-
-            if (cards.Count() >= 3)
-            {
-                SortByValue(cards);
-
-            }
-
-            return false;
+            return IsRac(cards)||IsDoi(cards)||IsSanh(cards)||IsTuQuy(cards);
         }
 
-        bool IsBaDoi(params Card[] cards)
+        bool IsRac(params Card[] cards)
         {
+            if (cards.Count() == 1)
+                return true;
+            else return false;
+        }
+
+        bool IsDoi(params Card[] cards)
+        {
+            if (cards.Count()%2 != 0)
+            {
+                return false;
+            }
+            if (IsTuQuy(cards))
+            {
+                return false;
+            }
+            SortByValue(cards);
+            for (int i = 0; i < cards.Count(); i +=2 )
+            {
+                if (cards[i].Value.RankText != cards[i+1].Value.RankText)
+                {
+                    return false;
+                }
+            }
             return true;
         }
 

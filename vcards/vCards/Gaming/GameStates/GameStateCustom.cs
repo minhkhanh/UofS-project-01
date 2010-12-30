@@ -12,7 +12,7 @@ namespace vCards
         #region  declare all image controls
 
         Pack pack01;
-        //Pack pack02;
+        Pack pack02;
         Deck deck01 = new Deck();
         //ImageButton
 
@@ -27,17 +27,20 @@ namespace vCards
         public override void InitControls()
         {
             pack01 = new Pack(PlayerSide.Bottom, gamePanel.GameGraphics);
-            //pack02 = new Pack(PlayerSide.Left, gamePanel.GameGraphics);
+            pack02 = new Pack(PlayerSide.Left, gamePanel.GameGraphics);
 
-            deck01.Deal(pack01);//, pack02);
+            pack01.Enabled = true;
+            pack02.Enabled = false;
+
+            deck01.Deal(pack01, pack02);
 
             ctrlContainer.AddControl(pack01);
-            //ctrlContainer.AddControl(pack02);
+            ctrlContainer.AddControl(pack02);
 
             pack01.SortByValue();
 
             pack01.Rearrange(gamePanel.GameGraphics);
-            //pack02.Rearrange(gamePanel.GameGraphics);
+            pack02.Rearrange(gamePanel.GameGraphics);
         }
 
         public override void RenderState()

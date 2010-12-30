@@ -63,5 +63,10 @@ namespace vCards
         {
 
         }
+
+        private void frmMain_Resize(object sender, EventArgs e)
+        {
+
+        }
     }
 }
