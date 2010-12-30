@@ -57,7 +57,7 @@ namespace vCards
             InitControls();
 
             // - enable tat ca cac control co trong state
-            ctrlContainer.Enabled = true;
+            //ctrlContainer.Enabled = true;
         }
 
         public virtual void RenderState() 
