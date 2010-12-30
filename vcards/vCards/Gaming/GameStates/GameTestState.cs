@@ -20,7 +20,7 @@ namespace vCards
             throw new NotImplementedException();
         }
 
-        Deck list;
+        //Deck list;
         public override void EnterState()
         {
         //    BackIBmp = gamePanel.IGameGracphics.CreateBitmap(Program.AppPath + @"\Resources\Images\Misc\MenuBkgr.bmp", true);

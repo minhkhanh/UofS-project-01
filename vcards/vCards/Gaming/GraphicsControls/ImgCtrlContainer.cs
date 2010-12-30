@@ -10,7 +10,7 @@ namespace vCards
     {
         protected List<ImageControl> listControls = new List<ImageControl>();
 
-        public ImgCtrlContainer() { }
+        //public ImgCtrlContainer() { }
 
         public ImgCtrlContainer(IGraphics igp)
             : base(new Rectangle(0, 0, igp.ScreenWidth, igp.ScreenHeight))
