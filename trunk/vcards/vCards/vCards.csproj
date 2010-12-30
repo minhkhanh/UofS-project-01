@@ -64,7 +64,8 @@
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Gaming\BmpAnimation.cs" />
-    <Compile Include="Gaming\GamePlayObjects\CardPack.cs" />
+    <Compile Include="Gaming\GamePlayObjects\CardCombination.cs" />
+    <Compile Include="Gaming\GamePlayObjects\Pack.cs" />
     <Compile Include="Gaming\GamePlayObjects\CardValue.cs" />
     <Compile Include="Gaming\GamePlayObjects\Player.cs" />
     <Compile Include="Gaming\GameStates\GameState.cs" />
@@ -94,7 +95,7 @@
     <Compile Include="Graphics\Interfaces\IBitmap.cs" />
     <Compile Include="Graphics\Interfaces\IFont.cs" />
     <Compile Include="Graphics\Interfaces\IGraphics.cs" />
-    <Compile Include="Gaming\GamePlayObjects\CardShape.cs" />
+    <Compile Include="Gaming\GamePlayObjects\Card.cs" />
     <Compile Include="Gaming\GamePlayObjects\Deck.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -133,7 +134,16 @@
     <Content Include="Resources\Images\Cards\hearts.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\Cards\leftside_cover.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Cards\rightside_cover.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\Cards\spades.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Cards\top_cover.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\Misc\btnCover.png">
@@ -157,6 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
   <ProjectExtensions>

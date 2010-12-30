@@ -164,11 +164,11 @@ namespace vCards
 
         public virtual void OnClick(object o, EventArgs e)
         {
-            if (mouseState == MouseState.MouseDown)
-            {
-                mouseState = MouseState.MouseUp;
-                RaiseClickEvent(e);
-            }
+            //if (mouseState == MouseState.MouseDown)
+            //{
+            //    mouseState = MouseState.MouseUp;
+            //    RaiseClickEvent(e);
+            //}
         }
 
         public virtual void DrawBackground(IGraphics igp){}

@@ -47,15 +47,14 @@ namespace vCards
             }
         }
 
-        public void Deal(params CardPack[] packs)
+        public void Deal(params Pack[] packs)
         {
-            int c = packs.Count();
             for (int j = 0; j < packs.Count(); ++j)
                 packs[j].Clear();
 
             for (int i = 0; i < CARD_NUM; ++i)
             {
-                packs[i % packs.Count()].AddControl(new CardShape(listCards[i]));
+                packs[i % packs.Count()].AddControl(new Card(listCards[i], packs[i % packs.Count()].Side));
             }
         }
     }

@@ -40,12 +40,12 @@ namespace vCards
 
         public void newGameImgBtn_Click(object o, EventArgs e)
         {
-            gamePanel.SwitchState(GameStateID.StateGameCustom);
+            
         }
 
         public void newGameImgBtn_MouseUp(object o, MouseEventArgs e)
         {
-            
+            gamePanel.SwitchState(GameStateID.StateGameCustom);
         }
 
         public void newGameImgBtn_MouseDown(object o, MouseEventArgs e)

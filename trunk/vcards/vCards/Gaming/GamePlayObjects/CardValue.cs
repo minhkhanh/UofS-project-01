@@ -47,6 +47,11 @@ namespace vCards
         }
 
         CardRank rank;
+        public CardRank Rank
+        {
+            get { return rank; }
+            //set { rank = value; }
+        }
 
         public CardValue(CardRank rnk, CardSuit sui)
         {
@@ -54,9 +59,19 @@ namespace vCards
             rank = rnk;
         }
 
-        public int CompareTo(CardValue target)
+        public int CompareValue(CardValue val)
         {
-            return rank - target.rank == 0 ? suit - target.suit : rank - target.rank;
+            return rank - val.rank == 0 ? suit - val.suit : rank - val.rank;
+        }
+
+        public int CompareRank(CardValue val)
+        {
+            return rank - val.rank;
+        }
+
+        public int CompareSuit(CardValue val)
+        {
+            return suit - val.suit;
         }
 
         public string RankText

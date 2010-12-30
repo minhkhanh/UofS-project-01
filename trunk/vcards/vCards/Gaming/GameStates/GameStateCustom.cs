@@ -11,10 +11,10 @@ namespace vCards
     {
         #region  declare all image controls
 
-        ImageButton okImgBtn;
-        CardPack pack01;
-        CardPack pack02;
+        Pack pack01;
+        //Pack pack02;
         Deck deck01 = new Deck();
+        //ImageButton
 
         #endregion
 
@@ -26,19 +26,15 @@ namespace vCards
         
         public override void InitControls()
         {
-            okImgBtn = new ImageButton(new Rectangle(50, 100, 100, 50)
-                , Program.AppPath + @"\Resources\Images\Buttons\OKBtn_Bkgr.bmp"                
-                , gamePanel.GameGraphics
-                , Program.AppPath + @"\Resources\Images\Buttons\OKBtn_Hover.png"
-                );
-            ctrlContainer.AddControl(okImgBtn);
+            pack01 = new Pack(PlayerSide.Bottom, gamePanel.GameGraphics);
+            //pack02 = new Pack(PlayerSide.Left, gamePanel.GameGraphics);
 
-            pack01 = new CardPack(PlayerSide.Bottom, gamePanel.GameGraphics);           
+            deck01.Deal(pack01);//, pack02);
 
-            deck01.Deal(pack01);
+            ctrlContainer.AddControl(pack01);
+            //ctrlContainer.AddControl(pack02);
 
-            gamePanel.ManageImgControl(pack01);
-            //gamePanel.ManageImgControl(pack02);
+            pack01.SortByValue();
 
             pack01.Rearrange(gamePanel.GameGraphics);
             //pack02.Rearrange(gamePanel.GameGraphics);
@@ -47,8 +43,6 @@ namespace vCards
         public override void RenderState()
         {
             base.RenderState();
-
-            pack01.Draw(gamePanel.GameGraphics);
         }
     }
 }

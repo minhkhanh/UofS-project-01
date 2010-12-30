@@ -6,10 +6,42 @@ using System.Drawing;
 
 namespace vCards
 {
-    public class CardShape : TransControl
+    public class Card : TransControl
     {
-        public const int WIDTH = 29;
-        public const int HEIGHT = 41;
+        public const int BREADTH = 29;
+        public const int LENGTH = 41;
+
+        Pack pack;
+        public Pack Pack
+        {
+            get { return pack; }
+            set { pack = value; }
+        }
+
+        int index = -1;
+
+        public int Index
+        {
+            get { return index; }
+            set { index = value; }
+        }
+
+        bool selected = false;
+        public bool Selected
+        {
+            get { return selected; }
+            set
+            {
+                if (selected != value)
+                {
+                    selected = value;
+                    if (value == true)
+                        this.Y -= 10;
+                    else
+                        this.Y += 10;
+                }   
+            }
+        }
 
         CardValue cardValue;
         public CardValue Value
@@ -18,13 +50,24 @@ namespace vCards
             set { cardValue = value; }
         }
 
-        public CardShape(CardValue val)
+        public Card(CardValue val, PlayerSide side)
         {
-            region = new Rectangle(-1, -1, WIDTH, HEIGHT);           
-
             cardValue = val;
 
-            iimgBkgr = MyResourceManager.GetCardImage(cardValue.Suit);
+            if (side == PlayerSide.Bottom || side == PlayerSide.Top)
+            {
+                region = new Rectangle(-1, -1, BREADTH, LENGTH);
+
+                if (side == PlayerSide.Bottom)
+                    iimgBkgr = MyResourceManager.GetCardImage(cardValue.Suit);
+            }
+            else
+            {
+                iimgBkgr = MyResourceManager.GetCoverImage(side);
+
+                if (side == PlayerSide.Left || side == PlayerSide.Right)
+                    region = new Rectangle(-1, -1, LENGTH, BREADTH);
+            }
         }
 
         Point clickOffset = new Point(0, 0);

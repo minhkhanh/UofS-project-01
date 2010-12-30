@@ -29,7 +29,14 @@
       <FileName>Gaming\GamePanel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="vCards.CardValue" Collapsed="true" BaseTypeListCollapsed="true">
+  <Class Name="vCards.Card" Collapsed="true">
+    <Position X="3" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAhgQAAAAEAAAAAAgICAAAIAEgAgABCAI=</HashCode>
+      <FileName>Gaming\GamePlayObjects\Card.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vCards.CardValue" Collapsed="true">
     <Position X="10" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEAAAABAAQAAAQQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
@@ -41,6 +48,13 @@
     <TypeIdentifier>
       <HashCode>AAAACEAAAAAAAQAAAAAAAAAAAAAAAAAAAAAIAAAAEAA=</HashCode>
       <FileName>Gaming\GamePlayObjects\Deck.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vCards.Pack" Collapsed="true">
+    <Position X="0.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>KCAICAAAAAAAoAYACIAAAABYIAAAAAAAAAAAEAIAEAA=</HashCode>
+      <FileName>Gaming\GamePlayObjects\Pack.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="vCards.Player" Collapsed="true">
@@ -86,14 +100,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="vCards.BmpControl" Collapsed="true">
-    <Position X="4" Y="4.75" Width="1.5" />
+    <Position X="6.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAEAAAEAAAAAAA=</HashCode>
       <FileName>Gaming\GraphicsControls\BmpControl.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="vCards.ImageButton" Collapsed="true">
-    <Position X="2.5" Y="6.25" Width="1.5" />
+    <Position X="5.25" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAgBAAAAAAAAAAAAAAAAABAAAAAAAAAA=</HashCode>
       <FileName>Gaming\GraphicsControls\ImageButton.cs</FileName>
@@ -101,30 +115,34 @@
   </Class>
   <Class Name="vCards.ImageControl" Collapsed="true">
     <Position X="4" Y="3.5" Width="1.5" />
-    <Compartments>
-      <Compartment Name="Fields" Collapsed="true" />
-    </Compartments>
     <TypeIdentifier>
       <HashCode>AACAAAAABAAAAsEAAAKAAEQCgBAAEAAAIAAEAACSYgA=</HashCode>
       <FileName>Gaming\GraphicsControls\ImageControl.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="vCards.ImageLabel" Collapsed="true">
-    <Position X="5.75" Y="6.25" Width="1.5" />
+    <Position X="7.5" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
       <FileName>Gaming\GraphicsControls\ImageLabel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="vCards.TransControl" Collapsed="true">
+  <Class Name="vCards.ImgCtrlContainer" Collapsed="true">
     <Position X="0.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAA4AAAIAAAAAAIAEAAAAACAAAAABAAAA=</HashCode>
+      <FileName>Gaming\GraphicsControls\ImgCtrlContainer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vCards.TransControl" Collapsed="true">
+    <Position X="3" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAQAAAAAAAgAAAAAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
       <FileName>Gaming\GraphicsControls\TransControl.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="vCards.MyResourceManager" Collapsed="true">
-    <Position X="13.5" Y="2.5" Width="1.75" />
+    <Position X="13.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAACAAAAAAEAAggAAAAECAAAAEAABAAAAEQAAAAA=</HashCode>
       <FileName>Gaming\MyResourcesManager.cs</FileName>
@@ -324,7 +342,7 @@
     </TypeIdentifier>
   </Enum>
   <Enum Name="vCards.BufferDisposalFlag" Collapsed="true">
-    <Position X="15.25" Y="7.75" Width="1.75" />
+    <Position X="15.25" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAgBAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAQAAAA=</HashCode>
       <FileName>Graphics\ImagingAPI.cs</FileName>
@@ -366,7 +384,7 @@
     </TypeIdentifier>
   </Enum>
   <Enum Name="vCards.SourceConstantAlpha" Collapsed="true">
-    <Position X="13.5" Y="10" Width="1.75" />
+    <Position X="13.5" Y="10" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAEAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Graphics\PlatformAPIs.cs</FileName>
