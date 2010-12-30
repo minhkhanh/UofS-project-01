@@ -27,11 +27,11 @@ namespace vCards
         public void Shuffle()
         {
             bool[] arrAssigned = new bool[CARD_NUM];
+            Random rand = new Random();
             for (CardRank rank = CardRank.Three; rank <= CardRank.Duece; ++rank)
             {
                 for (CardSuit suit = CardSuit.Spades; suit <= CardSuit.Hearts; ++suit)
-                {
-                    Random rand = new Random();
+                {   
                     bool found = false;
                     while (found == false)
                     {
