@@ -64,10 +64,16 @@
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Gaming\BmpAnimation.cs" />
-    <Compile Include="Gaming\GamePlayObjects\CardCombination.cs" />
-    <Compile Include="Gaming\GamePlayObjects\Pack.cs" />
-    <Compile Include="Gaming\GamePlayObjects\CardValue.cs" />
-    <Compile Include="Gaming\GamePlayObjects\Player.cs" />
+    <Compile Include="Gaming\GameLogicalObj\CardCombinationRac.cs" />
+    <Compile Include="Gaming\GameLogicalObj\CardCombinationDoi.cs" />
+    <Compile Include="Gaming\GameLogicalObj\CardCombinationSamCo.cs" />
+    <Compile Include="Gaming\GameLogicalObj\CardCombinationSanh.cs" />
+    <Compile Include="Gaming\GameLogicalObj\CardCombinationTuQuy.cs" />
+    <Compile Include="Gaming\GameLogicalObj\PackLogical.cs" />
+    <Compile Include="Gaming\GameLogicalObj\CardCombination.cs" />
+    <Compile Include="Gaming\GameControlObj\Pack.cs" />
+    <Compile Include="Gaming\GameLogicalObj\CardLogical.cs" />
+    <Compile Include="Gaming\GameLogicalObj\Player.cs" />
     <Compile Include="Gaming\GameStates\GameState.cs" />
     <Compile Include="Gaming\GameStates\GameStateMenu.cs" />
     <Compile Include="Gaming\Animation.cs" />
@@ -95,8 +101,8 @@
     <Compile Include="Graphics\Interfaces\IBitmap.cs" />
     <Compile Include="Graphics\Interfaces\IFont.cs" />
     <Compile Include="Graphics\Interfaces\IGraphics.cs" />
-    <Compile Include="Gaming\GamePlayObjects\Card.cs" />
-    <Compile Include="Gaming\GamePlayObjects\Deck.cs" />
+    <Compile Include="Gaming\GameControlObj\Card.cs" />
+    <Compile Include="Gaming\GameLogicalObj\Deck.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmMain.resx">

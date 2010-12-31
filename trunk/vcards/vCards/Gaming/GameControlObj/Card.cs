@@ -43,14 +43,14 @@ namespace vCards
             }
         }
 
-        CardValue cardValue;
-        public CardValue Value
+        CardLogical cardValue;
+        public CardLogical Value
         {
             get { return cardValue; }
             set { cardValue = value; }
         }
 
-        public Card(CardValue val, PlayerSide side)
+        public Card(CardLogical val, PlayerSide side)
         {
             cardValue = val;
 
