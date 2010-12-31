@@ -10,12 +10,12 @@ namespace vCards
     public class Deck
     {
         public const int CARD_NUM = 52;
-        List<CardValue> listCards = new List<CardValue>(CARD_NUM);
+        List<CardLogical> listCards = new List<CardLogical>(CARD_NUM);
 
         private void Initialize()
         {
             for (int i = 0; i < listCards.Capacity; ++i)
-                listCards.Add(new CardValue(CardRank.None, CardSuit.None));
+                listCards.Add(new CardLogical(CardRank.None, CardSuit.None));
         }
 
         public Deck()
@@ -38,7 +38,7 @@ namespace vCards
                         int randIdx = rand.Next(CARD_NUM);
                         if (arrAssigned[randIdx] == false)
                         {
-                            listCards[randIdx] = new CardValue((CardRank)rank, (CardSuit)suit);
+                            listCards[randIdx] = new CardLogical((CardRank)rank, (CardSuit)suit);
                             found = true;
                             arrAssigned[randIdx] = true;
                         }

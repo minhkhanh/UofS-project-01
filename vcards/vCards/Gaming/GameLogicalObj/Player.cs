@@ -16,6 +16,6 @@ namespace vCards
 
     public class Player
     {
-        //PlayerSide side = PlayerSide.None;
+        PlayerSide side = PlayerSide.None;
     }
 }

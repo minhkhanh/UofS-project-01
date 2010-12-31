@@ -38,7 +38,7 @@ namespace vCards
         Duece
     }
 
-    public class CardValue
+    public class CardLogical
     {
         CardSuit suit;
         public CardSuit Suit
@@ -53,23 +53,23 @@ namespace vCards
             //set { rank = value; }
         }
 
-        public CardValue(CardRank rnk, CardSuit sui)
+        public CardLogical(CardRank rnk, CardSuit sui)
         {
             suit = sui;
             rank = rnk;
         }
 
-        public int CompareValue(CardValue val)
+        public int CompareValue(CardLogical val)
         {
             return rank - val.rank == 0 ? suit - val.suit : rank - val.rank;
         }
 
-        public int CompareRank(CardValue val)
+        public int CompareRank(CardLogical val)
         {
             return rank - val.rank;
         }
 
-        public int CompareSuit(CardValue val)
+        public int CompareSuit(CardLogical val)
         {
             return suit - val.suit;
         }
