@@ -59,6 +59,11 @@ namespace vCards
             rank = rnk;
         }
 
+        public static explicit operator CardLogical(Card card)
+        {
+            return card.Value;
+        }
+
         public int CompareValue(CardLogical val)
         {
             return rank - val.rank == 0 ? suit - val.suit : rank - val.rank;
@@ -96,6 +101,10 @@ namespace vCards
                         return ((int)rank + 2).ToString();
                 }
             }
+        }
+        public static CardLogical CardMin(CardLogical card1, CardLogical card2)
+        {
+            return card1.CompareValue(card2)<0 ? card1 : card1.CompareValue(card2)==0 ? null : card2;
         }
     }
 }

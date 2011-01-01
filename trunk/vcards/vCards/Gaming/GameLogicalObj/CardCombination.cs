@@ -43,7 +43,26 @@ namespace vCards
             {
                 return t;
             }
+            t = CardCombinationDoiThong.Create(cards);
+            if (t != null)
+            {
+                return t;
+            }
+            t = CardCombinationNhieuDoi.Create(cards);
+            if (t != null)
+            {
+                return t;
+            }
             return null;
+        }
+        public static CardCombination CreateCombination(params Card[] cards)
+        {
+            List<CardLogical> list = new List<CardLogical>();
+            foreach (Card c in cards)
+            {
+                list.Add((CardLogical)c);
+            }
+            return CreateCombination(list.ToArray());
         }
         public abstract int CompareTo(CardCombination cards);
         protected abstract bool Check(params CardLogical[] cards);

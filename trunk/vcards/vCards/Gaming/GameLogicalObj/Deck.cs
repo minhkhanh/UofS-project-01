@@ -46,16 +46,29 @@ namespace vCards
                 }
             }
         }
+        // se bo ham nay
+        //public void Deal(params Pack[] packs)
+        //{
+        //    for (int j = 0; j < packs.Count(); ++j)
+        //        packs[j].Clear();
 
-        public void Deal(params Pack[] packs)
+        //    for (int i = 0; i < CARD_NUM; ++i)
+        //    {
+        //        packs[i % packs.Count()].AddControl(new Card(listCards[i], packs[i % packs.Count()].Side));
+        //    }
+        //}
+        public void DealAndSort(params PlayerServer[] player)
         {
-            for (int j = 0; j < packs.Count(); ++j)
-                packs[j].Clear();
+            for (int j = 0; j < player.Count(); ++j)
+                player[j].InitCard();
 
             for (int i = 0; i < CARD_NUM; ++i)
             {
-                packs[i % packs.Count()].AddControl(new Card(listCards[i], packs[i % packs.Count()].Side));
+                player[i % player.Count()].AddCard(new CardLogical(listCards[i].Rank, listCards[i].Suit));
             }
+
+            for (int j = 0; j < player.Count(); ++j)
+                player[j].SortCardsByValue();
         }
     }
 }
