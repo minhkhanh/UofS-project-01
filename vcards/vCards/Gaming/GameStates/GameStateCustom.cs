@@ -32,7 +32,7 @@ namespace vCards
             pack01.Enabled = true;
             pack02.Enabled = false;
 
-            deck01.Deal(pack01, pack02);
+            //deck01.Deal(pack01, pack02);
 
             ctrlContainer.AddControl(pack01);
             ctrlContainer.AddControl(pack02);

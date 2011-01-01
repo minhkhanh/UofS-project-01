@@ -11,6 +11,14 @@ namespace vCards
         {
             if (this.GetType()!=cards.GetType())
             {
+                if (listCards[0].Rank==CardRank.Duece && cards.GetType()==typeof(CardCombinationDoiThong))
+                {
+                    return -1;
+                }
+                if (listCards[0].Rank == CardRank.Duece && cards.GetType() == typeof(CardCombinationTuQuy))
+                {
+                    return -1;
+                }
                 return 0;
             }
             return listCards[0].CompareValue(((CardCombinationRac)cards).listCards[0]);

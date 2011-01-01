@@ -22,6 +22,10 @@ namespace vCards
         {
             if (this.GetType() != cards.GetType())
             {
+                if (listCards[0].Rank == CardRank.Duece && cards.GetType() == typeof(CardCombinationDoiThong) && ((CardCombinationDoiThong)cards).ListCards.Count==8)
+                {
+                    return -1;
+                }
                 return 0;
             }
             if (listCards.Count != ((CardCombinationDoi)cards).listCards.Count)
@@ -33,24 +37,13 @@ namespace vCards
 
         protected override bool Check(params CardLogical[] cards)
         {
-            if (cards.Count() % 2 != 0)
+            if (cards.Count() != 2)
             {
                 return false;
             }
-            if (cards.Count() == 4)
+            if (cards[0].RankText != cards[1].RankText)
             {
                 return false;
-            }
-            for (int i = 0; i < cards.Count() - 2; i += 2)
-            {
-                if (cards[i].RankText != cards[i + 1].RankText)
-                {
-                    return false;
-                }
-                if (cards[i].CompareRank(cards[i + 2]) == -1)
-                {
-                    return false;
-                }
             }
             return true;
         }
