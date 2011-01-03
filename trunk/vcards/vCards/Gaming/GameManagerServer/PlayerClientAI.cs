@@ -17,9 +17,9 @@ namespace vCards
         {
             packLogic = pack;
         }
-        public override void OnTurnToMe()
-        {            
-            base.OnTurnToMe();
+        public override void OnTurnToMe(BuocDi buoc)
+        {
+            base.OnTurnToMe(buoc);
         }
     }
 }
