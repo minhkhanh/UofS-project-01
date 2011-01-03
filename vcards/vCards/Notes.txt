@@ -3,3 +3,5 @@
 - linh hoạt khi thay đổi tên hay đường dẫn thư mục chứa resource
 - resource lá bài thiết kế với size lớn hơn
 - tìm hiểu sử dụng lớp ResourceManager
+
+--có lỗi outofmemory ở dòng 611 drawtext gdigraphic

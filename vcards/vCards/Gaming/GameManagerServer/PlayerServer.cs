@@ -5,9 +5,9 @@ using System.Text;
 
 namespace vCards
 {
-    public class PlayerServer
+    class PlayerServer
     {
-        int iIndex;
+        //int iIndex;
         PackLogical packLogic;
         public vCards.PackLogical PackLogic
         {
@@ -15,24 +15,16 @@ namespace vCards
             set { packLogic = value; }
         }
         PlayerInfo info;
-        public PlayerServer(PlayerInfo inf, int i)
+        public vCards.PlayerInfo Info
+        {
+            get { return info; }
+            set { info = value; }
+        }
+        public PlayerServer(PlayerInfo inf)//, int i)
         {
             info = inf;
-            iIndex = i;
+            //iIndex = i;
         }
-        //public CardLogical this[int idx]
-        //{
-        //    get
-        //    {
-        //        return (CardLogical)(idx >= 0 && idx < CARD_NUM ? listCards[idx] : null);
-        //    }
-
-        //    set
-        //    {
-        //        if (idx >= 0 && idx < CARD_NUM)
-        //            listCards[idx] = value;
-        //    }
-        //}
         public void InitCard()//(params CardLogical[] cards)
         {
             //if (cards.Count() < PackLogical.CARD_NUM) return;
@@ -45,6 +37,14 @@ namespace vCards
         public void SortCardsByValue()
         {
             packLogic.SortByValue();
+        }
+        public void OnPhatBaiChoClient()
+        {
+            VirtualNetworkServer.SendPackLogicalToPlayer(info.IdPlayer, packLogic);
+        }
+        public void OnYeuCauClientDi()
+        {
+            VirtualNetworkServer.SendTurnToPlayer(info.IdPlayer);
         }
     }
 }

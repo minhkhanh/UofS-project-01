@@ -55,7 +55,7 @@ namespace vCards
                 {
                     return false;
                 }
-                if (cards[i].CompareRank(cards[i + 2]) == -1)
+                if (cards[i].CompareRank(cards[i + 2]) != -1)
                 {
                     return false;
                 }

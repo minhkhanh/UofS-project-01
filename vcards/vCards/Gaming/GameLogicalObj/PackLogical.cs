@@ -20,6 +20,10 @@ namespace vCards
             get { return listCards; }
             set { listCards = value; }
         }
+        public int CardsCount
+        {
+            get { return listCards.Count; }            
+        }
         public CardLogical this[int idx]
         {
             get
@@ -32,6 +36,37 @@ namespace vCards
                 if (idx >= 0 && idx < CARD_NUM)
                     listCards[idx] = value;
             }
+        }
+        public bool IsHave(params CardLogical[] cards)
+        {
+            foreach (CardLogical card in cards)
+            {
+                bool bHave = false;
+                for (int i = 0; i < listCards.Count; ++i )
+                {
+                    if (listCards[i].CompareValue(card)==0)
+                    {
+                        bHave = true;
+                        break;
+                    }
+                }
+                if (!bHave)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        public bool IsChua(CardCombination cards)
+        {
+            foreach (CardLogical card in cards.listCards)
+            {
+                if (!IsHave(card))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
         public PackLogical(params CardLogical[] cards)
         {

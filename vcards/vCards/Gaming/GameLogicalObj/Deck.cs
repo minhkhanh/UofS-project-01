@@ -7,7 +7,7 @@ using System.Collections;
 
 namespace vCards
 {
-    public class Deck
+    class Deck
     {
         public const int CARD_NUM = 52;
         List<CardLogical> listCards = new List<CardLogical>(CARD_NUM);
@@ -62,7 +62,7 @@ namespace vCards
             for (int j = 0; j < player.Count(); ++j)
                 player[j].InitCard();
 
-            for (int i = 0; i < CARD_NUM; ++i)
+            for (int i = 0; i < PackLogical.CARD_NUM * player.Count(); ++i)
             {
                 player[i % player.Count()].AddCard(new CardLogical(listCards[i].Rank, listCards[i].Suit));
             }

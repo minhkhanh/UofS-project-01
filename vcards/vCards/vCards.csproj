@@ -75,10 +75,15 @@
     <Compile Include="Gaming\GameLogicalObj\CardCombination.cs" />
     <Compile Include="Gaming\GameControlObj\Pack.cs" />
     <Compile Include="Gaming\GameLogicalObj\CardLogical.cs" />
-    <Compile Include="Gaming\GameLogicalObj\Player.cs" />
+    <Compile Include="Gaming\GameManagerServer\Player.cs" />
     <Compile Include="Gaming\GameManagerServer\BanChoi.cs" />
+    <Compile Include="Gaming\GameManagerServer\BuocDi.cs" />
+    <Compile Include="Gaming\GameManagerServer\PlayerClient.cs" />
+    <Compile Include="Gaming\GameManagerServer\PlayerClientAI.cs" />
+    <Compile Include="Gaming\GameManagerServer\PlayerClientUser.cs" />
     <Compile Include="Gaming\GameManagerServer\PlayerInfo.cs" />
     <Compile Include="Gaming\GameManagerServer\PlayerServer.cs" />
+    <Compile Include="Gaming\GameManagerServer\VongDi.cs" />
     <Compile Include="Gaming\GameStates\GameState.cs" />
     <Compile Include="Gaming\GameStates\GameStateMenu.cs" />
     <Compile Include="Gaming\Animation.cs" />
@@ -124,6 +129,8 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Gaming\MyResourcesManager.cs" />
+    <Compile Include="VirtualNetworkClient.cs" />
+    <Compile Include="VirtualNetworkServer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Notes.txt" />
