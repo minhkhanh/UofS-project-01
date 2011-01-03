@@ -143,7 +143,7 @@ namespace vCards
         {
             bClientDaDi = false;
             bDaYeuCauPlayerDi = true;
-            player[turnQueye[0]].OnYeuCauClientDi();
+            player[turnQueye[0]].OnYeuCauClientDi(turnList.GetLastBuocDi());
         }
         public static void StartThread(BanChoi banChoi)
         {

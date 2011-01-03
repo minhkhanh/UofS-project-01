@@ -32,13 +32,17 @@ namespace vCards
         {
             listClient[clientId].ProcPackLogicalToPlayer(cards);
         }
-        public static void SendTurnToPlayer(int clientID)
+        public static void SendTurnToPlayer(int clientID, BuocDi buoc)
         {
-            listClient[clientID].ProcTurnToPlayer();
+            listClient[clientID].ProcTurnToPlayer(buoc);
         }
         public static bool ProcPlayerGo(int clientID, CardCombination cards)
         {
             return banChoi.PlayerGo(clientID, cards);
+        }
+        public static void SendHavePlayerGo()
+        {
+
         }
     }
 }

@@ -92,10 +92,31 @@ namespace vCards
             imgBtnSkip.Enabled = true;
         }
 
+        public void PaintNotTurnToPlayer()
+        {
+            imgBtnEnter.Visible = false;
+            imgBtnSkip.Visible = false;
+            imgBtnEnter.Enabled = false;
+            imgBtnSkip.Enabled = false;
+        }
+
         public void imgBtnEnter_MouseUp(object o, MouseEventArgs e)
         {
             PackLogical pack = ((PlayerClientUser)player1).MyPack.GetSelectedCard();
             CardCombination cards = CardCombination.CreateCombination(pack.ListCards.ToArray());
+            if (cards==null)
+            {
+                return;
+            }
+            if (cards.CompareTo(player1.BuocDiTruoc.Cards)<=0)
+            {
+                return;
+            }
+            if (player1.SendBaiPlayerDanh(cards))
+            {
+                ((PlayerClientUser)player1).MyPack.RemoveSelectedCard();
+                PaintNotTurnToPlayer();
+            }
         }
 
         public void imgBtnSkip_MouseUp(object o, MouseEventArgs e)

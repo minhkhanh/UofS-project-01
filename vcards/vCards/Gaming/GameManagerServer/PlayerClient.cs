@@ -15,6 +15,12 @@ namespace vCards
         {
             info = playerinfo;
         }
+        protected BuocDi buocDiTruoc;
+        public vCards.BuocDi BuocDiTruoc
+        {
+            get { return buocDiTruoc; }
+            //set { buocDiTruoc = value; }
+        }
         protected VirtualNetworkClient client;
         protected PlayerInfo info;
         public vCards.PlayerInfo Info
@@ -32,9 +38,13 @@ namespace vCards
         {
 
         }
-        public virtual void OnTurnToMe()
+        public virtual void OnTurnToMe(BuocDi buoc)
         {
             Trace.WriteLine("Den luot cua: " + info.Name);
+        }
+        public bool SendBaiPlayerDanh(CardCombination cards)
+        {
+            return client.SendPlayerGo(cards);
         }
     }
 }

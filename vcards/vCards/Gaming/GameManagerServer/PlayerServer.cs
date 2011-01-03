@@ -42,9 +42,9 @@ namespace vCards
         {
             VirtualNetworkServer.SendPackLogicalToPlayer(info.IdPlayer, packLogic);
         }
-        public void OnYeuCauClientDi()
+        public void OnYeuCauClientDi(BuocDi buoc)
         {
-            VirtualNetworkServer.SendTurnToPlayer(info.IdPlayer);
+            VirtualNetworkServer.SendTurnToPlayer(info.IdPlayer, buoc);
         }
     }
 }

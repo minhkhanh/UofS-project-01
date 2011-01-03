@@ -131,6 +131,18 @@ namespace vCards
             return pl;
         }
 
+        public void RemoveSelectedCard()
+        {
+            for (int i = 0; i < listControls.Count; )
+            {
+                if (((Card)listControls[i]).Selected)
+                {
+                    RemoveAt(i);
+                }
+                else ++i;
+            }
+        }
+
         public void Rearrange(IGraphics igp)
         {
             int cardSpace = (LENGTH - Card.BREADTH) / (listControls.Count - 1);

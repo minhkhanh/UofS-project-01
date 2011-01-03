@@ -35,10 +35,10 @@ namespace vCards
             ////////////////////xu ly phia client
             client.OnServerPhatBai(cards);
         }
-        public void ProcTurnToPlayer()
+        public void ProcTurnToPlayer(BuocDi buoc)
         {
             ///////////////////xu ly den luot di cua client
-            client.OnTurnToMe();
+            client.OnTurnToMe(buoc);
         }
         public bool SendPlayerGo(CardCombination cards)
         {

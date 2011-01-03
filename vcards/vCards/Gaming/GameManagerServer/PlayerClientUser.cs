@@ -38,10 +38,11 @@ namespace vCards
             ctrlList.AddControl(myPack);
             //base.OnServerPhatBai(packLogic);
         }
-        public override void OnTurnToMe()
+        public override void OnTurnToMe(BuocDi buoc)
         {
+            buocDiTruoc = buoc;
             ((GameStateCustom)gameState).PaintTurnToPlayer();
-            base.OnTurnToMe();
+            base.OnTurnToMe(buoc);
         }
     }
 }
