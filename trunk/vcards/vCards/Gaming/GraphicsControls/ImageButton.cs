@@ -20,9 +20,15 @@ namespace vCards
         {
             igp.DrawImageAlphaChannel(iimgHover, region);
         }
-
+        private bool bVisible = true;
+        public bool Visible
+        {
+            get { return bVisible; }
+            set { bVisible = value; }
+        }
         public override void Draw(IGraphics igp)
         {
+            if (!bVisible) return;
             base.Draw(igp);
 
             if (mouseState == MouseState.MouseDown)

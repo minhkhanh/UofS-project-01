@@ -13,6 +13,7 @@ namespace vCards
         public static CardCombination CreateCombination(params CardLogical[] cards)
         {
             CardCombination t;
+            SortCardsByValue(cards);
             t = CardCombinationDoi.Create(cards);
             if (t!=null)
             {

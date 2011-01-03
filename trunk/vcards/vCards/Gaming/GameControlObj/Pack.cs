@@ -12,7 +12,7 @@ namespace vCards
     /// </summary>
     public class Pack: ImgCtrlContainer
     {
-        int[] selectedCards = new int[13];
+        int[] selectedCards = new int[CARD_NUM];
         public Pack(PlayerSide playside, IGraphics igp)
             : base(igp)
         {
@@ -115,6 +115,20 @@ namespace vCards
         {
             get { return side; }
             //set { side = value; }
+        }
+
+        public PackLogical GetSelectedCard()
+        {
+            PackLogical pl = new PackLogical();
+            for (int i = 0; i < listControls.Count; ++i )
+            {
+                if (((Card)listControls[i]).Selected)
+                {
+                    pl.AddCards(((Card)listControls[i]).Value);
+                }
+            }
+            pl.SortByValue();
+            return pl;
         }
 
         public void Rearrange(IGraphics igp)
