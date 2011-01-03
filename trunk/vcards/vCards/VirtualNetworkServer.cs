@@ -38,11 +38,15 @@ namespace vCards
         }
         public static bool ProcPlayerGo(int clientID, CardCombination cards)
         {
-            return banChoi.PlayerGo(clientID, cards);
+            return banChoi.OnPlayerGo(clientID, cards);
         }
         public static void SendHavePlayerGo()
         {
 
+        }
+        public static bool ProcPlayerSkip(int clientID)
+        {
+            return banChoi.OnPlayerSkip(clientID);
         }
     }
 }

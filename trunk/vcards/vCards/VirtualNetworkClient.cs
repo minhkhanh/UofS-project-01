@@ -44,5 +44,9 @@ namespace vCards
         {
             return VirtualNetworkServer.ProcPlayerGo(client.Info.IdPlayer, cards);
         }
+        public bool SendPlayerSkip()
+        {
+            return VirtualNetworkServer.ProcPlayerSkip(client.Info.IdPlayer);
+        }
     }
 }

@@ -40,9 +40,8 @@ namespace vCards
         }
         public override void OnTurnToMe(BuocDi buoc)
         {
-            buocDiTruoc = buoc;
-            ((GameStateCustom)gameState).PaintTurnToPlayer();
             base.OnTurnToMe(buoc);
+            ((GameStateCustom)gameState).PaintTurnToPlayer();            
         }
     }
 }

@@ -131,6 +131,20 @@ namespace vCards
             return pl;
         }
 
+        public CardLogical GetMinCardLogical()
+        {
+            if (listControls.Count <= 0) return null;
+            CardLogical t = ((Card)listControls[0]).Value;
+            for (int i = 1; i < listControls.Count; ++i)
+            {
+                if (t.CompareValue(((Card)listControls[i]).Value)>0)
+                {
+                    t = ((Card)listControls[i]).Value;
+                }
+            }
+            return t;
+        }
+
         public void RemoveSelectedCard()
         {
             for (int i = 0; i < listControls.Count; )
