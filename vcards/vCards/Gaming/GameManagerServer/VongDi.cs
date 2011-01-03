@@ -8,6 +8,10 @@ namespace vCards
     class VongDi
     {
         private List<BuocDi> listBuocDi =  new List<BuocDi>();
+        public int Count
+        {
+            get { return listBuocDi.Count; }
+        }
         public BuocDi GetLastBuocDi()
         {
             if (listBuocDi.Count==0)
@@ -20,6 +24,10 @@ namespace vCards
         public void ThemBuoiDi(BuocDi buoc)
         {
             listBuocDi.Add(buoc);
+        }
+        public void Clear()
+        {
+            listBuocDi.Clear();
         }
     }
 }

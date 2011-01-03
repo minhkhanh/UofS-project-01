@@ -51,7 +51,7 @@ namespace vCards
             player1.JoinPlay();
             player2 = new PlayerClientAI(new PlayerInfo("MinhAI"));
             player2.JoinPlay();
-            banChoi.NewGame();
+            banChoi.NewGame(); // tao game moi phat bai cho client de hien thi len
             ((PlayerClientUser)player1).Rearrange(gamePanel.GameGraphics);            
 
 
@@ -108,21 +108,26 @@ namespace vCards
             {
                 return;
             }
-            if (cards.CompareTo(player1.BuocDiTruoc.Cards)<=0)
+            if (player1.BuocDiTruoc.LoaiBuocDi == LoaiBuocDi.BinhThuong && cards.CompareTo(player1.BuocDiTruoc.Cards) <= 0)
+            {
+                return;
+            }
+            if (player1.BuocDiTruoc.LoaiBuocDi == LoaiBuocDi.BuocDau && !cards.IsHave(((PlayerClientUser)player1).MyPack.GetMinCardLogical()))
             {
                 return;
             }
             if (player1.SendBaiPlayerDanh(cards))
             {
                 ((PlayerClientUser)player1).MyPack.RemoveSelectedCard();
+                ((PlayerClientUser)player1).MyPack.Rearrange(gamePanel.GameGraphics);
                 PaintNotTurnToPlayer();
             }
         }
 
         public void imgBtnSkip_MouseUp(object o, MouseEventArgs e)
         {
-            //imgBtnSkip.Visible = false;
-            //imgBtnEnter.Visible = true;
+            ((PlayerClientUser)player1).SendPlayerSkip();
+            PaintNotTurnToPlayer();
         }
 
         public override void RenderState()

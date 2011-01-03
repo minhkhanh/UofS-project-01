@@ -41,10 +41,15 @@ namespace vCards
         public virtual void OnTurnToMe(BuocDi buoc)
         {
             Trace.WriteLine("Den luot cua: " + info.Name);
+            buocDiTruoc = buoc;
         }
         public bool SendBaiPlayerDanh(CardCombination cards)
         {
             return client.SendPlayerGo(cards);
+        }
+        public bool SendPlayerSkip()
+        {
+            return client.SendPlayerSkip();
         }
     }
 }

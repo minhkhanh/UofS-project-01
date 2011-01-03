@@ -37,6 +37,22 @@ namespace vCards
                     listCards[idx] = value;
             }
         }
+        public CardLogical GetMinCard()
+        {
+            if (listCards.Count<=0)
+            {
+                return null;
+            }
+            CardLogical t = listCards[0];
+            for (int i = 1; i < listCards.Count; ++i )
+            {
+                if (t.CompareValue(listCards[i])<0)
+                {
+                    t = listCards[i];
+                }
+            }
+            return t;
+        }
         public bool IsHave(params CardLogical[] cards)
         {
             foreach (CardLogical card in cards)

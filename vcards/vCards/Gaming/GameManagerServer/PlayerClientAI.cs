@@ -20,6 +20,7 @@ namespace vCards
         public override void OnTurnToMe(BuocDi buoc)
         {
             base.OnTurnToMe(buoc);
+            SendPlayerSkip();
         }
     }
 }

@@ -17,6 +17,8 @@ namespace vCards
         //int iPlayerCanGoIndex = -1;
         bool bDaYeuCauPlayerDi;
         bool bClientDaDi;
+        bool bBuocDiDauTien;
+        //bool bBuocDiMoi;
         protected BanChoi()
         {
 
@@ -55,6 +57,7 @@ namespace vCards
                 return false;
             }
             deck = new Deck();
+            bBuocDiDauTien = true;
             deck.DealAndSort(player.ToArray());
             InitTurn();
             PhatBaiChoCacClient();
@@ -71,6 +74,7 @@ namespace vCards
         private void InitTurn()
         {
             turnQueye = new List<int>(NUM_PLAYER);
+            turnList = new VongDi();
             int iMin = 0;
             for (int i=1; i < player.Count; ++i )
             {
@@ -79,34 +83,66 @@ namespace vCards
                     iMin = i;
                 }
             }
-            turnQueye.Add(iMin++);
-            //for (int i = 0; i < player.Count; ++i)
-            //{
-            //    turnQueye.Enqueue(iMin++);
-            //    if (iMin==player.Count)
-            //    {
-            //        iMin = 0;
-            //    }
-            //}
+            for (int i = 0; i < player.Count; ++i)
+            {
+                turnQueye.Add(iMin);
+                iMin = PlayerNext(iMin);
+            }
         }
-        public bool PlayerGo(int iIndex, CardCombination cards)
+        private void KhoiTaoVongMoi()
+        {
+            int t = turnQueye[0];
+            turnList.Clear();
+            turnQueye.Clear();
+            for (int i = 0; i < player.Count; ++i )
+            {
+                turnQueye.Add(t);
+                t = PlayerNext(t);
+            }
+            //bBuocDiMoi = true;
+        }
+        public bool OnPlayerSkip(int iIndex)
+        {
+            if (iIndex != turnQueye[0])
+            {
+                return false;
+            }
+            bClientDaDi = true;
+            turnQueye.RemoveAt(0);
+            if (turnQueye.Count == 1)
+            {
+                KhoiTaoVongMoi();
+            }
+
+            bDaYeuCauPlayerDi = false;
+
+            return true;
+        }
+        public bool OnPlayerGo(int iIndex, CardCombination cards)
         {
             if (iIndex != turnQueye[0] || !player[iIndex].PackLogic.IsChua(cards))
             {
                 return false;
             }
-            if (turnList.GetLastBuocDi().Cards.CompareTo(cards) <= 0)
+            if (!bBuocDiDauTien && turnList.Count!=0)// khong phai buoc di dau tien va vong di moi
             {
-                return false;
+                if (turnList.GetLastBuocDi().Cards.CompareTo(cards) <= 0)//kiem tra bai di phai to hon
+                {
+                    return false;
+                }
             }
+            if (bBuocDiDauTien) bBuocDiDauTien = false;
             bClientDaDi = true;
             BuocDi buoc = new BuocDi();
             buoc.Player = player[iIndex];
             buoc.Cards = cards;
             turnList.ThemBuoiDi(buoc);
-            iIndex = PlayerNext(iIndex);
+            //iIndex = PlayerNext(iIndex);
             turnQueye.Add(turnQueye[0]);
-            turnQueye[0] = iIndex;
+            //turnQueye[0] = iIndex;
+            turnQueye.RemoveAt(0);
+
+            bDaYeuCauPlayerDi = false;
             return true;
         }
         private int PlayerNext(int iIndex)
@@ -143,7 +179,18 @@ namespace vCards
         {
             bClientDaDi = false;
             bDaYeuCauPlayerDi = true;
-            player[turnQueye[0]].OnYeuCauClientDi(turnList.GetLastBuocDi());
+            if (turnList.Count>0)
+                player[turnQueye[0]].OnYeuCauClientDi(turnList.GetLastBuocDi());
+            else
+            {
+                BuocDi b = new BuocDi();
+                if (bBuocDiDauTien)
+                {
+                    b.LoaiBuocDi = LoaiBuocDi.BuocDau;
+                }
+                else b.LoaiBuocDi = LoaiBuocDi.BuocMoi;
+                player[turnQueye[0]].OnYeuCauClientDi(b);
+            }
         }
         public static void StartThread(BanChoi banChoi)
         {

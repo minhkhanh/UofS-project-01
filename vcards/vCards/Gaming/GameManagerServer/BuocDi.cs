@@ -5,6 +5,12 @@ using System.Text;
 
 namespace vCards
 {
+    enum LoaiBuocDi
+    {
+        BuocDau,
+        BuocMoi,
+        BinhThuong
+    }
     class BuocDi
     {
         private PlayerServer player;
@@ -18,6 +24,12 @@ namespace vCards
         {
             get { return cards; }
             set { cards = value; }
+        }
+        LoaiBuocDi loaiBuocDi = LoaiBuocDi.BinhThuong;
+        public vCards.LoaiBuocDi LoaiBuocDi
+        {
+            get { return loaiBuocDi; }
+            set { loaiBuocDi = value; }
         }
     }
 }
