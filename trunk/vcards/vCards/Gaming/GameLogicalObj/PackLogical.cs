@@ -7,13 +7,14 @@ namespace vCards
 {
     public class PackLogical
     {
-        public const int CARD_NUM = 13;
-        int iID = 0;
-        public int ID
+        public PackLogical(PackLogical old)
         {
-            get { return iID; }
-            set { iID = value; }
+            foreach (CardLogical card in old.listCards)
+            {
+                this.listCards.Add(card);
+            }            
         }
+        public const int CARD_NUM = 13;
         protected List<CardLogical> listCards = new List<CardLogical>(CARD_NUM);
         public List<CardLogical> ListCards
         {
@@ -72,6 +73,32 @@ namespace vCards
                 }
             }
             return true;
+        }
+        private int Find(CardLogical card)
+        {
+            for (int i = 0; i < listCards.Count; ++i)
+            {
+                if (listCards[i].CompareValue(card) == 0)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+        private void LoaiBoMotCard(CardLogical card)
+        {
+            int i = Find(card);
+            if (i>-1)
+            {
+                listCards.RemoveAt(i);
+            }
+        }
+        public void PhepHieu(CardCombination cards)
+        {
+            foreach (CardLogical card in cards.listCards)
+            {
+                LoaiBoMotCard(card);
+            }
         }
         public bool IsChua(CardCombination cards)
         {
