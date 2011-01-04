@@ -19,6 +19,10 @@ namespace vCards
         PlayerClient player2;
         ImageButton imgBtnEnter;
         ImageButton imgBtnSkip;
+
+        int iIndexCardDanhRa = -1;
+
+        Pack myPack;
         //ImageButton
 
         #endregion
@@ -47,12 +51,12 @@ namespace vCards
             //pack01.Rearrange(gamePanel.GameGraphics);
             //pack02.Rearrange(gamePanel.GameGraphics);
             banChoi = BanChoi.Create();
-            player1 = new PlayerClientUser(new PlayerInfo("Khanh"), gamePanel.GameGraphics, ctrlContainer, this);
+            player1 = new PlayerClientUser(new PlayerInfo("Khanh"));
             player1.JoinPlay();
             player2 = new PlayerClientAI(new PlayerInfo("MinhAI"));
             player2.JoinPlay();
             banChoi.NewGame(); // tao game moi phat bai cho client de hien thi len
-            ((PlayerClientUser)player1).Rearrange(gamePanel.GameGraphics);            
+            //((PlayerClientUser)player1).Rearrange(gamePanel.GameGraphics);            
 
 
             Rectangle origin = new Rectangle((gamePanel.GameGraphics.ScreenWidth - 20) / 3, 230, 35, 12);
@@ -79,12 +83,12 @@ namespace vCards
             BanChoi.StartThread(banChoi);
         }
 
-        public void PaintServerChiaBai()
+        private void PaintServerChiaBai()
         {
 
         }
 
-        public void PaintTurnToPlayer()
+        private void PaintTurnToPlayer()
         {
             imgBtnEnter.Visible = true;
             imgBtnSkip.Visible = true;
@@ -92,7 +96,7 @@ namespace vCards
             imgBtnSkip.Enabled = true;
         }
 
-        public void PaintNotTurnToPlayer()
+        private void PaintNotTurnToPlayer()
         {
             imgBtnEnter.Visible = false;
             imgBtnSkip.Visible = false;
@@ -102,7 +106,7 @@ namespace vCards
 
         public void imgBtnEnter_MouseUp(object o, MouseEventArgs e)
         {
-            PackLogical pack = ((PlayerClientUser)player1).MyPack.GetSelectedCard();
+            PackLogical pack = myPack.GetSelectedCard();
             CardCombination cards = CardCombination.CreateCombination(pack.ListCards.ToArray());
             if (cards==null)
             {
@@ -112,26 +116,53 @@ namespace vCards
             {
                 return;
             }
-            if (player1.BuocDiTruoc.LoaiBuocDi == LoaiBuocDi.BuocDau && !cards.IsHave(((PlayerClientUser)player1).MyPack.GetMinCardLogical()))
+            if (player1.BuocDiTruoc.LoaiBuocDi == LoaiBuocDi.BuocDau && !cards.IsHave(myPack.GetMinCardLogical()))
             {
                 return;
             }
             if (player1.SendBaiPlayerDanh(cards))
             {
-                ((PlayerClientUser)player1).MyPack.RemoveSelectedCard();
-                ((PlayerClientUser)player1).MyPack.Rearrange(gamePanel.GameGraphics);
-                PaintNotTurnToPlayer();
+                myPack.RemoveSelectedCard();
+                myPack.Rearrange(gamePanel.GameGraphics);
+                //player1.Status = StatusPlayer.None;
             }
         }
 
         public void imgBtnSkip_MouseUp(object o, MouseEventArgs e)
         {
-            ((PlayerClientUser)player1).SendPlayerSkip();
-            PaintNotTurnToPlayer();
+            player1.SendPlayerSkip();
+            //player1.Status = StatusPlayer.None;
+            //PaintNotTurnToPlayer();
         }
 
         public override void RenderState()
         {            
+            if (((PlayerClientUser)player1).Status == StatusPlayer.ServerPhatBai)
+            {
+                myPack = new Pack(PlayerSide.Bottom, gamePanel.GameGraphics, player1.PackLogic);
+                myPack.Rearrange(gamePanel.GameGraphics);
+                ctrlContainer.AddControl(myPack);
+                ((PlayerClientUser)player1).Status = StatusPlayer.None;
+            }
+            else if (((PlayerClientUser)player1).Status == StatusPlayer.DenLuotToiDi)
+            {
+                PaintTurnToPlayer();
+            }
+            else
+            {
+                PaintNotTurnToPlayer();
+            }
+            CardCombination cards = ((PlayerClientUser)player1).CardsOnePlayerGo;
+            if (cards!=null)
+            {
+                NhomBaiDanhRa nhomBai = new NhomBaiDanhRa(gamePanel.GameGraphics, cards);
+                if (iIndexCardDanhRa!=-1)
+                {
+                    ctrlContainer.RemoveAt(iIndexCardDanhRa);
+                }
+                iIndexCardDanhRa = ctrlContainer.AddControl(nhomBai);
+                nhomBai.Rearrange(gamePanel.GameGraphics);
+            }
             base.RenderState();
         }
     }

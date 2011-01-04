@@ -51,5 +51,13 @@ namespace vCards
         {
 
         }
+        //private static CardCombination TimDoiNhoNhatTrong(PackLogical cards)
+        //{
+
+        //}
+        //public override CardCombination TimCaiVuaDuDeThangToiTrong(PackLogical cards)
+        //{
+            
+        //}
     }
 }

@@ -11,12 +11,12 @@ namespace vCards
         public const int BREADTH = 29;
         public const int LENGTH = 41;
 
-        Pack pack;
-        public Pack Pack
-        {
-            get { return pack; }
-            set { pack = value; }
-        }
+        //Pack pack;
+        //public Pack Pack
+        //{
+        //    get { return pack; }
+        //    set { pack = value; }
+        //}
 
         int index = -1;
 

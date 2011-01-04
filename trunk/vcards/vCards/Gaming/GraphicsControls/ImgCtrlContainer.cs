@@ -39,10 +39,11 @@ namespace vCards
             listControls.Clear();
         }
 
-        public virtual void AddControl(ImageControl control)
+        public virtual int AddControl(ImageControl control)
         {
             listControls.Add(control);
             ManageControl(control);
+            return listControls.Count - 1;
         }
 
         public virtual void RemoveAt(int idx)
@@ -73,9 +74,9 @@ namespace vCards
 
         public override void Draw(IGraphics igp)
         {
-            foreach (ImageControl i in listControls)
+            for (int i = 0; i < listControls.Count; ++i )
             {
-                i.Draw(igp);
+                listControls[i].Draw(igp);
             }
         }
     }

@@ -7,41 +7,79 @@ namespace vCards
 {
     class PlayerClientUser: PlayerClient
     {
-        Pack myPack = null;
-        public vCards.Pack MyPack
-        {
-            get { return myPack; }
-            //set { myPack = value; }
-        }
-        IGraphics gp;
-        ImgCtrlContainer ctrlList;
-        GameState gameState;
-        public PlayerClientUser(PlayerInfo playerinfo, IGraphics g, ImgCtrlContainer controls, GameState state)
+        public PlayerClientUser(PlayerInfo playerinfo)
             : base(playerinfo)
         {
-            gp = g;
-            ctrlList = controls;
-            gameState = state;
+
         }
-        public void Rearrange(IGraphics g)
+        protected StatusPlayer status = StatusPlayer.None;
+        public vCards.StatusPlayer Status
         {
-            if (myPack != null) myPack.Rearrange(g);
+            get
+            {
+                mutexProtectVar.WaitOne();
+                mutexProtectVar.ReleaseMutex();
+                return status;
+            }
+            set
+            {
+                mutexProtectVar.WaitOne();
+                status = value;
+                mutexProtectVar.ReleaseMutex();
+            }
         }
         public override void OnServerPhatBai(PackLogical packLogic)
         {
             base.OnServerPhatBai(packLogic);
-            myPack = new Pack(PlayerSide.Bottom, gp);
-            myPack.Enabled = true;
-            foreach (CardLogical card in packLogic.ListCards)
-            {
-                myPack.AddControl(new Card(card, PlayerSide.Bottom));
-            }            
-            ctrlList.AddControl(myPack);            
+            status = StatusPlayer.ServerPhatBai;          
         }
         public override void OnTurnToMe(BuocDi buoc)
         {
             base.OnTurnToMe(buoc);
-            ((GameStateCustom)gameState).PaintTurnToPlayer();            
+            status = StatusPlayer.DenLuotToiDi;            
+        }
+        public override bool SendBaiPlayerDanh(CardCombination cards)
+        {
+            if (base.SendBaiPlayerDanh(cards))
+            {
+                status = StatusPlayer.None;
+                return true;
+            }
+            return false;
+        }
+        public override bool SendPlayerSkip()
+        {
+            if (base.SendPlayerSkip())
+            {
+                status = StatusPlayer.None;
+                return true;
+            }
+            return false;
+        }
+        private bool bDaVeCardDanhRa = false;
+        private CardCombination cardsOnePlayerGo = null;
+        public vCards.CardCombination CardsOnePlayerGo
+        {
+            get 
+            {
+                if (cardsOnePlayerGo==null || bDaVeCardDanhRa)
+                {
+                    return null;
+                }
+                mutexProtectVar.WaitOne();
+                CardCombination cards = cardsOnePlayerGo;
+                bDaVeCardDanhRa = true;
+                mutexProtectVar.ReleaseMutex();
+                return cards; 
+            }
+        }
+        public override void OnOnePlayerGo(CardCombination cards)
+        {
+            base.OnOnePlayerGo(cards);
+            mutexProtectVar.WaitOne();
+            bDaVeCardDanhRa = false;
+            cardsOnePlayerGo = cards;
+            mutexProtectVar.ReleaseMutex();
         }
     }
 }

@@ -26,22 +26,6 @@ namespace vCards
                 return temp; 
             }
         }
-        protected StatusPlayer status = StatusPlayer.None;
-        public vCards.StatusPlayer Status
-        {
-            get 
-            {
-                mutexProtectVar.WaitOne();
-                mutexProtectVar.ReleaseMutex();
-                return status; 
-            }
-            set 
-            {
-                mutexProtectVar.WaitOne();                
-                status = value;
-                mutexProtectVar.ReleaseMutex();
-            }
-        }
         protected Mutex mutexProtectVar;
         //PlayerSide mySide;
 
@@ -74,22 +58,42 @@ namespace vCards
         }
         public virtual void OnServerPhatBai(PackLogical pack)
         {
-            mutexProtectVar.WaitOne();
+            mutexProtectVar.WaitOne();            
             packLogic = pack;
             mutexProtectVar.ReleaseMutex();
         }
         public virtual void OnTurnToMe(BuocDi buoc)
         {
             Trace.WriteLine("Den luot cua: " + info.Name);
+            mutexProtectVar.WaitOne();            
             buocDiTruoc = buoc;
+            mutexProtectVar.ReleaseMutex();
         }
-        public bool SendBaiPlayerDanh(CardCombination cards)
+        public virtual void OnTurnToOtherPlayer(PlayerInfo player) //id cua nguoi choi dc di
         {
-            return client.SendPlayerGo(cards);
+            Trace.WriteLine("Den luot cua: " + player.Name + " phai doi thoi!");
         }
-        public bool SendPlayerSkip()
+        public virtual bool SendBaiPlayerDanh(CardCombination cards)
         {
-            return client.SendPlayerSkip();
+            if (client.SendPlayerGo(cards))
+            {
+                packLogic.PhepHieu(cards);                
+                return true;
+            }
+            return false;
+        }
+        public virtual bool SendPlayerSkip()
+        {
+            if (client.SendPlayerSkip())
+            {
+                Trace.WriteLine("Toi: " + info.Name + " nhuong mot nuoc do!");
+                return true;
+            }
+            return false;
+        }
+        public virtual void OnOnePlayerGo(CardCombination cards)
+        {
+            Trace.WriteLine("Co nguoi di " + cards.CardsCount + " la bai, lo ma chan di!");
         }
     }
 }

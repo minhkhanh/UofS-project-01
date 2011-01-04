@@ -26,6 +26,25 @@ namespace vCards
             }
         }
 
+        public Pack(PlayerSide playside, IGraphics igp, PackLogical packLogic)
+            : base(igp)
+        {
+            side = playside;
+            listControls.Capacity = CARD_NUM;
+            //InitRegion(igp);
+
+            foreach (CardLogical card in packLogic.ListCards)
+            {
+                this.AddControl(new Card(card, side));
+            }
+
+
+            if (side != PlayerSide.Bottom)
+            {
+                enabled = false;
+            }
+        }
+
         private void InitRegion(IGraphics igp)
         {
             switch (side)
@@ -61,10 +80,10 @@ namespace vCards
             }
         }
 
-        public override void AddControl(ImageControl cardControl)
+        public override int AddControl(ImageControl cardControl)
         {
             if (listControls.Count == listControls.Capacity)
-                return;
+                return -1;
 
             base.AddControl(cardControl);
 
@@ -73,8 +92,9 @@ namespace vCards
             cardControl.MouseUp += new EventHandler<MouseEventArgs>(card_MouseUp);
 
             Card card = (Card)cardControl;
-            card.Pack = this;
+            //card.Pack = this;
             card.Index = listControls.Count - 1;
+            return listControls.Count - 1;
         }
 
         public void card_MouseUp(object o, MouseEventArgs e)

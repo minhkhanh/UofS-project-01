@@ -64,6 +64,7 @@
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Gaming\BmpAnimation.cs" />
+    <Compile Include="Gaming\GameControlObj\NhomBai.cs" />
     <Compile Include="Gaming\GameLogicalObj\CardCombinationDoiThong.cs" />
     <Compile Include="Gaming\GameLogicalObj\CardCombinationNhieuDoi.cs" />
     <Compile Include="Gaming\GameLogicalObj\CardCombinationRac.cs" />

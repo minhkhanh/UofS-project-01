@@ -19,7 +19,12 @@ namespace vCards
         public override void OnTurnToMe(BuocDi buoc)
         {
             base.OnTurnToMe(buoc);
-            SendPlayerSkip();
+            if (buoc.Cards==null)
+            {
+                CardCombination card = CardCombination.CreateCombination(packLogic.ListCards[0]);
+                base.SendBaiPlayerDanh(card);
+            }
+            else SendPlayerSkip();
         }
     }
 }

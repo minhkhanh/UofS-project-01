@@ -67,6 +67,7 @@ namespace vCards
         }
         public abstract int CompareTo(CardCombination cards);
         protected abstract bool Check(params CardLogical[] cards);
+        //public abstract CardCombination TimCaiVuaDuDeThangToiTrong(PackLogical cards);
         public static void SortCardsByValue(params CardLogical[] cards)
         {
             for (int i = 0; i < cards.Count() - 1; ++i)
