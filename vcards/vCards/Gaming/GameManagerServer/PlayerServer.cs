@@ -46,5 +46,13 @@ namespace vCards
         {
             VirtualNetworkServer.SendTurnToPlayer(info.IdPlayer, buoc);
         }
+        public void OnTurnToOtherPlayer(PlayerInfo player) //id cua nguoi choi dc di
+        {
+            VirtualNetworkServer.SendTurnToOtherPlayer(info.IdPlayer, player);
+        }
+        public void SendOnePlayerGo(CardCombination cards)
+        {
+            VirtualNetworkServer.SendOnePlayerGo(info.IdPlayer, cards);
+        }
     }
 }

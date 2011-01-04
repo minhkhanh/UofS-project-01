@@ -40,13 +40,17 @@ namespace vCards
         {
             return banChoi.OnPlayerGo(clientID, cards);
         }
-        public static void SendHavePlayerGo()
-        {
-
-        }
         public static bool ProcPlayerSkip(int clientID)
         {
             return banChoi.OnPlayerSkip(clientID);
+        }
+        public static void SendTurnToOtherPlayer(int clientID, PlayerInfo player) //id cua nguoi choi dc di
+        {
+            listClient[clientID].ProcTurnToOtherPlayer(player);
+        }
+        public static void SendOnePlayerGo(int clientID, CardCombination cards)
+        {
+            listClient[clientID].ProcOnePlayerGo(cards);
         }
     }
 }

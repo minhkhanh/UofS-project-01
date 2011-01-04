@@ -40,6 +40,10 @@ namespace vCards
             ///////////////////xu ly den luot di cua client
             client.OnTurnToMe(buoc);
         }
+        public void ProcTurnToOtherPlayer(PlayerInfo player) //id cua nguoi choi dc di
+        {
+            client.OnTurnToOtherPlayer(player);
+        }
         public bool SendPlayerGo(CardCombination cards)
         {
             return VirtualNetworkServer.ProcPlayerGo(client.Info.IdPlayer, cards);
@@ -47,6 +51,10 @@ namespace vCards
         public bool SendPlayerSkip()
         {
             return VirtualNetworkServer.ProcPlayerSkip(client.Info.IdPlayer);
+        }
+        public void ProcOnePlayerGo(CardCombination cards)
+        {
+            client.OnOnePlayerGo(cards);
         }
     }
 }

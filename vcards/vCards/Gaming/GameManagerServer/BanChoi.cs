@@ -118,6 +118,23 @@ namespace vCards
 
             return true;
         }
+        private void TurnToOtherPlayer()//bao cho nguoi choi biet luot den voi nguoi choi khac 
+        {
+            foreach (PlayerServer pl in player)
+            {
+                if (pl.Info.IdPlayer!=turnQueye[0])
+                {
+                    pl.OnTurnToOtherPlayer(player[turnQueye[0]].Info);
+                }
+            }
+        }
+        private void TurnToOtherPlayer(CardCombination cards)//bao cho nguoi choi biet luot den voi nguoi choi khac 
+        {
+            foreach (PlayerServer pl in player)
+            {
+                pl.SendOnePlayerGo(cards);
+            }
+        }
         public bool OnPlayerGo(int iIndex, CardCombination cards)
         {
             if (iIndex != turnQueye[0] || !player[iIndex].PackLogic.IsChua(cards))
@@ -140,6 +157,8 @@ namespace vCards
             turnList.ThemBuoiDi(buoc);
             turnQueye.Add(turnQueye[0]);
             turnQueye.RemoveAt(0);
+
+            TurnToOtherPlayer(cards);
 
             bDaYeuCauPlayerDi = false;
             return true;
@@ -178,6 +197,7 @@ namespace vCards
         {
             bClientDaDi = false;
             bDaYeuCauPlayerDi = true;
+            TurnToOtherPlayer();
             if (turnList.Count>0)
                 player[turnQueye[0]].OnYeuCauClientDi(turnList.GetLastBuocDi());
             else
