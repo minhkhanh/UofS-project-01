@@ -6,8 +6,7 @@ using System.Text;
 namespace vCards
 {
     class PlayerClientAI: PlayerClient
-    {
-        PackLogical packLogic;
+    {                
         public PlayerClientAI(PlayerInfo playerinfo)
             : base(playerinfo)
         {
@@ -15,7 +14,7 @@ namespace vCards
         }
         public override void OnServerPhatBai(PackLogical pack)
         {
-            packLogic = pack;
+            base.OnServerPhatBai(pack);
         }
         public override void OnTurnToMe(BuocDi buoc)
         {

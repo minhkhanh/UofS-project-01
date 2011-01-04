@@ -131,15 +131,14 @@ namespace vCards
                     return false;
                 }
             }
+            player[iIndex].PackLogic.PhepHieu(cards);
             if (bBuocDiDauTien) bBuocDiDauTien = false;
             bClientDaDi = true;
             BuocDi buoc = new BuocDi();
             buoc.Player = player[iIndex];
             buoc.Cards = cards;
             turnList.ThemBuoiDi(buoc);
-            //iIndex = PlayerNext(iIndex);
             turnQueye.Add(turnQueye[0]);
-            //turnQueye[0] = iIndex;
             turnQueye.RemoveAt(0);
 
             bDaYeuCauPlayerDi = false;

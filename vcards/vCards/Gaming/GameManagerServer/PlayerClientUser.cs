@@ -29,14 +29,14 @@ namespace vCards
         }
         public override void OnServerPhatBai(PackLogical packLogic)
         {
+            base.OnServerPhatBai(packLogic);
             myPack = new Pack(PlayerSide.Bottom, gp);
             myPack.Enabled = true;
             foreach (CardLogical card in packLogic.ListCards)
             {
                 myPack.AddControl(new Card(card, PlayerSide.Bottom));
             }            
-            ctrlList.AddControl(myPack);
-            //base.OnServerPhatBai(packLogic);
+            ctrlList.AddControl(myPack);            
         }
         public override void OnTurnToMe(BuocDi buoc)
         {

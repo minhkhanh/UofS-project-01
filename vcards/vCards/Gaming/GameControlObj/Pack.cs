@@ -159,7 +159,7 @@ namespace vCards
 
         public void Rearrange(IGraphics igp)
         {
-            int cardSpace = (LENGTH - Card.BREADTH) / (listControls.Count - 1);
+            int cardSpace = listControls.Count <= 1 ? 0 : (LENGTH - Card.BREADTH) / (listControls.Count - 1);
 
             switch (side)
             {
