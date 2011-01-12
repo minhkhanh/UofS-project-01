@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Diagnostics;
+using ShareLibrary;
 
 namespace vCards
 {
@@ -16,7 +17,7 @@ namespace vCards
     class PlayerClient
     {
         protected PackLogical packLogic;
-        public vCards.PackLogical PackLogic
+        public PackLogical PackLogic
         {
             get 
             {

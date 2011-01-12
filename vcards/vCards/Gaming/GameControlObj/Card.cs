@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
+using ShareLibrary;
 
 namespace vCards
 {
@@ -11,6 +12,10 @@ namespace vCards
         public const int BREADTH = 29;
         public const int LENGTH = 41;
 
+        public static explicit operator CardLogical(Card card)
+        {
+            return card.Value;
+        }
         //Pack pack;
         //public Pack Pack
         //{

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Text;
+using ShareLibrary;
 
 namespace vCards
 {
@@ -9,7 +10,7 @@ namespace vCards
     {
         //int iIndex;
         PackLogical packLogic;
-        public vCards.PackLogical PackLogic
+        public PackLogical PackLogic
         {
             get { return packLogic; }
             set { packLogic = value; }

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using System.Reflection;
+using ShareLibrary;
 
 namespace vCards
 {
