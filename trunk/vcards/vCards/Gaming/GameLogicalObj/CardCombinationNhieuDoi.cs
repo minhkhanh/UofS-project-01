@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Text;
+using ShareLibrary;
 
 namespace vCards
 {   //6 doi

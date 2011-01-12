@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 
-namespace vCards
+namespace ShareLibrary
 {
     /// <summary>
     /// Hoa cua la bai (da duoc sap xep be -> lon de su dung trong luc so sanh)
@@ -59,10 +58,10 @@ namespace vCards
             rank = rnk;
         }
 
-        public static explicit operator CardLogical(Card card)
-        {
-            return card.Value;
-        }
+        //public static explicit operator CardLogical(Card card)
+        //{
+        //    return card.Value;
+        //}
 
         public int CompareValue(CardLogical val)
         {

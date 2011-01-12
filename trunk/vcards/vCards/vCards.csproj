@@ -72,10 +72,8 @@
     <Compile Include="Gaming\GameLogicalObj\CardCombinationSamCo.cs" />
     <Compile Include="Gaming\GameLogicalObj\CardCombinationSanh.cs" />
     <Compile Include="Gaming\GameLogicalObj\CardCombinationTuQuy.cs" />
-    <Compile Include="Gaming\GameLogicalObj\PackLogical.cs" />
     <Compile Include="Gaming\GameLogicalObj\CardCombination.cs" />
     <Compile Include="Gaming\GameControlObj\Pack.cs" />
-    <Compile Include="Gaming\GameLogicalObj\CardLogical.cs" />
     <Compile Include="Gaming\GameManagerServer\Player.cs" />
     <Compile Include="Gaming\GameManagerServer\BanChoi.cs" />
     <Compile Include="Gaming\GameManagerServer\BuocDi.cs" />
@@ -183,6 +181,12 @@
     <Content Include="Resources\Images\Misc\Untitled-1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ShareLibrary\ShareLibrary.csproj">
+      <Project>{61CAD1DC-7D99-42F5-9571-7ADEFE478340}</Project>
+      <Name>ShareLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
   <ProjectExtensions>
