@@ -25,17 +25,22 @@ namespace ChickenAI
             throw new NotImplementedException();
         }
 
+        public void OnTurnToOtherPlayer(PlayerInfo pInfo)
+        {
+            throw new NotImplementedException();
+        }
+
         public void OnServerPhatBai(PackLogical pack)
         {
             throw new NotImplementedException();
         }
 
-        public PackLogical OnTurnToMe(BuocDi buoc)
+        public CardCombination OnTurnToMe(BuocDi buoc)
         {
             throw new NotImplementedException();
         }
 
-        public void OnOnePlayerGo(PlayerInfo player, CardCombination cards)
+        public void OnOtherPlayerGo(PlayerInfo player, CardCombination cards)
         {
             throw new NotImplementedException();
         }

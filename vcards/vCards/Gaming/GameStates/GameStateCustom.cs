@@ -54,7 +54,7 @@ namespace vCards
             banChoi = BanChoi.Create();
             player1 = new PlayerClientUser(new PlayerInfo("Khanh"));
             player1.JoinPlay();
-            player2 = new PlayerClientAI(new PlayerInfo("MinhAI"));
+            player2 = new PlayerClientAI(new PlayerInfo("MinhAI"), "Chicken AI");
             player2.JoinPlay();
             banChoi.NewGame(); // tao game moi phat bai cho client de hien thi len
             //((PlayerClientUser)player1).Rearrange(gamePanel.GameGraphics);            
