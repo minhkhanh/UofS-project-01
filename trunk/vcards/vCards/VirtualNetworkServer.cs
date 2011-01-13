@@ -49,9 +49,9 @@ namespace vCards
         {
             listClient[clientID].ProcTurnToOtherPlayer(player);
         }
-        public static void SendOnePlayerGo(int clientID, CardCombination cards)
+        public static void SendOnePlayerGo(int clientID, PlayerInfo player, CardCombination cards)
         {
-            listClient[clientID].ProcOnePlayerGo(cards);
+            listClient[clientID].ProcOnePlayerGo(player, cards);
         }
     }
 }

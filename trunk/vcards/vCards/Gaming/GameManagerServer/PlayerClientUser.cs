@@ -74,9 +74,9 @@ namespace vCards
                 return cards; 
             }
         }
-        public override void OnOnePlayerGo(CardCombination cards)
+        public override void OnOnePlayerGo(PlayerInfo player, CardCombination cards)
         {
-            base.OnOnePlayerGo(cards);
+            base.OnOnePlayerGo(player, cards);
             mutexProtectVar.WaitOne();
             bDaVeCardDanhRa = false;
             cardsOnePlayerGo = cards;
