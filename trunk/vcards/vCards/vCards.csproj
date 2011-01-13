@@ -65,22 +65,12 @@
     </Compile>
     <Compile Include="Gaming\BmpAnimation.cs" />
     <Compile Include="Gaming\GameControlObj\NhomBai.cs" />
-    <Compile Include="Gaming\GameLogicalObj\CardCombinationDoiThong.cs" />
-    <Compile Include="Gaming\GameLogicalObj\CardCombinationNhieuDoi.cs" />
-    <Compile Include="Gaming\GameLogicalObj\CardCombinationRac.cs" />
-    <Compile Include="Gaming\GameLogicalObj\CardCombinationDoi.cs" />
-    <Compile Include="Gaming\GameLogicalObj\CardCombinationSamCo.cs" />
-    <Compile Include="Gaming\GameLogicalObj\CardCombinationSanh.cs" />
-    <Compile Include="Gaming\GameLogicalObj\CardCombinationTuQuy.cs" />
-    <Compile Include="Gaming\GameLogicalObj\CardCombination.cs" />
     <Compile Include="Gaming\GameControlObj\Pack.cs" />
     <Compile Include="Gaming\GameManagerServer\Player.cs" />
     <Compile Include="Gaming\GameManagerServer\BanChoi.cs" />
-    <Compile Include="Gaming\GameManagerServer\BuocDi.cs" />
     <Compile Include="Gaming\GameManagerServer\PlayerClient.cs" />
     <Compile Include="Gaming\GameManagerServer\PlayerClientAI.cs" />
     <Compile Include="Gaming\GameManagerServer\PlayerClientUser.cs" />
-    <Compile Include="Gaming\GameManagerServer\PlayerInfo.cs" />
     <Compile Include="Gaming\GameManagerServer\PlayerServer.cs" />
     <Compile Include="Gaming\GameManagerServer\VongDi.cs" />
     <Compile Include="Gaming\GameStates\GameState.cs" />
@@ -111,7 +101,7 @@
     <Compile Include="Graphics\Interfaces\IFont.cs" />
     <Compile Include="Graphics\Interfaces\IGraphics.cs" />
     <Compile Include="Gaming\GameControlObj\Card.cs" />
-    <Compile Include="Gaming\GameLogicalObj\Deck.cs" />
+    <Compile Include="Gaming\GameManagerServer\Deck.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmMain.resx">

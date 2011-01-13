@@ -3,9 +3,9 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 
-namespace vCards
+namespace ShareLibrary
 {
-    class PlayerInfo
+    public class PlayerInfo
     {
         //int id = -1;
         //public int ID   //ID o trong mang tuong duong IP

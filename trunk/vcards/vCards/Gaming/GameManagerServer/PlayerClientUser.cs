@@ -59,7 +59,7 @@ namespace vCards
         }
         private bool bDaVeCardDanhRa = false;
         private CardCombination cardsOnePlayerGo = null;
-        public vCards.CardCombination CardsOnePlayerGo
+        public CardCombination CardsOnePlayerGo
         {
             get 
             {
