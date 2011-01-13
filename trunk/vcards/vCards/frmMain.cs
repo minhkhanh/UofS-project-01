@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
+using ShareLibrary;
 
 namespace vCards
 {
@@ -24,6 +25,7 @@ namespace vCards
             InitializeComponent();
 
             string[] str = QuanLyAI.GetAINameList();
+            InterfaceAI tmp = QuanLyAI.CreateObjAIByName("Chicken AI");
 
             gamePanel = new GamePanel(this);
             resrcManager = new MyResourceManager(gamePanel.GameGraphics);

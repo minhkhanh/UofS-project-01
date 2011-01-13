@@ -39,5 +39,42 @@ namespace vCards
             }
             return temp.ToArray();
         }
+        public static InterfaceAI CreateObjAIByName(string strName)
+        {
+            string strPath = System.Reflection.Assembly.GetExecutingAssembly().GetModules()[0].FullyQualifiedName;
+            strPath = strPath.Replace(System.Reflection.Assembly.GetExecutingAssembly().GetModules()[0].Name, "");
+            foreach (string fileName in Directory.GetFiles(strPath))
+            {
+                //Tạo biến giữ thông tin file
+                FileInfo file = new FileInfo(fileName);
+                //Nếu file có đuôi là dll thì ok
+                if (file.Extension.Equals(".dll"))
+                {
+                    Assembly asm = Assembly.LoadFrom(fileName);
+                    foreach (Type loai in asm.GetTypes())
+                    {
+                        foreach (Type face in loai.GetInterfaces())
+                        {
+                            if (face.FullName == "ShareLibrary.InterfaceAI")
+                            {
+                                InterfaceAI t = (InterfaceAI)Activator.CreateInstance(asm.GetType(loai.ToString()));
+                                if (t.NameAI==strName)
+                                {
+                                    return t;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        public static InterfaceAI CreateObjAIByIndex(int iNum)
+        {
+            string[] temp = GetAINameList();
+            if (temp.Count() > 0) return CreateObjAIByName(temp[0]);
+            return null;
+        }
     }
 }

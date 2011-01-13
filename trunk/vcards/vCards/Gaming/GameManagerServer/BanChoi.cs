@@ -119,7 +119,7 @@ namespace vCards
 
             return true;
         }
-        private void TurnToOtherPlayer()//bao cho nguoi choi biet luot den voi nguoi choi khac 
+        private void TurnToOtherPlayer()//bao cho moi nguoi choi biet luot den voi nguoi choi khac tru nguoi dang co luot
         {
             foreach (PlayerServer pl in player)
             {
@@ -129,7 +129,7 @@ namespace vCards
                 }
             }
         }
-        private void TurnToOtherPlayer(CardCombination cards)//bao cho nguoi choi biet luot den voi nguoi choi khac 
+        private void TurnToOtherPlayer(CardCombination cards)//bao cho moi nguoi choi biet co nguoi di bai
         {
             foreach (PlayerServer pl in player)
             {
