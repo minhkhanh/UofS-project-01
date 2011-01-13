@@ -10,8 +10,10 @@ namespace vCards
 {
     class QuanLyAI
     {
-        public static string[] GetAINameList(string strPath)
+        public static string[] GetAINameList()
         {
+            string strPath = System.Reflection.Assembly.GetExecutingAssembly().GetModules()[0].FullyQualifiedName;
+            strPath = strPath.Replace(System.Reflection.Assembly.GetExecutingAssembly().GetModules()[0].Name, "");
             List<string> temp = new List<string>();
             foreach (string fileName in Directory.GetFiles(strPath))
             {

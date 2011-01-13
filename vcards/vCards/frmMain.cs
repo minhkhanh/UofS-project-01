@@ -23,6 +23,8 @@ namespace vCards
         {
             InitializeComponent();
 
+            string[] str = QuanLyAI.GetAINameList();
+
             gamePanel = new GamePanel(this);
             resrcManager = new MyResourceManager(gamePanel.GameGraphics);
 
