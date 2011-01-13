@@ -30,7 +30,7 @@ namespace vCards
         protected Mutex mutexProtectVar;
         //PlayerSide mySide;
 
-        public PlayerClient(PlayerInfo playerinfo)
+        protected PlayerClient(PlayerInfo playerinfo)
         {
             info = playerinfo;
             mutexProtectVar = new Mutex();
@@ -40,13 +40,13 @@ namespace vCards
             mutexProtectVar.Close();
         }
         protected BuocDi buocDiTruoc;
-        public vCards.BuocDi BuocDiTruoc
+        public BuocDi BuocDiTruoc
         {
             get { return buocDiTruoc; }
         }
         protected VirtualNetworkClient client;
         protected PlayerInfo info;
-        public vCards.PlayerInfo Info
+        public PlayerInfo Info
         {
             get { return info; }
             set { info = value; }
@@ -56,6 +56,14 @@ namespace vCards
             client = VirtualNetworkClient.Create(info, this);
             if (client != null) return true;
             return false;
+        }
+        public virtual void OnOtherJoinPlay(PlayerInfo pInfo) //bao voi client la da co 1 nguoi vao ban choi
+        {
+
+        }
+        public virtual void OnOtherLeavePlay(PlayerInfo pInfo) //bao voi client la da co 1 nguoi roi ban choi
+        {
+
         }
         public virtual void OnServerPhatBai(PackLogical pack)
         {
@@ -92,7 +100,7 @@ namespace vCards
             }
             return false;
         }
-        public virtual void OnOnePlayerGo(CardCombination cards)
+        public virtual void OnOnePlayerGo(CardCombination cards) //co nguoi danh bai ra co the la minh
         {
             Trace.WriteLine("Co nguoi di " + cards.CardsCount + " la bai, lo ma chan di!");
         }

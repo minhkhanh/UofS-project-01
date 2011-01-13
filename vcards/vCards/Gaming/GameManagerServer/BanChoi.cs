@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using ShareLibrary;
 
 namespace vCards
 {
@@ -143,7 +144,7 @@ namespace vCards
             }
             if (!bBuocDiDauTien && turnList.Count!=0)// khong phai buoc di dau tien va vong di moi
             {
-                if (turnList.GetLastBuocDi().Cards.CompareTo(cards) <= 0)//kiem tra bai di phai to hon
+                if (turnList.GetLastBuocDi().Cards.CompareTo(cards) >= 0)//kiem tra bai di phai to hon
                 {
                     return false;
                 }
@@ -152,7 +153,7 @@ namespace vCards
             if (bBuocDiDauTien) bBuocDiDauTien = false;
             bClientDaDi = true;
             BuocDi buoc = new BuocDi();
-            buoc.Player = player[iIndex];
+            buoc.Player = player[iIndex].Info;
             buoc.Cards = cards;
             turnList.ThemBuoiDi(buoc);
             turnQueye.Add(turnQueye[0]);

@@ -6,7 +6,7 @@ using ShareLibrary;
 
 namespace vCards
 {
-    class PlayerServer
+    public class PlayerServer
     {
         //int iIndex;
         PackLogical packLogic;
@@ -16,7 +16,7 @@ namespace vCards
             set { packLogic = value; }
         }
         PlayerInfo info;
-        public vCards.PlayerInfo Info
+        public PlayerInfo Info
         {
             get { return info; }
             set { info = value; }

@@ -148,6 +148,11 @@ namespace vCards
             else if (((PlayerClientUser)player1).Status == StatusPlayer.DenLuotToiDi)
             {
                 PaintTurnToPlayer();
+                if (player1.BuocDiTruoc.LoaiBuocDi == LoaiBuocDi.BuocMoi && iIndexCardDanhRa != -1)
+                {
+                    ctrlContainer.RemoveAt(iIndexCardDanhRa);
+                    iIndexCardDanhRa = -1;
+                }
             }
             else
             {

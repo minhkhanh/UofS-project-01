@@ -70,8 +70,21 @@
   </Target>
   -->
   <ItemGroup>
-    <Compile Include="CardLogical.cs" />
+    <Compile Include="GameLogicalObj\BuocDi.cs" />
+    <Compile Include="GameLogicalObj\CardLogical.cs" />
+    <Compile Include="GameLogicalObj\CardCombination.cs" />
+    <Compile Include="GameLogicalObj\CardCombinationDoi.cs" />
+    <Compile Include="GameLogicalObj\CardCombinationDoiThong.cs" />
+    <Compile Include="GameLogicalObj\CardCombinationNhieuDoi.cs" />
+    <Compile Include="GameLogicalObj\CardCombinationRac.cs" />
+    <Compile Include="GameLogicalObj\CardCombinationSamCo.cs" />
+    <Compile Include="GameLogicalObj\CardCombinationSanh.cs" />
+    <Compile Include="GameLogicalObj\CardCombinationTuQuy.cs" />
     <Compile Include="InterfaceAI.cs" />
-    <Compile Include="PackLogical.cs" />
+    <Compile Include="GameLogicalObj\PackLogical.cs" />
+    <Compile Include="GameLogicalObj\PlayerInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GameManager\" />
   </ItemGroup>
 </Project>
