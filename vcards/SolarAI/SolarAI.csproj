@@ -5,22 +5,18 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{61CAD1DC-7D99-42F5-9571-7ADEFE478340}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{84AC4A38-C684-4B0D-9D9C-1B201AA2EFBC}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ShareLibrary</RootNamespace>
-    <AssemblyName>ShareLibrary</AssemblyName>
+    <RootNamespace>SolarAI</RootNamespace>
+    <AssemblyName>SolarAI</AssemblyName>
     <ProjectTypeGuids>{4D628B5B-2FBC-4AA6-8C16-197242AEB884};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PlatformFamilyName>PocketPC</PlatformFamilyName>
-    <PlatformID>b2c48bd2-963d-4549-9169-1fa021dce484</PlatformID>
-    <OSVersion>5.2</OSVersion>
-    <DeployDirSuffix>vCards</DeployDirSuffix>
+    <PlatformID>4118C335-430C-497f-BE48-11C3316B135E</PlatformID>
+    <OSVersion>5.1</OSVersion>
+    <DeployDirSuffix>SolarAI</DeployDirSuffix>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <NativePlatformName>Windows Mobile 6 Professional SDK</NativePlatformName>
-    <FormFactorID>
-    </FormFactorID>
-    <StartupObject>
-    </StartupObject>
+    <NativePlatformName>Windows Mobile 5.0 Pocket PC SDK</NativePlatformName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,10 +46,6 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
   <ItemGroup>
     <Reference Include="mscorlib" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
@@ -69,22 +61,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup>
-    <Compile Include="GameLogicalObj\BuocDi.cs" />
-    <Compile Include="GameLogicalObj\CardLogical.cs" />
-    <Compile Include="GameLogicalObj\CardCombination.cs" />
-    <Compile Include="GameLogicalObj\CardCombinationDoi.cs" />
-    <Compile Include="GameLogicalObj\CardCombinationDoiThong.cs" />
-    <Compile Include="GameLogicalObj\CardCombinationNhieuDoi.cs" />
-    <Compile Include="GameLogicalObj\CardCombinationRac.cs" />
-    <Compile Include="GameLogicalObj\CardCombinationSamCo.cs" />
-    <Compile Include="GameLogicalObj\CardCombinationSanh.cs" />
-    <Compile Include="GameLogicalObj\CardCombinationTuQuy.cs" />
-    <Compile Include="InterfaceAI.cs" />
-    <Compile Include="GameLogicalObj\PackLogical.cs" />
-    <Compile Include="GameLogicalObj\PlayerInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="GameManager\" />
-  </ItemGroup>
 </Project>

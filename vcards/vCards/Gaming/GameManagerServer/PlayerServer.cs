@@ -53,7 +53,7 @@ namespace vCards
         }
         public void SendOnePlayerGo(CardCombination cards)
         {
-            VirtualNetworkServer.SendOnePlayerGo(info.IdPlayer, cards);
+            VirtualNetworkServer.SendOnePlayerGo(info.IdPlayer, info, cards);
         }
     }
 }

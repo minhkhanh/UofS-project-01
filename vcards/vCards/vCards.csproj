@@ -118,6 +118,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Gaming\MyResourcesManager.cs" />
+    <Compile Include="QuanLyAI.cs" />
     <Compile Include="VirtualNetworkClient.cs" />
     <Compile Include="VirtualNetworkServer.cs" />
   </ItemGroup>

@@ -53,9 +53,9 @@ namespace vCards
         {
             return VirtualNetworkServer.ProcPlayerSkip(client.Info.IdPlayer);
         }
-        public void ProcOnePlayerGo(CardCombination cards)
+        public void ProcOnePlayerGo(PlayerInfo player, CardCombination cards)
         {
-            client.OnOnePlayerGo(cards);
+            client.OnOnePlayerGo(player, cards);
         }
     }
 }

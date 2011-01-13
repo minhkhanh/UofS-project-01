@@ -100,7 +100,7 @@ namespace vCards
             }
             return false;
         }
-        public virtual void OnOnePlayerGo(CardCombination cards) //co nguoi danh bai ra co the la minh
+        public virtual void OnOnePlayerGo(PlayerInfo player, CardCombination cards) //co nguoi danh bai ra co the la minh
         {
             Trace.WriteLine("Co nguoi di " + cards.CardsCount + " la bai, lo ma chan di!");
         }
