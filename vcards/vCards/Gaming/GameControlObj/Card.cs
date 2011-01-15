@@ -7,7 +7,7 @@ using ShareLibrary;
 
 namespace vCards
 {
-    public class Card : TransControl
+    public class Card : ImageControl
     {
         public const int BREADTH = 29;
         public const int LENGTH = 41;
@@ -68,7 +68,7 @@ namespace vCards
             }
             else
             {
-                iimgBkgr = MyResourceManager.GetCoverImage(side);
+                iimgBkgr = MyResourceManager.GetCardCoverImage(side);
 
                 if (side == PlayerSide.Left || side == PlayerSide.Right)
                     region = new Rectangle(-1, -1, LENGTH, BREADTH);

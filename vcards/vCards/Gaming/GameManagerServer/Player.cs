@@ -44,7 +44,7 @@ namespace vCards
             //packLogic = new PackLogical(cards);
             foreach (CardLogical c in cards)
             {
-                pack.AddControl(new Card(c, PlayerSide.Bottom));
+                pack.ManageControl(new Card(c, PlayerSide.Bottom));
             }            
         }
     }

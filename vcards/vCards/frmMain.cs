@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
+using System.Media;
 using ShareLibrary;
 
 namespace vCards
@@ -32,16 +33,23 @@ namespace vCards
 
             threadLogic = new Thread(new ThreadStart(ThreadFunc));
             threadLogic.Start();
+
+            //MyResourceManager.songBkgr01.PlayLooping();
         }
 
         private void frmMain_Closing(object sender, CancelEventArgs e)
         {
             threadLogic.Abort();
+            MyResourceManager.StopSounds();
         }
 
         void ThreadFunc()
         {
             gamePanel.GameLoop();
+
+            MyResourceManager.StopSounds();
+
+            Application.Exit();
         }
 
         void Test01()
@@ -71,6 +79,11 @@ namespace vCards
         private void frmMain_Resize(object sender, EventArgs e)
         {
 
+        }
+
+        private void frmMain_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

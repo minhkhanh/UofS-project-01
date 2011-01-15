@@ -12,7 +12,9 @@ namespace vCards
     {
         #region declare all image controls
 
-        ImageButton newGameImgBtn;
+        ImageButton btnPlay;
+        ImageButton btnGameOpt;
+        ImageButton btnExit;
 
         #endregion
 
@@ -24,33 +26,47 @@ namespace vCards
         
         public override void InitControls()
         {         
-            Rectangle origin = new Rectangle((gamePanel.GameGraphics.ScreenWidth - 100) / 2, 50, 100, 30);
+            Rectangle origin = new Rectangle((gamePanel.GameGraphics.ScreenWidth - 100) / 2, 100, 100, 30);
 
-            newGameImgBtn = new ImageButton(origin
-                , Program.AppPath + @"\Resources\Images\Buttons\OKBtn_Bkgr.bmp"                
+            btnPlay = new ImageButton(origin
+                , Program.AppPath + @"\Resources\Images\Buttons\PlayBtn_Bkgr.png"                
                 , gamePanel.GameGraphics
-                , Program.AppPath + @"\Resources\Images\Buttons\OKBtn_Hover.png");
+                , Program.AppPath + @"\Resources\Images\Buttons\PlayBtn_Hover.png");
 
-            ctrlContainer.AddControl(newGameImgBtn);
+            origin.Y += origin.Height + 10;
+            btnGameOpt = new ImageButton(origin
+                , Program.AppPath + @"\Resources\Images\Buttons\OptBtn_Bkgr.png"
+                , gamePanel.GameGraphics
+                , Program.AppPath + @"\Resources\Images\Buttons\OptBtn_Hover.png");
 
-            newGameImgBtn.MouseDown += new EventHandler<MouseEventArgs>(newGameImgBtn_MouseDown);
-            newGameImgBtn.MouseUp += new EventHandler<MouseEventArgs>(newGameImgBtn_MouseUp);
-            newGameImgBtn.Click += new EventHandler<EventArgs>(newGameImgBtn_Click);
+            origin.Y += origin.Height + 10;
+            btnExit = new ImageButton(origin
+                , Program.AppPath + @"\Resources\Images\Buttons\ExitBtn_Bkgr.png"
+                , gamePanel.GameGraphics
+                , Program.AppPath + @"\Resources\Images\Buttons\ExitBtn_Hover.png");
+
+            ctrlContainer.ManageControl(btnPlay);
+            ctrlContainer.ManageControl(btnGameOpt);
+            ctrlContainer.ManageControl(btnExit);
+
+            btnPlay.MouseUp += new EventHandler<MouseEventArgs>(newGameImgBtn_MouseUp);
+            btnExit.MouseUp += new EventHandler<MouseEventArgs>(btnExit_MouseUp);
+            btnGameOpt.MouseUp += new EventHandler<MouseEventArgs>(btnGameOpt_MouseUp);
         }
 
-        public void newGameImgBtn_Click(object o, EventArgs e)
+        public void btnGameOpt_MouseUp(object o, EventArgs e)
         {
-            
+            gamePanel.SwitchState(GameStateID.StateOptions);
+        }
+
+        public void btnExit_MouseUp(object o, EventArgs e)
+        {
+            gamePanel.SwitchState(GameStateID.StateExiting);
         }
 
         public void newGameImgBtn_MouseUp(object o, MouseEventArgs e)
         {
             gamePanel.SwitchState(GameStateID.StateGameCustom);
-        }
-
-        public void newGameImgBtn_MouseDown(object o, MouseEventArgs e)
-        {
-
         }
     }
 }

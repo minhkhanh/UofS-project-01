@@ -36,16 +36,18 @@ namespace vCards
         public void InitGameStates()
         {
             listGameStates.Add(new GameStateMenu(this, Program.AppPath + @"\Resources\Images\StateBackgrounds\MenuBkgr.bmp"));
-            listGameStates.Add(new GameStateCustom(this, Program.AppPath + @"\Resources\Images\StateBackgrounds\PlayBkgr.bmp"));
+            listGameStates.Add(new GameStatePlaying(this, Program.AppPath + @"\Resources\Images\StateBackgrounds\PlayBkgr.bmp"));
+            listGameStates.Add(new GameStateOptions(this, Program.AppPath + @"\Resources\Images\StateBackgrounds\OptMenuBkgr.bmp"));
+            listGameStates.Add(new GameStateExiting(this, Program.AppPath + @"\Resources\Images\StateBackgrounds\ExitBkgr.bmp"));
         }
 
-        public void ManageImgControl(ImageControl ic)
+        public void ManageImgControl(MyControl ic)
         {
             ownerControl.MouseDown += new MouseEventHandler(ic.OnMouseDown);
             ownerControl.MouseUp += new MouseEventHandler(ic.OnMouseUp);
             ownerControl.MouseMove += new MouseEventHandler(ic.OnMouseMove);
 
-            ownerControl.Click += new EventHandler(ic.OnClick);
+            //ownerControl.Click += new EventHandler(ic.OnClick);
         }
 
         public GamePanel(Control frm)
@@ -68,28 +70,27 @@ namespace vCards
         }
 
         bool playing = true;
+        public bool Playing
+        {
+            //get { return playing; }
+            set { playing = value; }
+        }
 
         bool enterState = true;
         bool exitState = false;
 
-        bool stateReady = false;
-        public bool StateReady
-        {
-            get { return stateReady; }
-            set { stateReady = value; }
-        }
-
-        public void GameLoop2()
-        {
-            while (playing)
-            {
-                if (stateReady)
-                {
-                    SendMessage(MessageID.MessageRender);
-                    SendMessage(MessageID.MessageDraw);
-                }
-            }
-        }
+        //bool stateReady = false;
+        //public void GameLoop2()
+        //{
+        //    while (playing)
+        //    {
+        //        if (stateReady)
+        //        {
+        //            SendMessage(MessageID.MessageRender);
+        //            SendMessage(MessageID.MessageDraw);
+        //        }
+        //    }
+        //}
 
         public void GameLoop()
         {

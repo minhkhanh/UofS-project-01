@@ -13,7 +13,9 @@ namespace vCards
         StateMenu,
         StateTest,
         StatePlay,
-        StateGameCustom
+        StateGameCustom,
+        StateOptions,
+        StateExiting
     }
 
     public abstract class GameState
@@ -77,6 +79,8 @@ namespace vCards
 
         public virtual void ExitState() 
         {
+            ctrlContainer.Dispose();
+
             gamePanel.SwitchStateDone(); 
         }
 

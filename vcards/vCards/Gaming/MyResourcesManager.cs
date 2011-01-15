@@ -4,11 +4,14 @@ using System.Collections.Generic;
 using System.Text;
 using System.Reflection;
 using ShareLibrary;
+using System.Media;
 
 namespace vCards
 {
     public class MyResourceManager
     {
+        #region card images
+
         public static IImage iimgSpades;
         public static IImage iimgClubs;
         public static IImage iimgDiamonds;
@@ -18,6 +21,33 @@ namespace vCards
         public static IImage iimgCardTopCover;
         public static IImage iimgCardLeftCover;
         public static IImage iimgCardRightCover;
+
+        #endregion        
+
+        #region button images
+
+        public static IImage iimgLeftArrowBkgr;
+        public static IImage iimgLeftArrowHover;
+
+        public static IImage iimgRightArrowBkgr;
+        public static IImage iimgRightArrowHover;
+
+        #endregion
+
+        #region sounds
+
+        public static int iMaxSong = 4;
+        public static SoundPlayer[] bkgrSongs = new SoundPlayer[iMaxSong];
+        public static int iCurrSong = 0;
+
+        #endregion
+
+        #region fonts
+
+        public static IFont fontH1;
+
+        #endregion
+
 
         //public static IGraphics GameGraphics;
         //static Assembly assem = Assembly.GetExecutingAssembly();
@@ -32,9 +62,47 @@ namespace vCards
             igraphics.CreateIImage(Program.AppPath + @"\Resources\Images\Cards\top_cover.png", out iimgCardTopCover);
             igraphics.CreateIImage(Program.AppPath + @"\Resources\Images\Cards\leftside_cover.png", out iimgCardLeftCover);
             igraphics.CreateIImage(Program.AppPath + @"\Resources\Images\Cards\rightside_cover.png", out iimgCardRightCover);
+
+            igraphics.CreateIImage(Program.AppPath + @"\Resources\Images\Buttons\LeftArrow_Bkgr.png", out iimgLeftArrowBkgr);
+            igraphics.CreateIImage(Program.AppPath + @"\Resources\Images\Buttons\LeftArrow_Hover.png", out iimgLeftArrowHover);
+            igraphics.CreateIImage(Program.AppPath + @"\Resources\Images\Buttons\RightArrow_Bkgr.png", out iimgRightArrowBkgr);
+            igraphics.CreateIImage(Program.AppPath + @"\Resources\Images\Buttons\RightArrow_Hover.png", out iimgRightArrowHover);
+
+            fontH1 = igraphics.CreateFont("tahoma", 10, System.Drawing.FontStyle.Bold);
+
+            bkgrSongs[0] = new SoundPlayer(Program.AppPath + @"\Resources\Sounds\Shorts\dee.wav");
+            bkgrSongs[1] = new SoundPlayer(Program.AppPath + @"\Resources\Sounds\BkgrSongs\song01.wav");
+            bkgrSongs[2] = new SoundPlayer(Program.AppPath + @"\Resources\Sounds\BkgrSongs\song02.wav");
+            bkgrSongs[3] = new SoundPlayer(Program.AppPath + @"\Resources\Sounds\BkgrSongs\song03.wav");
+            bkgrSongs[0].LoadAsync();
+            bkgrSongs[1].LoadAsync();
+            bkgrSongs[2].LoadAsync();
+            bkgrSongs[3].LoadAsync();
         }
 
-        public static IImage GetCoverImage(PlayerSide side)
+        public static void NextSong(int iSong)
+        {
+            if (iSong < 0 || iSong >= iMaxSong)
+                return;
+
+            bkgrSongs[iCurrSong].Stop();
+
+            if (iSong != 0)
+            {
+                iCurrSong = iSong;
+                bkgrSongs[iCurrSong].PlayLooping();
+            }
+        }
+
+        public static void StopSounds()
+        {
+            foreach (SoundPlayer i in bkgrSongs)
+            {
+                i.Stop();
+            }
+        }
+
+        public static IImage GetCardCoverImage(PlayerSide side)
         {
             switch (side)
             {

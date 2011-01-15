@@ -73,20 +73,24 @@
     <Compile Include="Gaming\GameManagerServer\PlayerClientUser.cs" />
     <Compile Include="Gaming\GameManagerServer\PlayerServer.cs" />
     <Compile Include="Gaming\GameManagerServer\VongDi.cs" />
+    <Compile Include="Gaming\GameOptions.cs" />
     <Compile Include="Gaming\GameStates\GameState.cs" />
+    <Compile Include="Gaming\GameStates\GameStateExiting.cs" />
     <Compile Include="Gaming\GameStates\GameStateMenu.cs" />
     <Compile Include="Gaming\Animation.cs" />
     <Compile Include="Gaming\GamePanel.cs" />
-    <Compile Include="Gaming\GameStates\GameStatePlay.cs" />
-    <Compile Include="Gaming\GameStates\GameStateCustom.cs" />
+    <Compile Include="Gaming\GameStates\GameStateOptions.cs" />
+    <Compile Include="Gaming\GameStates\GameStatePlaying.cs" />
     <Compile Include="Gaming\GameStates\GameTestState.cs" />
     <Compile Include="Gaming\GraphicsControls\BmpControl.cs" />
     <Compile Include="Gaming\GraphicsControls\ImageButton.cs" />
-    <Compile Include="Gaming\GraphicsControls\ImageControl.cs">
+    <Compile Include="Gaming\GraphicsControls\MyControl.cs">
     </Compile>
     <Compile Include="Gaming\GraphicsControls\ImgCtrlContainer.cs" />
     <Compile Include="Gaming\GraphicsControls\ImageLabel.cs" />
-    <Compile Include="Gaming\GraphicsControls\TransControl.cs" />
+    <Compile Include="Gaming\GraphicsControls\ImgCtrlScrollList.cs" />
+    <Compile Include="Gaming\GraphicsControls\ToggleImgBtn.cs" />
+    <Compile Include="Gaming\GraphicsControls\ImageControl.cs" />
     <Compile Include="Gaming\TransAnimation.cs" />
     <Compile Include="Graphics\PlatformAPIs.cs" />
     <Compile Include="Graphics\DirectX\DirectXBitmap.cs" />
@@ -124,10 +128,55 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Notes.txt" />
+    <Content Include="Resources\Images\Buttons\BackBtn_Bgkr.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Buttons\ExitBtn_Bkgr.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Buttons\ExitBtn_Hover.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Buttons\ExitStatus.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Buttons\LeftArrow_Bkgr.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Buttons\LeftArrow_Hover.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\Buttons\OKBtn_Bkgr.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\Buttons\OKBtn_Hover.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Buttons\OptBtn_Bkgr.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Buttons\OptBtn_Hover.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Buttons\PlayBtn_Bkgr.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Buttons\PlayBtn_Bkgr.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Buttons\PlayBtn_Hover.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Buttons\RightArrow_Bkgr.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Buttons\RightArrow_Hover.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Buttons\VolBtn_Bkgr.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Buttons\VolBtn_Hover.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\Cards\clubs.png">
@@ -163,13 +212,40 @@
     <Content Include="Resources\Images\Misc\btnUp.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\StateBackgrounds\ExitBkgr.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\StateBackgrounds\MenuBkgr.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\StateBackgrounds\OptMenuBkgr.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\StateBackgrounds\PlayBkgr.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\Misc\Untitled-1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\TextImages\textAILevel.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\TextImages\textGameSound.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\TextImages\textPlayerNum.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sounds\BkgrSongs\song01.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sounds\BkgrSongs\song02.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sounds\BkgrSongs\song03.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sounds\Shorts\dee.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
