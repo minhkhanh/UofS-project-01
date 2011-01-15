@@ -6,7 +6,7 @@ using System.Drawing;
 
 namespace vCards
 {
-    public class ImageLabel : BmpControl
+    public class ImageLabel : ImageControl
     {
         string caption;
 

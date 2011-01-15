@@ -6,7 +6,7 @@ using System.Drawing;
 
 namespace vCards
 {
-    public abstract class BmpControl: ImageControl
+    public abstract class BmpControl: MyControl
     {
         protected IBitmap bmpBkgr;
 

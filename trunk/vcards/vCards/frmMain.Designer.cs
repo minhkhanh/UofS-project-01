@@ -49,6 +49,7 @@
             this.Name = "frmMain";
             this.Text = "vCards";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Click += new System.EventHandler(this.frmMain_Click);
             this.Closing += new System.ComponentModel.CancelEventHandler(this.frmMain_Closing);
             this.Resize += new System.EventHandler(this.frmMain_Resize);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.frmMain_MouseMove);

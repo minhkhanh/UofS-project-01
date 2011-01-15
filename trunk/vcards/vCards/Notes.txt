@@ -5,3 +5,9 @@
 - tìm hiểu sử dụng lớp ResourceManager
 
 --có lỗi outofmemory ở dòng 611 drawtext gdigraphic
+
+- loại bỏ class BitmapControl, chỉ sử dụng một loại ảnh là .png
+
+Sửa đổi 15/1/2011 1:51PM
+ - Đổi tên class
+	+ ImageControl - MyControl

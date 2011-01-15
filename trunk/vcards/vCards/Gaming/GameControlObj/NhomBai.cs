@@ -25,18 +25,18 @@ namespace vCards
 
             foreach (CardLogical card in packLogic.ListCards)
             {
-                this.AddControl(new Card(card, PlayerSide.Bottom));
+                this.ManageControl(new Card(card, PlayerSide.Bottom));
             }
 
             enabled = false;
         }       
 
-        public override int AddControl(ImageControl cardControl)
+        public override int ManageControl(MyControl cardControl)
         {
             if (listControls.Count == listControls.Capacity)
                 return -1;
 
-            base.AddControl(cardControl);
+            base.ManageControl(cardControl);
 
             Card card = (Card)cardControl;
             card.Index = listControls.Count - 1;

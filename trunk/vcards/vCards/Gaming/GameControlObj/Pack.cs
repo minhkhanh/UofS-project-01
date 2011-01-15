@@ -36,7 +36,7 @@ namespace vCards
 
             foreach (CardLogical card in packLogic.ListCards)
             {
-                this.AddControl(new Card(card, side));
+                this.ManageControl(new Card(card, side));
             }
 
 
@@ -81,12 +81,12 @@ namespace vCards
             }
         }
 
-        public override int AddControl(ImageControl cardControl)
+        public override int ManageControl(MyControl cardControl)
         {
             if (listControls.Count == listControls.Capacity)
                 return -1;
 
-            base.AddControl(cardControl);
+            base.ManageControl(cardControl);
 
             cardControl.MouseMove += new EventHandler<MouseEventArgs>(card_MouseMove);
             cardControl.MouseDown += new EventHandler<MouseEventArgs>(card_MouseDown);

@@ -8,7 +8,7 @@ using ShareLibrary;
 
 namespace vCards
 {
-    public class GameStateCustom: GameState
+    public class GameStatePlaying: GameState
     {
         #region  declare all image controls
 
@@ -28,7 +28,7 @@ namespace vCards
 
         #endregion
 
-        public GameStateCustom(GamePanel gp, string bkgrPath)
+        public GameStatePlaying(GamePanel gp, string bkgrPath)
             : base(gp, bkgrPath)
         {
             stateId = GameStateID.StateGameCustom;
@@ -65,7 +65,7 @@ namespace vCards
                 , Program.AppPath + @"\Resources\Images\Buttons\OKBtn_Bkgr.bmp"
                 , gamePanel.GameGraphics
                 , Program.AppPath + @"\Resources\Images\Buttons\OKBtn_Hover.png");
-            ctrlContainer.AddControl(imgBtnEnter);
+            ctrlContainer.ManageControl(imgBtnEnter);
             imgBtnEnter.MouseUp += new EventHandler<MouseEventArgs>(imgBtnEnter_MouseUp);
 
             origin = new Rectangle((gamePanel.GameGraphics.ScreenWidth - 20)*2 / 3, 230, 35, 12);
@@ -73,7 +73,7 @@ namespace vCards
                 , Program.AppPath + @"\Resources\Images\Buttons\OKBtn_Bkgr.bmp"
                 , gamePanel.GameGraphics
                 , Program.AppPath + @"\Resources\Images\Buttons\OKBtn_Hover.png");
-            ctrlContainer.AddControl(imgBtnSkip);
+            ctrlContainer.ManageControl(imgBtnSkip);
             imgBtnSkip.MouseUp += new EventHandler<MouseEventArgs>(imgBtnSkip_MouseUp);
             imgBtnEnter.Visible = false;
             imgBtnSkip.Visible = false;
@@ -142,7 +142,7 @@ namespace vCards
             {
                 myPack = new Pack(PlayerSide.Bottom, gamePanel.GameGraphics, player1.PackLogic);
                 myPack.Rearrange(gamePanel.GameGraphics);
-                ctrlContainer.AddControl(myPack);
+                ctrlContainer.ManageControl(myPack);
                 ((PlayerClientUser)player1).Status = StatusPlayer.None;
             }
             else if (((PlayerClientUser)player1).Status == StatusPlayer.DenLuotToiDi)
@@ -166,7 +166,7 @@ namespace vCards
                 {
                     ctrlContainer.RemoveAt(iIndexCardDanhRa);
                 }
-                iIndexCardDanhRa = ctrlContainer.AddControl(nhomBai);
+                iIndexCardDanhRa = ctrlContainer.ManageControl(nhomBai);
                 nhomBai.Rearrange(gamePanel.GameGraphics);
             }
             base.RenderState();

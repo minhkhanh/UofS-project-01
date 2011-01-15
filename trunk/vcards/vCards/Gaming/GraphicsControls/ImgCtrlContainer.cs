@@ -6,43 +6,58 @@ using System.Drawing;
 
 namespace vCards
 {
-    public class ImgCtrlContainer: ImageControl
+    public class ImgCtrlContainer: MyControl
     {
-        protected List<ImageControl> listControls = new List<ImageControl>();
+        protected List<MyControl> listControls = new List<MyControl>();
 
-        //public ImgCtrlContainer() { }
+        public ImgCtrlContainer(Rectangle rect)
+            : base(rect)
+            
+        {
+        }
 
         public ImgCtrlContainer(IGraphics igp)
             : base(new Rectangle(0, 0, igp.ScreenWidth, igp.ScreenHeight))
         {
         }
 
-        private void ManageControl(ImageControl control)
-        {
-            this.MouseDown += new EventHandler<System.Windows.Forms.MouseEventArgs>(control.OnMouseDown);
-            this.MouseUp += new EventHandler<System.Windows.Forms.MouseEventArgs>(control.OnMouseUp);
-            this.MouseMove += new EventHandler<System.Windows.Forms.MouseEventArgs>(control.OnMouseMove);
-            this.Click += new EventHandler<EventArgs>(control.OnClick);
-        }
+        //private void ManageControl(ImageControl control)
+        //{
+        //    this.MouseDown += new EventHandler<System.Windows.Forms.MouseEventArgs>(control.OnMouseDown);
+        //    this.MouseUp += new EventHandler<System.Windows.Forms.MouseEventArgs>(control.OnMouseUp);
+        //    this.MouseMove += new EventHandler<System.Windows.Forms.MouseEventArgs>(control.OnMouseMove);
+        //    this.Click += new EventHandler<EventArgs>(control.OnClick);
+        //}
 
-        private void ReleaseControl(ImageControl control)
+        private void UnmanageControl(MyControl control)
         {
             this.MouseDown -= (EventHandler<System.Windows.Forms.MouseEventArgs>)control.OnMouseDown;
             this.MouseUp -= (EventHandler<System.Windows.Forms.MouseEventArgs>)control.OnMouseUp;
             this.MouseMove -= (EventHandler<System.Windows.Forms.MouseEventArgs>)control.OnMouseMove;
 
-            this.Click -= (EventHandler<EventArgs>)control.OnClick;
+            //this.Click -= (EventHandler<EventArgs>)control.OnClick;
         }
 
-        public void Clear()
+        public override void Dispose()
         {
+            foreach (MyControl i in listControls)
+            {
+                UnmanageControl(i);
+                i.Dispose();
+            }
+
             listControls.Clear();
         }
 
-        public virtual int AddControl(ImageControl control)
+        public virtual int ManageControl(MyControl control)
         {
             listControls.Add(control);
-            ManageControl(control);
+
+            this.MouseDown += new EventHandler<System.Windows.Forms.MouseEventArgs>(control.OnMouseDown);
+            this.MouseUp += new EventHandler<System.Windows.Forms.MouseEventArgs>(control.OnMouseUp);
+            this.MouseMove += new EventHandler<System.Windows.Forms.MouseEventArgs>(control.OnMouseMove);
+            //this.Click += new EventHandler<EventArgs>(control.OnClick);
+
             return listControls.Count - 1;
         }
 
@@ -51,7 +66,7 @@ namespace vCards
             if (listControls.Count == 0 || idx < 0 || idx >= listControls.Count)
                 return;
 
-            ReleaseControl(listControls[idx]);
+            UnmanageControl(listControls[idx]);
             listControls.RemoveAt(idx);
         }
 
@@ -65,7 +80,7 @@ namespace vCards
             {
                 enabled = value;
 
-                foreach (ImageControl i in listControls)
+                foreach (MyControl i in listControls)
                 {
                     i.Enabled = value;
                 }
