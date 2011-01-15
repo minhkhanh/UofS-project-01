@@ -19,6 +19,23 @@ namespace ShareLibrary
             else t = null;
             return t;
         }
+        //public static bool CoTheMoRongDoiThong(CardCombinationDoiThong doiThong, PackLogical cards)
+        //{
+        //    doiThong.SortByValue();
+        //    CardLogical cardEnd;
+        //    if (doiThong.ListCards[doiThong.CardsCount - 1].Rank == CardRank.Ace)
+        //    {
+        //        return false;
+        //    }
+        //    cardEnd = new CardLogical(doiThong.ListCards[doiThong.CardsCount - 1].Rank + 1, doiThong.ListCards[doiThong.CardsCount - 1].Suit);
+        //    int iDem = 0;
+        //    foreach (CardLogical card in cards.ListCards)
+        //    {
+        //        if (card.Rank )
+        //        {
+        //        }
+        //    }
+        //}
         public override int CompareTo(CardCombination cards)
         {
             if (this.GetType() != cards.GetType())

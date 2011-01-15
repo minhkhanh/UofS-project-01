@@ -57,6 +57,13 @@ namespace ShareLibrary
             }
             return null;
         }
+        //public static CardCombination CreateCombination(PackLogical cards, CardLogical card) //tao mot nhom bai hop le tu cards, co chua card
+        //{
+        //    if (!cards.IsHave(card))
+        //    {
+        //        return null;
+        //    }
+        //}
         //public static CardCombination CreateCombination(params Card[] cards)
         //{
         //    List<CardLogical> list = new List<CardLogical>();

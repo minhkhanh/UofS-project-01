@@ -8,6 +8,7 @@ namespace ChickenAI
 {
     public class ChickenAI: InterfaceAI
     {
+        private PackLogical myPack;
         #region InterfaceAI Members
 
         public string NameAI
@@ -32,12 +33,24 @@ namespace ChickenAI
 
         public void OnServerPhatBai(PackLogical pack)
         {
-            throw new NotImplementedException();
+            myPack = pack;
         }
-
+        //List<CardCombination> listNhomBai;
+        //private void 
         public CardCombination OnTurnToMe(BuocDi buoc)
         {
-            throw new NotImplementedException();
+            CardCombination cards = null;
+            if (buoc.LoaiBuocDi == LoaiBuocDi.BuocDau)
+            {
+            }
+            else if (buoc.LoaiBuocDi == LoaiBuocDi.BuocMoi)
+            {
+            }
+            else
+            {
+
+            }
+            return cards;
         }
 
         public void OnOtherPlayerGo(PlayerInfo player, CardCombination cards)
