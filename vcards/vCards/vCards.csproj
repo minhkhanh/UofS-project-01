@@ -128,55 +128,26 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Notes.txt" />
-    <Content Include="Resources\Images\Buttons\BackBtn_Bgkr.png">
+    <Content Include="Resources\Images\Buttons\BtnBkgrBack.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Buttons\ExitBtn_Bkgr.png">
+    <Content Include="Resources\Images\Buttons\BtnBkgrExit.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Buttons\ExitBtn_Hover.png">
+    <Content Include="Resources\Images\Buttons\BtnBkgrGameOpt.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Buttons\ExitStatus.png">
+    <Content Include="Resources\Images\Buttons\BtnBkgrLeaveHere.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Buttons\LeftArrow_Bkgr.png">
+    <Content Include="Resources\Images\Buttons\BtnBkgrPlay.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Buttons\LeftArrow_Hover.png">
+    <Content Include="Resources\Images\Buttons\BtnCoverDownState.png" />
+    <Content Include="Resources\Images\Buttons\SquareBtnBkgrLeftArrow.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Buttons\OKBtn_Bkgr.bmp">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\Buttons\OKBtn_Hover.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\Buttons\OptBtn_Bkgr.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\Buttons\OptBtn_Hover.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\Buttons\PlayBtn_Bkgr.bmp">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\Buttons\PlayBtn_Bkgr.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\Buttons\PlayBtn_Hover.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\Buttons\RightArrow_Bkgr.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\Buttons\RightArrow_Hover.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\Buttons\VolBtn_Bkgr.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\Buttons\VolBtn_Hover.png">
+    <Content Include="Resources\Images\Buttons\SquareBtnBkgrRightArrow.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\Cards\clubs.png">

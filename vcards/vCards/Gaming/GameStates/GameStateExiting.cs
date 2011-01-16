@@ -24,9 +24,8 @@ namespace vCards
             Rectangle regn = new Rectangle(0, gamePanel.GameGraphics.ScreenHeight - 30, 100, 30);
 
             btnStatus = new ImageButton(regn
-                , Program.AppPath + @"\Resources\Images\Buttons\ExitStatus.png"
+                , Program.AppPath + @"\Resources\Images\Buttons\BtnBkgrLeaveHere.png"
                 , gamePanel.GameGraphics
-                , Program.AppPath + @"\Resources\Images\Buttons\ExitStatus.png"
                 );
 
             ctrlContainer.ManageControl(btnStatus);

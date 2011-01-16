@@ -64,11 +64,11 @@ namespace vCards
                 region = new Rectangle(-1, -1, BREADTH, LENGTH);
 
                 if (side == PlayerSide.Bottom)
-                    iimgBkgr = MyResourceManager.GetCardImage(cardValue.Suit);
+                    _iimgBkgr = MyResourceManager.GetCardImage(cardValue.Suit);
             }
             else
             {
-                iimgBkgr = MyResourceManager.GetCardCoverImage(side);
+                _iimgBkgr = MyResourceManager.GetCardCoverImage(side);
 
                 if (side == PlayerSide.Left || side == PlayerSide.Right)
                     region = new Rectangle(-1, -1, LENGTH, BREADTH);
@@ -109,10 +109,8 @@ namespace vCards
                 );
         }
 
-        public override void Draw(IGraphics igp)
+        public override void DoDrawing(IGraphics igp)
         {
-            base.Draw(igp);
-
             DrawRankText(igp);
         }
     }

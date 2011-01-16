@@ -8,28 +8,28 @@ namespace vCards
 {
     public abstract class ImageControl: MyControl
     {
-        protected IImage iimgBkgr;
+        protected IImage _iimgBkgr;
 
         public ImageControl(Rectangle regn, string iimgPath, IGraphics igp)
             : base(regn)
         {
-            igp.CreateIImage(iimgPath, out iimgBkgr);
+            igp.CreateIImage(iimgPath, out _iimgBkgr);
         }
 
-        public ImageControl(Rectangle regn, IImage iimgPath)
+        public ImageControl(Rectangle regn, IImage iimgBkgr)
             : base(regn)
         {
-            iimgBkgr = iimgPath;
+            _iimgBkgr = iimgBkgr;
         }
 
         public ImageControl(){}
 
         public override void DrawBackground(IGraphics igp)
         {
-            igp.DrawImageAlphaChannel(iimgBkgr, region);
+            igp.DrawImageAlphaChannel(_iimgBkgr, region);
         }
 
-        public override void Draw(IGraphics igp)
+        public override void DoDrawing(IGraphics igp)
         {
             DrawBackground(igp);
         }

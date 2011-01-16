@@ -10,16 +10,16 @@ namespace vCards
     {
         bool toggleValue;
 
-        public ToggleImgBtn(Rectangle regn, string ibmpPath, IGraphics igp, string iimgPath, bool val)
-            : base(regn, ibmpPath, igp, iimgPath)
+        public ToggleImgBtn(Rectangle regn, string ibmpPath, string iimgPath, string pathIcon, IGraphics igp, bool val)
+            : base(regn, ibmpPath, igp)
         {
             toggleValue = val;
         }
 
-        public override void Draw(IGraphics igp)
+        public override void DoDrawing(IGraphics igp)
         {
             if (toggleValue)
-                DrawHover(igp);
+                DrawDownState(igp);
             else
                 DrawBackground(igp);
         }

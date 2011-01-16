@@ -28,22 +28,25 @@ namespace vCards
         {         
             Rectangle origin = new Rectangle((gamePanel.GameGraphics.ScreenWidth - 100) / 2, 100, 100, 30);
 
-            btnPlay = new ImageButton(origin
-                , Program.AppPath + @"\Resources\Images\Buttons\PlayBtn_Bkgr.png"                
+            btnPlay = new ImageButton(
+                origin
+                , Program.AppPath + @"\Resources\Images\Buttons\BtnBkgrPlay.png"
                 , gamePanel.GameGraphics
-                , Program.AppPath + @"\Resources\Images\Buttons\PlayBtn_Hover.png");
+                );
 
             origin.Y += origin.Height + 10;
-            btnGameOpt = new ImageButton(origin
-                , Program.AppPath + @"\Resources\Images\Buttons\OptBtn_Bkgr.png"
+            btnGameOpt = new ImageButton(
+                origin
+                , Program.AppPath + @"\Resources\Images\Buttons\BtnBkgrGameOpt.png"
                 , gamePanel.GameGraphics
-                , Program.AppPath + @"\Resources\Images\Buttons\OptBtn_Hover.png");
+                );
 
             origin.Y += origin.Height + 10;
-            btnExit = new ImageButton(origin
-                , Program.AppPath + @"\Resources\Images\Buttons\ExitBtn_Bkgr.png"
+            btnExit = new ImageButton(
+                origin
+                , Program.AppPath + @"\Resources\Images\Buttons\BtnBkgrExit.png"
                 , gamePanel.GameGraphics
-                , Program.AppPath + @"\Resources\Images\Buttons\ExitBtn_Hover.png");
+                );
 
             ctrlContainer.ManageControl(btnPlay);
             ctrlContainer.ManageControl(btnGameOpt);

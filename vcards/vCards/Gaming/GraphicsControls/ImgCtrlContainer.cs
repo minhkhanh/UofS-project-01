@@ -21,21 +21,11 @@ namespace vCards
         {
         }
 
-        //private void ManageControl(ImageControl control)
-        //{
-        //    this.MouseDown += new EventHandler<System.Windows.Forms.MouseEventArgs>(control.OnMouseDown);
-        //    this.MouseUp += new EventHandler<System.Windows.Forms.MouseEventArgs>(control.OnMouseUp);
-        //    this.MouseMove += new EventHandler<System.Windows.Forms.MouseEventArgs>(control.OnMouseMove);
-        //    this.Click += new EventHandler<EventArgs>(control.OnClick);
-        //}
-
         private void UnmanageControl(MyControl control)
         {
             this.MouseDown -= (EventHandler<System.Windows.Forms.MouseEventArgs>)control.OnMouseDown;
             this.MouseUp -= (EventHandler<System.Windows.Forms.MouseEventArgs>)control.OnMouseUp;
             this.MouseMove -= (EventHandler<System.Windows.Forms.MouseEventArgs>)control.OnMouseMove;
-
-            //this.Click -= (EventHandler<EventArgs>)control.OnClick;
         }
 
         public override void Dispose()
@@ -56,7 +46,6 @@ namespace vCards
             this.MouseDown += new EventHandler<System.Windows.Forms.MouseEventArgs>(control.OnMouseDown);
             this.MouseUp += new EventHandler<System.Windows.Forms.MouseEventArgs>(control.OnMouseUp);
             this.MouseMove += new EventHandler<System.Windows.Forms.MouseEventArgs>(control.OnMouseMove);
-            //this.Click += new EventHandler<EventArgs>(control.OnClick);
 
             return listControls.Count - 1;
         }
@@ -80,14 +69,14 @@ namespace vCards
             {
                 enabled = value;
 
-                foreach (MyControl i in listControls)
-                {
-                    i.Enabled = value;
-                }
+                //foreach (MyControl i in listControls)
+                //{
+                //    i.Enabled = value;
+                //}
             }
         }
 
-        public override void Draw(IGraphics igp)
+        public override void DoDrawing(IGraphics igp)
         {
             for (int i = 0; i < listControls.Count; ++i )
             {
