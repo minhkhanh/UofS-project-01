@@ -25,6 +25,8 @@ namespace vCards
         void CreateIImage(string filename, out IImage iimg);
         void CreateIImage(Stream strm, out IImage iimg);
 
+        void DrawLine(Color c, int x1, int y1, int x2, int y2);
+
         ///  
         /// Gets the height of the screen. 
         ///  
@@ -134,5 +136,7 @@ namespace vCards
         /// A font object compatible with this graphics device 
         ///  
         IFont CreateFont(string fontName);
+
+        //IFont CreateFont(IFont)
     }
 }

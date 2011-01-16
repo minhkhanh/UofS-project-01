@@ -10,9 +10,7 @@ namespace vCards
     public enum MouseState
     {
         MouseUp,
-        MouseDown,
-
-        Click
+        MouseDown
     }
 
     public abstract class MyControl
@@ -22,6 +20,7 @@ namespace vCards
         protected MouseState mouseState = MouseState.MouseUp;
         protected Rectangle region = Rectangle.Empty;
         protected bool enabled = true;
+        protected bool visible = true;
 
         #endregion
 
@@ -36,6 +35,12 @@ namespace vCards
         #endregion
 
         #region properties
+
+        public bool Visible
+        {
+            get { return visible; }
+            set { visible = value; }
+        }
 
         public int X
         {
@@ -162,17 +167,13 @@ namespace vCards
             }
         }
 
-        //public virtual void OnClick(object o, EventArgs e)
-        //{
-        //    //if (mouseState == MouseState.MouseDown)
-        //    //{
-        //    //    mouseState = MouseState.MouseUp;
-        //    //    RaiseClickEvent(e);
-        //    //}
-        //}
-
         public virtual void DrawBackground(IGraphics igp){}
-        public virtual void Draw(IGraphics igp){}
+        public virtual void DoDrawing(IGraphics igp) {}
+        public void Draw(IGraphics igp)
+        {
+            if (visible)
+                DoDrawing(igp);
+        }
 
         public virtual void Dispose(){}
 

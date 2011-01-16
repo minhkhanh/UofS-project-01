@@ -21,7 +21,7 @@ namespace vCards
             igp.DrawBitmap(region, bmpBkgr);
         }
 
-        public override void Draw(IGraphics igp)
+        public override void DoDrawing(IGraphics igp)
         {
             DrawBackground(igp);
         }

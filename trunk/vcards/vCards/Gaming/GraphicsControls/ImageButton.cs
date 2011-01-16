@@ -8,47 +8,73 @@ namespace vCards
 {
     public class ImageButton: ImageControl
     {
-        public ImageButton(Rectangle regn, string ibmpPath, IGraphics igp, string iimgPath)
-            : base(regn, ibmpPath, igp)
+        //IImage _iimgDown;
+
+        //IImage _iimgIcon;
+        //Point _offSet = Point.Empty;
+
+        public ImageButton(Rectangle regn, string pathBkgr, IGraphics igp)
+            : base(regn, pathBkgr, igp)
         {
-            igp.CreateIImage(iimgPath, out iimgHover);
+            //igp.CreateIImage(pathDownImg, out _iimgDown);
+            //igp.CreateIImage(pathIconImg, out _iimgIcon);
         }
 
-        public ImageButton(Rectangle regn, IImage ibmpPath, IImage iimgPath)
-            : base(regn, ibmpPath)
+        public ImageButton(Rectangle regn, IImage iimgBkgr)
+            : base(regn, iimgBkgr)
         {
-            iimgHover = iimgPath;
-        }
+            //_iimgDown = iimgDown;
 
-        //IImage iimgIcon;
-        IImage iimgHover;
+            //_iimgIcon = iimgIcon;
+        }
 
         //public void DrawIcon(IGraphics igp)
         //{
-        //    Rectangle rectIcon;
-        //    rectIcon.X = 
-        //    //igp.DrawImageAlphaChannel(iimgIcon, region);
+        //    igp.DrawImageAlphaChannel(_iimgIcon, region);
         //}
 
-        public void DrawHover(IGraphics igp)
+        public void DrawDownState(IGraphics igp)
         {
-            igp.DrawImageAlphaChannel(iimgHover, region);
+            //if (_iimgDown != null)
+            //    igp.DrawImageAlphaChannel(_iimgDown, region);
+            //else
+            //{
+            //    igp.DrawFilledRect(region, Color.Red);
+
+            //    igp.DrawLine(Color.FromArgb(64, 0, 0), region.X, region.Y + region.Height, region.X, region.Y);
+            //    igp.DrawLine(Color.FromArgb(64, 0, 0), region.X, region.Y, region.X + region.Width, region.Y);
+
+            //    igp.DrawLine(Color.FromArgb(255, 145, 145), region.X + region.Width, region.Y, region.X + region.Width, region.Y + region.Height);
+            //    igp.DrawLine(Color.FromArgb(255, 145, 145), region.X + region.Width, region.Y + region.Height, region.X, region.Y + region.Height);
+            //}
+
+            igp.DrawImageAlphaChannel(MyResourceManager.iimgBtnDownCover, region);
         }
 
-        private bool bVisible = true;
-        public bool Visible
-        {
-            get { return bVisible; }
-            set { bVisible = value; }
-        }
+        //public void DrawUpState(IGraphics igp)
+        //{
+        //    //if (_iimgBkgr != null)
+        //    igp.DrawImageAlphaChannel(_iimgBkgr, region);
+        //    //else
+        //    //{
+        //    //    igp.DrawFilledRect(region, Color.Red);
 
-        public override void Draw(IGraphics igp)
+        //    //    igp.DrawLine(Color.FromArgb(255, 145, 145), region.X, region.Y + region.Height, region.X, region.Y);
+        //    //    igp.DrawLine(Color.FromArgb(255, 145, 145), region.X, region.Y, region.X + region.Width, region.Y);
+
+        //    //    igp.DrawLine(Color.FromArgb(64, 0, 0), region.X + region.Width, region.Y, region.X + region.Width, region.Y + region.Height);
+        //    //    igp.DrawLine(Color.FromArgb(64, 0, 0), region.X + region.Width, region.Y + region.Height, region.X, region.Y + region.Height);
+        //    //}
+        //}        
+
+        public override void DoDrawing(IGraphics igp)
         {
-            if (!bVisible) return;
-            base.Draw(igp);
+            DrawBackground(igp);
 
             if (mouseState == MouseState.MouseDown)
-                DrawHover(igp);
+                DrawDownState(igp);
+            //else if (mouseState == MouseState.MouseUp)
+            //    DrawUpState(igp);
         }
     }
 }

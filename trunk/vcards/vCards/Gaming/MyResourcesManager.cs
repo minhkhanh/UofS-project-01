@@ -26,11 +26,10 @@ namespace vCards
 
         #region button images
 
-        public static IImage iimgLeftArrowBkgr;
-        public static IImage iimgLeftArrowHover;
+        public static IImage iimgLeftArrow;
+        public static IImage iimgRightArrow;
 
-        public static IImage iimgRightArrowBkgr;
-        public static IImage iimgRightArrowHover;
+        public static IImage iimgBtnDownCover;
 
         #endregion
 
@@ -63,10 +62,10 @@ namespace vCards
             igraphics.CreateIImage(Program.AppPath + @"\Resources\Images\Cards\leftside_cover.png", out iimgCardLeftCover);
             igraphics.CreateIImage(Program.AppPath + @"\Resources\Images\Cards\rightside_cover.png", out iimgCardRightCover);
 
-            igraphics.CreateIImage(Program.AppPath + @"\Resources\Images\Buttons\LeftArrow_Bkgr.png", out iimgLeftArrowBkgr);
-            igraphics.CreateIImage(Program.AppPath + @"\Resources\Images\Buttons\LeftArrow_Hover.png", out iimgLeftArrowHover);
-            igraphics.CreateIImage(Program.AppPath + @"\Resources\Images\Buttons\RightArrow_Bkgr.png", out iimgRightArrowBkgr);
-            igraphics.CreateIImage(Program.AppPath + @"\Resources\Images\Buttons\RightArrow_Hover.png", out iimgRightArrowHover);
+            igraphics.CreateIImage(Program.AppPath + @"\Resources\Images\Buttons\SquareBtnBkgrLeftArrow.png", out iimgLeftArrow);
+            igraphics.CreateIImage(Program.AppPath + @"\Resources\Images\Buttons\SquareBtnBkgrRightArrow.png", out iimgRightArrow);
+
+            igraphics.CreateIImage(Program.AppPath + @"\Resources\Images\Buttons\BtnCoverDownState.png", out iimgBtnDownCover);
 
             fontH1 = igraphics.CreateFont("tahoma", 10, System.Drawing.FontStyle.Bold);
 

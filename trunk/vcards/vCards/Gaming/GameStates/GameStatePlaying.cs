@@ -64,7 +64,7 @@ namespace vCards
             imgBtnEnter = new ImageButton(origin
                 , Program.AppPath + @"\Resources\Images\Buttons\OKBtn_Bkgr.bmp"
                 , gamePanel.GameGraphics
-                , Program.AppPath + @"\Resources\Images\Buttons\OKBtn_Hover.png");
+                );
             ctrlContainer.ManageControl(imgBtnEnter);
             imgBtnEnter.MouseUp += new EventHandler<MouseEventArgs>(imgBtnEnter_MouseUp);
 
@@ -72,7 +72,7 @@ namespace vCards
             imgBtnSkip = new ImageButton(origin
                 , Program.AppPath + @"\Resources\Images\Buttons\OKBtn_Bkgr.bmp"
                 , gamePanel.GameGraphics
-                , Program.AppPath + @"\Resources\Images\Buttons\OKBtn_Hover.png");
+                );
             ctrlContainer.ManageControl(imgBtnSkip);
             imgBtnSkip.MouseUp += new EventHandler<MouseEventArgs>(imgBtnSkip_MouseUp);
             imgBtnEnter.Visible = false;

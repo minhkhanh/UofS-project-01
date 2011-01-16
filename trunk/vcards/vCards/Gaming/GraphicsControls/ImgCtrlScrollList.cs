@@ -11,27 +11,29 @@ namespace vCards
         List<object> listItemValue = new List<object>();
         List<string> listItemText = new List<string>();
 
-        ImageButton btnLeft;// = new ImageButton()
+        ImageButton btnLeft;
         ImageButton btnRight;
 
         int iCurr = 0;
         int iLimit = 0;
 
-        public ImgCtrlScrollList(Rectangle rect)
+        IFont _font;
+
+        public ImgCtrlScrollList(Rectangle rect, IFont font)
             : base(rect)
         {
+            _font = font;
+
             Rectangle rectArrow = new Rectangle(rect.X, rect.Y, rect.Height, rect.Height);
             btnLeft = new ImageButton(
                 rectArrow
-                , MyResourceManager.iimgLeftArrowBkgr
-                , MyResourceManager.iimgLeftArrowHover
+                , MyResourceManager.iimgLeftArrow
                 );
 
             rectArrow.X = rect.X + rect.Width - rect.Height;
             btnRight = new ImageButton(
                 rectArrow
-                , MyResourceManager.iimgRightArrowBkgr
-                , MyResourceManager.iimgRightArrowHover
+                , MyResourceManager.iimgRightArrow
                 );
 
             ManageControl(btnLeft);
@@ -76,15 +78,15 @@ namespace vCards
             listItemText.Clear();
         }
 
-        public override void Draw(IGraphics igp)
+        public override void DoDrawing(IGraphics igp)
         {
-            base.Draw(igp);
+            base.DoDrawing(igp);
 
             igp.DrawText(
                 new Rectangle(btnLeft.X+btnLeft.Width, btnLeft.Y, btnRight.X-btnLeft.X-btnLeft.Width, btnLeft.Height)
                 , listItemText[iCurr]
                 , Color.GreenYellow
-                , MyResourceManager.fontH1
+                , _font
                 , FontDrawOptions.DrawTextMiddle | FontDrawOptions.DrawTextCenter
                 );
         }
