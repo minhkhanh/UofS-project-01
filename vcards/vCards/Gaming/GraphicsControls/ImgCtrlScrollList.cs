@@ -73,6 +73,7 @@ namespace vCards
         public int CurrentIndex
         {
             set { iCurrIdx = value; }
+            get { return iCurrIdx; }
         }
 
         public override void Dispose()
@@ -82,7 +83,10 @@ namespace vCards
             listItemValue.Clear();
             listItemText.Clear();
         }
-
+        public string CurrentItemText
+        {
+            get { return listItemText[iCurrIdx]; }
+        }
         public override void DoDrawing(IGraphics igp)
         {
             base.DoDrawing(igp);

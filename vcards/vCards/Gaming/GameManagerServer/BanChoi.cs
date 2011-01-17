@@ -234,10 +234,17 @@ namespace vCards
                 if (!bClientDaDi)
                 {
                     continue;
-                }
-                
+                }                
             }
-        } 
+            SendEndGameToAllPlayer();
+        }
+        private void SendEndGameToAllPlayer()
+        {
+            foreach (PlayerServer pl in player)
+            {
+                pl.SendMessEndGame();
+            }
+        }
         private bool IsTheEnd()
         {
             int iSoNguoiHetBai = 0;

@@ -79,6 +79,7 @@ namespace vCards
             {
                 scrllistAILevel01.AddItem(i, listAIName[i]);
             }
+            if (listAIName.Count()>0) scrllistAILevel01.CurrentIndex = 1;
 
             origin.Y += origin.Height + 5;
             origin.X = 10;
@@ -115,6 +116,21 @@ namespace vCards
         public void btnOK_MouseUp(object o, System.Windows.Forms.MouseEventArgs e)
         {
             // do changes here
+            options.ArrNameAI.Clear();
+            if (scrllistAILevel01.CurrentIndex > 0)
+            {
+                options.ArrNameAI.Add(scrllistAILevel01.CurrentItemText);
+            }
+            if (scrllistAILevel02.CurrentIndex > 0)
+            {
+                options.ArrNameAI.Add(scrllistAILevel02.CurrentItemText);
+            }
+            if (scrllistAILevel03.CurrentIndex > 0)
+            {
+                options.ArrNameAI.Add(scrllistAILevel03.CurrentItemText);
+            }
+
+            gamePanel.Option = options;
 
             GoBackState();
         }

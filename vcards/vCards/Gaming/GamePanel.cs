@@ -37,7 +37,12 @@ namespace vCards
             get { return g; }
             set { g = value; }
         }
-
+        GameOptions option = new GameOptions();
+        public vCards.GameOptions Option
+        {
+            get { return option; }
+            set { option = value; }
+        }
         List<GameState> listGameStates = new List<GameState>();
         public void InitGameStates()
         {

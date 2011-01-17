@@ -37,7 +37,8 @@ namespace vCards
         public override void OnTurnToMe(BuocDi buoc)
         {
             base.OnTurnToMe(buoc);
-            status = StatusPlayer.DenLuotToiDi;            
+            status = StatusPlayer.DenLuotToiDi;
+            strStatus = "Den luot cua toi danh bai!";
         }
         public override bool SendBaiPlayerDanh(CardCombination cards)
         {
@@ -74,13 +75,35 @@ namespace vCards
                 return cards; 
             }
         }
+        private string strStatus = "";
+        public string StatusString
+        {
+            get { return strStatus; }
+            //set { strStatus = value; }
+        }
         public override void OnOnePlayerGo(PlayerInfo player, CardCombination cards)
         {
             base.OnOnePlayerGo(player, cards);
-            mutexProtectVar.WaitOne();
+            mutexProtectVar.WaitOne();            
             bDaVeCardDanhRa = false;
             cardsOnePlayerGo = cards;
             mutexProtectVar.ReleaseMutex();
+        }
+        public override void OnTurnToOtherPlayer(PlayerInfo player)
+        {
+            base.OnTurnToOtherPlayer(player);
+            strStatus = "Den luot cua " + player.Name + " danh bai!";
+        }
+        private bool bEndGame = false;
+        public bool IsEndGame
+        {
+            get { return bEndGame; }
+            set { bEndGame = value; }
+        }
+        public override void OnEndGame()
+        {
+            base.OnEndGame();
+            bEndGame = true;
         }
     }
 }

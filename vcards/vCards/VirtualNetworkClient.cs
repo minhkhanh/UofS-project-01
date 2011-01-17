@@ -57,5 +57,10 @@ namespace vCards
         {
             client.OnOnePlayerGo(player, cards);
         }
+
+        public void ProcMessEndGame()
+        {
+            client.OnEndGame();
+        }
     }
 }

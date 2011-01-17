@@ -53,5 +53,9 @@ namespace vCards
         {
             listClient[clientID].ProcOnePlayerGo(player, cards);
         }
+        public static void SendMessEndGame(int clientID)
+        {
+            listClient[clientID].ProcMessEndGame();
+        }
     }
 }
