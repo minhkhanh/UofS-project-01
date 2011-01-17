@@ -65,7 +65,12 @@ namespace vCards
             ++iLimit;
         }
 
-        public object CurrentValue
+        public string CurrentItemText
+        {
+            get { return listItemText[iCurrIdx]; }
+        }
+
+        public object CurrentItemValue
         {
             get { return listItemValue[iCurrIdx]; }
         }

@@ -137,7 +137,7 @@ namespace vCards
 
         public void imglistGameSound_MouseUp(object o, System.Windows.Forms.MouseEventArgs e)
         {
-            int currSong = (int)scrllistGameSound.CurrentValue;
+            int currSong = (int)scrllistGameSound.CurrentItemValue;
             if (currSong != MyResourceManager.iCurrSong)
                 MyResourceManager.NextSong(currSong);
         }
