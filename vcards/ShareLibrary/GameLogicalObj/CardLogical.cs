@@ -58,6 +58,12 @@ namespace ShareLibrary
             rank = rnk;
         }
 
+        public CardLogical(CardLogical card)
+        {
+            suit = card.suit;
+            rank = card.rank;
+        }
+
         //public static explicit operator CardLogical(Card card)
         //{
         //    return card.Value;

@@ -29,12 +29,12 @@ namespace ShareLibrary
         {
             get
             {
-                return (CardLogical)(idx >= 0 && idx < CARD_NUM ? listCards[idx] : null);
+                return (CardLogical)(idx >= 0 && idx < listCards.Count ? listCards[idx] : null);
             }
 
             set
             {
-                if (idx >= 0 && idx < CARD_NUM)
+                if (idx >= 0 && idx < listCards.Count)
                     listCards[idx] = value;
             }
         }
@@ -62,6 +62,26 @@ namespace ShareLibrary
                 for (int i = 0; i < listCards.Count; ++i )
                 {
                     if (listCards[i].CompareValue(card)==0)
+                    {
+                        bHave = true;
+                        break;
+                    }
+                }
+                if (!bHave)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        public bool IsHave(PackLogical cards)
+        {
+            foreach (CardLogical card in cards.listCards)
+            {
+                bool bHave = false;
+                for (int i = 0; i < listCards.Count; ++i)
+                {
+                    if (listCards[i].CompareValue(card) == 0)
                     {
                         bHave = true;
                         break;
