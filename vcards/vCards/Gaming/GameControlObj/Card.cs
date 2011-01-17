@@ -111,6 +111,7 @@ namespace vCards
 
         public override void DoDrawing(IGraphics igp)
         {
+            base.DoDrawing(igp);
             DrawRankText(igp);
         }
     }

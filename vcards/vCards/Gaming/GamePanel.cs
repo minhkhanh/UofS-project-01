@@ -25,6 +25,12 @@ namespace vCards
         const int GAME_FPS = 24;
         Control ownerControl;
 
+        public Control OwnerControl
+        {
+            get { return ownerControl; }
+            set { ownerControl = value; }
+        }
+
         IGraphics g;
         public IGraphics GameGraphics
         {
@@ -39,6 +45,7 @@ namespace vCards
             listGameStates.Add(new GameStatePlaying(this, Program.AppPath + @"\Resources\Images\StateBackgrounds\PlayBkgr.bmp"));
             listGameStates.Add(new GameStateOptions(this, Program.AppPath + @"\Resources\Images\StateBackgrounds\OptMenuBkgr.bmp"));
             listGameStates.Add(new GameStateExiting(this, Program.AppPath + @"\Resources\Images\StateBackgrounds\ExitBkgr.bmp"));
+            listGameStates.Add(new GameStateHighScore(this, Program.AppPath + @"\Resources\Images\StateBackgrounds\StateBkgrHighScore.bmp"));
         }
 
         public void ManageImgControl(MyControl ic)
@@ -126,6 +133,9 @@ namespace vCards
 
         public void SwitchStateDone()
         {
+            GameState prev = listGameStates.Find(i => i.ID == nextStateID);
+            prev.PreviousStateID = currStateID;
+
             currStateID = nextStateID;
         }
 

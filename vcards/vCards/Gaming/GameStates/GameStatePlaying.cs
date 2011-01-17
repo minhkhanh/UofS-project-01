@@ -62,7 +62,7 @@ namespace vCards
 
             Rectangle origin = new Rectangle((gamePanel.GameGraphics.ScreenWidth - 20) / 3, 230, 35, 12);
             imgBtnEnter = new ImageButton(origin
-                , Program.AppPath + @"\Resources\Images\Buttons\OKBtn_Bkgr.bmp"
+                , Program.AppPath + @"\Resources\Images\Buttons\SquareBtnBkgrLeftArrow.png"
                 , gamePanel.GameGraphics
                 );
             ctrlContainer.ManageControl(imgBtnEnter);
@@ -70,7 +70,7 @@ namespace vCards
 
             origin = new Rectangle((gamePanel.GameGraphics.ScreenWidth - 20)*2 / 3, 230, 35, 12);
             imgBtnSkip = new ImageButton(origin
-                , Program.AppPath + @"\Resources\Images\Buttons\OKBtn_Bkgr.bmp"
+                , Program.AppPath + @"\Resources\Images\Buttons\SquareBtnBkgrLeftArrow.png"
                 , gamePanel.GameGraphics
                 );
             ctrlContainer.ManageControl(imgBtnSkip);
@@ -169,6 +169,7 @@ namespace vCards
                 iIndexCardDanhRa = ctrlContainer.ManageControl(nhomBai);
                 nhomBai.Rearrange(gamePanel.GameGraphics);
             }
+
             base.RenderState();
         }
     }

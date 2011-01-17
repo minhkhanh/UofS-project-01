@@ -15,7 +15,8 @@ namespace vCards
         StatePlay,
         StateGameCustom,
         StateOptions,
-        StateExiting
+        StateExiting,
+        StateHighScore
     }
 
     public abstract class GameState
@@ -23,6 +24,8 @@ namespace vCards
         #region data members
 
         protected GameStateID stateId = GameStateID.None;
+        protected GameStateID prevStateId = GameStateID.None;
+
         protected GamePanel gamePanel;
         protected ImgCtrlContainer ctrlContainer;
         protected IBitmap ibmpBack;
@@ -36,7 +39,17 @@ namespace vCards
             get { return stateId; }
         }
 
+        public GameStateID PreviousStateID
+        {
+            set { prevStateId = value; }
+        }
+
         #endregion
+
+        public void GoBackState()
+        {
+            gamePanel.SwitchState(prevStateId);
+        }
 
         public GameState(GamePanel gp, string bmpPath)
         {
