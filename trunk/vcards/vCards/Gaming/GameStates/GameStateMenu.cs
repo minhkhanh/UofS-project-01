@@ -15,6 +15,7 @@ namespace vCards
         ImageButton btnPlay;
         ImageButton btnGameOpt;
         ImageButton btnExit;
+        ImageButton btnHighScore;
 
         #endregion
 
@@ -26,7 +27,7 @@ namespace vCards
         
         public override void InitControls()
         {         
-            Rectangle origin = new Rectangle((gamePanel.GameGraphics.ScreenWidth - 100) / 2, 100, 100, 30);
+            Rectangle origin = new Rectangle((gamePanel.GameGraphics.ScreenWidth - 100) / 2, 150, 100, 30);
 
             btnPlay = new ImageButton(
                 origin
@@ -34,14 +35,21 @@ namespace vCards
                 , gamePanel.GameGraphics
                 );
 
-            origin.Y += origin.Height + 10;
+            origin.Y += origin.Height + 5;
             btnGameOpt = new ImageButton(
                 origin
                 , Program.AppPath + @"\Resources\Images\Buttons\BtnBkgrGameOpt.png"
                 , gamePanel.GameGraphics
                 );
 
-            origin.Y += origin.Height + 10;
+            origin.Y += origin.Height + 5;
+            btnHighScore = new ImageButton(
+                origin
+                , Program.AppPath + @"\Resources\Images\Buttons\BtnBkgrHighScore.png"
+                , gamePanel.GameGraphics
+                );
+
+            origin.Y += origin.Height + 5;
             btnExit = new ImageButton(
                 origin
                 , Program.AppPath + @"\Resources\Images\Buttons\BtnBkgrExit.png"
@@ -51,10 +59,17 @@ namespace vCards
             ctrlContainer.ManageControl(btnPlay);
             ctrlContainer.ManageControl(btnGameOpt);
             ctrlContainer.ManageControl(btnExit);
+            ctrlContainer.ManageControl(btnHighScore);
 
             btnPlay.MouseUp += new EventHandler<MouseEventArgs>(newGameImgBtn_MouseUp);
             btnExit.MouseUp += new EventHandler<MouseEventArgs>(btnExit_MouseUp);
             btnGameOpt.MouseUp += new EventHandler<MouseEventArgs>(btnGameOpt_MouseUp);
+            btnHighScore.MouseUp += new EventHandler<MouseEventArgs>(btnHighScore_MouseUp);
+        }
+
+        public void btnHighScore_MouseUp(object o, EventArgs e)
+        {
+            gamePanel.SwitchState(GameStateID.StateHighScore);
         }
 
         public void btnGameOpt_MouseUp(object o, EventArgs e)
@@ -64,6 +79,9 @@ namespace vCards
 
         public void btnExit_MouseUp(object o, EventArgs e)
         {
+            if (MessageBox.Show("Are you sure?", "vCards", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.No)
+                return;
+
             gamePanel.SwitchState(GameStateID.StateExiting);
         }
 

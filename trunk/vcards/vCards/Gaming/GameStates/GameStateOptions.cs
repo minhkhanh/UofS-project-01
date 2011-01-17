@@ -10,19 +10,21 @@ namespace vCards
     {
         #region controls
 
-        ImageButton btnBack;
+        ImageButton btnCancel;
+        ImageButton btnOK;
 
-        ImgCtrlScrollList imglistPlayerNum;
-        ImgCtrlScrollList imglistGameSound;
-        ImgCtrlScrollList imglistAILevel;
+        ImgCtrlScrollList scrllistGameSound;
+        ImgCtrlScrollList scrllistAILevel01;
+        ImgCtrlScrollList scrllistAILevel02;
+        ImgCtrlScrollList scrllistAILevel03;
 
         #endregion
 
         #region images
 
-        IImage iimgtextGameSound;
-        IImage iimgtextAILevel;
-        IImage iimgtextPlayerNum;
+        //IImage iimgtextGameSound;
+        //IImage iimgtextAILevel;
+        //IImage iimgtextPlayerNum;
 
         #endregion
 
@@ -40,91 +42,93 @@ namespace vCards
 
         public override void InitControls()
         {
+            //gamePanel
             Rectangle rect;
 
             rect = new Rectangle(0, gamePanel.GameGraphics.ScreenHeight - 30, 100, 30);
-            btnBack = new ImageButton(
+            btnCancel = new ImageButton(
                 rect
-                , Program.AppPath + @"\Resources\Images\Buttons\BtnBkgrBack.png"
-                , gamePanel.GameGraphics
+                , MyResourceManager.iimgBtnCancel
+                );            
+
+            rect.X = gamePanel.GameGraphics.ScreenWidth - 100;
+            btnOK = new ImageButton(
+                rect
+                , MyResourceManager.iimgBtnOK
                 );
 
-            ctrlContainer.ManageControl(btnBack);
+            //gamePanel.GameGraphics.CreateIImage(Program.AppPath + @"\Resources\Images\TextImages\textGameSound.png", out iimgtextGameSound);
+            //gamePanel.GameGraphics.CreateIImage(Program.AppPath + @"\Resources\Images\TextImages\textAILevel.png", out iimgtextAILevel);
+            //gamePanel.GameGraphics.CreateIImage(Program.AppPath + @"\Resources\Images\TextImages\textPlayerNum.png", out iimgtextPlayerNum);
 
-            gamePanel.GameGraphics.CreateIImage(Program.AppPath + @"\Resources\Images\TextImages\textGameSound.png", out iimgtextGameSound);
-            gamePanel.GameGraphics.CreateIImage(Program.AppPath + @"\Resources\Images\TextImages\textAILevel.png", out iimgtextAILevel);
-            gamePanel.GameGraphics.CreateIImage(Program.AppPath + @"\Resources\Images\TextImages\textPlayerNum.png", out iimgtextPlayerNum);
+            Rectangle origin = new Rectangle(10, 150, 110, 30);
+            origin.X += 120;
+            scrllistGameSound = new ImgCtrlScrollList(origin);
+            scrllistGameSound.AddItem(0, "OFF");
+            scrllistGameSound.AddItem(1, "Song 1");
+            scrllistGameSound.AddItem(2, "Song 2");
+            scrllistGameSound.AddItem(3, "Song 3");
 
-            Rectangle origin = new Rectangle(130, 150, 110, 30);
-            imglistGameSound = new ImgCtrlScrollList(origin, MyResourceManager.fontH1);
-            imglistGameSound.AddItem(0, "OFF");
-            imglistGameSound.AddItem(1, "Song 1");
-            imglistGameSound.AddItem(2, "Song 2");
-            imglistGameSound.AddItem(3, "Song 3");
+            origin.Y += origin.Height + 5;
+            origin.X = 10;
+            origin.X += 120;
+            scrllistAILevel01 = new ImgCtrlScrollList(origin);
+            string[] listAIName = QuanLyAI.GetAINameList();
+            scrllistAILevel01.AddItem(-1, "N/A");
+            for (int i = 0; i < listAIName.Count(); ++i)
+            {
+                scrllistAILevel01.AddItem(i, listAIName[i]);
+            }
 
-            ctrlContainer.ManageControl(imglistGameSound);
+            origin.Y += origin.Height + 5;
+            origin.X = 10;
+            origin.X += 120;
+            scrllistAILevel02 = new ImgCtrlScrollList(origin);
+            scrllistAILevel02.AddItem(-1, "N/A");
+            for (int i = 0; i < listAIName.Count(); ++i)
+            {
+                scrllistAILevel02.AddItem(i, listAIName[i]);
+            }
 
-            origin.Y += origin.Height + 10;
+            origin.Y += origin.Height + 5;
+            origin.X = 10;
+            origin.X += 120;
+            scrllistAILevel03 = new ImgCtrlScrollList(origin);
+            scrllistAILevel03.AddItem(-1, "N/A");
+            for (int i = 0; i < listAIName.Count(); ++i)
+            {
+                scrllistAILevel03.AddItem(i, listAIName[i]);
+            }
 
-            imglistAILevel = new ImgCtrlScrollList(origin, MyResourceManager.fontH1);
-            //string[] listAIName = QuanLyAI.GetAINameList();
-            //for (int i = 0; i < listAIName.Count(); ++i )
-            //{
-            //    imglistAILevel.AddItem(i, listAIName[i]);
-            //}
-            imglistAILevel.AddItem(1, "Easy");
-            imglistAILevel.AddItem(2, "Hard");
+            btnCancel.MouseUp += new EventHandler<System.Windows.Forms.MouseEventArgs>(btnCancel_MouseUp);
+            btnOK.MouseUp += new EventHandler<System.Windows.Forms.MouseEventArgs>(btnOK_MouseUp);
+            scrllistGameSound.MouseUp += new EventHandler<System.Windows.Forms.MouseEventArgs>(imglistGameSound_MouseUp);
 
-            ctrlContainer.ManageControl(imglistAILevel);
+            ctrlContainer.ManageControl(btnOK);
+            ctrlContainer.ManageControl(scrllistGameSound);
+            ctrlContainer.ManageControl(scrllistAILevel01);
+            ctrlContainer.ManageControl(scrllistAILevel02);
+            ctrlContainer.ManageControl(scrllistAILevel03);
+            ctrlContainer.ManageControl(btnCancel);
+        }
 
-            origin.Y += origin.Height + 10;
-            imglistPlayerNum = new ImgCtrlScrollList(origin, MyResourceManager.fontH1);
-            imglistPlayerNum.AddItem(1, "1");
-            imglistPlayerNum.AddItem(2, "2");
-            imglistPlayerNum.AddItem(3, "3");
-            imglistPlayerNum.AddItem(4, "4");
+        public void btnOK_MouseUp(object o, System.Windows.Forms.MouseEventArgs e)
+        {
+            // do changes here
 
-            ctrlContainer.ManageControl(imglistPlayerNum);
-
-            btnBack.MouseUp += new EventHandler<System.Windows.Forms.MouseEventArgs>(btnBack_MouseUp);
-            imglistGameSound.MouseUp += new EventHandler<System.Windows.Forms.MouseEventArgs>(imglistGameSound_MouseUp);
+            GoBackState();
         }
 
         public void imglistGameSound_MouseUp(object o, System.Windows.Forms.MouseEventArgs e)
         {
-            int currSong = (int)imglistGameSound.GetCurrValue();
+            int currSong = (int)scrllistGameSound.CurrentValue;
             if (currSong != MyResourceManager.iCurrSong)
                 MyResourceManager.NextSong(currSong);
         }
 
-        public void btnPlayerNumIncrease_MouseUp(object o, System.Windows.Forms.MouseEventArgs e)
+        public void btnCancel_MouseUp(object o, System.Windows.Forms.MouseEventArgs e)
         {
-            options.IncreasePlayerNum();
-        }
-
-        public void btnPlayerNumDecrease_MouseUp(object o, System.Windows.Forms.MouseEventArgs e)
-        {
-            options.DecreasePlayerNum();
-        }
-
-        public void btnAIIncrease_MouseUp(object o, System.Windows.Forms.MouseEventArgs e)
-        {
-            options.IncreaseAILevel();
-        }
-
-        public void btnAIDecrease_MouseUp(object o, System.Windows.Forms.MouseEventArgs e)
-        {
-            options.DecreaseAILevel();
-        }
-
-        public void btnGameSound_MouseUp(object o, System.Windows.Forms.MouseEventArgs e)
-        {
-            options.Sound = !options.Sound;
-        }
-
-        public void btnBack_MouseUp(object o, System.Windows.Forms.MouseEventArgs e)
-        {
-            gamePanel.SwitchState(GameStateID.StateMenu);
+            GoBackState();
         }
 
         public override void RenderState()
@@ -133,9 +137,14 @@ namespace vCards
 
             ctrlContainer.Draw(gamePanel.GameGraphics);
 
-            gamePanel.GameGraphics.DrawImageAlphaChannel(iimgtextGameSound, 0, 150);
-            gamePanel.GameGraphics.DrawImageAlphaChannel(iimgtextAILevel, 0, 190);
-            gamePanel.GameGraphics.DrawImageAlphaChannel(iimgtextPlayerNum, 0, 230);
+            Rectangle origin = new Rectangle(10, 150, 110, 30);
+            gamePanel.GameGraphics.DrawText(origin, "Background songs: ", MyResourceManager.colorT1, MyResourceManager.fontH1, FontDrawOptions.DrawTextLeft | FontDrawOptions.DrawTextMiddle);
+            origin.Y += origin.Height + 5;
+            gamePanel.GameGraphics.DrawText(origin, "AI 1 level: ", MyResourceManager.colorT1, MyResourceManager.fontH1, FontDrawOptions.DrawTextLeft | FontDrawOptions.DrawTextMiddle);
+            origin.Y += origin.Height + 5;
+            gamePanel.GameGraphics.DrawText(origin, "AI 2 level: ", MyResourceManager.colorT1, MyResourceManager.fontH1, FontDrawOptions.DrawTextLeft | FontDrawOptions.DrawTextMiddle);
+            origin.Y += origin.Height + 5;
+            gamePanel.GameGraphics.DrawText(origin, "AI 3 level: ", MyResourceManager.colorT1, MyResourceManager.fontH1, FontDrawOptions.DrawTextLeft | FontDrawOptions.DrawTextMiddle);
         }
 
     }

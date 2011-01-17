@@ -14,15 +14,15 @@ namespace vCards
         ImageButton btnLeft;
         ImageButton btnRight;
 
-        int iCurr = 0;
+        int iCurrIdx = 0;
         int iLimit = 0;
 
-        IFont _font;
+        //IFont _font;
 
-        public ImgCtrlScrollList(Rectangle rect, IFont font)
+        public ImgCtrlScrollList(Rectangle rect)
             : base(rect)
         {
-            _font = font;
+            //_font = font;
 
             Rectangle rectArrow = new Rectangle(rect.X, rect.Y, rect.Height, rect.Height);
             btnLeft = new ImageButton(
@@ -45,16 +45,16 @@ namespace vCards
 
         public void btnRight_MouseUp(object o, System.Windows.Forms.MouseEventArgs e)
         {
-            ++iCurr;
-            if (iCurr >= iLimit)
-                iCurr = 0;
+            ++iCurrIdx;
+            if (iCurrIdx >= iLimit)
+                iCurrIdx = 0;
         }
 
         public void btnLeft_MouseUp(object o, System.Windows.Forms.MouseEventArgs e)
         {
-            --iCurr;
-            if (iCurr < 0)
-                iCurr = iLimit - 1;
+            --iCurrIdx;
+            if (iCurrIdx < 0)
+                iCurrIdx = iLimit - 1;
         }
 
         public void AddItem(object val, string txt)
@@ -65,9 +65,14 @@ namespace vCards
             ++iLimit;
         }
 
-        public object GetCurrValue()
+        public object CurrentValue
         {
-            return listItemValue[iCurr];
+            get { return listItemValue[iCurrIdx]; }
+        }
+
+        public int CurrentIndex
+        {
+            set { iCurrIdx = value; }
         }
 
         public override void Dispose()
@@ -82,13 +87,14 @@ namespace vCards
         {
             base.DoDrawing(igp);
 
-            igp.DrawText(
-                new Rectangle(btnLeft.X+btnLeft.Width, btnLeft.Y, btnRight.X-btnLeft.X-btnLeft.Width, btnLeft.Height)
-                , listItemText[iCurr]
-                , Color.GreenYellow
-                , _font
-                , FontDrawOptions.DrawTextMiddle | FontDrawOptions.DrawTextCenter
-                );
+            if (iLimit > 0)
+                igp.DrawText(
+                    new Rectangle(btnLeft.X + btnLeft.Width, btnLeft.Y, btnRight.X - btnLeft.X - btnLeft.Width, btnLeft.Height)
+                    , listItemText[iCurrIdx]
+                    , MyResourceManager.colorT1
+                    , MyResourceManager.fontH1
+                    , FontDrawOptions.DrawTextMiddle | FontDrawOptions.DrawTextCenter
+                    );
         }
     }
 }

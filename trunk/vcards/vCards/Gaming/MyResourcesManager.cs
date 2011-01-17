@@ -5,6 +5,7 @@ using System.Text;
 using System.Reflection;
 using ShareLibrary;
 using System.Media;
+using System.Drawing;
 
 namespace vCards
 {
@@ -31,6 +32,10 @@ namespace vCards
 
         public static IImage iimgBtnDownCover;
 
+        public static IImage iimgBtnBack;
+        public static IImage iimgBtnCancel;
+        public static IImage iimgBtnOK;
+
         #endregion
 
         #region sounds
@@ -44,6 +49,7 @@ namespace vCards
         #region fonts
 
         public static IFont fontH1;
+        public static Color colorT1 = Color.GreenYellow;
 
         #endregion
 
@@ -66,6 +72,10 @@ namespace vCards
             igraphics.CreateIImage(Program.AppPath + @"\Resources\Images\Buttons\SquareBtnBkgrRightArrow.png", out iimgRightArrow);
 
             igraphics.CreateIImage(Program.AppPath + @"\Resources\Images\Buttons\BtnCoverDownState.png", out iimgBtnDownCover);
+
+            igraphics.CreateIImage(Program.AppPath + @"\Resources\Images\Buttons\BtnBkgrCancel.png", out iimgBtnCancel);
+            igraphics.CreateIImage(Program.AppPath + @"\Resources\Images\Buttons\BtnBkgrOK.png", out iimgBtnOK);
+            igraphics.CreateIImage(Program.AppPath + @"\Resources\Images\Buttons\BtnBkgrBack.png", out iimgBtnBack);
 
             fontH1 = igraphics.CreateFont("tahoma", 10, System.Drawing.FontStyle.Bold);
 
