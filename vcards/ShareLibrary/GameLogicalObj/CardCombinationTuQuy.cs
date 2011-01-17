@@ -21,6 +21,10 @@ namespace ShareLibrary
         }
         public override int CompareTo(CardCombination cards)
         {
+            if (this.GetType() != cards.GetType())
+            {
+                return 0;
+            }
             return listCards[listCards.Count - 1].CompareValue(((CardCombinationTuQuy)cards).listCards[listCards.Count - 1]);
         }
 

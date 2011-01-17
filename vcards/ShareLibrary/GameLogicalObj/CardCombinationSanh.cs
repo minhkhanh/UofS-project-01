@@ -21,6 +21,10 @@ namespace ShareLibrary
         }
         public override int CompareTo(CardCombination cards)
         {
+            if (this.GetType() != cards.GetType())
+            {
+                return 0;
+            }
             if (listCards.Count != ((CardCombinationSanh)cards).listCards.Count)
             {
                 return 0;
