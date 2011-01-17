@@ -104,5 +104,10 @@ namespace vCards
         {
             Trace.WriteLine("Co nguoi di " + cards.CardsCount + " la bai, lo ma chan di!");
         }
+
+        public virtual void OnEndGame()
+        {
+            
+        }
     }
 }

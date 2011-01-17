@@ -36,10 +36,9 @@ namespace ChickenAI
             myPack = pack;
             myPack.SortByValue();
         }
-        //List<CardCombination> listNhomBai;
-        //private void 
         public CardCombination OnTurnToMe(BuocDi buoc)
         {
+            System.Threading.Thread.Sleep(2000);
             CardCombination cards = null;
             if (buoc.LoaiBuocDi == LoaiBuocDi.BuocDau || buoc.LoaiBuocDi == LoaiBuocDi.BuocMoi)
             {
@@ -57,9 +56,6 @@ namespace ChickenAI
                     }
                 }
             }
-            //else if (buoc.LoaiBuocDi == LoaiBuocDi.BuocMoi)
-            //{
-            //}
             else
             {
                 List<CardCombination> listCC = new List<CardCombination>();

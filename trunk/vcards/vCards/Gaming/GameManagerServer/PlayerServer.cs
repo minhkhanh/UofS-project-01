@@ -55,5 +55,9 @@ namespace vCards
         {
             VirtualNetworkServer.SendOnePlayerGo(info.IdPlayer, info, cards);
         }
+        public void SendMessEndGame()
+        {
+            VirtualNetworkServer.SendMessEndGame(info.IdPlayer);
+        }
     }
 }
