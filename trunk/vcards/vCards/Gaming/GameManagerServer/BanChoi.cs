@@ -116,6 +116,7 @@ namespace vCards
             }
 
             bDaYeuCauPlayerDi = false;
+            if (bBuocDiDauTien) bBuocDiDauTien = false;
 
             return true;
         }
@@ -199,8 +200,11 @@ namespace vCards
             bClientDaDi = false;
             bDaYeuCauPlayerDi = true;
             TurnToOtherPlayer();
-            if (turnList.Count>0)
+            if (turnList.Count > 0)
+            {
+                turnList.GetLastBuocDi().LoaiBuocDi = LoaiBuocDi.BinhThuong;
                 player[turnQueye[0]].OnYeuCauClientDi(turnList.GetLastBuocDi());
+            }
             else
             {
                 BuocDi b = new BuocDi();

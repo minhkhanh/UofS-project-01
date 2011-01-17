@@ -66,10 +66,10 @@ namespace ShareLibrary
         public static CardCombination[] GetCombinationCoChua(PackLogical pack, CardCombination cards) 
         {
             //if nay co the bo???
-            if (!pack.IsHave(cards))
-            {
-                return null;
-            }
+            //if (!pack.IsHave(cards))
+            //{
+            //    return null;
+            //}
             PackLogical packNew = new PackLogical(pack);
             List<CardCombination> listKQ = new List<CardCombination>();
             listKQ.Add(cards);
@@ -84,7 +84,11 @@ namespace ShareLibrary
                     if (card.CompareRank(cards[0])==0)
                     {
                         CardCombination temp = CardCombinationDoi.Create(card, cards[0]);
-                        if (temp != null) listKQ.AddRange(GetCombinationCoChua(packNew, temp));
+                        if (temp != null)
+                        {
+                            CardCombination[] list = GetCombinationCoChua(packNew, temp);
+                            if (list!=null && list.Count()>0) listKQ.AddRange(list);
+                        }
                     }
                 }
                 //doi thanh sanh
@@ -97,7 +101,11 @@ namespace ShareLibrary
                             if (card2.Rank == cards[0].Rank + 2)
                             {
                                 CardCombination temp = CardCombinationSanh.Create(cards[0], card1, card2);
-                                if (temp != null) listKQ.AddRange(GetCombinationCoChua(packNew, temp));
+                                if (temp != null)
+                                {
+                                    CardCombination[] list = GetCombinationCoChua(packNew, temp);
+                                    if (list != null && list.Count() > 0) listKQ.AddRange(list);
+                                }
                             }
                         }
                     }
@@ -106,44 +114,156 @@ namespace ShareLibrary
             }
             else if (cards.GetType() == typeof(CardCombinationDoi))
             {
-                //co the mo rong thanh tu quy, doi thong
-                CardLogical card1 = null; 
-                CardLogical card2 = null;
+                //co the mo rong thanh sam co, tu quy, doi thong
+
+                //thu mo thanh sam co
                 foreach (CardLogical card in packNew.ListCards)
                 {
                     if (card.Rank == cards[0].Rank)
                     {
-                        if (card1==null)
+                        List<CardLogical> t = new List<CardLogical>();
+                        t.AddRange(cards.ToArray());
+                        t.Add(card);
+                        CardCombination temp = CardCombinationSamCo.Create(t.ToArray());
+                        if (temp != null)
                         {
-                            card1 = card;
-                        }
-                        else
-                        {
-                            card2 = card;
+                            CardCombination[] list = GetCombinationCoChua(packNew, temp);
+                            if (list != null && list.Count() > 0) listKQ.AddRange(list);
                         }
                     }
                 }
-                if (card1!=null && card2!=null) //co them mot doi nua
+
+                //thu mo thanh tu quy
+                // khong mo rong doi thanh tu quy se bi trung khi mo rong sam co thanh tu quy
+                //foreach (CardLogical card1 in packNew.ListCards)
+                //{
+                //    if (card1.Rank == cards[0].Rank)
+                //    {
+                //        foreach (CardLogical card2 in packNew.ListCards)
+                //        {
+                //            if (card2!=card1 && card2.Rank == cards[0].Rank)
+                //            {
+                //                List<CardLogical> t = new List<CardLogical>();
+                //                t.AddRange(cards.ToArray());
+                //                t.Add(card1);
+                //                t.Add(card2);
+                //                CardCombination temp = CardCombinationTuQuy.Create(t.ToArray());
+                //                if (temp != null)
+                //                {
+                //                    CardCombination[] list = GetCombinationCoChua(packNew, temp);
+                //                    if (list!=null && list.Count()>0) listKQ.AddRange(list);
+                //                }
+                //            }
+                //        }
+                //    }
+                //}
+
+                //thu mo thanh doi thong
+                foreach (CardLogical card1 in packNew.ListCards)
                 {
-                    List<CardLogical> t = new List<CardLogical>();
-                    t.AddRange(cards.ToArray());
-                    t.Add(card1);
-                    t.Add(card2);                    
-                    CardCombination temp = CardCombinationTuQuy.Create(t.ToArray());
-                    if (temp != null) listKQ.AddRange(GetCombinationCoChua(packNew, temp));
+                    if (card1.Rank == cards[0].Rank+1)
+                    {
+                        foreach (CardLogical card2 in packNew.ListCards)
+                        {
+                            if (card2 != card1 && card2.Rank == cards[0].Rank+1)
+                            {
+                                foreach (CardLogical card3 in packNew.ListCards)
+                                {
+                                    if (card3.Rank == cards[0].Rank+2)
+                                    {
+                                        foreach (CardLogical card4 in packNew.ListCards)
+                                        {
+                                            if (card3 != card4 && card4.Rank == cards[0].Rank+2)
+                                            {
+                                                List<CardLogical> t = new List<CardLogical>();
+                                                t.AddRange(cards.ToArray());
+                                                t.Add(card1);
+                                                t.Add(card2);
+                                                t.Add(card3);
+                                                t.Add(card4);
+                                                CardCombination temp = CardCombinationDoiThong.Create(t.ToArray());
+                                                if (temp != null)
+                                                {
+                                                    CardCombination[] list = GetCombinationCoChua(packNew, temp);
+                                                    if (list != null && list.Count() > 0) listKQ.AddRange(list);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
             else if (cards.GetType() == typeof(CardCombinationDoiThong))
             {
+                //neu 3 doi thong thi thanh 4 doi, 4 thanh 5 doi
+                foreach (CardLogical card1 in packNew.ListCards)
+                {
+                    if (card1.Rank == cards[0].Rank+1)
+                    {
+                        foreach (CardLogical card2 in packNew.ListCards)
+                        {
+                            if (card2 != card1 && card2.Rank == cards[0].Rank+1)
+                            {
+                                List<CardLogical> t = new List<CardLogical>();
+                                t.AddRange(cards.ToArray());
+                                t.Add(card1);
+                                t.Add(card2);
+                                CardCombination temp = CardCombinationDoiThong.Create(t.ToArray());
+                                if (temp != null)
+                                {
+                                    CardCombination[] list = GetCombinationCoChua(packNew, temp);
+                                    if (list != null && list.Count() > 0) listKQ.AddRange(list);
+                                }
+                            }
+                        }
+                    }
+                }
             }
             else if (cards.GetType() == typeof(CardCombinationSamCo))
             {
+                //mo rong thanh tu quy
+                foreach (CardLogical card in packNew.ListCards)
+                {
+                    if (card.Rank == cards[cards.CardsCount - 1].Rank)
+                    {
+                        List<CardLogical> t = new List<CardLogical>();
+                        t.AddRange(cards.ToArray());
+                        t.Add(card);
+                        CardCombination temp = CardCombinationTuQuy.Create(t.ToArray());
+                        if (temp != null)
+                        {
+                            CardCombination[] list = GetCombinationCoChua(packNew, temp);
+                            if (list != null && list.Count() > 0) listKQ.AddRange(list);
+                        }
+                        break;
+                    }
+                }
             }
             else if (cards.GetType() == typeof(CardCombinationSanh))
             {
+                //them mot la
+                foreach (CardLogical card in packNew.ListCards)
+                {
+                    if (card.Rank == cards[cards.CardsCount - 1].Rank+1)
+                    {
+                        List<CardLogical> t = new List<CardLogical>();
+                        t.AddRange(cards.ToArray());
+                        t.Add(card);
+                        CardCombination temp = CardCombinationSanh.Create(t.ToArray());
+                        if (temp != null)
+                        {
+                            CardCombination[] list = GetCombinationCoChua(packNew, temp);
+                            if (list != null && list.Count() > 0) listKQ.AddRange(list);
+                        }
+                    }
+                }
             }
             else if (cards.GetType() == typeof(CardCombinationTuQuy))
             {
+                //ko mo rong dc
             }
             return listKQ.ToArray();
         }
